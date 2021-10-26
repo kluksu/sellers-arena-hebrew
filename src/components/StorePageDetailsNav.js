@@ -22,14 +22,14 @@ class StorePageDetailsNav extends React.Component {
                 onClick={this.props.addCartItems}
                 variant="success"
               >
-                add to order
+                הוסף להזמנה
               </Button>
               <Button
                 type="button"
                 onClick={this.props.addCartItemsAndCheckout}
                 variant="success"
               >
-                add items and go to checkout
+                הוסף ועבור לעמוד סיום הזמנה
               </Button>
             </Navbar.Collapse>
           </Navbar>

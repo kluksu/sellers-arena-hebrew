@@ -36,9 +36,7 @@ export default class QuantitySelector extends Component {
                 this.props.variation.batch_size -
                 sum
             )}
-           units where removed (batch size is ${
-             this.props.variation.batch_size
-           })`,
+           יחידות הוסרו (גודל מנה הוא ${this.props.variation.batch_size})`,
           });
         } else {
           this.setState({ notice: "" });

@@ -37,12 +37,12 @@ export default class Search extends Component {
     let storeCategoriesButtons = [];
     if (this.props.storeSubCategories) {
       this.props.storeSubCategories.forEach((subCategory) => {
-        let clearAll = subCategory === "clear all" ? "warning" : "primary";
+        let clearAll = subCategory === " אפס חיפוש" ? "warning" : "primary";
         let fontSize = this.props.storeSubCategories.length > 15 ? 10 : 12;
         let variant =
           this.props.activeSubCategory === subCategory ? "success" : clearAll;
 
-        let funcCatogory = subCategory === "clear all" ? "" : subCategory;
+        let funcCatogory = subCategory === "אפס חיפוש" ? "" : subCategory;
 
         storeCategoriesButtons.push(
           <Button
@@ -69,7 +69,7 @@ export default class Search extends Component {
                   this.props.getSearchText(event.target.value)
                 }
                 type="text"
-                placeholder="search..."
+                placeholder="...חפש"
               />
             </Form.Group>
           </Form>

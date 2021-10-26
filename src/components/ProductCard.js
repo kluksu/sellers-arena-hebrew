@@ -40,9 +40,9 @@ class ProductCard extends React.Component {
           discountsArr.push(
             <span className="borderRight">
               <div>
-                {prev}-{key} units{" "}
+                {prev}-{key} יחידות{" "}
               </div>{" "}
-              <div>{price}$</div>{" "}
+              <div>{price}₪</div>{" "}
             </span>
           );
           price = this.props.price * (1 - value);
@@ -55,12 +55,12 @@ class ProductCard extends React.Component {
 
         discountsArr.push(
           <span>
-            <div>{`>=${lastKey} units`}</div>
-            <div>{`${lastPrice}$`}</div>
+            <div>{`>=${lastKey} יחידות`}</div>
+            <div>{`${lastPrice}₪`}</div>
           </span>
         );
       } else {
-        discountsArr.push(<div>{`${this.props.price}$ per unit`} </div>);
+        discountsArr.push(<div>{`${this.props.price}₪ ליחידה`} </div>);
       }
     }
     let buttons =
@@ -83,7 +83,7 @@ class ProductCard extends React.Component {
         : "https://cdn.pixabay.com/photo/2014/06/18/18/42/running-shoe-371625__340.jpg";
     const storeLInksAcive = this.props.linkAllAround;
     const batchSize = this.props.variation ? (
-      <div>batch size {this.props.variation.batch_size}</div>
+      <div>כמות מנה {this.props.variation.batch_size}</div>
     ) : null;
 
     if (this.props.type == 10) {
@@ -103,7 +103,7 @@ class ProductCard extends React.Component {
                   {this.state.notice}
                 </p>
 
-                <NavLink src="">go to store</NavLink>
+                <NavLink src="">לחנות</NavLink>
               </Col>
               <Col xs={6}>
                 {" "}
@@ -112,7 +112,7 @@ class ProductCard extends React.Component {
                     window.location.assign(this.props.productInfoLink)
                   }
                 >
-                  see product
+                  למוצר
                 </NavLink>
               </Col>
             </Row>
@@ -157,7 +157,7 @@ class ProductCard extends React.Component {
             <NavLink
               onClick={() => window.location.assign(this.props.productInfoLink)}
             >
-              see product
+              למוצר
             </NavLink>
           </NavLink>
         </div>

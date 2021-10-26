@@ -318,8 +318,7 @@ class StorePage extends React.Component {
 
       console.log(this.state.selectedContactID);
       this.setState({
-        cartsError:
-          "oops, either you didnt pick a client or there is an order in progress",
+        cartsError: "אופס, או שלא בחרת לקוח או שיש הזמנה ללקוח זה במערכת",
       });
     }
     postData(
@@ -339,7 +338,7 @@ class StorePage extends React.Component {
       console.log(data);
       this.postAndRetrevData(data.id).then((data) => {
         this.editItem(data.id, this.state.changedQuantities).then(
-          this.openModal("success!", "changes were made successfully"),
+          this.openModal("הצלחה!", "השינויים נוספו בהצלחה"),
           this.setState({ changedQuantities: {} }),
 
           this.setState({ activeCart: data }),
@@ -497,9 +496,9 @@ class StorePage extends React.Component {
     } else {
       console.log(this.state.activeCart.id);
       this.postAndRetrevData(this.state.activeCart.id).then((data) => {
-        this.openModal("success!", "changes were made successfully");
+        this.openModal("הצלחה!", "השינויים נוספו להזמנה");
         this.editItem(data.id, this.state.changedQuantities).then(
-          this.openModal("success!", "changes were made successfully"),
+          this.openModal("הצלחה!", "השינויים נוספו להזמנה"),
           this.setState({ changedQuantities: {} }),
           this.setState({ activeCart: data }),
           getData(
@@ -621,7 +620,7 @@ class StorePage extends React.Component {
         this.props.activeAccount.account_type == 3 ? (
           <Col>
             <Form.Group controlId="exampleForm.ControlSelect1">
-              <Form.Label>select client </Form.Label>
+              <Form.Label>בחר לקוח </Form.Label>
               <Form.Control
                 onChange={this.handleOptionsChange}
                 as="select"
@@ -673,12 +672,12 @@ class StorePage extends React.Component {
 
               <p>{this.state.currentStore.name}</p>
               <p>{this.state.currentStore.store_address}</p>
-              <p> phone number: {this.state.currentStore.phone_number}</p>
+              <p> {this.state.currentStore.phone_number}:טלפון</p>
             </Col>
             <Col className="buttonsCol" xl={4} lg={12}>
               <a href={this.state.currentStore.phone_number}>
                 <Button className="w-50" variant="success">
-                  call <FiPhoneCall />
+                  התקשר <FiPhoneCall />
                 </Button>{" "}
               </a>{" "}
               <Button
@@ -692,22 +691,22 @@ class StorePage extends React.Component {
                     ) /////////////////////////////////////////////////////////////////////////////////////
                 }
               >
-                send message <BiMailSend />
+                שלח הודעה <BiMailSend />
               </Button>
               <Button
                 onClick={() => this.props.postAndGetContacts(messageUserID)}
                 className="w-50"
                 variant="success"
               >
-                add to contacts <RiContactsLine />{" "}
+                הוסף לאנשי הקשר <RiContactsLine />{" "}
               </Button>
               <a
                 target="_blank"
                 href="https://meet.google.com/_meet/iah-uyfs-bdu?authuser=0&ijlm=1628853707454&adhoc=1&hs=187"
               >
-                <Button className="w-50" variant="success">
+                {/* <Button className="w-50" variant="success">
                   shared screen order
-                </Button>{" "}
+                </Button>{" "} */}
               </a>
             </Col>
             <Col>{ticker}</Col>
@@ -769,11 +768,11 @@ class StorePage extends React.Component {
             ),
           });
         }
-        if (!this.state.storeSubCategories.includes("clear all")) {
+        if (!this.state.storeSubCategories.includes("אפס חיפוש")) {
           ////change to clear all
           this.setState({
             storeSubCategories:
-              this.state.storeSubCategories.concat("clear all"),
+              this.state.storeSubCategories.concat("אפס חיפוש"),
           });
         }
         Object.values(variation.variation).forEach((value) => {
@@ -817,7 +816,7 @@ class StorePage extends React.Component {
                       productInfoLink={`/#/storePage/${this.props.match.params.id}/product_page/${item.id}`}
                       currency={""}
                       productName={item.name}
-                      price="register to see prices"
+                      price="הרשם על מנת לראות מחירים"
                       pictures={variation.image}
                     >
                       {" "}
@@ -876,7 +875,7 @@ class StorePage extends React.Component {
                     item={item}
                     productInfoLink={`/#/storePage/${this.props.match.params.id}/product_page/${item.id}`}
                     productName={item.name}
-                    price="to see price add member to your contacts"
+                    price="עליך להיות ברשימת אנשי הקשר של ספק זה על מנת לראות מחירים"
                     currency={""}
                     pictures={variation.image}
                   >

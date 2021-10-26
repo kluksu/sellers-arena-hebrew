@@ -14,10 +14,10 @@ export default class ControlPanelNavbar extends Component {
 
     return (
       <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
-        <Tab eventKey="add-user" title=" add user"></Tab>
-        <Tab eventKey="create-user" title="create user"></Tab>
-        <Tab eventKey="delete-user" title="delete user"></Tab>
-        <Tab eventKey="edit-user" title="edit users promitions"></Tab>
+        <Tab eventKey="add-user" title=" הוסף משתמש קיים"></Tab>
+        <Tab eventKey="create-user" title=" צור משתמש"></Tab>
+        <Tab eventKey="delete-user" title="הסר משתמש"></Tab>
+        <Tab eventKey="edit-user" title="ערוך הרשאות משתמש"></Tab>
       </Tabs>
     );
   }

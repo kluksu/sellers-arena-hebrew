@@ -234,12 +234,12 @@ class EditItemPage2 extends React.Component {
             <Row>
               <Col xl={6}>
                 <Form.Group controlId="exampleForm.ControlInput1">
-                  <Form.Label>product name</Form.Label>
+                  <Form.Label>שם מוצר</Form.Label>
                   <Form.Control
                     onChange={this.handleChange}
                     type="text"
                     value={this.state.productName}
-                    placeholder="product name"
+                    placeholder="שם מוצר"
                     name="productName"
                   />
                 </Form.Group>
@@ -247,7 +247,7 @@ class EditItemPage2 extends React.Component {
               </Col>
               <Col xl={6}>
                 <Form.Group controlId="exampleForm.ControlSelect1">
-                  <Form.Label>currency</Form.Label>
+                  <Form.Label>מטבע</Form.Label>
                   <Form.Control
                     onChange={this.handleChange}
                     value={this.state.currency}
@@ -269,7 +269,7 @@ class EditItemPage2 extends React.Component {
             <Row>
               <Col xl={4}>
                 <Form.Group controlId="exampleForm.ControlSelect1">
-                  <Form.Label> main category</Form.Label>
+                  <Form.Label> קטגוריה ראשית</Form.Label>
                   <Form.Control
                     onChange={this.handleChange}
                     as="select"
@@ -287,7 +287,7 @@ class EditItemPage2 extends React.Component {
               </Col>
               <Col xl={4}>
                 <Form.Group controlId="exampleForm.ControlSelect1">
-                  <Form.Label> subcategory</Form.Label>
+                  <Form.Label> קטגוריה משנית</Form.Label>
                   <Form.Control
                     onChange={this.handleChange}
                     as="select"
@@ -305,16 +305,16 @@ class EditItemPage2 extends React.Component {
               </Col>
               <Col xl={4}>
                 <Form.Group controlId="exampleForm.ControlSelect1">
-                  <Form.Label>price visibility</Form.Label>
+                  <Form.Label>מי יכול לראות את המחיר</Form.Label>
                   <Form.Control
                     onChange={this.handleChange}
                     as="select"
                     value={this.state.visibility}
                     name="visibility"
                   >
-                    <option value={priceForAll}>visibile to all</option>
+                    <option value={priceForAll}>כולם</option>
                     <option value={priceForVerified}>
-                      Only verified users (recomended)
+                      רק משתמשים רשומים (מומלץ){" "}
                     </option>
                     {/* <option>contacts only </option>
               <option>only me (and my staff)</option> */}
@@ -329,13 +329,13 @@ class EditItemPage2 extends React.Component {
             <Row>
               <Col xl={12}>
                 <Form.Group controlId="exampleForm.ControlTextarea1">
-                  <Form.Label>item description</Form.Label>
+                  <Form.Label>תיאור מוצר</Form.Label>
                   <Form.Control
                     onChange={this.handleChange}
                     as="textarea"
                     rows={3}
                     value={this.state.description}
-                    placeholder="enter description here..."
+                    placeholder="תיאור..."
                     name="description"
                   />
                 </Form.Group>
@@ -352,7 +352,7 @@ class EditItemPage2 extends React.Component {
                   type="button"
                   variant="primary"
                 >
-                  submit
+                  שלח
                 </Button>
               </Col>
               <Col xl={4}>
@@ -361,7 +361,7 @@ class EditItemPage2 extends React.Component {
                   type="button"
                   variant="danger"
                 >
-                  delete Item (and variations)
+                  מחק את המוצר (ואת הוריאציות שלו){" "}
                 </Button>
               </Col>
             </Row>
@@ -376,13 +376,13 @@ class EditItemPage2 extends React.Component {
                   type="button"
                   variant="primary"
                 >
-                  add new variations for this product
+                  הוסף וריאציות חדשות
                 </Button>
               </Col>
             </Row>
             <Row>
               <Col xl={12}>
-                <h1>variations</h1>
+                <h1>וריאציות</h1>
               </Col>
             </Row>
 
@@ -392,12 +392,12 @@ class EditItemPage2 extends React.Component {
         <>
           <Modal show={this.state.isOpen} onHide={this.handleClose}>
             <Modal.Header closeButton>
-              <Modal.Title>Modal heading</Modal.Title>
+              <Modal.Title>אזהרה!</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              you are about to delete this item, <br></br>
-              this cant be undone<br></br>
-              what would you like to do?
+              אתה עומד למחוק את מוצר זה, <br></br>
+              <br></br>
+              מה תרצה לעשות?
             </Modal.Body>
             <Modal.Footer>
               <Button
@@ -405,10 +405,10 @@ class EditItemPage2 extends React.Component {
                 variant="danger"
                 onClick={this.deleteItem}
               >
-                delete the item
+                מחק
               </Button>
               <Button variant="primary" onClick={this.handleClose}>
-                go back
+                חזור
               </Button>
             </Modal.Footer>
           </Modal>

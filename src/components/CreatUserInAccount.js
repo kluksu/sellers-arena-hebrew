@@ -80,16 +80,13 @@ export default class CreatUserInAccount extends Component {
             ` ${this.props.accessToken}`
           )
             .then((data) => {
-              this.props.openGenericModal(
-                "success!",
-                "new user was added to your account successfully"
-              );
+              this.props.openGenericModal("הצלחה!", "המשתמש נוסף לחשבונך");
               console.log(data);
             })
             .catch(
               this.props.openGenericModal(
-                "Error!",
-                "please verify that all the fields are field correctly and try again"
+                "אופס!",
+                "אנא וודא שכל השדות מלאים ונכונים ולאחר מכן נסה שנית"
               )
             );
           this.setState({ registerData: data });
@@ -110,7 +107,7 @@ export default class CreatUserInAccount extends Component {
       }
     } else {
       this.setState({
-        userPremmitionsMassege: "please select an option from the list",
+        userPremmitionsMassege: "אנא בחר אפשרות מהרשימה",
       });
     }
   };
@@ -118,31 +115,30 @@ export default class CreatUserInAccount extends Component {
   render() {
     const emailNote =
       this.state.emailValidate === false ? (
-        <p className="FormRejects">please make sure your email is correct</p>
+        <p className="FormRejects">אנא וודא שכתובת המייל נכונה</p>
       ) : (
         ""
       );
     const PasswordNote =
       this.state.passwordValidate === false ? (
         <p className="FormRejects">
-          Minimum eight characters, at least one uppercase letter, one lowercase
-          letter,
+          מינימום שמונה תווים, אות קטנה אחת ואות גדולה אחת
           <br />
-          one number and one special character:{" "}
+          מספר אחד וסימן אחד.{" "}
         </p>
       ) : (
         ""
       );
     const repetPasswordNote =
       this.state.repetPasswordValidate === false ? (
-        <p className="FormRejects"> passwords do not match</p>
+        <p className="FormRejects"> הססמאות אינן תואמות</p>
       ) : (
         ""
       );
     console.log(this.state.phoneValidate);
     const phonNote =
       this.state.phoneValidate === false ? (
-        <p className="FormRejects">phone number should be 10 digits long</p>
+        <p className="FormRejects">מספר הטלפון חייב להכיל עשר ספרות</p>
       ) : (
         ""
       );
@@ -155,7 +151,7 @@ export default class CreatUserInAccount extends Component {
             {" "}
             <Form>
               <Form.Group controlId="formGroupEmail">
-                <Form.Label>Email address</Form.Label>
+                <Form.Label>כתובת מייל</Form.Label>
                 <Form.Control
                   className="formValid"
                   onChange={this.handleChange}
@@ -170,7 +166,7 @@ export default class CreatUserInAccount extends Component {
               <p className="FormRejects">{this.state.emailErrorMessege}</p>
 
               <Form.Group controlId="formGroupPassword">
-                <Form.Label>Password</Form.Label>
+                <Form.Label>סיסמא</Form.Label>
                 <Form.Control
                   onChange={this.handleChange}
                   type="password"
@@ -183,7 +179,7 @@ export default class CreatUserInAccount extends Component {
               <p className="FormRejects">{this.state.passwordErrorMessege}</p>
 
               <Form.Group controlId="formGroupRepetPassword">
-                <Form.Label> repet Password</Form.Label>
+                <Form.Label> הקש את הסיסמא בשנית</Form.Label>
                 <Form.Control
                   onChange={this.handleChange}
                   type="password"
@@ -195,7 +191,7 @@ export default class CreatUserInAccount extends Component {
               {repetPasswordNote}
 
               <Form.Group controlId="formGroupPhoneNumber">
-                <Form.Label> phone number</Form.Label>
+                <Form.Label> טלפון</Form.Label>
                 <Form.Control
                   onChange={this.handleChange}
                   type="text"
@@ -211,7 +207,7 @@ export default class CreatUserInAccount extends Component {
               <Row>
                 <Col xl={12}>
                   <Form.Group controlId="exampleForm.ControlSelect1">
-                    <Form.Label>user promitions </Form.Label>
+                    <Form.Label>הרשאות משתמש </Form.Label>
                     <Form.Control
                       onChange={this.handleChange}
                       placeholder="-----"
@@ -220,10 +216,10 @@ export default class CreatUserInAccount extends Component {
                       name="userPermmitions"
                     >
                       <option value={""}>------------</option>
-                      <option value={"read"}>read only</option>
-                      <option value={"write"}>read and write</option>
+                      <option value={"read"}>קריאה בלבד</option>
+                      <option value={"write"}>קריאה ועריכה</option>
                       <option value={"admin"}>
-                        admin (read,write,control users)
+                        מנהל(קריאה,עריכה וניהול משתמשים){" "}
                       </option>
                     </Form.Control>
                   </Form.Group>
@@ -236,7 +232,7 @@ export default class CreatUserInAccount extends Component {
             <p className="FormRejects">{this.state.errorMessege}</p>
             <Button onClick={this.authinticateForm} type="button">
               {" "}
-              submit
+              שלח
             </Button>
           </>
         </Container>

@@ -122,27 +122,27 @@ class OrderInfo extends React.Component {
           // className="orderInfoWindow"
         >
           <thead>
-            <td>id</td>
-            <td>name</td>
-            <td>description</td>
-            <td>quantity</td>
-            <td style={{ minWidth: "121px" }}>price per item</td>
-            <td>total before discount</td>
-            <td>total after discount</td>
+            <td>קוד מוצר</td>
+            <td>שם</td>
+            <td>תיאור</td>
+            <td>כמות</td>
+            <td style={{ minWidth: "121px" }}>מחיר ליחידה</td>
+            <td>מחיר לפני הנחה</td>
+            <td>מחיר לאחר הנחה</td>
           </thead>
           <tbody>
             {variationArr}
 
             <tr>
-              <td>order id </td>
-              <td>buyer id</td>
+              <td>מספר הזמנה </td>
+              <td>מספר לקוח</td>
 
-              <td>seller id</td>
-              <td>total quantity</td>
+              <td>מספר מוכר</td>
+              <td>כמות כוללת</td>
 
-              <td>pre-tax</td>
-              <td>tax rate</td>
-              <td>total</td>
+              <td>לפני מיסים</td>
+              <td>אחוז המס</td>
+              <td>סה"כ</td>
             </tr>
             <tr>
               <td>{this.props.activeCart.id}</td>

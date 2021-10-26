@@ -121,7 +121,7 @@ export const categoriesList = [
   "Toys & Hobbies",
   "Vehicles & Accessories",
 ];
-export const hebrewCategoriesAndSubCategories = [
+export const categoriesAndSubCategories = [
   {
     "צעצועים ומשחקים": [
       "לגו ומשחקי הרכבה",
@@ -135,7 +135,7 @@ export const hebrewCategoriesAndSubCategories = [
   },
 ];
 
-export const categoriesAndSubCategories = [
+export const englishCategoriesAndSubCategories = [
   {
     Baby: [
       "Baby Shoes",

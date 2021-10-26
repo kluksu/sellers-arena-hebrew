@@ -53,17 +53,13 @@ class ControlPanel extends React.Component {
           <Navbar expand="lg" bg="primary" variant="dark">
             <Container>
               <Nav>
-                <NavLink href="/#/control_panel/manage_users">
-                  manage user{" "}
-                </NavLink>
+                <NavLink href="/#/control_panel/manage_users">משתמשים </NavLink>
                 <NavLink href="/#/control_panel/manage_clients">
-                  manage clients{" "}
+                  לקוחות{" "}
                 </NavLink>
-                <NavLink href="/#/control_panel/manage_orders">
-                  manage orders{" "}
-                </NavLink>
+                <NavLink href="/#/control_panel/manage_orders">הזמנות </NavLink>
                 <NavLink href="/#/control_panel/manage_discounts">
-                  manage discounts{" "}
+                  הנחות{" "}
                 </NavLink>
               </Nav>
             </Container>

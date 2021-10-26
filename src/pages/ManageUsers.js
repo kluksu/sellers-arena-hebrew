@@ -32,7 +32,7 @@ export default class ManageUsers extends Component {
     return (
       <>
         <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
-          <Tab eventKey="add-user" title=" add user">
+          <Tab eventKey="add-user" title=" הוסף משתמש קיים">
             <ControlPanelAddUser
               closeGenericModal={this.props.closeGenericModal}
               openGenericModal={this.props.openGenericModal}
@@ -40,7 +40,7 @@ export default class ManageUsers extends Component {
               accessToken={this.props.accessToken}
             ></ControlPanelAddUser>
           </Tab>
-          <Tab eventKey="create-user" title="create user">
+          <Tab eventKey="create-user" title="צור משתמש חדש">
             <CreatUserInAccount
               closeGenericModal={this.props.closeGenericModal}
               openGenericModal={this.props.openGenericModal}
@@ -48,7 +48,7 @@ export default class ManageUsers extends Component {
               accessToken={this.props.accessToken}
             ></CreatUserInAccount>
           </Tab>
-          <Tab eventKey="delete-user" title="delete user">
+          <Tab eventKey="delete-user" title="מחק משתמש">
             <DeleteUserInAccount
               closeGenericModal={this.props.closeGenericModal}
               openGenericModal={this.props.openGenericModal}
@@ -58,7 +58,7 @@ export default class ManageUsers extends Component {
               accessToken={this.props.accessToken}
             ></DeleteUserInAccount>
           </Tab>
-          <Tab eventKey="edit-user" title="edit users premmitions">
+          <Tab eventKey="edit-user" title="ערוך הרשאות משתמש">
             <UserPremmitions
               closeGenericModal={this.props.closeGenericModal}
               openGenericModal={this.props.openGenericModal}

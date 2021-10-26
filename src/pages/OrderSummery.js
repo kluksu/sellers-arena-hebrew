@@ -94,11 +94,11 @@ class OrderSummery extends React.Component {
             <Button onClick={this.editItem}>stage changes</Button>
             <Form>
               <Form.Group controlId="exampleForm.ControlSelect1">
-                <Form.Label>order Notes</Form.Label>
+                <Form.Label>הערות להזמנה</Form.Label>
                 <Form.Control
                   className="w-50 m-auto"
                   onChange={this.handleChange}
-                  placeholder="add notes here..."
+                  placeholder="הוסף הערה במקרה הצורך..."
                   as="textarea"
                   value={this.state.category}
                   name="orderNotes"
@@ -110,7 +110,7 @@ class OrderSummery extends React.Component {
               type="button"
               variant="primary"
             >
-              submite order
+              שלח
             </Button>
           </Container>
           <DiscountModal

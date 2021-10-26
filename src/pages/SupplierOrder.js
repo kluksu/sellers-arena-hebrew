@@ -70,7 +70,7 @@ class SupplierOrder extends React.Component {
     ).then((data) => {
       console.log(data);
       if (data.status.includes("successfully")) {
-        this.openModal("success!", "the changes were applied successfully");
+        this.openModal("הצלחה!", "השינויים נוספו בהצלחה");
         this.onSupplierOrderMount();
       }
     });
@@ -85,7 +85,7 @@ class SupplierOrder extends React.Component {
     ).then((data) => {
       console.log(data);
       if (data.status.includes("successfully")) {
-        this.openModal("success!", "the changes were applied successfully");
+        this.openModal("מצויין!", "השינויים נוספו בהצלחה");
         this.onSupplierOrderMount();
       }
     });
@@ -104,19 +104,16 @@ class SupplierOrder extends React.Component {
       if (data && data.info && data.info.includes("successfully")) {
         // window.location.assign("/#/");
 
-        this.openModal(
-          "success!",
-          `order number ${this.props.match.params.id} was ${rejectOrApprove}ed successfully`
-        );
+        this.openModal("מצויין!", "הפעולה נעשתה בהצלחה");
       } else {
         this.openModal(
-          "warning!",
+          "אזהרה!",
           <>
-            "you are about to reject this order, what would you like to do?"
+            "אתה עומד לדחות את ההזמנה, מה ברצונך לעשות?"
             <Form.Group controlId="exampleForm.ControlSelect1">
               <Form.Label className="no-print">
                 {" "}
-                if you reject this order please provide a reason
+                אם את דוחה את הזמנה זו בבקשה ספק סיבה ללקוח{" "}
               </Form.Label>
               <Form.Control
                 className="no-print lowerForms rejectOrderForm"
@@ -126,14 +123,14 @@ class SupplierOrder extends React.Component {
                 name="declineReason"
               ></Form.Control>
             </Form.Group>
-            <p className="FormRejects">please provide a reason for rejection</p>
+            <p className="FormRejects">בבקשה ספק סיבה</p>
           </>,
           <Button
             variant="danger"
             onClick={() => this.acceptAbortOrder("", "reject")}
           >
             {" "}
-            reject order
+            דחה הזמנה
           </Button>
         ); //creat a warning for not filling all fields
       }
@@ -274,20 +271,20 @@ class SupplierOrder extends React.Component {
             className=""
             onClick={() =>
               this.openModal(
-                "important noitice!",
-                `you are about to apply a ${this.state.discountPrecentage}% discount on the entire order`,
+                "שים לב!",
+                `האם להמשיך? ${this.state.discountPrecentage}% אתה עומד להעניק הנחה בגובה `,
                 <Button
                   variant="success"
                   onClick={() =>
                     this.createOrderDiscount(this.state.discountPrecentage)
                   }
                 >
-                  approve
+                  אישור
                 </Button>
               )
             }
           >
-            add discount
+            הוסף הנחה
           </Button>
           <Row></Row>
 
@@ -297,7 +294,7 @@ class SupplierOrder extends React.Component {
             type="button"
             variant="primary"
           >
-            accept order
+            אשר הזמנה
           </Button>
 
           <Button
@@ -305,14 +302,13 @@ class SupplierOrder extends React.Component {
             // onClick={() => this.acceptAbortOrder("", "reject")}
             onClick={() =>
               this.openModal(
-                "warning!",
+                "שים לב!",
                 <>
-                  "you are about to reject this order, what would you like to
-                  do?"
+                  "אתה עומד לדחות את ההזמנה, מה ברצונך לעשות?"
                   <Form.Group controlId="exampleForm.ControlSelect1">
                     <Form.Label className="no-print">
                       {" "}
-                      if you reject this order please provide a reason
+                      אם אתה דוחה את הזמנה זו בבקשה ספק סיבה{" "}
                     </Form.Label>
                     <Form.Control
                       className="no-print lowerForms rejectOrderForm"
@@ -328,14 +324,14 @@ class SupplierOrder extends React.Component {
                   onClick={() => this.acceptAbortOrder("", "reject")}
                 >
                   {" "}
-                  reject order
+                  דחה
                 </Button>
               )
             }
             type="button"
             variant="danger"
           >
-            decline order
+            דחה הזמנה
           </Button>
         </>
       );
@@ -349,7 +345,7 @@ class SupplierOrder extends React.Component {
               this.createOrderDiscount(this.state.discountPrecentage)
             }
           >
-            add discount
+            הוסף הנחה
           </Button>
           <Row></Row>
           <Button
@@ -360,7 +356,7 @@ class SupplierOrder extends React.Component {
             type="button"
             variant="primary"
           >
-            mark as delivered
+            סמן כנשלח
           </Button>
           {/* <Button
             className="no-print "
@@ -384,7 +380,7 @@ class SupplierOrder extends React.Component {
             type="button"
             variant="primary"
           >
-            mark as payed
+            סמן כשולם
           </Button>
         </>
       );
@@ -414,7 +410,7 @@ class SupplierOrder extends React.Component {
             onClick={this.printOrder}
             type="button"
           >
-            print
+            הדפס
           </Button>
           <Container fluid className="orderSummeryContainer">
             <div className="sellerInfoContainer">
@@ -422,7 +418,7 @@ class SupplierOrder extends React.Component {
                 {" "}
                 {this.props.activeAccount.name}
               </span>
-              <span>order number {this.props.match.params.id}</span>
+              <span> {this.props.match.params.id} מספר הזמנה</span>
               <div>
                 {" "}
                 <span>
@@ -449,7 +445,7 @@ class SupplierOrder extends React.Component {
                 onClick={this.editItem}
                 disabled={this.state.isStageChangeButtonDisabled}
               >
-                stage changes
+                שמור שינויים
               </Button>
             ) : null}
 
@@ -462,7 +458,7 @@ class SupplierOrder extends React.Component {
                   {this.state.buyer.phone_number}{" "}
                 </span>
               </div>
-              <div> {`  Tax Id: ${this.state.buyerTaxId}`}</div>
+              <div> {`${this.state.buyerTaxId}:חפ `}</div>
             </div>
 
             <div className="directions no-print">

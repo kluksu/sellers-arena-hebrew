@@ -44,12 +44,12 @@ export default class AddUnregisterdAccount extends Component {
         config
       )
       .then((res) => {
-        this.props.openGenericModal("success!", "new buyer card was created");
+        this.props.openGenericModal("הצלחה!", "חשבון חדש נוצר");
       })
       .catch(
         this.props.openGenericModal(
-          "Error!",
-          "there was a problem creating new client, please verify that all the information is correct and try again"
+          "אופס!",
+          "ישנה שגיאה, אנא וודא שכל השדות מלאים ונכונים ונסה שנית"
         )
       );
   };
@@ -67,7 +67,7 @@ export default class AddUnregisterdAccount extends Component {
                   <Row>
                     <Col xl={12}>
                       <Form.Group controlId="exampleForm.ControlSelect1">
-                        <Form.Label> store name </Form.Label>
+                        <Form.Label> שם העסק </Form.Label>
                         <Form.Control
                           onChange={this.handleChange}
                           placeholder="name..."
@@ -80,7 +80,7 @@ export default class AddUnregisterdAccount extends Component {
                   <Row>
                     <Col xl={12}>
                       <Form.Group controlId="exampleForm.ControlSelect1">
-                        <Form.Label>phone number </Form.Label>
+                        <Form.Label>טלפון </Form.Label>
                         <Form.Control
                           onChange={this.handleChange}
                           placeholder="name..."
@@ -93,7 +93,7 @@ export default class AddUnregisterdAccount extends Component {
                   <Row>
                     <Col xl={12}>
                       <Form.Group controlId="exampleForm.ControlSelect1">
-                        <Form.Label>store address </Form.Label>
+                        <Form.Label>כתובת </Form.Label>
                         <Form.Control
                           onChange={this.handleChange}
                           placeholder="name..."
@@ -106,7 +106,7 @@ export default class AddUnregisterdAccount extends Component {
                   <Row>
                     <Col xl={12}>
                       <Form.Group controlId="exampleForm.ControlSelect1">
-                        <Form.Label>store email </Form.Label>
+                        <Form.Label>אימייל </Form.Label>
                         <Form.Control
                           onChange={this.handleChange}
                           placeholder="name..."
@@ -119,7 +119,7 @@ export default class AddUnregisterdAccount extends Component {
                   <Row>
                     <Col xl={12}>
                       <Form.Group controlId="exampleForm.ControlSelect1">
-                        <Form.Label>tax id</Form.Label>
+                        <Form.Label>ח"פ</Form.Label>
                         <Form.Control
                           onChange={this.handleChange}
                           placeholder="name..."
@@ -138,7 +138,7 @@ export default class AddUnregisterdAccount extends Component {
                         type="button"
                         variant="primary"
                       >
-                        create new client
+                        צור לקוח
                       </Button>
                     </Col>
                   </Row>

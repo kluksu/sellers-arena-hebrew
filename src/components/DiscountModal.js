@@ -17,7 +17,7 @@ export default class DiscountModal extends Component {
             <Modal.Footer>
               {this.props.bottom}
               <Button variant="primary" onClick={this.props.closeModal}>
-                Close
+                סגור
               </Button>
             </Modal.Footer>
           </Modal>

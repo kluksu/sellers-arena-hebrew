@@ -7,10 +7,10 @@ export default class ManageOrders extends Component {
   render() {
     return (
       <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
-        <Tab eventKey="" title="open orders"></Tab>
-        <Tab eventKey="" title="closed ordera"></Tab>
-        <Tab eventKey="" title="rejected orders"></Tab>
-        <Tab eventKey="" title="create new order"></Tab>
+        <Tab eventKey="" title="הזמנות פתוחות"></Tab>
+        <Tab eventKey="" title="הזמנות סגורות"></Tab>
+        <Tab eventKey="" title="הזמנות דחויות"></Tab>
+        <Tab eventKey="" title="צור הזמנה חדשה"></Tab>
       </Tabs>
     );
   }

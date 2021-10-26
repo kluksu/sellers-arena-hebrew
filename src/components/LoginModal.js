@@ -17,7 +17,7 @@ export default class LoginModal extends Component {
   };
   render() {
     const generalError = this.props.loginData.detail ? (
-      <p className="FormRejects">{`${this.props.loginData.detail}, make sure your email and password are correct`}</p>
+      <p className="FormRejects">{`${this.props.loginData.detail},אנא וודא ששם המשתמש והסיסמא נכונים`}</p>
     ) : (
       ""
     );
@@ -35,12 +35,12 @@ export default class LoginModal extends Component {
     return (
       <Modal show={this.props.isOpen} onHide={this.props.closeModal}>
         <Modal.Header closeButton>
-          <Modal.Title>login</Modal.Title>
+          <Modal.Title>התחבר</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {generalError}
           <Form.Group controlId="">
-            <Form.Label> email</Form.Label>
+            <Form.Label> כתובת מייל</Form.Label>
             <Form.Control
               onChange={this.handleChange}
               type="email"
@@ -50,7 +50,7 @@ export default class LoginModal extends Component {
           </Form.Group>
           {EmailError}
           <Form.Group controlId="formGroupPhoneNumber">
-            <Form.Label> password</Form.Label>
+            <Form.Label> סיסמא</Form.Label>
             <Form.Control
               onChange={this.handleChange}
               type="password"
@@ -67,10 +67,10 @@ export default class LoginModal extends Component {
               this.props.loginPostData(this.state.email, this.state.password)
             }
           >
-            submit
+            שלח
           </Button>
           <Button variant="primary" onClick={this.props.closeModal}>
-            Close
+            סגור
           </Button>
         </Modal.Footer>
       </Modal>

@@ -21,11 +21,11 @@ export default class QuantityDiscount extends Component {
     if (this.state.value && this.state.key) {
       this.setState({ variant: "danger" });
       this.setState({ isDisabled: true });
-      this.setState({ buttonText: "undo" });
+      this.setState({ buttonText: "בטל" });
       this.props.addDiscount(this.state.key, this.state.value);
       this.props.updateDiscounts(this.state.key, this.state.value);
     } else {
-      this.setState({ warning: "fields may not be bank" });
+      this.setState({ warning: "שדה חובה" });
     }
   };
   handleChange = (event) => {
@@ -45,12 +45,12 @@ export default class QuantityDiscount extends Component {
           <Row>
             <Col xl={6}>
               <Form.Group controlId="exampleForm.ControlInput1">
-                <Form.Label>quntity for discount</Form.Label>
+                <Form.Label>כמות להנחה</Form.Label>
                 <Form.Control
                   onChange={this.handleChange}
                   type="number"
                   disabled={this.state.isDisabled}
-                  placeholder="quntity for discount"
+                  placeholder="כמות להנחה"
                   name="key"
                 />
               </Form.Group>
@@ -58,13 +58,13 @@ export default class QuantityDiscount extends Component {
             </Col>
             <Col xl={6}>
               <Form.Group controlId="exampleForm.ControlInput1">
-                <Form.Label> discount rate</Form.Label>
+                <Form.Label>גובה ההנחה</Form.Label>
                 <Form.Control
                   onChange={this.handleChange}
                   disabled={this.state.isDisabled}
                   as="select"
                   type="number"
-                  placeholder="variation value"
+                  // placeholder="0%"
                   name="value"
                 >
                   {optionsArr}

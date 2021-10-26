@@ -113,46 +113,45 @@ export default class Register extends Component {
       this.state.emailValidate === true ? (
         ""
       ) : (
-        <p className="FormRejects">please make sure your email is correct</p>
+        <p className="FormRejects">אנא וודא שכתובת המייל נכונה</p>
       );
     const PasswordNote =
       this.state.passwordValidate === true ? (
         ""
       ) : (
         <p className="FormRejects">
-          Minimum eight characters, at least one uppercase letter, one lowercase
-          letter,
+          מינימום שמונה תווים, אות גדולה אחת, את קטנה אחת
           <br />
-          one number and one special character:{" "}
+          מספר אחד, וסימן אחד.{" "}
         </p>
       );
     const repetPasswordNote =
       this.state.repetPasswordValidate === true ? (
         ""
       ) : (
-        <p className="FormRejects"> passwords do not match</p>
+        <p className="FormRejects"> הסיסמאות אינן תואמות</p>
       );
     console.log(this.state.phoneValidate);
     const phonNote =
       this.state.phoneValidate === true ? (
         ""
       ) : (
-        <p className="FormRejects">phone number should be 10 digits long</p>
+        <p className="FormRejects">10 ספרות</p>
       );
     const success = this.state.registerData.id ? (
-      <p>user registration was seccesfull!</p>
+      <p>הרשמה הצליחה!</p>
     ) : (
       <>
         {" "}
         <Form>
           <p className="info-p-registerContainer">
-            Only registered users can:<br></br>
-            -view most of the prices.<br></br>
-            -create orders.<br></br>
-            -open stores and upload products.<br></br>
+            רק משתמשים רשומים יכולים:<br></br>
+            -לראות את מרבית המחירים.<br></br>
+            -ליצור הזמנות.<br></br>
+            -לפתוח חנויות ולהעלות מוצרים.<br></br>
           </p>
           <Form.Group controlId="formGroupEmail">
-            <Form.Label>Email address</Form.Label>
+            <Form.Label>כתובת מייל</Form.Label>
             <Form.Control
               className="formValid"
               onChange={this.handleChange}
@@ -167,11 +166,11 @@ export default class Register extends Component {
           <p className="FormRejects">{this.state.emailErrorMessege}</p>
 
           <Form.Group controlId="formGroupPassword">
-            <Form.Label>Password</Form.Label>
+            <Form.Label>סיסמא</Form.Label>
             <Form.Control
               onChange={this.handleChange}
               type="password"
-              placeholder="Password"
+              placeholder="**********"
               value={this.state.password}
               name="password"
             />
@@ -180,7 +179,7 @@ export default class Register extends Component {
           <p className="FormRejects">{this.state.passwordErrorMessege}</p>
 
           <Form.Group controlId="formGroupRepetPassword">
-            <Form.Label> repet Password</Form.Label>
+            <Form.Label> הקש סיסמתך בשנית</Form.Label>
             <Form.Control
               onChange={this.handleChange}
               type="password"
@@ -192,7 +191,7 @@ export default class Register extends Component {
           {repetPasswordNote}
 
           <Form.Group controlId="formGroupPhoneNumber">
-            <Form.Label> phone number</Form.Label>
+            <Form.Label> טלפון</Form.Label>
             <Form.Control
               onChange={this.handleChange}
               type="text"
@@ -207,7 +206,7 @@ export default class Register extends Component {
         <p className="FormRejects">{this.state.errorMessege}</p>
         <Button onClick={this.authinticateForm} type="button">
           {" "}
-          submit
+          שלח
         </Button>
       </>
     );

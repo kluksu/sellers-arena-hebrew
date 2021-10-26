@@ -74,11 +74,11 @@ class MyNavBar extends React.Component {
   render() {
     let rootButton =
       this.props.activeAccount && this.props.activeAccount.id == 1 ? (
-        <Nav.Link href="/#/rootPage">root</Nav.Link>
+        <Nav.Link href="/#/rootPage">משתמש ראשי</Nav.Link>
       ) : null;
     let newOrderAwating =
       this.props.MySupplierOrders.length > 0
-        ? `(${this.props.MySupplierOrders.length} new)`
+        ? `(${this.props.MySupplierOrders.length} חדשות)`
         : "";
     let awaitingPayment = [];
     this.props.fulfilledOrders.forEach((fulfilledorder) => {
@@ -89,7 +89,7 @@ class MyNavBar extends React.Component {
       );
     });
     let awaitingPaymentDropDown = (
-      <NavDropdown title={`awating payment (${awaitingPayment.length})`}>
+      <NavDropdown title={`לא שולמו (${awaitingPayment.length})`}>
         {awaitingPayment}
       </NavDropdown>
     );
@@ -99,7 +99,7 @@ class MyNavBar extends React.Component {
           href={`${window.location}`}
           onClick={this.openMessagesBoardModal}
         >
-          messages board
+          לוח הודעות
         </NavLink>
       ) : null;
     console.log(this.props.MyShoppingCarts);
@@ -118,7 +118,7 @@ class MyNavBar extends React.Component {
       waitingDelivery =
         this.props.activeAccount.account_type == 3 ? (
           <NavDropdown
-            title={`awating delivery (${this.props.sellerApprovedOrders.length})`}
+            title={`לא נשלחו (${this.props.sellerApprovedOrders.length})`}
           >
             {waitingDeliveryArr}
           </NavDropdown>
@@ -146,11 +146,11 @@ class MyNavBar extends React.Component {
     const user_account =
       this.props.accessToken && this.props.userAccounts == 0 ? (
         <>
-          <Nav.Link href="/#/openAccount">create account</Nav.Link>{" "}
+          <Nav.Link href="/#/openAccount">צור חשבון</Nav.Link>{" "}
         </>
       ) : null;
     const register = !this.props.accessToken ? (
-      <Nav.Link href="/#/register">register</Nav.Link>
+      <Nav.Link href="/#/register">הירשם</Nav.Link>
     ) : null;
 
     const login_logout = !this.props.accessToken ? (
@@ -158,11 +158,11 @@ class MyNavBar extends React.Component {
         href={`${window.location}`}
         onClick={() => this.props.openModal()}
       >
-        login
+        התחבר
       </Nav.Link>
     ) : (
       <Nav.Link href={`${window.location}`} onClick={() => this.props.logout()}>
-        logout
+        התנתק
       </Nav.Link>
     );
     let productUpload = "";
@@ -171,8 +171,8 @@ class MyNavBar extends React.Component {
         this.props.activeAccount.account_type == 3 ? (
           <>
             {" "}
-            <Nav.Link href="/#/uploadpage">upload products</Nav.Link>
-            <Nav.Link href="/#/add_items">edit items</Nav.Link>
+            <Nav.Link href="/#/uploadpage">העלאת מוצר</Nav.Link>
+            <Nav.Link href="/#/add_items">עריכת מוצר</Nav.Link>
           </>
         ) : (
           ""
@@ -226,9 +226,7 @@ class MyNavBar extends React.Component {
     if (this.props.activeAccount) {
       Orders =
         this.props.activeAccount.account_type == 3 ? (
-          <NavDropdown
-            title={`awaiting approval (${this.props.MySupplierOrders.length})`}
-          >
+          <NavDropdown title={`חדשות (${this.props.MySupplierOrders.length})`}>
             {ordersArr}
           </NavDropdown>
         ) : null;
@@ -246,14 +244,14 @@ class MyNavBar extends React.Component {
       this.props.activeAccount &&
       this.props.activeAccount.account_type === 3 ? (
         <Nav.Link href={`/#/StorePage/${this.props.activeAccount.id}`}>
-          creat new order
+          צור הזמנה
         </Nav.Link>
       ) : null;
     let ordersNav = "";
     if (this.props.activeAccount) {
       ordersNav =
         this.props.activeAccount.account_type == 3 ? (
-          <NavDropdown title={`orders ${newOrderAwating}`}>
+          <NavDropdown title={`הזמנות ${newOrderAwating}`}>
             {" "}
             {Orders}
             {waitingDelivery}
@@ -272,11 +270,11 @@ class MyNavBar extends React.Component {
             aria-controls="responsive-navbar-nav"
           />
           <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="mr-auto">
-              <Nav.Link href="/#/">Home</Nav.Link>
-              <Nav.Link href="/#/features">Features</Nav.Link>
-              <Nav.Link href="/#/pricing">Pricing</Nav.Link>
-              <Nav.Link href="/#/suppliers">suppliers</Nav.Link>
+            <Nav className="ml-auto">
+              <Nav.Link href="/#/">ראשי</Nav.Link>
+              <Nav.Link href="/#/features">שימושים</Nav.Link>
+              <Nav.Link href="/#/pricing">מחירון</Nav.Link>
+              <Nav.Link href="/#/suppliers">ספקים</Nav.Link>
             </Nav>
             <Nav>
               {rootButton}
@@ -306,27 +304,27 @@ class MyNavBar extends React.Component {
           <Modal show={this.state.isOpen} onHide={this.closeModal}>
             <Modal.Header closeButton>
               <Modal.Title>
-                you are about to delete cart{" "}
+                אתה עומד למחוק את העגלה{" "}
                 {this.state.modalDeleteItem.seller_account}
               </Modal.Title>
             </Modal.Header>
-            <Modal.Body>what would you like to do?</Modal.Body>
+            <Modal.Body>מה ברצונך לעשות</Modal.Body>
             <Modal.Footer>
               <Button variant="danger" onClick={this.deleteCartAndCloseModal}>
-                delete item
+                מחק
               </Button>
               <Button variant="primary" onClick={this.closeModal}>
-                go back
+                חזור
               </Button>
             </Modal.Footer>
           </Modal>
         </>
         <Modal show={this.state.isMessageBoardOpen} onHide={this.closeModal}>
           <Modal.Header closeButton>
-            <Modal.Title>change messages board text</Modal.Title>
+            <Modal.Title>שנה את לוח המודעות</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            enter your text here...
+            הקש את תוכן ההודעה פה...{" "}
             <Form.Group controlId="exampleForm.ControlSelect1">
               <Form.Label> </Form.Label>
               <Form.Control
@@ -339,10 +337,10 @@ class MyNavBar extends React.Component {
           </Modal.Body>
           <Modal.Footer>
             <Button variant="success" onClick={this.updateMessageBoard}>
-              update message board
+              עדכן
             </Button>
             <Button variant="primary" onClick={this.closeModal}>
-              go back
+              חזור
             </Button>
           </Modal.Footer>
         </Modal>

@@ -265,7 +265,7 @@ class ProductPage extends React.Component {
           }}
         >
           {" "}
-          add to cart
+          הוסף לעלה
         </Button>
       </>
     ) : null;
@@ -274,7 +274,7 @@ class ProductPage extends React.Component {
     let headline =
       this.state.activeCart !== "" ? (
         <h1 className="productPageHeadLine">
-          add to {this.state.activeCart.buyer_account}'s cart
+          {this.state.activeCart.buyer_account} הוסף לעגלה של
         </h1>
       ) : null;
 
@@ -321,20 +321,20 @@ class ProductPage extends React.Component {
                   <h4>{this.state.itemData.name}</h4>
                 </Row>
                 <Row>
-                  <div>category: {this.state.itemData.category}</div>
+                  <div>קטגוריה: {this.state.itemData.category}</div>
                 </Row>
                 <Row>
-                  <span>subcategory: {this.state.itemData.subcategory}</span>
+                  <span>קטגוריה משנית: {this.state.itemData.subcategory}</span>
                 </Row>
                 <Row>
-                  <span>id: {this.state.itemData.id}</span>
+                  <span>קוד מוצר: {this.state.itemData.id}</span>
                 </Row>
                 <Row>
-                  <div>description: {this.state.itemData.description}</div>
+                  <div>תיאור: {this.state.itemData.description}</div>
                 </Row>
               </div>
               <Form.Group>
-                <FormLabel>choose variation</FormLabel>
+                <FormLabel>בחר וריאציה</FormLabel>
                 <Form.Control
                   onChange={this.handleChange}
                   size="md"

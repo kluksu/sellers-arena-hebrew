@@ -42,19 +42,19 @@ export default class InfoBox extends Component {
         <Table striped bordered hover size="sm" variant="dark hidden ">
           <tbody>
             <tr>
-              <td>name</td>
+              <td>שם מוצר</td>
               <td>{item.name}</td>
             </tr>
             <tr>
-              <td>currency</td>
+              <td>מטבע</td>
               <td>{item.currency}</td>
             </tr>
             <tr>
-              <td>batch size</td>
+              <td>מנה</td>
               <td>{batch_size}</td>
             </tr>
             <tr>
-              <td>price</td>
+              <td>מחיר ליחידה</td>
               <td>{cost_per_item}</td>
             </tr>
             {varArr}

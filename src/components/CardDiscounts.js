@@ -40,7 +40,7 @@ export default class CardDiscounts extends Component {
           discountsArr.push(
             <span className="borderRight">
               <div>
-                {prev}-{key} units{" "}
+                {prev}-{key} יחידות{" "}
               </div>{" "}
               <div>{price.toFixed(2)}$</div>{" "}
             </span>
@@ -55,12 +55,12 @@ export default class CardDiscounts extends Component {
 
         discountsArr.push(
           <span>
-            <div>{`>=${lastKey} units`}</div>
+            <div>{`>=${lastKey} יחידות`}</div>
             <div>{`${lastPrice.toFixed(2)}$`}</div>
           </span>
         );
       } else {
-        discountsArr.push(<div>{`${this.props.price}$ per unit`} </div>);
+        discountsArr.push(<div>{`${this.props.price}$ ליחידה`} </div>);
       }
     }
     return (

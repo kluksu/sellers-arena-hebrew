@@ -10,7 +10,7 @@ export default class AddVars extends Component {
       isDisabled: false,
       variant: "primary",
       json: "",
-      buttonText: "add item",
+      buttonText: "הוסף מוצר",
       warning: "",
     };
   }
@@ -21,11 +21,11 @@ export default class AddVars extends Component {
     if (this.state.key !== "" && this.state.value !== "") {
       this.setState({ variant: "danger" });
       this.setState({ isDisabled: true });
-      this.setState({ buttonText: "undo" });
+      this.setState({ buttonText: "בטל" });
       this.props.addVar(this.state.key, this.state.value);
       this.props.updateObj(this.state.key, this.state.value);
     } else {
-      this.setState({ warning: "fields may not be blank" });
+      this.setState({ warning: "שדה חובה" });
     }
   };
   handleChange = (event) => {
@@ -38,12 +38,12 @@ export default class AddVars extends Component {
           <Row>
             <Col xl={6}>
               <Form.Group controlId="exampleForm.ControlInput1">
-                <Form.Label>variation name</Form.Label>
+                <Form.Label>שם תכונה</Form.Label>
                 <Form.Control
                   onChange={this.handleChange}
                   type="text"
                   disabled={this.state.isDisabled}
-                  placeholder="variation"
+                  placeholder="לדוגמה - צבע"
                   name="key"
                 />
               </Form.Group>
@@ -51,12 +51,12 @@ export default class AddVars extends Component {
             </Col>
             <Col xl={6}>
               <Form.Group controlId="exampleForm.ControlInput1">
-                <Form.Label> variation value</Form.Label>
+                <Form.Label> ערך תכונה</Form.Label>
                 <Form.Control
                   onChange={this.handleChange}
                   disabled={this.state.isDisabled}
                   type="text"
-                  placeholder="variation value"
+                  placeholder="לדוגמה - כחול"
                   name="value"
                 />
               </Form.Group>

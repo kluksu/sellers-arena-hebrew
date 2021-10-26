@@ -49,7 +49,7 @@ export default class NewMessageModal extends Component {
           showMessages.push(
             <div className="messageContainer">
               <div>
-                {israelTime} by {message.src_user}
+                {israelTime} ע"י {message.src_user}
               </div>
               <span>{src_account}: </span>
               <span>{message.text}</span>{" "}
@@ -63,7 +63,7 @@ export default class NewMessageModal extends Component {
         <Modal show={this.props.isOpen} onHide={() => this.props.handleClose()}>
           <Modal.Header closeButton>
             <Modal.Title>
-              send message to {this.props.currentStore.name}{" "}
+              שלח הודעה ל {this.props.currentStore.name}{" "}
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -71,7 +71,7 @@ export default class NewMessageModal extends Component {
               {showMessages.reverse()}
             </div>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>message</Form.Label>
+              <Form.Label>הודעה</Form.Label>
               <Form.Control
                 type="text"
                 as="textarea"
@@ -80,7 +80,7 @@ export default class NewMessageModal extends Component {
                 name="message"
               />
               <Form.Text className="text-muted">
-                all masseges are saved
+                שים לב! כל ההודעות נשמרות במערכת
               </Form.Text>
             </Form.Group>
           </Modal.Body>
@@ -89,13 +89,13 @@ export default class NewMessageModal extends Component {
               variant="secondary"
               onClick={() => this.props.handleClose()}
             >
-              Close
+              סגור
             </Button>
             <Button
               variant="primary"
               onClick={() => this.props.sendMessage(this.props.currentStore.id)}
             >
-              submit message
+              שלח
             </Button>
             <Button
               variant="success"
@@ -103,7 +103,7 @@ export default class NewMessageModal extends Component {
                 this.props.postAndGetContacts(this.props.currentStore.id)
               }
             >
-              add to contacts
+              הוסף לאנשי קשר
             </Button>{" "}
             <Button
               variant="danger"
@@ -111,7 +111,7 @@ export default class NewMessageModal extends Component {
                 this.props.removeContact(this.props.currentStore.id)
               }
             >
-              remove from contacts
+              הסר מאנשי קשר
             </Button>
           </Modal.Footer>
         </Modal>

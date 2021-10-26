@@ -127,12 +127,11 @@ class ProductVaritionPage extends React.Component {
       },
       (error) => {
         if (!this.state.cost_per_item) {
-          this.setState({ priceError: "this field may not be blank" });
+          this.setState({ priceError: "שדה חובה" });
         }
         if (this.state.cost_per_item) {
           this.setState({
-            variationError:
-              "this variation was allready uploaded, if you wish to upload another variation of this product please use the add variation button, fill in the variation form, and dont forget to hit the `add item` button befor you submit",
+            variationError: "וריאציה זו כבר קיימת",
           });
         }
         console.log(error);
@@ -267,7 +266,7 @@ class ProductVaritionPage extends React.Component {
               </Col>
             </Row>
             <Form.Group controlId="exampleForm.ControlTextarea1">
-              <Form.Label>var description (needs a backend)</Form.Label>
+              <Form.Label>תיאור וריאציה (לא פעיל)</Form.Label>
               <Form.Control
                 onChange={this.handleChange}
                 as="textarea"
@@ -279,29 +278,29 @@ class ProductVaritionPage extends React.Component {
             </Form.Group>
 
             <Form.Group controlId="exampleForm.ControlInput1">
-              <Form.Label>batch size</Form.Label>
+              <Form.Label>גודל מנה</Form.Label>
               <Form.Control
                 onChange={this.handleChange}
                 type="number"
-                placeholder="batch size"
+                placeholder="לדוגמה כפולות של 10"
                 value={this.state.batch_size}
                 name="batch_size"
               />
             </Form.Group>
 
             <Form.Group controlId="exampleForm.ControlInput1">
-              <Form.Label>in stock</Form.Label>
+              <Form.Label>מלאי</Form.Label>
               <Form.Control
                 onChange={this.handleChange}
                 type="number"
-                placeholder="stock"
+                placeholder="מלאי..."
                 value={this.state.amount_in_stock}
                 name="amount_in_stock"
               />
             </Form.Group>
 
             <Form.Group controlId="exampleForm.ControlInput1">
-              <Form.Label>price</Form.Label>
+              <Form.Label>מחיר</Form.Label>
               <Form.Control
                 onChange={this.handleChange}
                 type="number"
@@ -319,7 +318,7 @@ class ProductVaritionPage extends React.Component {
                 variant="success"
                 disabled={this.state.IsVarButtonDisabled}
               >
-                add variation
+                הוסף וריאציה
               </Button>
               <p className="FormRejects">{this.state.variationError}</p>
               <Row>
@@ -334,7 +333,7 @@ class ProductVaritionPage extends React.Component {
                 variant="success"
                 disabled={this.state.IsDiscountsButtonDisabled}
               >
-                add discount
+                הוסף הנחה
               </Button>
               {/* </Col> */}
             </Row>
@@ -346,17 +345,17 @@ class ProductVaritionPage extends React.Component {
             <Row>
               <Col xl={7}>
                 <Button type="button" onClick={this.uploadNRestet}>
-                  submit and upload another variation of this item
+                  שלח וצור וריאציה נוספת של מוצר זה
                 </Button>
               </Col>
               <Col xl={3}>
                 <Button type="button" onClick={this.uploadVar}>
-                  submit
+                  שלח
                 </Button>
               </Col>
               <Col xl={2}>
                 <Button type="button" variant="danger" onClick={this.resetPage}>
-                  reset form
+                  מחק את הטופס
                 </Button>
               </Col>
             </Row>

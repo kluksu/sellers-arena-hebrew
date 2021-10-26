@@ -16,7 +16,7 @@ export default class MyCarousl extends Component {
           />{" "}
           <Carousel.Caption>
             {" "}
-            <h6>variation {variation.id}</h6>
+            <h6>קוד מוצר {variation.id}</h6>
           </Carousel.Caption>{" "}
         </Carousel.Item>
       );

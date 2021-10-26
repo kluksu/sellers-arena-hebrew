@@ -30,14 +30,14 @@ export default class Login extends Component {
         <Container className="registerContainer">
           <Form>
             <Form.Group>
-              <FormLabel>please choose an account</FormLabel>
+              <FormLabel>בחר חשבון</FormLabel>
               <Form.Control
                 onChange={this.handleChange}
                 size="md"
                 as="select"
                 name="selectedAccount"
               >
-                <option>choose one</option>
+                <option>---------------</option>
                 {accountsArr}
               </Form.Control>
             </Form.Group>
@@ -46,7 +46,7 @@ export default class Login extends Component {
             variant="primary"
             onClick={() => this.props.selectAccount(this.state.selectedAccount)}
           >
-            submit
+            שלח
           </Button>
         </Container>
       </div>

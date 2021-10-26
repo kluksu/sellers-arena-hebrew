@@ -17,16 +17,13 @@ export default class ControlPanelAddUser extends Component {
       ` ${this.props.accessToken}`
     )
       .then((data) => {
-        this.props.openGenericModal(
-          "success!",
-          "user was successfully added tou your account"
-        );
+        this.props.openGenericModal("הצלחה!", "המשתמש נוסף בהצלחה לחשבון");
         console.log(data);
       })
       .catch(
         this.props.openGenericModal(
-          "ERROR!",
-          "please verify that all of the information is correct and try again"
+          "אופס!",
+          "אנא וודא שכל המידה שהזנת נכון ומלא ולאחר מכן נסה שנית"
         )
       );
   };
@@ -41,7 +38,7 @@ export default class ControlPanelAddUser extends Component {
             <Row>
               <Col xl={12}>
                 <Form.Group controlId="exampleForm.ControlSelect1">
-                  <Form.Label> user id </Form.Label>
+                  <Form.Label> קוד משתמש </Form.Label>
                   <Form.Control
                     onChange={this.handleChange}
                     placeholder="user id here..."
@@ -54,7 +51,7 @@ export default class ControlPanelAddUser extends Component {
             <Row>
               <Col xl={12}>
                 <Form.Group controlId="exampleForm.ControlSelect1">
-                  <Form.Label>user promitions </Form.Label>
+                  <Form.Label>הרשאות משתמש </Form.Label>
                   <Form.Control
                     onChange={this.handleChange}
                     placeholder="-----"
@@ -63,10 +60,10 @@ export default class ControlPanelAddUser extends Component {
                     name="userPromitions"
                   >
                     <option>------------</option>
-                    <option value={"read"}>read only</option>
-                    <option value={"write"}>read and write</option>
+                    <option value={"read"}>קריאה בלבד</option>
+                    <option value={"write"}>קריאה ועריכה</option>
                     <option value={"admin"}>
-                      admin (read,write,control users)
+                      מנהל(קריאה, עריכה וניהול משתמשים)
                     </option>
                   </Form.Control>
                 </Form.Group>
@@ -81,7 +78,7 @@ export default class ControlPanelAddUser extends Component {
                   type="button"
                   variant="primary"
                 >
-                  add user to my acount
+                  הוסף משתמש לחשבון
                 </Button>
               </Col>
             </Row>

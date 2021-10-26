@@ -45,17 +45,17 @@ export default class ProductPageVariationInfo extends Component {
           <Row>
             <Col>
               <Row>
-                <h4>id: {this.props.variation.id}</h4>
+                <h4>קוד מוצר: {this.props.variation.id}</h4>
               </Row>
               <Row>
-                <div>batch size: {this.props.variation.batch_size}</div>
+                <div>כמות מנה: {this.props.variation.batch_size}</div>
               </Row>
               <Row>
-                <span>price: {this.props.variation.cost_per_item}</span>
+                <span>מחיר ליחידה: {this.props.variation.cost_per_item}</span>
               </Row>
 
               <Row>
-                <div>description: {this.props.variation.name}</div>
+                <div>תיאור: {this.props.variation.name}</div>
               </Row>
               {varVariationArr}
             </Col>

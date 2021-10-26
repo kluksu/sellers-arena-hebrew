@@ -39,7 +39,7 @@ export default class UserPremmitions extends Component {
             <Row>
               <Col xl={12}>
                 <Form.Group controlId="exampleForm.ControlSelect1">
-                  <Form.Label>choose user </Form.Label>
+                  <Form.Label>בחר משתמש </Form.Label>
                   <Form.Control
                     onChange={this.handleChange}
                     placeholder="-----"
@@ -57,7 +57,7 @@ export default class UserPremmitions extends Component {
             <Row>
               <Col xl={12}>
                 <Form.Group controlId="exampleForm.ControlSelect1">
-                  <Form.Label>user promitions </Form.Label>
+                  <Form.Label>הרשאות משתמש </Form.Label>
                   <Form.Control
                     onChange={this.handleChange}
                     placeholder="-----"
@@ -66,10 +66,10 @@ export default class UserPremmitions extends Component {
                     name="userPremissions"
                   >
                     <option>------------</option>
-                    <option value={"read"}>read only</option>
-                    <option value={"write"}>read and write</option>
+                    <option value={"read"}>קריאה בלבד</option>
+                    <option value={"write"}>קריאה ועריכה</option>
                     <option value={"admin"}>
-                      admin (read,write,control users)
+                      מנהל (קריאה עריכה וניהול משתמשים){" "}
                     </option>
                   </Form.Control>
                 </Form.Group>
@@ -84,7 +84,7 @@ export default class UserPremmitions extends Component {
                   type="button"
                   variant="warning"
                 >
-                  change user permmitions
+                  שנה הרשאות משתמש
                 </Button>
               </Col>
             </Row>

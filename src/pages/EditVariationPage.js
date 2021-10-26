@@ -280,7 +280,7 @@ class EditVariationPage extends React.Component {
               variant="danger"
               type="button"
             >
-              delete variation {`(${key} - ${value})`}
+              מחק וריאציה {`(${key} - ${value})`}
             </Button>
           </>
         );
@@ -295,7 +295,7 @@ class EditVariationPage extends React.Component {
           <>
             <tr>
               {" "}
-              <td>{key} or more</td>
+              <td> או יותר {key}</td>
               <td>{value * 100}%</td>
             </tr>
             <Button
@@ -303,7 +303,7 @@ class EditVariationPage extends React.Component {
               variant="danger"
               type="button"
             >
-              delete discount {`(${key} or more - ${value * 100}%})`}
+              מחק הנחה {`( ${value * 100}% - או יותר ${key})`}
             </Button>
           </>
         );
@@ -328,30 +328,30 @@ class EditVariationPage extends React.Component {
             </Row>
 
             <Form.Group controlId="exampleForm.ControlTextarea1">
-              <Form.Label>var description</Form.Label>
+              <Form.Label>תיאור וריאציה</Form.Label>
               <Form.Control
                 onChange={this.handleChange}
                 as="textarea"
                 rows={3}
                 value={this.state.description}
-                placeholder="enter description here..."
+                placeholder="תיאור..."
                 name="description"
               />
             </Form.Group>
 
             <Form.Group controlId="exampleForm.ControlInput1">
-              <Form.Label>batch size</Form.Label>
+              <Form.Label>גודל מנה</Form.Label>
               <Form.Control
                 onChange={this.handleChange}
                 type="number"
-                placeholder="batch size"
+                placeholder="לדוגמה 10 יחדות בארגז"
                 value={this.state.batch_size}
                 name="batch_size"
               />
             </Form.Group>
 
             <Form.Group controlId="exampleForm.ControlInput1">
-              <Form.Label>in stock</Form.Label>
+              <Form.Label>במלאי</Form.Label>
               <Form.Control
                 onChange={this.handleChange}
                 type="number"
@@ -362,11 +362,11 @@ class EditVariationPage extends React.Component {
             </Form.Group>
 
             <Form.Group controlId="exampleForm.ControlInput1">
-              <Form.Label>price</Form.Label>
+              <Form.Label>מחיר ליחידה</Form.Label>
               <Form.Control
                 onChange={this.handleChange}
                 type="number"
-                placeholder="unit price"
+                placeholder="מחיר ליחידה"
                 value={this.state.cost_per_item}
                 name="cost_per_item"
               />
@@ -376,8 +376,8 @@ class EditVariationPage extends React.Component {
               <Col xl={6}>
                 <Table striped bordered hover size="sm">
                   <thead>
-                    <td>variation name</td>
-                    <td>variation value</td>
+                    <td> (לדוגמה משקל)שם וריאציה</td>
+                    <td> (לדוגמה 4 קילו)ערך וריאציה</td>
                   </thead>
                   <tbody>{DeletePagevariationsARR}</tbody>
                 </Table>
@@ -385,8 +385,8 @@ class EditVariationPage extends React.Component {
               <Col xl={6}>
                 <Table striped bordered hover size="sm">
                   <thead>
-                    <td>discount per units</td>
-                    <td>discount rate</td>
+                    <td>הנחת כמות</td>
+                    <td>גובה ההנחה</td>
                   </thead>
                   <tbody>{DeletePageDiscountsARR}</tbody>
                 </Table>
@@ -397,7 +397,7 @@ class EditVariationPage extends React.Component {
                 variant="success"
                 disabled={this.state.isVarButtonActive}
               >
-                add variation
+                הוסף וריאציה
               </Button>
 
               <Row></Row>
@@ -411,7 +411,7 @@ class EditVariationPage extends React.Component {
                 type="button"
                 variant="success"
               >
-                add discount
+                הוסף הנחה
               </Button>
             </Row>
             <Row>
@@ -425,17 +425,17 @@ class EditVariationPage extends React.Component {
                   variant="danger"
                   onClick={this.deleteVariation}
                 >
-                  delete variation
+                  מחק וריאציה
                 </Button>
               </Col>
               <Col xl={3}>
                 <Button type="button" onClick={this.uploadVar}>
-                  submit
+                  שלח
                 </Button>
               </Col>
               <Col xl={2}>
                 <Button type="button" variant="danger" onClick={this.resetPage}>
-                  reset form
+                  מחק את הטופס
                 </Button>
               </Col>
             </Row>

@@ -184,7 +184,7 @@ class FiltteredCategoryPage extends React.Component {
               linkAllAround={`/#/StorePage/${element.item.account}`}
               currency={""}
               productName={element.item.name}
-              price="register to see prices"
+              price="הרשם על מנת לראות את המחיר"
               pictures={element.image}
             >
               {" "}
@@ -241,7 +241,7 @@ class FiltteredCategoryPage extends React.Component {
               productInfoLink={`/#/StorePage/${element.item.account}/product_page/${element.item.id}`}
               linkAllAround={`/#/StorePage/${element.item.account}`}
               productName={element.item.name}
-              price="to see price add member to your contacts"
+              price="על מנת לראות את המחיר עליך להיות ברשימת אנשי הקשר של ספק זה"
               currency={""}
               pictures={element.image}
             >

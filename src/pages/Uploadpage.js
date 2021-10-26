@@ -107,16 +107,16 @@ class Uploadpage extends React.Component {
           productSubCategoryError: "",
         });
         if (this.state.productName === "") {
-          this.setState({ productNameError: "this field may not be blank" });
+          this.setState({ productNameError: "שדה חובה" });
         }
         if (this.state.category === "") {
           this.setState({
-            productCategoryError: "this field may not be blank",
+            productCategoryError: "שדה חובה",
           });
         }
         if (this.state.subcategory === "") {
           this.setState({
-            productSubCategoryError: "this field may not be blank",
+            productSubCategoryError: "שדה חובה",
           });
         }
       }
@@ -217,11 +217,11 @@ class Uploadpage extends React.Component {
             <Row>
               <Col xl={6}>
                 <Form.Group controlId="exampleForm.ControlInput1">
-                  <Form.Label>product name</Form.Label>
+                  <Form.Label>שם מוצר</Form.Label>
                   <Form.Control
                     onChange={this.handleChange}
                     type="text"
-                    placeholder="product name"
+                    placeholder="שם מוצר.."
                     name="productName"
                   />
                 </Form.Group>
@@ -229,7 +229,7 @@ class Uploadpage extends React.Component {
               </Col>
               <Col xl={6}>
                 <Form.Group controlId="exampleForm.ControlSelect1">
-                  <Form.Label>currency</Form.Label>
+                  <Form.Label>מטבע</Form.Label>
                   <Form.Control
                     onChange={this.handleChange}
                     as="select"
@@ -250,7 +250,7 @@ class Uploadpage extends React.Component {
             <Row>
               <Col xl={4}>
                 <Form.Group controlId="exampleForm.ControlSelect1">
-                  <Form.Label> main category</Form.Label>
+                  <Form.Label> קטגוריה ראשית</Form.Label>
                   <Form.Control
                     onChange={this.handleChange}
                     as="select"
@@ -267,7 +267,7 @@ class Uploadpage extends React.Component {
               </Col>
               <Col xl={4}>
                 <Form.Group controlId="exampleForm.ControlSelect1">
-                  <Form.Label> subcategory</Form.Label>
+                  <Form.Label> קטגוריה משנית</Form.Label>
                   <Form.Control
                     onChange={this.handleChange}
                     as="select"
@@ -284,15 +284,15 @@ class Uploadpage extends React.Component {
               </Col>
               <Col xl={4}>
                 <Form.Group controlId="exampleForm.ControlSelect1">
-                  <Form.Label>price visibility</Form.Label>
+                  <Form.Label>מי יכול לראות את המחיר</Form.Label>
                   <Form.Control
                     onChange={this.handleChange}
                     as="select"
                     name="visibility"
                   >
-                    <option value={priceForAll}>visibile to all</option>
+                    <option value={priceForAll}>כולם</option>
                     <option value={priceForVerified}>
-                      Only verified users (recomended)
+                      רק משתמשים רשומים (מומלץ){" "}
                     </option>
                     {/* <option>contacts only </option>
       <option>only me (and my staff)</option> */}
@@ -307,12 +307,12 @@ class Uploadpage extends React.Component {
             <Row>
               <Col xl={12}>
                 <Form.Group controlId="exampleForm.ControlTextarea1">
-                  <Form.Label>item description</Form.Label>
+                  <Form.Label>תיאור פריט</Form.Label>
                   <Form.Control
                     onChange={this.handleChange}
                     as="textarea"
                     rows={3}
-                    placeholder="enter description here..."
+                    placeholder="תיאור..."
                     name="description"
                   />
                 </Form.Group>
@@ -324,7 +324,7 @@ class Uploadpage extends React.Component {
             </Row>
 
             <Button onClick={this.uploadItem} type="button" variant="primary">
-              next
+              הבא
             </Button>
           </Form>
         </Container>

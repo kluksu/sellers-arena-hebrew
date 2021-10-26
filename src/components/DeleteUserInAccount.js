@@ -42,7 +42,7 @@ export default class DeleteUserInAccount extends Component {
             <Row>
               <Col xl={12}>
                 <Form.Group controlId="exampleForm.ControlSelect1">
-                  <Form.Label>choose user to delete </Form.Label>
+                  <Form.Label>בחר את המשתמש שברצונך להסיר </Form.Label>
                   <Form.Control
                     onChange={this.handleChange}
                     placeholder="-----"
@@ -66,7 +66,7 @@ export default class DeleteUserInAccount extends Component {
                   type="button"
                   variant="danger"
                 >
-                  delete user from my acount
+                  הסר
                 </Button>
               </Col>
             </Row>
