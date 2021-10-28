@@ -44,7 +44,7 @@ export default class CardDiscounts extends Component {
               <div>
                 {prev}-{Items - 1} יחידות{" "}
               </div>{" "}
-              <div>{price.toFixed(2)}₪</div>{" "}
+              <div>{price.toFixed(2)}₪ ליחידה </div>{" "}
             </span>
           );
           price = this.props.price * (1 - value);

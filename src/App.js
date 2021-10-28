@@ -664,11 +664,11 @@ class App extends React.Component {
           <span style={{ color: "" }}> {`(${unreadMessages})`}</span>
         </Button>
       );
-    ////start bug here
-    // if (this.state.refreshToken && !this.state.accessToken) {
-    //   return <FullPageLoader></FullPageLoader>;
-    // }
-    ///////
+    //start bug here
+    if (this.state.refreshToken && !this.state.accessToken) {
+      return <FullPageLoader></FullPageLoader>;
+    }
+    /////
     console.log(this.state.allThreads);
     let showMassegesRead = [];
     let showMassegesUnRead = [];
