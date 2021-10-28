@@ -672,7 +672,7 @@ class StorePage extends React.Component {
 
               <p>{this.state.currentStore.name}</p>
               <p>{this.state.currentStore.store_address}</p>
-              <p> {this.state.currentStore.phone_number}:טלפון</p>
+              <p> טלפון: {this.state.currentStore.phone_number}</p>
             </Col>
             <Col className="buttonsCol" xl={4} lg={12}>
               <a href={this.state.currentStore.phone_number}>

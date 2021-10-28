@@ -23,44 +23,46 @@ export default class CardDiscounts extends Component {
     let discountsArr = [];
     let prev = 0;
     let price = 0;
-    let lastKey = 0;
+    let lastItems = 0;
     let lastPrice = 0;
     let discountClass = "productCardDiscounts";
 
     if (this.props.variation) {
       let discounts = this.props.variation.discounts;
+      console.log(discounts);
       discounts["0"] = 0;
       if (Object.keys(discounts).length > 1) {
-        for (const [key, value] of Object.entries(discounts)) {
+        for (const [Items, value] of Object.entries(discounts)) {
+          console.log(prev + Items);
           discountClass = "productCardDiscounts";
-          if (key == 0) {
+          if (Items == 0) {
             price = this.props.price * (1 - value).toFixed(2);
             continue;
           }
           discountsArr.push(
             <span className="borderRight">
               <div>
-                {prev}-{key} יחידות{" "}
+                {prev}-{Items - 1} יחידות{" "}
               </div>{" "}
-              <div>{price.toFixed(2)}$</div>{" "}
+              <div>{price.toFixed(2)}₪</div>{" "}
             </span>
           );
           price = this.props.price * (1 - value);
-          lastKey = key;
+          lastItems = Items;
           lastPrice = price;
-          if (key > prev) {
-            prev = key;
+          if (parseInt(Items) > parseInt(prev)) {
+            prev = Items;
           }
         }
 
         discountsArr.push(
           <span>
-            <div>{`>=${lastKey} יחידות`}</div>
-            <div>{`${lastPrice.toFixed(2)}$`}</div>
+            <div>{`>=${lastItems} יחידות`}</div>
+            <div>{`${lastPrice.toFixed(2)}₪`}</div>
           </span>
         );
       } else {
-        discountsArr.push(<div>{`${this.props.price}$ ליחידה`} </div>);
+        discountsArr.push(<div>{` ${this.props.price}₪ ליחידה`} </div>);
       }
     }
     return (

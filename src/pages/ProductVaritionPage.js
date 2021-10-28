@@ -54,6 +54,7 @@ class ProductVaritionPage extends React.Component {
       discounts: {},
       newBlob: "",
       variation: "",
+      varsInfo: {},
       IsVarButtonDisabled: false,
       IsDiscountsButtonDisabled: false,
     });

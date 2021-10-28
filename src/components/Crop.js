@@ -13,7 +13,7 @@ class Crop extends PureComponent {
       crop: {
         unit: "%",
         width: 100,
-        aspect: "",
+        aspect: 5 / 5,
       },
     };
   }

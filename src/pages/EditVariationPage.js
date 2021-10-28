@@ -112,6 +112,8 @@ class EditVariationPage extends React.Component {
       discounts: {},
       newBlob: "",
       variation: "",
+      varsInfo: {},
+
       isDiscountButtonActive: false,
       isVarButtonActive: false,
     });

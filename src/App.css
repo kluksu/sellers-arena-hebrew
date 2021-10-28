@@ -3,6 +3,7 @@
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   direction: rtl;
+  /* text-align: right; */
 }
 @import url("https://fonts.googleapis.com/css2?family=Rampart+One&display=swap");
 /*font-family: 'Abril Fatface', cursive;
@@ -20,6 +21,17 @@ font-family: 'Syncopate', sans-serif; */
 }
 .modal-dialog {
   margin: 6.75rem auto !important;
+}
+.modal {
+  max-width: 80%;
+  right: 5%;
+}
+.modal-header .close {
+  padding: 1rem 1rem;
+  margin: -1rem 1rem -1rem;
+}
+.modal-backdrop.fade {
+  width: 100%;
 }
 .App-logo {
   height: 40vmin;
@@ -124,7 +136,7 @@ font-family: 'Syncopate', sans-serif; */
 .FormRejects {
   margin-top: 0;
   margin-bottom: 1rem;
-  text-align: left;
+  text-align: right;
   color: red;
 }
 .container .form > .form-group {
@@ -211,7 +223,8 @@ label.form-label {
   margin-top: 30px;
 } */
 .type2card {
-  width: 300px;
+  width: 280px;
+  /* max-width: 300px; */
   height: 508px;
   border: 1px solid black;
   border-color: #eaefe9;
@@ -229,6 +242,7 @@ label.form-label {
   overflow-x: scroll;
 }
 .productCardDiscounts {
+  direction: ltr;
   transition: transform 0.2s; /* Animation */
   font-size: 12px;
   padding: 5px;
@@ -368,7 +382,7 @@ label.form-label {
   align-items: flex-start;
   flex-wrap: wrap;
   margin-top: 0px;
-  padding-left: 24px;
+  padding-right: 24px;
 }
 .cardButtonsContainer {
   display: flex;
@@ -391,6 +405,13 @@ label.form-label {
 } */
 .inner-cropper {
   margin-bottom: 10px;
+}
+.inner-cropper button,
+input {
+  overflow: hidden;
+}
+.ReactCrop__image {
+  overflow: hidden;
 }
 .homePage {
   background-color: white;
@@ -814,7 +835,7 @@ label.form-label {
   font-weight: 700; */
 }
 .info-p-registerContainer {
-  text-align: left;
+  text-align: right;
   background-color: rgba(231, 216, 231, 0.849);
   padding: 10px;
 }
@@ -878,6 +899,7 @@ label.form-label {
   margin-top: 30px;
   margin-bottom: -8px;
 } */
+
 .storePage.searchPageContainer .searchPage {
   margin-top: 86px;
 }
@@ -1007,7 +1029,7 @@ label.form-label {
 }
 .modalMessageThreadContainer {
   height: 100px;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 }
 .messageContainer:nth-of-type(even) {
   background-color: rgb(224, 227, 228);
@@ -1063,7 +1085,7 @@ label.form-label {
 }
 
 .sellerInfoContainer {
-  text-align: left;
+  text-align: right;
   font-weight: 700;
   margin: 20px 0px 10px 20px;
 }

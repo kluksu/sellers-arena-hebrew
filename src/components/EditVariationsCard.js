@@ -32,7 +32,7 @@ class EditVariationsCard extends React.Component {
           <div>
             {" "}
             <img src={this.props.pictures} alt="variation picture"></img>{" "}
-            <div>קוד משתמש:{this.props.id}</div>
+            <div>קוד וריאציה:{this.props.id}</div>
           </div>
 
           <div>
@@ -40,8 +40,8 @@ class EditVariationsCard extends React.Component {
               <Col xl={12}>
                 <Table striped bordered hover size="sm">
                   <thead>
-                    <td> (לדוגמה - צבע)שם תכונה</td>
-                    <td> (לדוגמה - כחול)ערך תכונה</td>
+                    <td>שם תכונה</td>
+                    <td>ערך תכונה</td>
                   </thead>
                   <tbody>{variationsARR}</tbody>
                 </Table>

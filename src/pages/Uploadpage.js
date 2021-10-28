@@ -24,7 +24,7 @@ class Uploadpage extends React.Component {
       productName: "",
       description: "",
       visibility: '{"price":1,"item":1}',
-      currency: "usd",
+      currency: "ils",
       category: "",
       subcategory: "",
       pictures: [],
@@ -235,10 +235,11 @@ class Uploadpage extends React.Component {
                     as="select"
                     name="currency"
                   >
+                    <option value={"ils"}>NIS ₪</option>
+
                     <option value="usd">USD $</option>
                     <option>EU €</option>
                     <option>GBP £ </option>
-                    <option>NIS ₪</option>
                   </Form.Control>
                 </Form.Group>
                 <p className="FormRejects">

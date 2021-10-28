@@ -60,7 +60,7 @@ export default class AddUnregisterdAccount extends Component {
     return (
       <div>
         <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
-          <Tab eventKey="" title="create client">
+          <Tab eventKey="" title="צור לקוח">
             <div className="registerPage">
               <Container className="registerContainer">
                 <Form>
