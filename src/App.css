@@ -738,12 +738,16 @@ input {
   margin-top: 40px;
   padding: 40px;
   min-height: 600px;
+  min-width: 375px;
 }
 .productVariationInfo {
   border: rgb(204, 197, 197) outset 1px;
   border-radius: 10px;
   margin-bottom: 30px;
   text-align: left;
+}
+.productVariationInfo .productCardDiscounts {
+  text-align: center;
 }
 .productVariationInfo img {
   max-width: 200px;
