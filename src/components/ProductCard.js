@@ -17,7 +17,7 @@ class ProductCard extends React.Component {
   };
   render() {
     //not sure
-    let cardZoom = this.props.screenWidth > 1000 ? "zoomCard" : "";
+    let cardZoom = this.props.screenWidth > 1000 ? "" : "scale(1)";
     //not sure
     console.log(navigator.userAgent);
     let discountsArr = [];
@@ -91,7 +91,8 @@ class ProductCard extends React.Component {
         <Col
           xl={2}
           lg={4}
-          className={`productCardContainer  ${cardZoom} ${this.props.extraClassName}`}
+          className={`productCardContainer  zoomCard ${cardZoom} ${this.props.extraClassName}`}
+          style={{ transform: cardZoom }}
         >
           <NavLink
             href={this.props.linkAllAround}
@@ -131,7 +132,10 @@ class ProductCard extends React.Component {
       );
     } else {
       return (
-        <div className={`type2card  ${cardZoom}`}>
+        <div
+          className={`type2card   zoomCard ${cardZoom}`}
+          style={{ transform: cardZoom }}
+        >
           <NavLink href={this.props.linkAllAround} className={`type2card`}>
             <div className="type2cardImage">
               <img className="zoomCardImg" src={picture} alt="no picture" />
