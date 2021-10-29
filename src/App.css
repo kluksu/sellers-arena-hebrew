@@ -745,26 +745,25 @@ input {
   border: rgb(204, 197, 197) outset 1px;
   border-radius: 10px;
   margin-bottom: 30px;
-  text-align: left;
 }
 .productVariationInfo .productCardDiscounts {
   text-align: center;
 }
 .productVariationInfo img {
   max-width: 200px;
-  border-radius: 10px 0px 0px 0px;
+  border-radius: 0px 10px 10px 0px;
 }
 .productVariationInfo .row {
-  margin-right: 0px;
+  margin-left: 0px;
 }
 .productPageVariationsGallry > .productVariationInfo {
-  margin-right: 15px;
+  margin-left: 15px;
 }
 .productPageVariationsGallry.row {
-  /* justify-content: center; */
+  justify-content: center;
 }
 .productPageUpperInfo {
-  margin-right: 13px;
+  margin-left: 13px;
 }
 
 .productVariationInfo:hover {
