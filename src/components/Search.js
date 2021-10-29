@@ -32,7 +32,7 @@ export default class Search extends Component {
     //     )}
     //   </Ticker>
     // ) : null;
-    let searchLogo = this.props.screenWidth < 1300 ? "" : logoWithText;
+    let searchLogo = this.props.screenWidth < 1300 ? logo : logoWithText;
     searchLogo = this.props.screenWidth < 650 ? "" : searchLogo;
     let storeCategoriesButtons = [];
     if (this.props.storeSubCategories) {
