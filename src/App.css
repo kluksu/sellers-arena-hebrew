@@ -15,6 +15,7 @@ font-family: 'Syncopate', sans-serif; */
 
 .App {
   text-align: center;
+  min-width: 800px;
 }
 .controlPanelBar {
   margin-left: 20px;
