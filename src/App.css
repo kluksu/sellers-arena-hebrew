@@ -15,7 +15,7 @@ font-family: 'Syncopate', sans-serif; */
 
 .App {
   text-align: center;
-  min-width: 800px;
+  /* min-width: 800px; */
 }
 .controlPanelBar {
   margin-left: 20px;
@@ -169,7 +169,7 @@ label.form-label {
     rgb(217, 233, 230) 46%,
     rgb(160, 247, 238) 70%
   );
-  padding: 20px;
+  padding: 10%;
   margin-top: 86px;
 }
 .productCardContainer > div > img {
@@ -576,7 +576,7 @@ input {
   white-space: nowrap;
 }
 .orderSummeryContainer {
-  padding: 0px !important;
+  padding: 0px 15px 0px 15px !important;
   margin-top: 50px;
   /* opacity: 0.9; */
   /* background-image: url("https://images.pexels.com/photos/7354627/pexels-photo-7354627.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"); */
@@ -945,8 +945,8 @@ input {
   border: outset;
   width: 200px;
   bottom: 3px;
-  right: 12px;
-  z-index: 101;
+  left: 12px;
+  z-index: 100000;
 }
 .btn {
   font-weight: 700 !important;

@@ -46,6 +46,7 @@ class App extends React.Component {
       // modal
       isOpen: false,
       // login
+      me:"",
       loginData: "",
       accessToken: "",
       refreshToken: "",
@@ -436,7 +437,19 @@ class App extends React.Component {
       this.setState({ userDevice: "computer" });
     }
   };
+  getMe=()=>{
+    const authorization = !this.state.accessToken
+    ? null
+    : `Bearer ${this.state.accessToken}`;
+  const config = {
+    headers: { "Content-Type": "application/json", authorization },
+  };
+    axios.get(`${domain}/me/`,config)
+    .then((res=>{
+this.setState({me:res.data})    }))
+  }
   componentDidMount() {
+    this.getMe()
     this.isMobile();
     window.addEventListener("resize", this.resize.bind(this));
     this.resize();
@@ -625,6 +638,8 @@ class App extends React.Component {
     if (this.state.activeAccount) {
       console.log(this.state.activeAccount.id);
       if (this.state.activeAccount !== prevState.activeAccount) {
+        this.getMe()
+
         this.getThreadsAndMarkUnRead();
         this.getContacts().then((res) => {
           this.setState({ myContacts: res.data });
@@ -728,6 +743,7 @@ class App extends React.Component {
 
           {messagesButton}
           <MyNavBar
+            me={this.state.me}
             payedOrders={this.state.payedOrders}
             fulfilledOrders={this.state.fulfilledOrders}
             sellerApprovedOrders={this.state.sellerApprovedOrders}

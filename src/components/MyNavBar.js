@@ -72,6 +72,7 @@ class MyNavBar extends React.Component {
   // sellerApprovedOrders={this.state.sellerApprovedOrders}
 
   render() {
+    console.log(this.props.me)
     let rootButton =
       this.props.activeAccount && this.props.activeAccount.id == 1 ? (
         <Nav.Link href="/#/rootPage">משתמש ראשי</Nav.Link>
@@ -163,7 +164,7 @@ class MyNavBar extends React.Component {
     ) : (
       <Nav.Link href={`${window.location}`} onClick={() => this.props.logout()}>
         התנתק
-      </Nav.Link>
+מ-{`${this.props.me.email}`}      </Nav.Link>
     );
     let productUpload = "";
     if (this.props.activeAccount) {
