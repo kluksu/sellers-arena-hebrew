@@ -1,3 +1,4 @@
+import { string } from "prop-types";
 import React, { Component } from "react";
 import { Form } from "react-bootstrap";
 
@@ -24,10 +25,12 @@ export default class PriceSelector extends Component {
         changedQuantities[this.props.variation.id] !== undefined
           ? changedQuantities[this.props.variation.id].quantity
           : this.props.quantity;
+      console.log(this.state.price);
+      let newPrice = this.state.price === "" ? 0 : this.state.price;
       this.props.createDelta(
         this.props.variation.id,
         quantity,
-        JSON.parse(this.state.price)
+        JSON.parse(newPrice)
       );
     }
   }
@@ -49,7 +52,7 @@ export default class PriceSelector extends Component {
             className="supplierChangePrice"
             type="number"
             step="0.01"
-            placeholder={this.props.price}
+            placeholder={this.state.price}
             value={this.state.price}
             name="price"
           />

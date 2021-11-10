@@ -10,40 +10,39 @@ export default class QuantitySelector extends Component {
     };
   }
   keepBatch = (event) => {
-    if (this.props.activateStageChangesButton) {
-      this.props.activateStageChangesButton();
-    }
-    this.setState({ units: event.target.value });
-    let firstValue = event.target.value;
-    if (
-      event.target.value !== this.state.units &&
-      event.target.value % this.props.variation.batch_size !== 0
-    ) {
-      setTimeout(() => {
-        let sum =
-          Math.floor(event.target.value / this.props.variation.batch_size) *
-          this.props.variation.batch_size;
-        this.setState({ units: sum });
-        if (
-          (firstValue / this.props.variation.batch_size) *
-            this.props.variation.batch_size -
-            sum !==
-          0
-        ) {
-          this.setState({
-            notice: `${Math.floor(
-              (firstValue / this.props.variation.batch_size) *
-                this.props.variation.batch_size -
-                sum
-            )}
-           יחידות הוסרו (גודל מנה הוא ${this.props.variation.batch_size})`,
-          });
-        } else {
-          this.setState({ notice: "" });
-        }
-      }, 3500);
-    }
-
+    // if (this.props.activateStageChangesButton) {
+    //   this.props.activateStageChangesButton();
+    // }
+    // this.setState({ units: event.target.value });
+    // let firstValue = event.target.value;
+    // if (
+    //   event.target.value !== this.state.units &&
+    //   event.target.value % this.props.variation.batch_size !== 0
+    // ) {
+    //   setTimeout(() => {
+    //     let sum =
+    //       Math.floor(event.target.value / this.props.variation.batch_size) *
+    //       this.props.variation.batch_size;
+    //     this.setState({ units: sum });
+    //     if (
+    //       (firstValue / this.props.variation.batch_size) *
+    //         this.props.variation.batch_size -
+    //         sum !==
+    //       0
+    //     ) {
+    //       this.setState({
+    //         notice: `${Math.floor(
+    //           (firstValue / this.props.variation.batch_size) *
+    //             this.props.variation.batch_size -
+    //             sum
+    //         )}
+    //        יחידות הוסרו (גודל מנה הוא ${this.props.variation.batch_size})`,
+    //       });
+    //     } else {
+    //       this.setState({ notice: "" });
+    //     }
+    //   }, 3500);
+    // }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
   };
   componentDidMount() {
@@ -122,6 +121,7 @@ export default class QuantitySelector extends Component {
                   placeholder={this.state.units}
                   value={this.state.units}
                   name="units"
+                  disabled
                 />
               </Form.Group>
             </Form>

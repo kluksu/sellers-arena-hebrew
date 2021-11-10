@@ -46,30 +46,32 @@ class SupplierOrder extends React.Component {
     this.setState({ changedQuantities: changedQuantities });
   };
   createOrderDiscount = (precentage) => {
-    console.log(this.state.activeCart.all_item_variations);
+    // console.log(this.state.activeCart.all_item_variations);
 
-    let discountObj = {};
-    this.state.activeCart.all_item_variations.forEach((CartVariation) => {
-      console.log(
-        CartVariation["item_variation"].cost_per_item * (1 - precentage / 100)
-      );
+    // let discountObj = {};
+    // this.state.activeCart.all_item_variations.forEach((CartVariation) => {
+    //   console.log(
+    //     CartVariation["item_variation"].cost_per_item * (1 - precentage / 100)
+    //   );
 
-      discountObj[CartVariation.item_variation.id] = {
-        cost_per_item:
-          CartVariation["item_variation"].cost_per_item *
-          (1 - precentage / 100),
-        quantity: CartVariation.quantity,
-      };
-    });
-    let obj = { variations_json: discountObj };
+    //   discountObj[CartVariation.item_variation.id] = {
+    //     cost_per_item:
+    //       CartVariation["item_variation"].cost_per_item *
+    //       (1 - precentage / 100),
+    //     quantity: CartVariation.quantity,
+    //   };
+    // });
+    // let obj = { variations_json: discountObj };
 
     postData(
-      `${domain}/supplier-orders/${this.props.match.params.id}/edit/`,
-      obj,
+      `${domain}/supplier-orders/${this.props.match.params.id}/add_percentage_discount/`,
+      {
+        discount_percentage: precentage,
+      },
       ` ${this.props.accessToken}`
     ).then((data) => {
       console.log(data);
-      if (data.status.includes("successfully")) {
+      if (data.info.includes("successfully")) {
         this.openModal("הצלחה!", "השינויים נוספו בהצלחה");
         this.onSupplierOrderMount();
       }
