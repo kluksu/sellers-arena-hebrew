@@ -26,16 +26,16 @@ export default class InfoBox extends Component {
             </tr>
           );
         }
-        if (this.props.variation && this.props.variation.discounts !== {}) {
-        }
-        for (const [key, value] of Object.entries(variation.discounts)) {
-          varArr.push(
-            <tr>
-              <td>{key}</td>
-              <td>{value}</td>
-            </tr>
-          );
-        }
+        // if (this.props.variation && this.props.variation.discounts !== {}) {
+        // }
+        // for (const [key, value] of Object.entries(variation.discounts)) {
+        //   varArr.push(
+        //     <tr>
+        //       <td>{key}</td>
+        //       <td>{value}</td>
+        //     </tr>
+        //   );
+        // }
       }
 
       return (
@@ -59,6 +59,7 @@ export default class InfoBox extends Component {
             </tr>
             {varArr}
             {info}
+            {this.props.link}
           </tbody>
         </Table>
       );

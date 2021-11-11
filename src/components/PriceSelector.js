@@ -27,15 +27,16 @@ export default class PriceSelector extends Component {
           : this.props.quantity;
       console.log(this.state.price);
       let newPrice = this.state.price === "" ? 0 : this.state.price;
+
       this.props.createDelta(
         this.props.variation.id,
         quantity,
-        JSON.parse(newPrice)
+        JSON.parse(+newPrice)
       );
     }
   }
   componentDidMount() {
-    this.setState({ price: this.props.price });
+    this.setState({ price: +this.props.price });
   }
   handleChange = (event) => {
     this.props.activateStageChangesButton();
@@ -52,8 +53,8 @@ export default class PriceSelector extends Component {
             className="supplierChangePrice"
             type="number"
             step="0.01"
-            placeholder={this.state.price}
-            value={this.state.price}
+            placeholder={+this.state.price}
+            value={+this.state.price}
             name="price"
           />
         </Form.Group>

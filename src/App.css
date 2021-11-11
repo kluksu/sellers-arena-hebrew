@@ -371,7 +371,18 @@ label.form-label {
 .cardInfo:hover + .hidden {
   display: block;
   font-size: 10px;
-  top: 0px;
+  bottom: 70px;
+  z-index: 100;
+  right: 0px;
+  width: auto;
+}
+table.hidden:hover {
+  display: block;
+  font-size: 10px;
+  bottom: 70px;
+  z-index: 100;
+  right: 0px;
+  width: auto;
 }
 
 .productCardContainer.smallerProductCard {

@@ -78,6 +78,21 @@ class SupplierOrder extends React.Component {
     });
   };
   editItem = (delta) => {
+    console.log(this.state.changedQuantities);
+    let freeItemsWarning = "";
+    let freeItemsArr = [];
+    for (const [key, value] of Object.entries(this.state.changedQuantities)) {
+      if (value.cost_per_item == 0) {
+        freeItemsArr.push(key);
+      }
+    }
+    console.log(freeItemsArr);
+
+    freeItemsWarning =
+      freeItemsArr.length > 0
+        ? `   שים לב, מחירי המוצרים הבאים ירד ל-0 ( ${freeItemsArr})`
+        : "";
+
     let obj = { variations_json: this.state.changedQuantities };
     console.log(obj);
     postData(
@@ -87,7 +102,7 @@ class SupplierOrder extends React.Component {
     ).then((data) => {
       console.log(data);
       if (data.status.includes("successfully")) {
-        this.openModal("מצויין!", "השינויים נוספו בהצלחה");
+        this.openModal("השינויים נוספו בהצלחה", `${freeItemsWarning}`);
         this.onSupplierOrderMount();
       }
     });
@@ -420,15 +435,15 @@ class SupplierOrder extends React.Component {
                 {" "}
                 {this.props.activeAccount.name}
               </span>
-              <span> {this.props.match.params.id} מספר הזמנה</span>
               <div>
                 {" "}
+                <div> מספר הזמנה {this.props.match.params.id}</div>
                 <span>
                   {this.props.activeAccount.store_address}{" "}
                   {this.props.activeAccount.phone_number}{" "}
                 </span>
               </div>
-              <div> {`  Tax Id: ${this.props.activeAccount.tax_id}`}</div>
+              <div> {`  ח"פ: ${this.props.activeAccount.tax_id}`}</div>
             </div>
             <OrderInfo
               screenWidth={this.props.screenWidth}

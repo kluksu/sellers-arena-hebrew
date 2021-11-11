@@ -150,6 +150,16 @@ class ProductCard extends React.Component {
               {batchSize}
               <div className="cardInfo">i</div>
               <InfoBox
+                link={
+                  <NavLink
+                    style={{ fontSize: "20px" }}
+                    onClick={() =>
+                      window.location.assign(this.props.productInfoLink)
+                    }
+                  >
+                    למוצר
+                  </NavLink>
+                }
                 variation={this.props.variation}
                 item={this.props.item}
               ></InfoBox>
@@ -158,11 +168,6 @@ class ProductCard extends React.Component {
             <p className="FormRejects absoluteCardNotice">
               {this.state.notice}
             </p>
-            <NavLink
-              onClick={() => window.location.assign(this.props.productInfoLink)}
-            >
-              למוצר
-            </NavLink>
           </NavLink>
         </div>
       );
