@@ -96,6 +96,8 @@ class StorePage extends React.Component {
         quantity: parseInt(quantity),
         cost_per_item: price,
       };
+      console.log("!!!!!!!!!!!");
+      this.setState({ changedQuantities: changedQuantities });
     }
   };
   handleChange = (event) => {

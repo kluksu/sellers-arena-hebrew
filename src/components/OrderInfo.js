@@ -103,7 +103,14 @@ class OrderInfo extends React.Component {
               {/* <p className="FormRejects">{this.state.notice}</p> */}
             </td>
             <td>{priceSelector}</td>
-            {/* <td>{variation.total_price_of_item_variation_before_discount}</td> */}
+            <td>{variation.total_price_of_item_variation_before_discount}</td>
+            <td>
+              {(1 -
+                variation.total_price_of_item_variation_after_discount /
+                  variation.total_price_of_item_variation_before_discount) *
+                100}
+              %
+            </td>
             <td>{variation.total_price_of_item_variation_after_discount}</td>
           </tr>
         );
@@ -127,7 +134,8 @@ class OrderInfo extends React.Component {
             <td>תיאור</td>
             <td>כמות</td>
             <td style={{ minWidth: "121px" }}>מחיר ליחידה</td>
-            {/* <td>מחיר לפני הנחה</td> */}
+            <td>מחיר לפני הנחה</td>
+            <td>הנחה</td>
             <td>מחיר לאחר הנחה</td>
           </thead>
           <tbody>

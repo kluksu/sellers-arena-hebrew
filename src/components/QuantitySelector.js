@@ -65,15 +65,18 @@ export default class QuantitySelector extends Component {
       // &&
       // prevState.units !== 0
     ) {
-      let changedQuantities = JSON.stringify(this.props.changedQuantities);
+      let changedQuantities = this.props.changedQuantities;
 
       let price =
         changedQuantities !== undefined &&
         changedQuantities[this.props.variation.id] !== undefined
           ? changedQuantities[this.props.variation.id].cost_per_item
           : this.props.price;
+      console.log(this.props.price);
+
+      console.log(changedQuantities);
+
       this.props.createDelta(this.props.variation.id, this.state.units, price);
-      console.log("!!!!!!!!!!!");
     }
   }
 

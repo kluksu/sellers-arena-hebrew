@@ -18,7 +18,7 @@ export default class PriceSelector extends Component {
       // prevState.price !== "" &&
       this.props.activeAccount.account_type == 3
     ) {
-      let changedQuantities = JSON.stringify(this.props.changedQuantities);
+      let changedQuantities = this.props.changedQuantities;
 
       let quantity =
         changedQuantities !== undefined &&
