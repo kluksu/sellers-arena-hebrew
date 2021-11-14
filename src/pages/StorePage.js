@@ -153,32 +153,34 @@ class StorePage extends React.Component {
     const config = {
       headers: { "Content-Type": "application/json", authorization },
     };
-    axios.get(next, config).then((response) => {
-      response.data.results.forEach((item) => {
-        if (item.item_variations.length > 0) {
-          this.setState({ loadShowList: true });
-          return;
-        } else if (
-          response.data.results.length > 0 &&
-          item.item_variations.length === 0
-        ) {
-          this.setState({ loadMoreItems: true });
-          return;
+    if (next !== null) {
+      axios.get(next, config).then((response) => {
+        response.data.results.forEach((item) => {
+          if (item.item_variations.length > 0) {
+            this.setState({ loadShowList: true });
+            return;
+          } else if (
+            response.data.results.length > 0 &&
+            item.item_variations.length === 0
+          ) {
+            this.setState({ loadMoreItems: true });
+            return;
+          }
+        });
+        if (this.state.loadMoreItems === true) {
+          this.getItems();
         }
-      });
-      if (this.state.loadMoreItems === true) {
-        this.getItems();
-      }
-      ////not sure
-      // if (this.state.loadShowList === true ) {
-      this.setState({
-        showList: this.state.showList.concat(response.data.results),
-      });
-      // }
+        ////not sure
+        // if (this.state.loadShowList === true ) {
+        this.setState({
+          showList: this.state.showList.concat(response.data.results),
+        });
+        // }
 
-      this.setState({ itemsLangh: response.data.results.length });
-      this.setState({ next: response.data.next });
-    });
+        this.setState({ itemsLangh: response.data.results.length });
+        this.setState({ next: response.data.next });
+      });
+    }
     this.setState({ loadShowList: false });
     this.setState({ loadMoreItems: false });
   };
@@ -392,6 +394,7 @@ class StorePage extends React.Component {
   addCartItemsAndCheckout = () => {
     if (this.state.activeCart == null || this.state.activeCart.id === "notID") {
       this.creatCart(true);
+      this.props.getAllOrders();
     } else {
       // this.postAndRetrevData(this.state.activeCart.id)
       this.postAndRetrevData(this.state.activeCart.id).then((data) => {
@@ -411,6 +414,8 @@ class StorePage extends React.Component {
               this.props.checkOut(this.state.activeCart.id).then((res) => {
                 console.log(res);
                 if (res.order_id) {
+                  this.props.getAllOrders();
+
                   window.location.assign(`/#/supplier-order/${res.order_id}`);
                 }
               });
@@ -629,7 +634,7 @@ class StorePage extends React.Component {
                 name="selectedContactID"
                 className=" m-auto"
               >
-                <option value={"none"}>------------</option>
+                <option value={0}>------------</option>
                 {this.state.contactsArr}
               </Form.Control>
             </Form.Group>
@@ -939,7 +944,19 @@ class StorePage extends React.Component {
             <Row className="productCardsRow">
               {" "}
               {<br></br>}
-              {cards}
+              {(this.props.activeAccount &&
+                this.props.activeAccount.account_type == 3 &&
+                this.state.selectedContactID &&
+                this.state.selectedContactID !== 0) ||
+              (this.props.activeAccount &&
+                this.props.activeAccount.account_type == 2) ||
+              !this.props.activeAccount ? (
+                cards
+              ) : (
+                <h1 style={{ color: "red" }}>
+                  please choose a store from the dropdown above
+                </h1>
+              )}
             </Row>
 
             {/* </InfiniteScroll> */}

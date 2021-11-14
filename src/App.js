@@ -46,7 +46,7 @@ class App extends React.Component {
       // modal
       isOpen: false,
       // login
-      me:"",
+      me: "",
       loginData: "",
       accessToken: "",
       refreshToken: "",
@@ -437,19 +437,19 @@ class App extends React.Component {
       this.setState({ userDevice: "computer" });
     }
   };
-  getMe=()=>{
+  getMe = () => {
     const authorization = !this.state.accessToken
-    ? null
-    : `Bearer ${this.state.accessToken}`;
-  const config = {
-    headers: { "Content-Type": "application/json", authorization },
+      ? null
+      : `Bearer ${this.state.accessToken}`;
+    const config = {
+      headers: { "Content-Type": "application/json", authorization },
+    };
+    axios.get(`${domain}/me/`, config).then((res) => {
+      this.setState({ me: res.data });
+    });
   };
-    axios.get(`${domain}/me/`,config)
-    .then((res=>{
-this.setState({me:res.data})    }))
-  }
   componentDidMount() {
-    this.getMe()
+    this.getMe();
     this.isMobile();
     window.addEventListener("resize", this.resize.bind(this));
     this.resize();
@@ -638,7 +638,7 @@ this.setState({me:res.data})    }))
     if (this.state.activeAccount) {
       console.log(this.state.activeAccount.id);
       if (this.state.activeAccount !== prevState.activeAccount) {
-        this.getMe()
+        this.getMe();
 
         this.getThreadsAndMarkUnRead();
         this.getContacts().then((res) => {
@@ -680,9 +680,9 @@ this.setState({me:res.data})    }))
         </Button>
       );
     //start bug here
-    if (this.state.refreshToken && !this.state.accessToken) {
-      return <FullPageLoader></FullPageLoader>;
-    }
+    // if (this.state.refreshToken && !this.state.accessToken) {
+    //   return <FullPageLoader></FullPageLoader>;
+    // }
     /////
     console.log(this.state.allThreads);
     let showMassegesRead = [];

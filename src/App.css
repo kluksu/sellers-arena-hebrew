@@ -26,6 +26,7 @@ font-family: 'Syncopate', sans-serif; */
 .modal {
   max-width: 80%;
   right: 5%;
+  text-align: right;
 }
 .modal-header .close {
   padding: 1rem 1rem;
