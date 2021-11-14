@@ -569,7 +569,7 @@ input {
 
 .dropDownBtn {
   font-size: 10px;
-  margin-left: 50px;
+  /* margin-left: 50px; */
 }
 .stickyNav {
   position: sticky;

@@ -200,6 +200,7 @@ class SupplierOrder extends React.Component {
       return axios
         .get(`${domain}/unregistered-accounts/${buyerId}`, config)
         .then((res) => {
+          console.log(res);
           this.setState({ buyer: res.data });
         });
     }
@@ -236,6 +237,7 @@ class SupplierOrder extends React.Component {
         this.getBuyerDits(data.data.buyer_unregistered_account);
       }
     });
+    this.props.getCarts();
   };
   componentDidMount() {
     this.onSupplierOrderMount();
@@ -475,7 +477,7 @@ class SupplierOrder extends React.Component {
                   {this.state.buyer.phone_number}{" "}
                 </span>
               </div>
-              <div> {`${this.state.buyerTaxId}:חפ `}</div>
+              <div> {`ח"פ:${this.state.buyer.tax_id} `}</div>
             </div>
 
             <div className="directions no-print">

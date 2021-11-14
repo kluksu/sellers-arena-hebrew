@@ -878,6 +878,7 @@ class App extends React.Component {
       payedOrders: [], */}
           <Route exact path="/supplier-order/:id">
             <SupplierOrder
+              getCarts={this.getCarts}
               screenWidth={this.state.screenWidth}
               getAllOrders={this.getAllOrders}
               markOrderAs={this.markOrderAs}

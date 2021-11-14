@@ -85,7 +85,7 @@ class MyNavBar extends React.Component {
     this.props.fulfilledOrders.forEach((fulfilledorder) => {
       awaitingPayment.push(
         <NavDropdown.Item href={`/#/supplier-order/${fulfilledorder.id}`}>
-          {fulfilledorder.cart_snapshot.buyer_account}
+          {fulfilledorder.buyer_account.name}
         </NavDropdown.Item>
       );
     });
@@ -110,7 +110,7 @@ class MyNavBar extends React.Component {
     this.props.sellerApprovedOrders.forEach((approvedOrder) => {
       waitingDeliveryArr.push(
         <NavDropdown.Item href={`/#/supplier-order/${approvedOrder.id}`}>
-          {approvedOrder.cart_snapshot.buyer_account}
+          {approvedOrder.buyer_account.name}
         </NavDropdown.Item>
       );
     });
@@ -181,24 +181,20 @@ class MyNavBar extends React.Component {
     }
     if (this.props.MyShoppingCarts) {
       this.props.MyShoppingCarts.forEach((cart) => {
-        console.log(cart.seller_account);
-        this.getAccount(cart.seller_account).then((res) => {
+        console.log(cart);
+        this.getAccount(cart.buyer_account).then((res) => {
+          console.log(res);
           cartDropDown.push(
             <NavDropdown.Item href={`/#/StorePage/${cart.seller_account}`}>
-              <Row>
-                <Col xl={6}>{res.data.name}</Col>
-                <Col xl={6}>
-                  {" "}
-                  <Button
-                    onClick={() => this.openModal(cart)}
-                    className="dropDownBtn"
-                    type="button"
-                    variant="danger"
-                  >
-                    {<MdRemoveShoppingCart />}
-                  </Button>
-                </Col>
-              </Row>
+              {res.data.name}{" "}
+              <Button
+                onClick={() => this.openModal(cart)}
+                className="dropDownBtn"
+                type="button"
+                variant="danger"
+              >
+                {<MdRemoveShoppingCart />}
+              </Button>
             </NavDropdown.Item>
           );
         });
@@ -216,9 +212,10 @@ class MyNavBar extends React.Component {
     }
     if (this.props.MySupplierOrders) {
       this.props.MySupplierOrders.forEach((order) => {
+        console.log(order);
         ordersArr.push(
           <NavDropdown.Item href={`/#/supplier-order/${order.id}`}>
-            {order.cart_snapshot.buyer_account}{" "}
+            {order.buyer_account.name}{" "}
           </NavDropdown.Item>
         );
       });
