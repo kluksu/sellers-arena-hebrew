@@ -227,7 +227,7 @@ label.form-label {
 .type2card {
   width: 280px;
   /* max-width: 300px; */
-  height: 508px;
+  height: 465px;
   border: 1px solid black;
   border-color: #eaefe9;
   background-color: white;
@@ -331,6 +331,13 @@ label.form-label {
   width: 100%;
   display: flex;
   align-items: center;
+  margin-top: 15px;
+}
+.CardUnitsFormContainer .form-control {
+  max-width: 150px;
+  width: fit-content;
+  text-align: center;
+  margin-top: 1px;
 }
 .productPageContainer .CardUnitsFormContainer {
   width: 100%;
@@ -384,6 +391,41 @@ table.hidden:hover {
   z-index: 100;
   right: 0px;
   width: auto;
+}
+.messagesBoardText {
+  margin: auto;
+  text-align: right;
+  /* min-width: ; */
+  max-width: 80%;
+  border: 1px solid black;
+  background: whitesmoke;
+  z-index: 100000000000000000000000000000;
+  padding: 10px;
+  /* display: none; */
+}
+
+.ticker:hover {
+  cursor: pointer;
+}
+.ticker:hover + .hidden {
+  display: block;
+  position: absolute;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
+.messagesBoardText.hidden:hover {
+  display: block;
+  position: absolute;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+
+  cursor: pointer;
 }
 
 .productCardContainer.smallerProductCard {
@@ -714,7 +756,7 @@ input {
 .searchPage .ticker {
   border: none;
   background-color: whitesmoke;
-  max-height: 100px;
+  /* max-height: ; */
 }
 
 .searchPage .btn {
@@ -945,6 +987,10 @@ input {
   background: gainsboro;
   border: 0.1px outset black;
   max-height: 70px !important;
+}
+.ticker h1 {
+  max-height: 70px;
+  white-space: nowrap;
 }
 .ticker p {
   margin: 4px !important ;

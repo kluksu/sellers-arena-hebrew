@@ -582,27 +582,28 @@ class StorePage extends React.Component {
   };
 
   render() {
-    let ticker = this.props.activeAccount ? (
-      <Ticker mode="smooth" className="ticker" direction={"toLeft"}>
-        {({ index }) => (
-          <>
-            <p
-              style={{
-                color: " #ffffff",
-                opacity: 4,
-                fontSize: "0.1px",
-              }}
-            >
-              {index}
-            </p>
+    let ticker =
+      this.props.activeAccount && this.props.activeAccount.account_type == 2 ? (
+        <Ticker mode="chain" className="ticker" direction={"toLeft"}>
+          {({ index }) => (
+            <>
+              <p
+                style={{
+                  color: " #ffffff",
+                  opacity: 4,
+                  fontSize: "0.1px",
+                }}
+              >
+                {index}
+              </p>
 
-            <h1>{this.state.messagesBoardText} </h1>
-          </>
-        )}
-      </Ticker>
-    ) : (
-      ""
-    );
+              <h1>{this.state.messagesBoardText} </h1>
+            </>
+          )}
+        </Ticker>
+      ) : (
+        ""
+      );
     if (
       this.props.activeAccount &&
       this.props.activeAccount.account_type == 2 &&
@@ -716,10 +717,19 @@ class StorePage extends React.Component {
                 </Button>{" "} */}
               </a>
             </Col>
-            <Col>{ticker}</Col>
+            <Col>
+              {ticker}{" "}
+              <div className={"messagesBoardText hidden"}>
+                {this.state.messagesBoardText}
+              </div>
+            </Col>
 
             {/* <MessageBoard></MessageBoard> */}
           </Row>
+
+          <div className={"messagesBoardText hidden"}>
+            {this.state.messagesBoardText}
+          </div>
         </Col>
       ) : null;
     let toggleIcon =

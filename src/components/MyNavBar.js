@@ -15,6 +15,8 @@ import {
 import { withRouter } from "react-router-dom";
 import LoginModal from "./LoginModal";
 import { FiShoppingCart } from "react-icons/fi";
+import { BsPerson } from "react-icons/bs";
+
 import { MdRemoveShoppingCart } from "react-icons/md";
 import { CgMenuGridR } from "react-icons/cg";
 import { AiOutlineMail } from "react-icons/ai";
@@ -72,6 +74,12 @@ class MyNavBar extends React.Component {
   // sellerApprovedOrders={this.state.sellerApprovedOrders}
 
   render() {
+    let profile = (
+      <NavLink>
+        {" "}
+        <BsPerson></BsPerson>
+      </NavLink>
+    );
     console.log(this.props.me);
     let rootButton =
       this.props.activeAccount && this.props.activeAccount.id == 1 ? (
@@ -278,6 +286,7 @@ class MyNavBar extends React.Component {
               {rootButton}
               {messageBoard}
               {shoppingCart}
+              {profile}
               {/* {massages} */}
               {ordersNav}
 

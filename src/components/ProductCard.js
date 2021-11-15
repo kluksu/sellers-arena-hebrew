@@ -163,8 +163,9 @@ class ProductCard extends React.Component {
                 variation={this.props.variation}
                 item={this.props.item}
               ></InfoBox>
-              <div className="CardUnitsFormContainer">{buttons}</div>
             </div>
+            <div className="CardUnitsFormContainer">{buttons}</div>
+
             <p className="FormRejects absoluteCardNotice">
               {this.state.notice}
             </p>
