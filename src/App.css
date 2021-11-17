@@ -1124,7 +1124,6 @@ input {
 }
 .stickyNav button:last-child {
   margin: auto;
-  margin-left: 40px;
 }
 .messageContainer > div {
   display: flex;

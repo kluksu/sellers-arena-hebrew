@@ -37,6 +37,7 @@ import { AiOutlineMail } from "react-icons/ai";
 import DiscountModal from "./components/DiscountModal";
 import RootPage from "./pages/RootPage";
 import { Button, Form } from "react-bootstrap";
+import Profile from "./pages/Profile";
 
 //${domain}/
 class App extends React.Component {
@@ -912,6 +913,13 @@ class App extends React.Component {
           </Route>
           <Route exact path="/suppliers">
             <Suppliers accessToken={this.state.accessToken}></Suppliers>
+          </Route>
+          <Route exact path="/me">
+            <Profile
+              me={this.state.me}
+              activeAccount={this.state.activeAccount}
+              accessToken={this.state.accessToken}
+            ></Profile>
           </Route>
 
           <NewMessageModal

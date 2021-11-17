@@ -75,7 +75,7 @@ class MyNavBar extends React.Component {
 
   render() {
     let profile = (
-      <NavLink>
+      <NavLink href="/#/me">
         {" "}
         <BsPerson></BsPerson>
       </NavLink>
