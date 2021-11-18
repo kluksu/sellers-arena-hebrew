@@ -2,9 +2,9 @@ import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 
 // Example POST method implementation:
-//http://supplierzz.herokuapp.com
+//https://supplierzz.herokuapp.com
 //https://supplierzz.westeurope.cloudapp.azure.com
-export let domain = "http://supplierzz.herokuapp.com";
+export let domain = "https://supplierzz.herokuapp.com";
 export async function postData(URL = "", data = {}, token) {
   // Default options are marked with *
   const response = await fetch(URL, {
