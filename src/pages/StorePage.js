@@ -684,9 +684,9 @@ class StorePage extends React.Component {
             </Col>
             <Col className="buttonsCol" xl={4} lg={12}>
               <Button
-                onclick={window.open(
-                  `tel:${this.state.currentStore.phone_number}`
-                )}
+                onclick={() =>
+                  window.open(`tel:${this.state.currentStore.phone_number}`)
+                }
                 className="w-50"
                 variant="success"
               >
