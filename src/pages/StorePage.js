@@ -683,11 +683,15 @@ class StorePage extends React.Component {
               <p> טלפון: {this.state.currentStore.phone_number}</p>
             </Col>
             <Col className="buttonsCol" xl={4} lg={12}>
-              <a href={this.state.currentStore.phone_number}>
-                <Button className="w-50" variant="success">
-                  התקשר <FiPhoneCall />
-                </Button>{" "}
-              </a>{" "}
+              <Button
+                onclick={window.open(
+                  `tel:${this.state.currentStore.phone_number}`
+                )}
+                className="w-50"
+                variant="success"
+              >
+                התקשר <FiPhoneCall />
+              </Button>{" "}
               <Button
                 className="w-50"
                 variant="success"
