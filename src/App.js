@@ -916,6 +916,8 @@ class App extends React.Component {
           </Route>
           <Route exact path="/me">
             <Profile
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
               me={this.state.me}
               activeAccount={this.state.activeAccount}
               accessToken={this.state.accessToken}

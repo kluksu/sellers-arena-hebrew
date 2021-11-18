@@ -13,6 +13,7 @@ export default class Profile extends Component {
       phone_number: "",
       messages: "",
       category: "",
+      error: {},
     };
   }
   submitChanges = () => {
@@ -26,28 +27,13 @@ export default class Profile extends Component {
       .patch(
         `${domain}/my-accounts/${this.props.activeAccount.id}/`,
         {
-          name:
-            this.state.name == ""
-              ? this.props.activeAccount.name
-              : this.state.name,
-          store_address:
-            this.state.address == ""
-              ? this.props.activeAccount.store_address
-              : this.state.address,
-          tax_id:
-            this.state.tax_id == ""
-              ? this.props.activeAccount.tax_id
-              : this.state.tax_id,
-          phone_number:
-            this.state.phone_number == ""
-              ? this.props.activeAccount.phone_number
-              : this.state.phone_number,
+          name: this.state.name,
+          store_address: this.state.address,
+          tax_id: this.state.tax_id,
+          phone_number: this.state.phone_number,
           is_active: true,
           account_type: this.props.activeAccount.account_type,
-          category:
-            this.state.category == ""
-              ? this.props.activeAccount.category
-              : this.state.category,
+          category: this.state.category,
           //   messages:
           //     this.state.messages == ""
           //       ? this.props.activeAccount.messages
@@ -59,14 +45,47 @@ export default class Profile extends Component {
       )
       .then((res) => {
         console.log(res);
+        this.props.openGenericModal("מעולה", "השינויים נשמרו בהצלחה");
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+        this.setState({ error: error.response.data });
+        this.props.openGenericModal(
+          "אופס",
+          "יש בעיה, אנא בדוק שכל השדות מלאים ונכונים ונסה שנית"
+        );
       });
   };
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
+  componentDidUpdate = (prevProps, prevState) => {
+    if (
+      this.props.activeAccount !== prevProps.activeAccount ||
+      (!prevProps.activeAccount && this.props.activeAccount)
+    ) {
+      this.setState({
+        tax_id: this.props.activeAccount.tax_id,
+        name: this.props.activeAccount.name,
+        address: this.props.activeAccount.store_address,
+        phone_number: this.props.activeAccount.phone_number,
+        messages: this.props.activeAccount.messages,
+        category: this.props.activeAccount.category,
+      });
+    }
+  };
   componentDidMount = () => {
     console.log(this.props.me);
-    this.setState();
+    if (this.props.activeAccount) {
+      this.setState({
+        tax_id: this.props.activeAccount.tax_id,
+        name: this.props.activeAccount.name,
+        address: this.props.activeAccount.store_address,
+        phone_number: this.props.activeAccount.phone_number,
+        messages: this.props.activeAccount.messages,
+        category: this.props.activeAccount.category,
+      });
+    }
   };
   render() {
     let showCategories = [];
@@ -75,54 +94,61 @@ export default class Profile extends Component {
         <option value={Object.keys(category)}>{Object.keys(category)}</option>
       );
     });
+    if (this.props.activeAccount) {
+      return (
+        <>
+          {" "}
+          <div style={{ marginTop: "70px" }}>
+            <Container style={{ maxWidth: "400px", marginBottom: "100px" }}>
+              <Form>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                  <Form.Label>שם העסק</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="name"
+                    onChange={this.handleChange}
+                    value={`${this.state.name}`}
+                  />
+                  <Form.Text className="text-muted"></Form.Text>
+                </Form.Group>
+                <p className="FormRejects">{this.state.error.name}</p>
 
-    return (
-      <>
-        {" "}
-        <div style={{ marginTop: "70px" }}>
-          <Container>
-            <Form>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>שם העסק</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="name"
-                  onChange={this.handleChange}
-                  placeholder={`${this.props.activeAccount.name}`}
-                />
-                <Form.Text className="text-muted"></Form.Text>
-              </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                  <Form.Label>ח"פ</Form.Label>
+                  <Form.Control
+                    type="text"
+                    onChange={this.handleChange}
+                    name="tax_id"
+                    value={`${this.state.tax_id}`}
+                  />
+                  <Form.Text className="text-muted"></Form.Text>
+                </Form.Group>
+                <p className="FormRejects">{this.state.error.tax_id}</p>
 
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>ח"פ</Form.Label>
-                <Form.Control
-                  type="text"
-                  onChange={this.handleChange}
-                  name="tax_id"
-                  placeholder={`${this.props.activeAccount.tax_id}`}
-                />
-                <Form.Text className="text-muted"></Form.Text>
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>טלפון</Form.Label>
-                <Form.Control
-                  type="number"
-                  onChange={this.handleChange}
-                  name="phone_number"
-                  placeholder={`${this.props.activeAccount.phone_number}`}
-                />
-                <Form.Text className="text-muted"></Form.Text>
-              </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                  <Form.Label>טלפון</Form.Label>
+                  <Form.Control
+                    type="number"
+                    onChange={this.handleChange}
+                    name="phone_number"
+                    value={`${this.state.phone_number}`}
+                  />
+                  <Form.Text className="text-muted"></Form.Text>
+                </Form.Group>
+                <p className="FormRejects">{this.state.error.phone_number}</p>
 
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>כתובת העסק</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="address"
-                  onChange={this.handleChange}
-                  placeholder={`${this.props.activeAccount.store_address}`}
-                />
-                {/* <Form.Text className="text-muted"></Form.Text>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                  <Form.Label>כתובת העסק</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="address"
+                    onChange={this.handleChange}
+                    value={`${this.state.address}`}
+                  />
+                  <p className="FormRejects">
+                    {this.state.error.store_address}
+                  </p>
+                  {/* <Form.Text className="text-muted"></Form.Text>
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -131,34 +157,38 @@ export default class Profile extends Component {
                   name="messages"
                   onChange={this.handleChange}
                   type="text"
-                  placeholder={`${this.props.activeAccount.messages}`}
+                  value={`${this.state.messages}`}
                 /> */}
 
-                <Form.Label> קטגוריה ראשית</Form.Label>
-                <Form.Control
-                  onChange={this.handleChange}
-                  as="select"
-                  name="category"
-                >
-                  <option value={this.props.activeAccount.category}>
-                    {this.props.activeAccount.category}
-                  </option>
-                  {showCategories}
-                </Form.Control>
-              </Form.Group>
-            </Form>{" "}
-            <div>{`סוג חשבון : ${this.props.activeAccount.account_type}`}</div>
-            <div>{`מדינה : ${this.props.activeAccount.country}`}</div>
-            <div>{`מספר חשבון :  ${this.props.activeAccount.id}`}</div>
-            <div>{`שפה : ${this.props.activeAccount.language}`}</div>
-            <div>{``}</div>
-            <div>{``}</div>
-            <Button onClick={this.submitChanges} type="button">
-              עדכן פרטים
-            </Button>
-          </Container>
-        </div>
-      </>
-    );
+                  <Form.Label> קטגוריה ראשית</Form.Label>
+                  <Form.Control
+                    onChange={this.handleChange}
+                    as="select"
+                    name="category"
+                  >
+                    <option value={this.state.category}>
+                      {this.state.category}
+                    </option>
+                    {showCategories}
+                  </Form.Control>
+                </Form.Group>
+                <p className="FormRejects">{this.state.error.category}</p>
+              </Form>{" "}
+              <div>{`סוג חשבון : ${this.props.activeAccount.account_type}`}</div>
+              <div>{`מדינה : ${this.props.activeAccount.country}`}</div>
+              <div>{`מספר חשבון :  ${this.props.activeAccount.id}`}</div>
+              <div>{`שפה : ${this.props.activeAccount.language}`}</div>
+              <div>{``}</div>
+              <div>{``}</div>
+              <Button onClick={this.submitChanges} type="button">
+                עדכן פרטים
+              </Button>
+            </Container>
+          </div>
+        </>
+      );
+    } else {
+      return <h1>לא נבחר חשבון</h1>;
+    }
   }
 }

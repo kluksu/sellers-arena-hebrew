@@ -74,12 +74,12 @@ class MyNavBar extends React.Component {
   // sellerApprovedOrders={this.state.sellerApprovedOrders}
 
   render() {
-    let profile = (
+    let profile = this.props.activeAccount ? (
       <NavLink href="/#/me">
         {" "}
         <BsPerson></BsPerson>
       </NavLink>
-    );
+    ) : null;
     console.log(this.props.me);
     let rootButton =
       this.props.activeAccount && this.props.activeAccount.id == 1 ? (
