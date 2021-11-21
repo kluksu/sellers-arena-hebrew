@@ -583,8 +583,10 @@ class StorePage extends React.Component {
 
   render() {
     let ticker =
-      this.props.activeAccount && this.props.activeAccount.account_type == 2 ? (
-        <Ticker mode="chain" className="ticker" direction={"toLeft"}>
+      this.props.activeAccount &&
+      this.props.activeAccount.account_type == 2 &&
+      this.state.messagesBoardText ? (
+        <Ticker mode="chain" className="ticker" direction={"toRight"}>
           {({ index }) => (
             <>
               <p
@@ -597,7 +599,7 @@ class StorePage extends React.Component {
                 {index}
               </p>
 
-              <h1>{this.state.messagesBoardText} </h1>
+              <h1>` {this.state.messagesBoardText} `</h1>
             </>
           )}
         </Ticker>

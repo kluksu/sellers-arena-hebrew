@@ -72,8 +72,11 @@ class MyNavBar extends React.Component {
   // payedOrders={this.state.payedOrders}
   // fulfilledOrders={this.state.fulfilledOrders}
   // sellerApprovedOrders={this.state.sellerApprovedOrders}
-
   render() {
+    let vibretOrders =
+      this.props.MySupplierOrders.length > 0
+        ? "animate__animated animate__headShake animate__repeat-3		"
+        : "";
     let profile = this.props.activeAccount ? (
       <NavLink href="/#/me">
         {" "}
@@ -159,11 +162,19 @@ class MyNavBar extends React.Component {
         </>
       ) : null;
     const register = !this.props.accessToken ? (
-      <Nav.Link href="/#/register">הירשם</Nav.Link>
+      <Nav.Link
+        className={
+          "animate__animated animate__headShake animate__infinite animate__slower animate__delay-2s	"
+        }
+        href="/#/register"
+      >
+        הירשם
+      </Nav.Link>
     ) : null;
 
     const login_logout = !this.props.accessToken ? (
       <Nav.Link
+        className={`animate__animated animate__headShake animate__infinite  animate__delay-0.5s	`}
         href={`${window.location}`}
         onClick={() => this.props.openModal()}
       >
@@ -257,7 +268,10 @@ class MyNavBar extends React.Component {
     if (this.props.activeAccount) {
       ordersNav =
         this.props.activeAccount.account_type == 3 ? (
-          <NavDropdown title={`הזמנות ${newOrderAwating}`}>
+          <NavDropdown
+            className={`${vibretOrders}`}
+            title={`הזמנות ${newOrderAwating}`}
+          >
             {" "}
             {Orders}
             {waitingDelivery}

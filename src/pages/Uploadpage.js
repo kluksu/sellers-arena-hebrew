@@ -198,9 +198,13 @@ class Uploadpage extends React.Component {
           <p className="FormRejects"> {this.state.responsData.detail}</p>
           <Form>
             <Row>
-              <Col xl={6} sm={12}>
+              <Col
+                className="animate__animated animate__headShake animate__repeat-3	"
+                xl={6}
+                sm={12}
+              >
                 <Crop
-                  className="cropper"
+                  className="cropper "
                   getCropedBlob={this.getCropedBlob}
                   getBase64={this.getBase64}
                 ></Crop>

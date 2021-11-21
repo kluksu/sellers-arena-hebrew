@@ -318,7 +318,7 @@ class EditVariationPage extends React.Component {
             <Row>
               <Col xl={6}>
                 <Crop
-                  className="cropper"
+                  className="cropper  "
                   getCropedBlob={this.getCropedBlob}
                   getBase64={this.getBase64}
                 ></Crop>

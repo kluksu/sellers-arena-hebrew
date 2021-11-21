@@ -545,13 +545,18 @@ class App extends React.Component {
 
     takeMeHome();
   };
-  openModal = () => this.setState({ isOpen: true });
+  openModal = () => this.setState({ isOpen: true, loginData: {} });
   closeModal = () => this.setState({ isOpen: false });
   loginPostData = (email, password) => {
+    // console.log("!!!!!!!!!!!!");
     postData(`${domain}/token/`, {
       email: email,
       password: password,
     }).then((data) => {
+      console.log(data);
+      if (data) {
+        this.setState({ loginData: data });
+      }
       this.getAllInfo(data);
       if (this.state.activeAccount) {
         takeMeHome();
@@ -659,11 +664,14 @@ class App extends React.Component {
         unreadMessages++;
       }
     }
-
+    let vibretMessages =
+      unreadMessages > 0
+        ? "animate__animated animate__headShake animate__repeat-3	animate__delay-5s	"
+        : "";
     let messagesButton =
       this.state.screenWidth > 500 ? (
         <Button
-          className=" no-print messagesButton "
+          className={`${vibretMessages} no-print messagesButton `}
           onClick={this.toggleMessages}
         >
           messages

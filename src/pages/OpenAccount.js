@@ -179,7 +179,7 @@ export default class OpenAccount extends Component {
                 name="countrey"
               >
                 <option>----------</option>
-                <option value="Israel">Israel</option>
+                <option value="israel">Israel</option>
                 {/* <option value="USA">USA</option> */}
               </Form.Control>
             </Form.Group>

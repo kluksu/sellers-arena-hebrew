@@ -17,17 +17,17 @@ export default class LoginModal extends Component {
   };
   render() {
     const generalError = this.props.loginData.detail ? (
-      <p className="FormRejects">{`${this.props.loginData.detail},אנא וודא ששם המשתמש והסיסמא נכונים`}</p>
+      <p className="FormRejects">{`אנא וודא ששם המשתמש והסיסמא נכונים`}</p>
     ) : (
       ""
     );
     const EmailError = this.props.loginData.email ? (
-      <p className="FormRejects">{this.props.loginData.email}</p>
+      <p className="FormRejects">שדה זה חייב להיות מלא</p>
     ) : (
       ""
     );
     const passwordError = this.props.loginData.password ? (
-      <p className="FormRejects">{this.props.loginData.password}</p>
+      <p className="FormRejects">שדה זה חייב להיות מלא</p>
     ) : (
       ""
     );
@@ -38,7 +38,6 @@ export default class LoginModal extends Component {
           <Modal.Title>התחבר</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {generalError}
           <Form.Group controlId="">
             <Form.Label> כתובת מייל</Form.Label>
             <Form.Control
@@ -59,6 +58,7 @@ export default class LoginModal extends Component {
             />
           </Form.Group>
           {passwordError}
+          {generalError}
         </Modal.Body>
         <Modal.Footer>
           <Button
