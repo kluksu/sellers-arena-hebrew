@@ -38,6 +38,8 @@ import DiscountModal from "./components/DiscountModal";
 import RootPage from "./pages/RootPage";
 import { Button, Form } from "react-bootstrap";
 import Profile from "./pages/Profile";
+import EmailForm from "./components/EmailForm";
+import Pricing from "./pages/Pricing";
 
 //${domain}/
 class App extends React.Component {
@@ -930,6 +932,12 @@ class App extends React.Component {
               activeAccount={this.state.activeAccount}
               accessToken={this.state.accessToken}
             ></Profile>
+          </Route>
+          <Route exact path="/pricing">
+            <Pricing
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
+            ></Pricing>
           </Route>
 
           <NewMessageModal

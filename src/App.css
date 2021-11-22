@@ -1131,6 +1131,36 @@ input {
   font-size: 10px;
 }
 
+/* .emailForm {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+} */
+.connectComponent {
+  margin-top: 20px;
+  max-width: 600px !important;
+  background: rgba(255, 255, 255, 0.938);
+  border-radius: 10px;
+  border: 1px outset;
+  padding: 0px 30px 50px 30px !important;
+}
+.pricingPage {
+  background-image: url("https://images.pexels.com/photos/7014946/pexels-photo-7014946.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+  background-repeat: no-repeat;
+  background-size: auto;
+  height: 100%;
+  background-position: top;
+  /* padding: 50px; */
+  padding-top: 100px;
+  padding-bottom: 100px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.pricingPage > h1 {
+  font-weight: 900;
+  max-width: 600px;
+  margin: auto;
+}
 .navbar.navbar-expand.navbar-light.bg-light > .btn.btn-success {
   margin-bottom: -6px;
   margin-top: 0px;

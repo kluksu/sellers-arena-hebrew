@@ -293,7 +293,9 @@ class MyNavBar extends React.Component {
             <Nav className="ml-auto">
               <Nav.Link href="/#/">ראשי</Nav.Link>
               <Nav.Link href="/#/features">שימושים</Nav.Link>
-              <Nav.Link href="/#/pricing">מחירון</Nav.Link>
+              <Nav.Link href="?subject=&name=&email=&phone=&message=#/pricing">
+                מחירון
+              </Nav.Link>
               <Nav.Link href="/#/suppliers">ספקים</Nav.Link>
             </Nav>
             <Nav>
