@@ -6,6 +6,7 @@ import {
   domain,
   hebrewCategoriesAndSubCategories,
   postData,
+  sendEmailToMe,
   takeMeHome,
 } from "../components/utils";
 
@@ -53,6 +54,15 @@ export default class OpenAccount extends Component {
       this.setState({ responseData: data });
       this.props.goToNewAccount(data);
       if (data.id) {
+        console.log(data);
+        sendEmailToMe(
+          data.name,
+          data.email,
+          data.phone_number,
+          `${data.id} is asking to open an account`,
+          "new account",
+          "template_bnhobxj"
+        );
         window.location.assign("/#/");
       }
     });

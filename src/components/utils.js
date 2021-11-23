@@ -1,5 +1,6 @@
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
+import emailjs from "emailjs-com";
 
 // Example POST method implementation:
 //https://supplierzz.herokuapp.com
@@ -83,6 +84,38 @@ export async function postFormData(URL = "", data = {}, token) {
   });
   return response.json();
 }
+export const sendEmailToMe = (
+  name,
+  email,
+  phone,
+  message,
+  subject,
+  template,
+  buyerName,
+  orderLInk,
+  sellerEmail
+) => {
+  // template_1iam9bt
+
+  // template_bnhobxj
+  let templateParams = {
+    name: name,
+    subject: subject,
+    email: email,
+    phone: phone,
+    message: message,
+    buyerName: buyerName,
+    orderLInk: orderLInk,
+    sellerEmail: sellerEmail,
+  };
+
+  return emailjs.send(
+    "default_service",
+    template,
+    templateParams,
+    "user_luCcUIntINSgugJfQeWCK"
+  );
+};
 export const delivered = "fill";
 export const categoriesList = [
   "Agriculture",

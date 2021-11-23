@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import OrderInfo from "../components/OrderInfo";
 import axios from "axios";
 import { Button, Form, Container } from "react-bootstrap";
-import { domain, postData } from "../components/utils";
+import { domain, postData, sendEmailToMe } from "../components/utils";
 import DiscountModal from "../components/DiscountModal";
 
 class OrderSummery extends React.Component {
@@ -28,7 +28,6 @@ class OrderSummery extends React.Component {
       this.setState({ changedQuantities: changedQuantities });
     } else {
       let changedQuantities = this.state.changedQuantities;
-
       changedQuantities[key] = {
         quantity: quantity,
         cost_per_item: price,
@@ -49,6 +48,24 @@ class OrderSummery extends React.Component {
   checkOutAndGoHome = () => {
     this.props.checkOut(this.props.match.params.id).then((data) => {
       if (data.order_id && this.props.activeAccount.account_type == 2) {
+        console.log(data);
+        this.props.getSpecificOrder(data.order_id).then((res) => {
+          console.log(res); ///to be continued - send email by response email with emailjs to the seller when a new order is made
+        });
+        //         buyer_account: {id: 122, name: 'מוצרים', tax_id: 'חגחגחקחגחקקי'}
+        // buyer_comments: ""
+        // buyer_unregistered_account: null
+        // cart_id: 1122
+        // cart_snapshot: {id: 1122, status: 'cart_status_open', buyer_account: 122, estimated_tax: 0.17, reopen_reason: null, …}
+        // filled_at: null
+        // id: 245
+        // order_status: "submitted"
+        // order_status_reason: null
+        // seller_account: {id: 116, name: 'NEWhebrew', tax_id: '3t325636363'}
+        // seller_edited_snapshot: null
+        // submitted_at: "2021-11-22T22:10:01.837740Z"
+        // user: 170
+        // sendEmailToMe()
         // this.props.deleteCart(this.props.match.params.id);
         window.location.assign("/#/");
       }

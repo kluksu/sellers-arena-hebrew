@@ -474,6 +474,15 @@ class App extends React.Component {
     this.getCarts();
     this.setState({ LoaderVisibilty: "none" });
   }
+  getSpecificOrder = (orderID) => {
+    const authorization = !this.state.accessToken
+      ? null
+      : `Bearer ${this.state.accessToken}`;
+    const config = {
+      headers: { "Content-Type": "application/json", authorization },
+    };
+    return axios.get(`${domain}/my-orders/${orderID}`, config);
+  };
   getOrders = (status, state) => {
     const authorization = !this.state.accessToken
       ? null
@@ -878,6 +887,7 @@ class App extends React.Component {
           </Route>
           <Route exact path="/order-summery/:id">
             <OrderSummery
+              getSpecificOrder={this.getSpecificOrder}
               checkOut={this.checkOut}
               activeAccount={this.state.activeAccount}
               deleteCart={this.deleteCart}
