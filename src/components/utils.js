@@ -91,6 +91,7 @@ export const sendEmailToMe = (
   message,
   subject,
   template,
+  captchaResponse,
   buyerName,
   orderLInk,
   sellerEmail
@@ -107,6 +108,7 @@ export const sendEmailToMe = (
     buyerName: buyerName,
     orderLInk: orderLInk,
     sellerEmail: sellerEmail,
+    "g-recaptcha-response": captchaResponse,
   };
 
   return emailjs.send(

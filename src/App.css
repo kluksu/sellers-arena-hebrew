@@ -1144,6 +1144,9 @@ input {
   border: 1px outset;
   padding: 0px 30px 50px 30px !important;
 }
+#g-recaptcha > div:first-of-type {
+  margin: auto;
+}
 .pricingPage {
   background-image: url("https://images.pexels.com/photos/7014946/pexels-photo-7014946.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
   background-repeat: no-repeat;

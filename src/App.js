@@ -40,7 +40,7 @@ import { Button, Form } from "react-bootstrap";
 import Profile from "./pages/Profile";
 import EmailForm from "./components/EmailForm";
 import Pricing from "./pages/Pricing";
-
+import recaptcha from "react-recaptcha";
 //${domain}/
 class App extends React.Component {
   constructor(props) {
@@ -85,8 +85,35 @@ class App extends React.Component {
       modalText: "",
       modalTop: "",
       modalBottom: "",
+      isRealUser: false,
     };
   }
+  verifyCallback = (response) => {
+    if (response) {
+      console.log(response);
+      this.setState({ captchaResponse: response });
+      this.setState({ isRealUser: true });
+      setTimeout(
+        () => {
+          this.setState({ isRealUser: false });
+        },
+
+        60000
+      );
+    } else {
+      this.setState({ isRealUser: false });
+    }
+  };
+  reCaptchaLoded = () => {
+    console.log("reacptcha has loaded");
+  };
+  handleVerified = () => {
+    if (this.state.isRealUser === true) {
+      alert("ok");
+    } else {
+      alert("please verify that you are a real user");
+    }
+  };
   ///////root account only functions start
   activateDeActivateAccount = (accountID, bollean) => {
     const authorization = !this.state.accessToken
@@ -806,6 +833,11 @@ class App extends React.Component {
           </Route>
           <Route exact path="/openAccount">
             <OpenAccount
+              captchaResponse={this.state.captchaResponse}
+              isRealUser={this.state.isRealUser}
+              verifyCallback={this.verifyCallback}
+              reCaptchaLoded={this.reCaptchaLoded}
+              // handleVerified={this.handleVerified}
               goToNewAccount={this.goToNewAccount}
               activeAccount={this.state.activeAccount}
               accessToken={this.state.accessToken}
@@ -945,6 +977,11 @@ class App extends React.Component {
           </Route>
           <Route exact path="/pricing">
             <Pricing
+              captchaResponse={this.state.captchaResponse}
+              isRealUser={this.state.isRealUser}
+              verifyCallback={this.verifyCallback}
+              reCaptchaLoded={this.reCaptchaLoded}
+              handleVerified={this.handleVerified}
               closeGenericModal={this.closeGenericModal}
               openGenericModal={this.openGenericModal}
             ></Pricing>

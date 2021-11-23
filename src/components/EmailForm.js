@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import emailjs from "emailjs-com";
 import { Button, Container, Form } from "react-bootstrap";
 import { sendEmailToMe } from "./utils";
+import Recaptcha from "react-recaptcha";
 
 export default class EmailForm extends Component {
   constructor(props) {
@@ -15,6 +16,7 @@ export default class EmailForm extends Component {
       errorMessage: "",
     };
   }
+
   closeModalAndGoBackHome = () => {
     window.location.assign("/#/");
     this.props.closeGenericModal();
@@ -23,57 +25,63 @@ export default class EmailForm extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
   sendEmail = () => {
-    if (
-      this.state.name !== "" &&
-      this.state.phone !== "" &&
-      this.state.email !== "" &&
-      this.state.subject !== "" &&
-      this.state.message !== ""
-    ) {
-      //   e.preventDefault();
+    this.setState({ errorMessage: "" });
+    if (this.props.isRealUser === true) {
+      if (
+        this.state.name !== "" &&
+        this.state.phone !== "" &&
+        this.state.email !== "" &&
+        this.state.subject !== "" &&
+        this.state.message !== ""
+      ) {
+        //   e.preventDefault();
 
-      //   emailjs
-      //     .sendForm(
-      //       "default_service",
-      //       "template_bnhobxj",
-      //       e.target,
-      //       "user_luCcUIntINSgugJfQeWCK"
-      //     )
-      // template_1iam9bt
+        //   emailjs
+        //     .sendForm(
+        //       "default_service",
+        //       "template_bnhobxj",
+        //       e.target,
+        //       "user_luCcUIntINSgugJfQeWCK"
+        //     )
+        // template_1iam9bt
 
-      // template_bnhobxj
-      sendEmailToMe(
-        this.state.name,
-        this.state.email,
-        this.state.phone,
-        this.state.message,
-        this.state.subject,
-        "template_bnhobxj"
-      ).then(
-        (result) => {
-          this.setState({
-            errorMessage: "",
-          });
-          this.props.openGenericModal(
-            "תודה רבה!",
-            "קיבלנו את הפניה וניצור קשר בהקדם",
-            <Button onClick={this.closeModalAndGoBackHome}>
-              חזור לעמוד הראשי{" "}
-            </Button>
-          );
-          console.log(result.text);
-        },
-        (error) => {
-          this.setState({
-            errorMessage: "אופס, יש תקלה, אנא נסה שנית מאוחר יותר",
-          });
-          console.log(error.text);
-        }
-      );
+        // template_bnhobxj
+        sendEmailToMe(
+          this.state.name,
+          this.state.email,
+          this.state.phone,
+          this.state.message,
+          this.state.subject,
+          "template_bnhobxj",
+          this.props.captchaResponse
+        ).then(
+          (result) => {
+            this.setState({
+              errorMessage: "",
+            });
+            this.props.openGenericModal(
+              "תודה רבה!",
+              "קיבלנו את הפניה וניצור קשר בהקדם",
+              <Button onClick={this.closeModalAndGoBackHome}>
+                חזור לעמוד הראשי{" "}
+              </Button>
+            );
+            console.log(result.text);
+          },
+          (error) => {
+            this.setState({
+              errorMessage: "אופס, יש תקלה, אנא נסה שנית מאוחר יותר",
+            });
+            console.log(error.text);
+          }
+        );
+      } else {
+        this.setState({
+          errorMessage: "  הטופס לא נשלח, אנא ודא שכל השדות מלאים",
+        });
+      }
     } else {
-      this.setState({
-        errorMessage: "  הטופס לא נשלח, אנא ודא שכל השדות מלאים",
-      });
+      this.setState({ errorMessage: "בבקשה אשר שאינך רובוט" });
     }
   };
 
@@ -141,6 +149,12 @@ export default class EmailForm extends Component {
               }
             />
           </Form.Group>
+          <Recaptcha
+            sitekey="6LeVP1MdAAAAAIiCocQV_iqctlgartuvAu9LHfn8"
+            render="explicit"
+            onloadCallback={this.props.reCaptchaLoded}
+            verifyCallback={this.props.verifyCallback}
+          />
           <p className="FormRejects ">{this.state.errorMessage}</p>
           <Button onClick={this.sendEmail} className="w-100" type="button">
             שלח טופס

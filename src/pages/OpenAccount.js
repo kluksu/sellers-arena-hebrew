@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Container, Form, FormLabel } from "react-bootstrap";
+import { Button, Container, Form, FormLabel, Row } from "react-bootstrap";
 import {
   categoriesAndSubCategories,
   categoriesList,
@@ -9,6 +9,7 @@ import {
   sendEmailToMe,
   takeMeHome,
 } from "../components/utils";
+import Recaptcha from "react-recaptcha";
 
 export default class OpenAccount extends Component {
   constructor(props) {
@@ -24,6 +25,7 @@ export default class OpenAccount extends Component {
       accountType: "",
       responseData: "",
       category: "",
+      captchaError: "",
     };
   }
   // }{
@@ -35,37 +37,42 @@ export default class OpenAccount extends Component {
   //   "account_type": 0
   // ${domain}/
   creatAccount = () => {
-    postData(
-      `${domain}/my-accounts/`,
-      {
-        name: this.state.name,
-        store_address: this.state.address,
-        tax_id: this.state.taxID,
-        // is_active: true,
-        account_type: this.state.accountType,
-        phone_number: this.state.phone,
-        category: this.state.category,
-        countrey: this.state.countrey,
-        language: this.state.language,
-      },
-      ` ${this.props.accessToken}`
-    ).then((data) => {
-      console.log(data);
-      this.setState({ responseData: data });
-      this.props.goToNewAccount(data);
-      if (data.id) {
+    if (this.props.isRealUser) {
+      postData(
+        `${domain}/my-accounts/`,
+        {
+          name: this.state.name,
+          store_address: this.state.address,
+          tax_id: this.state.taxID,
+          // is_active: true,
+          account_type: this.state.accountType,
+          phone_number: this.state.phone,
+          category: this.state.category,
+          countrey: this.state.countrey,
+          language: this.state.language,
+        },
+        ` ${this.props.accessToken}`
+      ).then((data) => {
         console.log(data);
-        sendEmailToMe(
-          data.name,
-          data.email,
-          data.phone_number,
-          `${data.id} is asking to open an account`,
-          "new account",
-          "template_bnhobxj"
-        );
-        window.location.assign("/#/");
-      }
-    });
+        this.setState({ responseData: data });
+        this.props.goToNewAccount(data);
+        if (data.id) {
+          console.log(data);
+          sendEmailToMe(
+            data.name,
+            data.email,
+            data.phone_number,
+            `${data.id} is asking to open an account`,
+            "new account",
+            "template_bnhobxj",
+            this.props.captchaResponse
+          );
+          window.location.assign("/#/");
+        }
+      });
+    } else {
+      this.setState({ captchaError: "בבקשה אשר שאינך רובוט" });
+    }
   };
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
@@ -194,6 +201,14 @@ export default class OpenAccount extends Component {
               </Form.Control>
             </Form.Group>
           </Form>
+          <br></br>
+          <Recaptcha
+            sitekey="6LeVP1MdAAAAAIiCocQV_iqctlgartuvAu9LHfn8"
+            render="explicit"
+            onloadCallback={this.props.reCaptchaLoded}
+            verifyCallback={this.props.verifyCallback}
+          />
+          <p className="FormRejects">{this.state.captchaError}</p>
           <Button onClick={this.creatAccount} type="button">
             {" "}
             שלח
