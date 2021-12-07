@@ -105,7 +105,12 @@ class Crop extends PureComponent {
     return (
       <div className="inner-cropper">
         <div>
-          <input type="file" accept="image/*" onChange={this.onSelectFile} />
+          <input
+            style={{ maxWidth: "100%" }}
+            type="file"
+            accept="image/*"
+            onChange={this.onSelectFile}
+          />
         </div>
         {src && (
           <ReactCrop

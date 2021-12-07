@@ -5,6 +5,7 @@
   direction: rtl;
   /* text-align: right; */
 }
+
 @import url("https://fonts.googleapis.com/css2?family=Rampart+One&display=swap");
 /*font-family: 'Abril Fatface', cursive;
 font-family: 'Acme', sans-serif;
@@ -12,6 +13,9 @@ font-family: 'Fredericka the Great', cursive;
 font-family: 'Montserrat', sans-serif;
 font-family: 'Raleway', sans-serif;
 font-family: 'Syncopate', sans-serif; */
+body {
+  text-align: right;
+}
 
 .App {
   text-align: center;
@@ -21,20 +25,29 @@ font-family: 'Syncopate', sans-serif; */
   margin-left: 20px;
 }
 .modal-dialog {
+  margin-top: 6.75rem !important;
+  min-width: 300px;
+}
+.modal {
+  /* direction: rtl; */
+}
+/* .modal-dialog {
   margin: 6.75rem auto !important;
 }
 .modal {
   max-width: 80%;
+  margin: auto;
   right: 5%;
   text-align: right;
 }
+
 .modal-header .close {
   padding: 1rem 1rem;
   margin: -1rem 1rem -1rem;
 }
 .modal-backdrop.fade {
   width: 100%;
-}
+} */
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -225,13 +238,14 @@ label.form-label {
   margin-top: 30px;
 } */
 .type2card {
-  width: 280px;
+  max-width: 280px;
   /* max-width: 300px; */
   height: 465px;
   border: 1px solid black;
   border-color: #eaefe9;
   background-color: white;
-  margin: auto;
+  /* margin: auto; */
+  margin-right: 0px;
   margin-bottom: 30px;
 }
 .borderRight {
@@ -472,7 +486,7 @@ input {
 .homePage {
   background-color: white;
   display: flex;
-  padding: 40px 0px 40px 26px;
+  /* padding: 40px 0px 40px 26px; */
   flex-wrap: wrap;
   justify-content: center;
 
@@ -484,9 +498,12 @@ input {
   /* justify-content: space-around; */
 }
 .homePage .productCardContainer {
-  overflow: hidden;
+  /* overflow: hidden; */
   margin: auto;
   margin-bottom: 31px;
+}
+.homePage .col {
+  padding: 0px;
 }
 .productCardContainer .productCardContainer .row .nav-link {
   font-size: 10px;
@@ -1093,7 +1110,7 @@ input {
   padding: 8px;
 }
 .modalMessageThreadContainer {
-  height: 100px;
+  /* height: 100px; */
   /* overflow-y: scroll; */
 }
 .messageContainer:nth-of-type(even) {

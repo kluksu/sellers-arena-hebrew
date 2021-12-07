@@ -266,7 +266,7 @@ class HomePage extends React.Component {
           screenWidth={this.props.screenWidth}
           getSearchText={this.getSearchText}
         ></Search>
-        <Row>
+        <Row style={{ marginLeft: "0px" }}>
           <Col xl={0.1}>
             <ProSidebar collapsed={this.state.isColapsed}>
               <Menu>
@@ -287,7 +287,10 @@ class HomePage extends React.Component {
           </Col>
           <Col style={{ paddingLeft: "0px" }}>
             <InfiniteScroll
-              style={{ paddingLeft: infiniteCrollPaddingLeft }}
+              style={{
+                // paddingRight: infiniteCrollPaddingLeft,
+                marginRight: "20px",
+              }}
               className="homePage"
               dataLength={cards.length}
               next={() => this.getItems()}
