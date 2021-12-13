@@ -292,7 +292,7 @@ class MyNavBar extends React.Component {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="ml-auto">
               <Nav.Link href="/#/">ראשי</Nav.Link>
-              <Nav.Link href="/#/features">שימושים</Nav.Link>
+              {/* <Nav.Link href="/#/features">שימושים</Nav.Link> */}
               <Nav.Link href="/#/pricing">מחירון</Nav.Link>
               <Nav.Link href="/#/suppliers">ספקים</Nav.Link>
             </Nav>

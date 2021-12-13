@@ -10,7 +10,7 @@ export default class AddVars extends Component {
       isDisabled: false,
       variant: "primary",
       json: "",
-      buttonText: "הוסף מוצר",
+      buttonText: "הוסף וריאציה",
       warning: "",
     };
   }

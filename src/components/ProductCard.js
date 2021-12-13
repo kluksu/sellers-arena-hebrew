@@ -19,7 +19,6 @@ class ProductCard extends React.Component {
     //not sure
     let cardZoom = this.props.screenWidth > 1000 ? "" : "scale(1)";
     //not sure
-    console.log(navigator.userAgent);
     let discountsArr = [];
     let prev = 0;
     let price = 0;
@@ -80,7 +79,7 @@ class ProductCard extends React.Component {
     const picture =
       this.props.pictures !== null
         ? this.props.pictures
-        : "https://cdn.pixabay.com/photo/2014/06/18/18/42/running-shoe-371625__340.jpg";
+        : "https://cdn.pixabay.com/photo/2015/05/11/23/10/picture-frame-763299_960_720.png";
     const storeLInksAcive = this.props.linkAllAround;
     const batchSize = this.props.variation ? (
       <div>כמות מנה {this.props.variation.batch_size}</div>

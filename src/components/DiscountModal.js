@@ -16,9 +16,11 @@ export default class DiscountModal extends Component {
             <Modal.Body>{this.props.text}</Modal.Body>
             <Modal.Footer>
               {this.props.bottom}
-              <Button variant="primary" onClick={this.props.closeModal}>
-                סגור
-              </Button>
+              {this.props.preventModalDefult !== true ? (
+                <Button variant="primary" onClick={this.props.closeModal}>
+                  סגור
+                </Button>
+              ) : null}
             </Modal.Footer>
           </Modal>
         </>

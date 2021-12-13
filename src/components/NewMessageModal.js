@@ -38,6 +38,7 @@ export default class NewMessageModal extends Component {
     let showMessages = [];
     if (this.props.threadTextRespons && this.props.activeAccount) {
       this.props.threadTextRespons.data.results.forEach((message) => {
+        console.log(message);
         if (!message.text.includes("wasReadBy")) {
           let src_account =
             message.src_account === this.props.activeAccount.id

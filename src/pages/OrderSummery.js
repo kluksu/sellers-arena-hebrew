@@ -67,7 +67,7 @@ class OrderSummery extends React.Component {
         // user: 170
         // sendEmailToMe()
         // this.props.deleteCart(this.props.match.params.id);
-        window.location.assign("/#/");
+        this.props.openGenericModalOrderSummery();
       }
       console.log(data);
     });

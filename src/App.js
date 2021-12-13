@@ -41,6 +41,7 @@ import Profile from "./pages/Profile";
 import EmailForm from "./components/EmailForm";
 import Pricing from "./pages/Pricing";
 import recaptcha from "react-recaptcha";
+import AccountNotActive from "./components/AccountNotActive";
 //${domain}/
 class App extends React.Component {
   constructor(props) {
@@ -85,7 +86,8 @@ class App extends React.Component {
       modalText: "",
       modalTop: "",
       modalBottom: "",
-      isRealUser: false,
+      isRealUser: true,
+      preventModalDefult: false,
     };
   }
   verifyCallback = (response) => {
@@ -132,17 +134,39 @@ class App extends React.Component {
   ///////root account only functions end
 
   closeGenericModal = () => {
-    this.setState({ modalText: "" });
-    this.setState({ modalTop: "" });
-    this.setState({ modalBottom: "" });
-    this.setState({ isGenericModalOpen: false });
+    if (this.state.preventModalDefult !== true) {
+      this.setState({ modalText: "" });
+      this.setState({ modalTop: "" });
+      this.setState({ modalBottom: "" });
+      this.setState({ isGenericModalOpen: false });
+    }
   };
-  openGenericModal = (top, text, bottom) => {
+  openGenericModal = (top, text, bottom, prevent) => {
+    prevent =
+      prevent === "prevent"
+        ? this.setState({ preventModalDefult: true })
+        : this.setState({ preventModalDefult: false });
     this.setState({ modalText: text });
     this.setState({ modalTop: top });
     this.setState({ modalBottom: bottom });
 
     this.setState({ isGenericModalOpen: true });
+  };
+  openGenericModalOrderSummery = () => {
+    this.openGenericModal(
+      "הפעולה נעשתה בהצלחה",
+      "",
+      <Button
+        onClick={() => {
+          window.location.assign("/#/");
+          this.setState({ isGenericModalOpen: false });
+          this.closeGenericModal();
+        }}
+      >
+        חזור לעמוד הבית
+      </Button>,
+      "prevent"
+    );
   };
   // getUnregisteredAccount=()=>{
 
@@ -173,10 +197,7 @@ class App extends React.Component {
       .then((res) => {
         this.getCarts();
         this.getAllOrders();
-        this.openGenericModal(
-          "succes!",
-          `the order was marked as ${statusName}`
-        );
+        this.openGenericModalOrderSummery();
       })
       .catch(
         this.openGenericModal(
@@ -224,7 +245,7 @@ class App extends React.Component {
   addToContacts = (contactID) => {
     this.setState({
       messageText:
-        "SYSTEM MESSAGE -hey, i have just added you to my contacts it would be great if you could do the same for me, feel free to write to me if you have ant qustions, thank you.",
+        "היי, צירפתי אותך לרשימת אנשי הקשר שלי, כעת אתה חשוף לכמות גדולה יותר של מידע על העסק שלי, אנא צרף אותי לרשימת אנשי הקשר שלך על מנת שאהיה חשוף למידע אודותיך (מחירים, מוצרים, עדכונים, מבצעים ועוד)",
     });
 
     const authorization = !this.state.accessToken
@@ -233,13 +254,18 @@ class App extends React.Component {
     const config = {
       headers: { "Content-Type": "application/json", authorization },
     };
-    return axios.post(
-      `${domain}/my-accounts/${this.state.activeAccount.id}/contacts/`,
-      {
-        account_contact_id: contactID,
-      },
-      config
-    );
+    return axios
+      .post(
+        `${domain}/my-accounts/${this.state.activeAccount.id}/contacts/`,
+        {
+          account_contact_id: contactID,
+        },
+        config
+      )
+      .then(this.openGenericModal("רשימת אנשי הקשר עודכנה בהצלחה"))
+      .catch((error) => {
+        console.log(error);
+      });
   };
   getContacts = () => {
     const authorization = !this.state.accessToken
@@ -373,7 +399,7 @@ class App extends React.Component {
         config
       )
       .then((res) => {
-        this.submitText(res.data.id, this.state.activeAccount.id);
+        this.submitText(res.data.id /*this.state.activeAccount.id)*/);
         this.getAllActiveThreads().then((res) => {
           this.setState({ allThreads: res.data.results });
           console.log(res.data.results);
@@ -668,6 +694,12 @@ class App extends React.Component {
     });
   };
   componentDidUpdate(prevProps, prevState) {
+    if (
+      this.state.activeAccount !== undefined &&
+      prevState.activeAccount === undefined
+    ) {
+      console.log(this.state.activeAccount);
+    }
     if (this.state.sellerApprovedOrders !== prevState.sellerApprovedOrders) {
       console.log(this.state.sellerApprovedOrders);
     }
@@ -767,11 +799,17 @@ class App extends React.Component {
       }
     });
     let showMasseges = showMassegesUnRead.concat(showMassegesRead);
+
     return (
       <div className="App">
         <FullPageLoader
           LoaderVisibilty={this.state.LoaderVisibilty}
         ></FullPageLoader>
+        <AccountNotActive
+          is_active={
+            this.state.activeAccount ? this.state.activeAccount.is_active : null
+          }
+        ></AccountNotActive>
         <HashRouter>
           <ul
             className="messagesList"
@@ -862,6 +900,8 @@ class App extends React.Component {
           </Route>
           <Route exact path="/ProductVaritionPage/:id">
             <ProductVaritionPage
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
               screenWidth={this.state.screenWidth}
               activeAccount={this.state.activeAccount}
               CurrentUploadItemId={this.state.CurrentUploadItemId}
@@ -887,6 +927,8 @@ class App extends React.Component {
           </Route>
           <Route exact path="/edit_variation/:id">
             <EditVariationPage
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
               screenWidth={this.state.screenWidth}
               activeAccount={this.state.activeAccount}
               accessToken={this.state.accessToken}
@@ -919,6 +961,7 @@ class App extends React.Component {
           </Route>
           <Route exact path="/order-summery/:id">
             <OrderSummery
+              openGenericModalOrderSummery={this.openGenericModalOrderSummery}
               getSpecificOrder={this.getSpecificOrder}
               checkOut={this.checkOut}
               activeAccount={this.state.activeAccount}
@@ -931,6 +974,7 @@ class App extends React.Component {
       payedOrders: [], */}
           <Route exact path="/supplier-order/:id">
             <SupplierOrder
+              openGenericModalOrderSummery={this.openGenericModalOrderSummery}
               getCarts={this.getCarts}
               screenWidth={this.state.screenWidth}
               getAllOrders={this.getAllOrders}
@@ -1001,6 +1045,7 @@ class App extends React.Component {
             accessToken={this.state.accessToken}
           ></NewMessageModal>
           <DiscountModal
+            preventModalDefult={this.state.preventModalDefult}
             bottom={this.state.modalBottom}
             top={this.state.modalTop}
             text={this.state.modalText}

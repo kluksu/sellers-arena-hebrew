@@ -29,7 +29,6 @@ export default class CardDiscounts extends Component {
 
     if (this.props.variation) {
       let discounts = this.props.variation.discounts;
-      console.log(discounts);
       discounts["0"] = 0;
       if (Object.keys(discounts).length > 1) {
         for (const [Items, value] of Object.entries(discounts)) {

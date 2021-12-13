@@ -27,14 +27,14 @@ class ProductVaritionPage extends React.Component {
       ///////////
       base64: "",
       pictures: [],
-      image: "",
+
       uploadImage: "",
       itemFormData: "",
       newBlob: "",
       varJson: "",
-      varCounter: 0,
+      varCounter: 1,
       varsInfo: "",
-      discountCounter: 0,
+      discountCounter: 1,
       isOpen: false,
     };
     this.onDrop = this.onDrop.bind(this);
@@ -45,19 +45,25 @@ class ProductVaritionPage extends React.Component {
     });
   }
   resetPage = () => {
-    this.setState({
-      varCounter: 0,
-      discountCounter: 0,
-      cost_per_item: "",
-      amount_in_stock: "",
-      batch_size: "",
-      discounts: {},
-      newBlob: "",
-      variation: "",
-      varsInfo: {},
-      IsVarButtonDisabled: false,
-      IsDiscountsButtonDisabled: false,
-    });
+    this.props.closeGenericModal();
+    window.location.reload();
+    // this.setState({
+    //   image: "",
+    //   varCounter: 1,
+    //   discountCounter: 1,
+    //   variation_key: "",
+    //   variation_value: "",
+    //   cost_per_item: "",
+    //   amount_in_stock: "",
+    //   varJson: "",
+    //   batch_size: "",
+    //   discounts: {},
+    //   newBlob: "",
+    //   variation: "",
+    //   varsInfo: {},
+    //   IsVarButtonDisabled: false,
+    //   IsDiscountsButtonDisabled: false,
+    // });
   };
 
   addVar = (key, value) => {
@@ -122,7 +128,33 @@ class ProductVaritionPage extends React.Component {
     axios.post(`${domain}/item-variations/`, productPost, config).then(
       (response) => {
         if (response) {
-          window.location.replace("/#/");
+          this.props.openGenericModal(
+            "המוצר עלה לאוויר!",
+            "מה ברצונך לעשות כעת?",
+            <>
+              {" "}
+              <Button onClick={this.resetPage}>
+                {" "}
+                להעלות וריאציה נוספת של מוצר זה
+              </Button>
+              <Button
+                onClick={() => {
+                  this.props.closeGenericModal();
+                  window.location.assign("/#/uploadpage");
+                }}
+              >
+                להעלות מוצר אחר
+              </Button>
+              <Button
+                onClick={() => {
+                  this.props.closeGenericModal();
+                  window.location.assign("/#/");
+                }}
+              >
+                חזור לעמוד הבית
+              </Button>
+            </>
+          );
         }
         console.log(response);
       },
@@ -150,44 +182,44 @@ class ProductVaritionPage extends React.Component {
     });
     console.log(this.state.discounts);
   };
-  uploadNRestet = (event) => {
-    let discounts = JSON.stringify(this.state.discounts);
-    let string = JSON.stringify(this.state.varsInfo);
-    console.log(this.state.newBlob);
-    console.log(JSON.stringify(this.state.newBlob));
-    let productPost = new FormData();
-    productPost.append("cost_per_item", this.state.cost_per_item);
-    productPost.append("amount_in_stock", this.state.amount_in_stock);
-    productPost.append("batch_size", this.state.batch_size);
-    productPost.append("variation", string);
-    productPost.append("discounts", discounts);
-    productPost.append("item", this.props.CurrentUploadItemId); //this.props.CurrentUploadItemId
-    if (this.state.newBlob) {
-      productPost.append("image", this.state.newBlob, this.state.newBlob.name);
-    }
+  // uploadNRestet = (event) => {
+  //   let discounts = JSON.stringify(this.state.discounts);
+  //   let string = JSON.stringify(this.state.varsInfo);
+  //   console.log(this.state.newBlob);
+  //   console.log(JSON.stringify(this.state.newBlob));
+  //   let productPost = new FormData();
+  //   productPost.append("cost_per_item", this.state.cost_per_item);
+  //   productPost.append("amount_in_stock", this.state.amount_in_stock);
+  //   productPost.append("batch_size", this.state.batch_size);
+  //   productPost.append("variation", string);
+  //   productPost.append("discounts", discounts);
+  //   productPost.append("item", this.props.CurrentUploadItemId); //this.props.CurrentUploadItemId
+  //   if (this.state.newBlob) {
+  //     productPost.append("image", this.state.newBlob, this.state.newBlob.name);
+  //   }
 
-    this.setState({ itemFormData: productPost });
-    for (let pair of productPost.entries()) {
-      console.log(pair[0] + ", " + pair[1]);
-    }
-    const config = {
-      headers: {
-        Authorization: `Bearer ${this.props.accessToken}`,
-        "Content-Type": "multipart/form-data",
-      },
-    };
-    axios.post(`${domain}/item-variations/`, productPost, config).then(
-      (response) => {
-        if (response) {
-          this.resetPage();
-        }
-        console.log(response);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  };
+  //   this.setState({ itemFormData: productPost });
+  //   for (let pair of productPost.entries()) {
+  //     console.log(pair[0] + ", " + pair[1]);
+  //   }
+  //   const config = {
+  //     headers: {
+  //       Authorization: `Bearer ${this.props.accessToken}`,
+  //       "Content-Type": "multipart/form-data",
+  //     },
+  //   };
+  //   axios.post(`${domain}/item-variations/`, productPost, config).then(
+  //     (response) => {
+  //       if (response) {
+  //         this.resetPage();
+  //       }
+  //       console.log(response);
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //     }
+  //   );
+  // };
 
   getBase64 = (base64) => {
     this.setState({ newBlob: base64 });
@@ -252,6 +284,7 @@ class ProductVaritionPage extends React.Component {
     return (
       <div className="Uploadpage">
         <Container className="productUploadContainer">
+          <h1>צור וריאציה</h1>
           <Form className="varUploadForm">
             <Row>
               <Col xl={6} sm={12}>
@@ -313,14 +346,14 @@ class ProductVaritionPage extends React.Component {
             </Form.Group>
 
             <Row style={{ padding: "0px 20px 0px 20px" }}>
-              <Button
+              {/* <Button
                 onClick={this.addVar}
                 type="button"
                 variant="success"
                 disabled={this.state.IsVarButtonDisabled}
               >
                 הוסף וריאציה
-              </Button>
+              </Button> */}
               <p className="FormRejects">{this.state.variationError}</p>
               <Row>
                 {" "}
@@ -328,14 +361,14 @@ class ProductVaritionPage extends React.Component {
               </Row>
               {/* <Col xl={2}> */}
               <Row></Row>
-              <Button
+              {/* <Button
                 onClick={this.addDiscount}
                 type="button"
                 variant="success"
                 disabled={this.state.IsDiscountsButtonDisabled}
               >
                 הוסף הנחה
-              </Button>
+              </Button> */}
               {/* </Col> */}
             </Row>
 
@@ -344,12 +377,7 @@ class ProductVaritionPage extends React.Component {
             </Row>
 
             <Row>
-              <Col xl={7}>
-                <Button type="button" onClick={this.uploadNRestet}>
-                  שלח וצור וריאציה נוספת של מוצר זה
-                </Button>
-              </Col>
-              <Col xl={3}>
+              <Col xl={10}>
                 <Button type="button" onClick={this.uploadVar}>
                   שלח
                 </Button>

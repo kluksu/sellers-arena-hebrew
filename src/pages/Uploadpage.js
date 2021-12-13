@@ -23,7 +23,7 @@ class Uploadpage extends React.Component {
       base64: "",
       productName: "",
       description: "",
-      visibility: '{"price":1,"item":1}',
+      visibility: '{"price":2,"item":1}',
       currency: "ils",
       category: "",
       subcategory: "",
@@ -188,7 +188,7 @@ class Uploadpage extends React.Component {
 
     console.log(this.state.image);
     const priceForAll = '{"price":1,"item":1}';
-    const priceForVerified = '{"Price":2,"item":1}}';
+    const priceForVerified = '{"price":2,"item":1}';
     const sellerContacts = '{"price":3,"item":1}';
     const noBody = '{"price":4,"item":1}';
     const itemForVerified = '{"price":2,"item":2}';
@@ -197,6 +197,8 @@ class Uploadpage extends React.Component {
         <Container className="productUploadContainer">
           <p className="FormRejects"> {this.state.responsData.detail}</p>
           <Form>
+            <h1>דף העלאת מוצר</h1>
+            <br></br>
             <Row>
               <Col
                 className="animate__animated animate__headShake animate__repeat-3	"
@@ -295,10 +297,11 @@ class Uploadpage extends React.Component {
                     as="select"
                     name="visibility"
                   >
-                    <option value={priceForAll}>כולם</option>
                     <option value={priceForVerified}>
                       רק משתמשים רשומים (מומלץ){" "}
                     </option>
+                    <option value={priceForAll}>כולם</option>
+
                     {/* <option>contacts only </option>
       <option>only me (and my staff)</option> */}
                   </Form.Control>

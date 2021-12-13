@@ -139,7 +139,10 @@ export default class Register extends Component {
         <p className="FormRejects">10 ספרות</p>
       );
     const success = this.state.registerData.id ? (
-      <p>הרשמה הצליחה!</p>
+      <p>
+        נרשמת בהצלחה, כעת הינך יכול להתחבר למערכת באמצעות לחצן "התחבר" בצד שמאל
+        למעלה
+      </p>
     ) : (
       <>
         {" "}

@@ -270,6 +270,7 @@ class StorePage extends React.Component {
               })}
             >
               {unregisteredAccount.name} {unregisteredAccount.id}
+              {" unregistered account"}
             </option>
           );
         });
@@ -582,6 +583,11 @@ class StorePage extends React.Component {
   };
 
   render() {
+    let unregisterDisable =
+      this.state.currentStore &&
+      this.state.currentStore.parent_account == this.props.match.params.id
+        ? true
+        : false;
     let ticker =
       this.props.activeAccount &&
       this.props.activeAccount.account_type == 2 &&
@@ -686,6 +692,7 @@ class StorePage extends React.Component {
             </Col>
             <Col className="buttonsCol" xl={4} lg={12}>
               <Button
+                disabled={unregisterDisable}
                 onclick={() =>
                   window.open(`tel:${this.state.currentStore.phone_number}`)
                 }
@@ -695,6 +702,7 @@ class StorePage extends React.Component {
                 התקשר <FiPhoneCall />
               </Button>{" "}
               <Button
+                disabled={unregisterDisable}
                 className="w-50"
                 variant="success"
                 onClick={
@@ -707,13 +715,16 @@ class StorePage extends React.Component {
               >
                 שלח הודעה <BiMailSend />
               </Button>
-              <Button
-                onClick={() => this.props.postAndGetContacts(messageUserID)}
-                className="w-50"
-                variant="success"
-              >
-                הוסף לאנשי הקשר <RiContactsLine />{" "}
-              </Button>
+              {this.props.match.params.id ==
+              this.props.activeAccount.id ? null : (
+                <Button
+                  onClick={() => this.props.postAndGetContacts(messageUserID)}
+                  className="w-50"
+                  variant="success"
+                >
+                  הוסף לאנשי הקשר <RiContactsLine />{" "}
+                </Button>
+              )}
               <a
                 target="_blank"
                 href="https://meet.google.com/_meet/iah-uyfs-bdu?authuser=0&ijlm=1628853707454&adhoc=1&hs=187"
@@ -970,7 +981,9 @@ class StorePage extends React.Component {
                 cards
               ) : (
                 <h1 style={{ color: "red" }}>
-                  please choose a store from the dropdown above
+                  {this.props.activeAccount.id == this.props.match.params.id
+                    ? "בבקשה בחר לקוח מהאפשרויות למעלה"
+                    : "רק חשבונות קונים יכולים לראות את המידע המוצג בעמוד זה"}
                 </h1>
               )}
             </Row>

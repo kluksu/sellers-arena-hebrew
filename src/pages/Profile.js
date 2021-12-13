@@ -88,6 +88,7 @@ export default class Profile extends Component {
     }
   };
   render() {
+    console.log(this.props.me);
     let showCategories = [];
     categoriesAndSubCategories.forEach((category) => {
       showCategories.push(
@@ -178,7 +179,9 @@ export default class Profile extends Component {
               <div>{`מדינה : ${this.props.activeAccount.country}`}</div>
               <div>{`מספר חשבון :  ${this.props.activeAccount.id}`}</div>
               <div>{`שפה : ${this.props.activeAccount.language}`}</div>
-              <div>{``}</div>
+              <div>{`אימייל:${this.props.me.email}`}</div>
+              <div>{`מספר משתמש:${this.props.me.id}`}</div>
+              <div>{`טלפון משתמש :${this.props.me.phone_number}`}</div>
               <div>{``}</div>
               <Button onClick={this.submitChanges} type="button">
                 עדכן פרטים

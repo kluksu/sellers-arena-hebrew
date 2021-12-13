@@ -121,7 +121,7 @@ class SupplierOrder extends React.Component {
       if (data && data.info && data.info.includes("successfully")) {
         // window.location.assign("/#/");
 
-        this.openModal("מצויין!", "הפעולה נעשתה בהצלחה");
+        this.props.openGenericModalOrderSummery();
       } else {
         this.openModal(
           "אזהרה!",

@@ -30,9 +30,9 @@ class EditVariationPage extends React.Component {
       itemFormData: "",
       newBlob: "",
       varJson: "",
-      varCounter: 0,
+      varCounter: 1,
       varsInfo: "",
-      discountCounter: 0,
+      discountCounter: 1,
       isOpen: false,
       selectedVariationDits: "",
       newDIscount: "",
@@ -393,28 +393,28 @@ class EditVariationPage extends React.Component {
                   <tbody>{DeletePageDiscountsARR}</tbody>
                 </Table>
               </Col>
-              <Button
+              {/* <Button
                 onClick={this.addVar}
                 type="button"
                 variant="success"
                 disabled={this.state.isVarButtonActive}
               >
                 הוסף וריאציה
-              </Button>
+              </Button> */}
 
               <Row></Row>
               <Row>
                 {" "}
                 <Col xl={12}>{varform}</Col>
               </Row>
-              <Button
+              {/* <Button
                 disabled={this.state.isDiscountButtonActive}
                 onClick={this.addDiscount}
                 type="button"
                 variant="success"
               >
                 הוסף הנחה
-              </Button>
+              </Button> */}
             </Row>
             <Row>
               <Col xl={12}>{discounts}</Col>

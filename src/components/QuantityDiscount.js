@@ -10,7 +10,7 @@ export default class QuantityDiscount extends Component {
       isDisabled: false,
       variant: "primary",
       json: "",
-      buttonText: "add discount",
+      buttonText: "הוסף הנחה",
       warning: "",
     };
   }
