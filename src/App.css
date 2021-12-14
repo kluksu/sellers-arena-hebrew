@@ -145,6 +145,10 @@ body {
   background-color: lightskyblue;
   color: white !important;
 }
+.wallMessages {
+  margin-top: 90px;
+  text-align: right;
+}
 .registerContainer > p {
   margin-right: 0px;
 }

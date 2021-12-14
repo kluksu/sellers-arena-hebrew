@@ -42,6 +42,8 @@ import EmailForm from "./components/EmailForm";
 import Pricing from "./pages/Pricing";
 import recaptcha from "react-recaptcha";
 import AccountNotActive from "./components/AccountNotActive";
+import Wall from "./pages/Wall";
+import WallMessages from "./components/WallMessages";
 //${domain}/
 class App extends React.Component {
   constructor(props) {
@@ -88,8 +90,21 @@ class App extends React.Component {
       modalBottom: "",
       isRealUser: true,
       preventModalDefult: false,
+      allMessages: [],
     };
   }
+  getContactsMesssageBoard = () => {
+    let allMessages = [];
+    this.state.myContacts.results.forEach((contact) => {
+      console.log(contact);
+      this.getCurrentstore(contact.account_contact.id).then((res) => {
+        console.log(res);
+
+        allMessages.push(res.data);
+      });
+      this.setState({ allMessages: allMessages });
+    });
+  };
   verifyCallback = (response) => {
     if (response) {
       console.log(response);
@@ -698,6 +713,9 @@ class App extends React.Component {
     });
   };
   componentDidUpdate(prevProps, prevState) {
+    if (this.state.myContacts.length !== prevState.myContacts.length) {
+      this.getContactsMesssageBoard();
+    }
     if (
       this.state.activeAccount !== undefined &&
       prevState.activeAccount === undefined
@@ -902,6 +920,16 @@ class App extends React.Component {
               activeAccount={this.state.activeAccount}
             ></Uploadpage>
           </Route>
+          <Route exact path="/wall">
+            <Wall
+              allMessages={this.state.allMessages}
+              getContactsMesssageBoard={this.getContactsMesssageBoard}
+              myContacts={this.state.myContacts}
+              activeAccount={this.state.activeAccount}
+              accessToken={this.state.accessToken}
+            ></Wall>
+          </Route>
+
           <Route exact path="/ProductVaritionPage/:id">
             <ProductVaritionPage
               closeGenericModal={this.closeGenericModal}
