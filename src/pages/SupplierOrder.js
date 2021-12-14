@@ -432,6 +432,16 @@ class SupplierOrder extends React.Component {
             הדפס
           </Button>
           <Container fluid className="orderSummeryContainer">
+            <h1>
+              {/* {this.state.activeCartStatus} */}
+              {this.state.activeCartStatus === "filled"
+                ? "נשלחה"
+                : null || this.state.activeCartStatus === "seller_approved"
+                ? "מחכה למשלוח"
+                : null || this.state.activeCartStatus === "submitted"
+                ? " מחכה לאישור"
+                : null}
+            </h1>
             <div className="sellerInfoContainer">
               <span style={{ fontSize: headlineSize }}>
                 {" "}
@@ -477,7 +487,8 @@ class SupplierOrder extends React.Component {
                   {this.state.buyer.phone_number}{" "}
                 </span>
               </div>
-              <div> {`ח"פ:${this.state.buyer.tax_id} `}</div>
+
+              <div> {`ח"פ:${this.state.buyer.tax_id}  `}</div>
             </div>
 
             <div className="directions no-print">

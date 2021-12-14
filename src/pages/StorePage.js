@@ -675,7 +675,8 @@ class StorePage extends React.Component {
 
     let supplierCard =
       !this.props.activeAccount ||
-      this.props.match.params.id == this.props.activeAccount.id ||
+      (this.props.activeAccount &&
+        this.props.match.params.id == this.props.activeAccount.id) ||
       this.props.activeAccount.account_type == 2 ? (
         <Col className="avatarDiv" xl={12}>
           <Row>
@@ -715,8 +716,9 @@ class StorePage extends React.Component {
               >
                 שלח הודעה <BiMailSend />
               </Button>
-              {this.props.match.params.id ==
-              this.props.activeAccount.id ? null : (
+              {this.props.activeAccount &&
+              this.props.match.params.id ==
+                this.props.activeAccount.id ? null : (
                 <Button
                   onClick={() => this.props.postAndGetContacts(messageUserID)}
                   className="w-50"
@@ -771,11 +773,9 @@ class StorePage extends React.Component {
     let cards = [];
     let cardsIdObj = {};
     for (let i = 0; i < this.state.showList.length; i++) {
-      console.log(this.state.showList);
       const item = this.state.showList[i];
       for (let j = 0; j < item.item_variations.length; j++) {
         const variation = item.item_variations[j];
-        console.log(variation);
         let value = 0;
         if (this.state.activeCart !== null) {
           this.state.activeCart.all_item_variations.forEach((CartVariation) => {

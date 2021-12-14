@@ -101,7 +101,7 @@ class MyNavBar extends React.Component {
       );
     });
     let awaitingPaymentDropDown = (
-      <NavDropdown title={`לא שולמו (${awaitingPayment.length})`}>
+      <NavDropdown title={`מחכים לתשלום (${awaitingPayment.length})`}>
         {awaitingPayment}
       </NavDropdown>
     );
@@ -127,14 +127,13 @@ class MyNavBar extends React.Component {
     });
     let waitingDelivery = "";
     if (this.props.activeAccount) {
-      waitingDelivery =
-        this.props.activeAccount.account_type == 3 ? (
-          <NavDropdown
-            title={`לא נשלחו (${this.props.sellerApprovedOrders.length})`}
-          >
-            {waitingDeliveryArr}
-          </NavDropdown>
-        ) : null;
+      waitingDelivery = this.props.activeAccount.account_type ? (
+        <NavDropdown
+          title={`מחכים למשלוח (${this.props.sellerApprovedOrders.length})`}
+        >
+          {waitingDeliveryArr}
+        </NavDropdown>
+      ) : null;
     }
     const controlPanel = this.props.activeAccount ? (
       <Nav.Link href="/#/control_panel">
@@ -241,12 +240,11 @@ class MyNavBar extends React.Component {
     }
     let Orders = "";
     if (this.props.activeAccount) {
-      Orders =
-        this.props.activeAccount.account_type == 3 ? (
-          <NavDropdown title={`חדשות (${this.props.MySupplierOrders.length})`}>
-            {ordersArr}
-          </NavDropdown>
-        ) : null;
+      Orders = this.props.activeAccount.account_type ? (
+        <NavDropdown title={`חדשות (${this.props.MySupplierOrders.length})`}>
+          {ordersArr}
+        </NavDropdown>
+      ) : null;
     }
 
     let brand = this.props.activeAccount ? (
@@ -266,19 +264,18 @@ class MyNavBar extends React.Component {
       ) : null;
     let ordersNav = "";
     if (this.props.activeAccount) {
-      ordersNav =
-        this.props.activeAccount.account_type == 3 ? (
-          <NavDropdown
-            className={`${vibretOrders}`}
-            title={`הזמנות ${newOrderAwating}`}
-          >
-            {" "}
-            {Orders}
-            {waitingDelivery}
-            {awaitingPaymentDropDown}
-            {creatNewSupplierOrder}
-          </NavDropdown>
-        ) : null;
+      ordersNav = this.props.activeAccount.account_type ? (
+        <NavDropdown
+          className={`${vibretOrders}`}
+          title={`הזמנות ${newOrderAwating}`}
+        >
+          {" "}
+          {Orders}
+          {waitingDelivery}
+          {awaitingPaymentDropDown}
+          {creatNewSupplierOrder}
+        </NavDropdown>
+      ) : null;
     }
 
     return (

@@ -201,8 +201,8 @@ class App extends React.Component {
       })
       .catch(
         this.openGenericModal(
-          "Error",
-          "somthing went wrong, please check all the information and try again"
+          "שגיאה",
+          "משהו השתבש, בדוק שכל המידע מלא ונכון ונסה שנית"
         )
       );
   };
@@ -543,8 +543,12 @@ class App extends React.Component {
     const config = {
       headers: { "Content-Type": "application/json", authorization },
     };
+    let BuyerSeller =
+      this.state.activeAccount.account_type == 3
+        ? "supplier-orders"
+        : "my-account-orders";
     axios
-      .get(`${domain}/supplier-orders/?order_status=${status}`, config)
+      .get(`${domain}/${BuyerSeller}/?order_status=${status}`, config)
       .then((data) => {
         console.log(data);
         if (data.status == 200) {
