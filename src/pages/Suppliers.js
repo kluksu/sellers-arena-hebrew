@@ -22,21 +22,17 @@ export default class Suppliers extends Component {
       headers: { "Content-Type": "application/json", authorization },
     };
     axios.get(`${domain}/public-accounts/`).then((data) => {
-      console.log(data.data.results);
       this.setState({ allAccounts: data.data.results });
     });
   }
   render() {
     let showCategories = [];
     //  let showSubCategories=[]
-    console.log(categoriesAndSubCategories);
+
     categoriesAndSubCategories.forEach((category) => {
       let showAccounts = [];
-      console.log(category);
-      this.state.allAccounts.forEach((account) => {
-        console.log(Object.keys(category)[0]);
-        console.log(account.category);
 
+      this.state.allAccounts.forEach((account) => {
         if (
           account.category === Object.keys(category)[0] &&
           account.account_type == 3
@@ -57,8 +53,8 @@ export default class Suppliers extends Component {
         </li>
       );
 
-      //  console.log(Object.keys(category)[0])
-      //  console.log(this.state.category)
+      //
+      //
 
       //  if((Object.keys(category)[0]===this.state.category)){
       //    Object.values(category).forEach(categoryObj => {

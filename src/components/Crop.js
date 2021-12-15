@@ -33,7 +33,6 @@ class Crop extends PureComponent {
     }
     if (this.state.blob !== prevState.blob) {
       this.props.getBase64(this.state.blob);
-      console.log(this.state.blob);
     }
   }
   // If you setState the crop in here you should return false.
@@ -83,7 +82,6 @@ class Crop extends PureComponent {
     );
     return new Promise((resolve, reject) => {
       canvas.toBlob((blob) => {
-        console.log(blob);
         if (!blob) {
           //reject(new Error('Canvas is empty'));
           console.error("Canvas is empty");
@@ -92,7 +90,7 @@ class Crop extends PureComponent {
         blob.name = fileName;
         window.URL.revokeObjectURL(this.fileUrl);
         this.fileUrl = window.URL.createObjectURL(blob);
-        console.log(this.fileUrl);
+
         resolve(this.fileUrl);
         this.setState({ blob: blob });
       }, "image/jpeg");

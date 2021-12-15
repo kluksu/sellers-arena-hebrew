@@ -49,7 +49,7 @@ class Uploadpage extends React.Component {
 
   getBase64 = (base64) => {
     this.setState({ newBlob: base64 });
-    console.log(this.state.newBlob);
+
     const getInfo = (image) => {
       this.setState({ uploadImage: image });
     };
@@ -66,8 +66,6 @@ class Uploadpage extends React.Component {
   };
 
   uploadItem = (base64) => {
-    console.log(this.state.newBlob);
-    console.log(JSON.stringify(this.state.newBlob));
     let productPost = new FormData();
     productPost.append("name", this.state.productName);
     productPost.append("description", this.state.description);
@@ -82,7 +80,6 @@ class Uploadpage extends React.Component {
 
     this.setState({ itemFormData: productPost });
     for (let pair of productPost.entries()) {
-      console.log(pair[0] + ", " + pair[1]);
     }
     const config = {
       headers: {
@@ -94,7 +91,6 @@ class Uploadpage extends React.Component {
     axios.post(`${domain}/items/`, productPost, config).then(
       (response) => {
         if (response.statusText === "Created") {
-          console.log(response);
           this.setState({ newProductID: response.data.id });
           this.props.getCurrentUploadItemId(response.data.id);
           window.location.replace(`/#/ProductVaritionPage/${response.data.id}`);
@@ -126,7 +122,7 @@ class Uploadpage extends React.Component {
   // postFormData("${domain}/items/", this.state.productPost, ` ${this.props.accessToken}` )
   //         .then(data=>{
   //              this.setState({responsData:data})
-  //              console.log(this.state.responsData)
+  //
 
   //            }   )}
 
@@ -135,7 +131,7 @@ class Uploadpage extends React.Component {
   //   "account_id":this.props.activeAccount.id,"visibility":this.state.visibility,"image":this.state.uploadImage},` ${this.props.accessToken}` )
   //   .then(data=>{
   //    this.setState({responsData:data})
-  //    console.log(this.state.responsData)
+  //
 
   //    })
   // }
@@ -167,13 +163,11 @@ class Uploadpage extends React.Component {
   render() {
     let showSubCategories = [];
     let showCategories = [];
-    console.log(categoriesAndSubCategories);
+
     categoriesAndSubCategories.forEach((category) => {
       showCategories.push(
         <option value={Object.keys(category)}>{Object.keys(category)}</option>
       );
-      console.log(Object.keys(category)[0]);
-      console.log(this.state.category);
 
       if (Object.keys(category)[0] === this.state.category) {
         Object.values(category).forEach((categoryObj) => {
@@ -186,7 +180,6 @@ class Uploadpage extends React.Component {
       }
     });
 
-    console.log(this.state.image);
     const priceForAll = '{"price":1,"item":1}';
     const priceForVerified = '{"price":2,"item":1}';
     const sellerContacts = '{"price":3,"item":1}';

@@ -32,7 +32,6 @@ export default class CardDiscounts extends Component {
       discounts["0"] = 0;
       if (Object.keys(discounts).length > 1) {
         for (const [Items, value] of Object.entries(discounts)) {
-          console.log(prev + Items);
           discountClass = "productCardDiscounts";
           if (Items == 0) {
             price = this.props.price * (1 - value).toFixed(2);

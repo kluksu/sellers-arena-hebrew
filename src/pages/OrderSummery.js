@@ -48,10 +48,7 @@ class OrderSummery extends React.Component {
   checkOutAndGoHome = () => {
     this.props.checkOut(this.props.match.params.id).then((data) => {
       if (data.order_id && this.props.activeAccount.account_type == 2) {
-        console.log(data);
-        this.props.getSpecificOrder(data.order_id).then((res) => {
-          console.log(res); ///to be continued - send email by response email with emailjs to the seller when a new order is made
-        });
+        this.props.getSpecificOrder(data.order_id).then((res) => {});
         //         buyer_account: {id: 122, name: 'מוצרים', tax_id: 'חגחגחקחגחקקי'}
         // buyer_comments: ""
         // buyer_unregistered_account: null
@@ -69,7 +66,6 @@ class OrderSummery extends React.Component {
         // this.props.deleteCart(this.props.match.params.id);
         this.props.openGenericModalOrderSummery();
       }
-      console.log(data);
     });
   };
 
@@ -87,7 +83,6 @@ class OrderSummery extends React.Component {
     axios
       .get(`${domain}/cart/${this.props.match.params.id}/`, config)
       .then((data) => {
-        console.log(data);
         this.setState({ activeCart: data.data });
       });
   };
@@ -95,7 +90,6 @@ class OrderSummery extends React.Component {
     this.getActiveCart();
   }
   render() {
-    console.log(this.state.activeCart);
     if (this.state.activeCart !== "") {
       return (
         <div className="OrderSummeryPage">

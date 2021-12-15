@@ -51,7 +51,6 @@ class FiltteredCategoryPage extends React.Component {
         newPhraseArr.push(character);
       }
     });
-    console.log(newPhraseArr.join(""));
 
     this.setState({ selectedCategory: newPhraseArr.join("") });
   };
@@ -68,7 +67,6 @@ class FiltteredCategoryPage extends React.Component {
     //    window.location.assign(`/#/storePage/${}`)
   };
   getItems = () => {
-    console.log(this.props.match.params);
     const nextfetch =
       this.state.next !== undefined
         ? this.state.next
@@ -81,16 +79,13 @@ class FiltteredCategoryPage extends React.Component {
     };
     axios.get(nextfetch, config).then(
       (response) => {
-        console.log(response);
         this.setState({ ipmortedItems: response.data.results });
         this.setState({ next: response.data.next });
         for (let i = 0; i < this.state.ipmortedItems.length; i++) {
           const item = this.state.ipmortedItems[i];
           axios
             .get(`${domain}/accounts/${item.id}`, config)
-            .then((response) => {
-              console.log(response);
-            });
+            .then((response) => {});
           for (let j = 0; j < item.item_variations.length; j++) {
             const variation = item.item_variations[j];
 
@@ -107,9 +102,7 @@ class FiltteredCategoryPage extends React.Component {
           }
         }
       },
-      (error) => {
-        console.log(error);
-      }
+      (error) => {}
     );
   };
   componentDidUpdate(prevProps, prevState) {
@@ -130,7 +123,7 @@ class FiltteredCategoryPage extends React.Component {
   render() {
     let infiniteCrollPaddingLeft =
       this.props.screenWidth < 500 ? "0px" : "26px";
-    console.log(this.props.match.params);
+
     let toggleIcon =
       this.state.isColapsed === true ? (
         <GiHamburgerMenu onClick={this.expandManuHideBurger} />
@@ -145,7 +138,7 @@ class FiltteredCategoryPage extends React.Component {
     };
     //  let showSubCategories=[]
     let showCategories = [];
-    console.log(categoriesAndSubCategories);
+
     categoriesAndSubCategories.forEach((category) => {
       showCategories.push(
         <MenuItem>
@@ -153,8 +146,8 @@ class FiltteredCategoryPage extends React.Component {
           {Object.keys(category)}
         </MenuItem>
       );
-      //  console.log(Object.keys(category)[0])
-      //  console.log(this.state.category)
+      //
+      //
 
       //  if((Object.keys(category)[0]===this.state.category)){
       //    Object.values(category).forEach(categoryObj => {

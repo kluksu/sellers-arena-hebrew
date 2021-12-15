@@ -72,7 +72,7 @@ class ProductVaritionPage extends React.Component {
   };
   addDiscount = (key, value) => {
     this.setState({ discountCounter: this.state.discountCounter + 1 });
-    console.log(this.state.discounts);
+
     this.setState({ IsDiscountsButtonDisabled: true });
   };
   //i want updateobj to update a state object
@@ -80,27 +80,25 @@ class ProductVaritionPage extends React.Component {
   updateObj = (key, value) => {
     let obj = {};
     obj[key] = value;
-    console.log(obj);
+
     this.setState({
       varsInfo: Object.assign({}, this.state.varsInfo, { [key]: value }),
     });
-    console.log(this.state.varsInfo);
   };
   updateDiscounts = (key, value) => {
     let discounts = {};
     discounts[key] = value;
-    console.log(discounts);
+
     this.setState({
       discounts: Object.assign({}, this.state.discounts, {
         [key]: parseFloat(value),
       }),
     });
-    console.log(this.state.discounts);
   };
   uploadVar = (event) => {
     let discounts = JSON.stringify(this.state.discounts);
     let string = JSON.stringify(this.state.varsInfo);
-    console.log(JSON.stringify(this.state.newBlob));
+
     let productPost = new FormData();
     productPost.append("cost_per_item", this.state.cost_per_item);
     productPost.append("amount_in_stock", this.state.amount_in_stock);
@@ -115,7 +113,6 @@ class ProductVaritionPage extends React.Component {
 
     this.setState({ itemFormData: productPost });
     for (let pair of productPost.entries()) {
-      console.log(pair[0] + ", " + pair[1]);
     }
     const config = {
       headers: {
@@ -156,7 +153,6 @@ class ProductVaritionPage extends React.Component {
             </>
           );
         }
-        console.log(response);
       },
       (error) => {
         if (!this.state.cost_per_item) {
@@ -167,26 +163,24 @@ class ProductVaritionPage extends React.Component {
             variationError: "וריאציה זו כבר קיימת",
           });
         }
-        console.log(error);
       }
     );
   };
   updateDiscounts = (key, value) => {
     let discounts = {};
     discounts[key] = value;
-    console.log(discounts);
+
     this.setState({
       discounts: Object.assign({}, this.state.discounts, {
         [key]: parseFloat(value),
       }),
     });
-    console.log(this.state.discounts);
   };
   // uploadNRestet = (event) => {
   //   let discounts = JSON.stringify(this.state.discounts);
   //   let string = JSON.stringify(this.state.varsInfo);
-  //   console.log(this.state.newBlob);
-  //   console.log(JSON.stringify(this.state.newBlob));
+  //
+  //
   //   let productPost = new FormData();
   //   productPost.append("cost_per_item", this.state.cost_per_item);
   //   productPost.append("amount_in_stock", this.state.amount_in_stock);
@@ -200,7 +194,7 @@ class ProductVaritionPage extends React.Component {
 
   //   this.setState({ itemFormData: productPost });
   //   for (let pair of productPost.entries()) {
-  //     console.log(pair[0] + ", " + pair[1]);
+  //
   //   }
   //   const config = {
   //     headers: {
@@ -213,17 +207,17 @@ class ProductVaritionPage extends React.Component {
   //       if (response) {
   //         this.resetPage();
   //       }
-  //       console.log(response);
+  //
   //     },
   //     (error) => {
-  //       console.log(error);
+  //
   //     }
   //   );
   // };
 
   getBase64 = (base64) => {
     this.setState({ newBlob: base64 });
-    console.log(this.state.newBlob);
+
     const getInfo = (image) => {
       this.setState({ uploadImage: image });
     };

@@ -18,9 +18,7 @@ class MyOrder extends Component {
   // return axios.get(`${domain}/my-orders/${orderID}/`,config)
   // }
   componentDidMount() {
-    this.props.getSpecificOrder().then((res) => {
-      console.log(res.data);
-    });
+    this.props.getSpecificOrder().then((res) => {});
   }
   render() {
     return <div>{this.props.match.params.id}</div>;

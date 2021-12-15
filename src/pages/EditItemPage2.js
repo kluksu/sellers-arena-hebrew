@@ -46,7 +46,6 @@ class EditItemPage2 extends React.Component {
   handleClose = () => this.setState({ isOpen: false });
   handleShow = () => this.setState({ isOpen: true });
   deleteItem = () => {
-    console.log(this.props.match);
     const config = {
       headers: {
         Authorization: `Bearer ${this.props.accessToken}`,
@@ -57,14 +56,13 @@ class EditItemPage2 extends React.Component {
     axios
       .delete(`${domain}/items/${this.props.match.params.id}`, config)
       .then((response) => {
-        console.log(response);
         if (response.status == "204") window.location.replace("#/add_items/");
       });
   };
 
   getBase64 = (base64) => {
     this.setState({ newBlob: base64 });
-    console.log(this.state.newBlob);
+
     const getInfo = (image) => {
       this.setState({ uploadImage: image });
     };
@@ -80,7 +78,6 @@ class EditItemPage2 extends React.Component {
     this.setState({ pictures: blob });
   };
   componentDidMount() {
-    console.log(this.props.match);
     const config = {
       headers: {
         Authorization: `Bearer ${this.props.accessToken}`,
@@ -97,7 +94,7 @@ class EditItemPage2 extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     if (this.state.selectedItemDits !== prevState.selectedItemDits) {
       let res = this.state.selectedItemDits;
-      console.log(res.visibility);
+
       this.setState({
         productName: res.name,
         description: res.description,
@@ -139,16 +136,13 @@ class EditItemPage2 extends React.Component {
       )
       .then(
         (response) => {
-          console.log(response);
           if (response.status == "200") {
             this.setState({ newProductID: response.data.id });
             this.props.getCurrentUploadItemId(this.state.selectedItemDits.id);
             window.location.replace("/#/add_items");
           }
         },
-        (error) => {
-          console.log(error);
-        }
+        (error) => {}
       );
   };
 
@@ -165,13 +159,11 @@ class EditItemPage2 extends React.Component {
       );
     let showSubCategories = [];
     let showCategories = [];
-    console.log(categoriesAndSubCategories);
+
     categoriesAndSubCategories.forEach((category) => {
       showCategories.push(
         <option value={Object.keys(category)}>{Object.keys(category)}</option>
       );
-      console.log(Object.keys(category)[0]);
-      console.log(this.state.category);
 
       if (Object.keys(category)[0] === this.state.category) {
         Object.values(category).forEach((categoryObj) => {

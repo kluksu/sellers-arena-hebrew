@@ -81,7 +81,7 @@ class StorePage extends React.Component {
   };
   handleOptionsChange = (event) => {
     let obj = JSON.parse(event.target.value);
-    console.log(obj);
+
     this.setState({ selectedContactID: obj });
   };
   createDelta = (key, quantity, price) => {
@@ -96,7 +96,7 @@ class StorePage extends React.Component {
         quantity: parseInt(quantity),
         cost_per_item: price,
       };
-      console.log("!!!!!!!!!!!");
+
       this.setState({ changedQuantities: changedQuantities });
     }
   };
@@ -109,17 +109,12 @@ class StorePage extends React.Component {
         this.state.selectedContactID,
         this.props.accessToken
       ).then((res) => {
-        console.log(res);
-        console.log(this.state.currentStore);
         this.setState({ currentStore: res });
       });
     } else {
-      console.log(this.state.selectedContactID);
       this.props
         .getUnregistered(this.state.selectedContactID.unregisteredAccountID)
         .then((res) => {
-          console.log(res);
-          console.log(this.state.currentStore);
           this.setState({ currentStore: res.data });
         });
       ////////
@@ -186,7 +181,6 @@ class StorePage extends React.Component {
   };
   getThreadID = (userID) => {
     this.props.allThreads.forEach((thread) => {
-      console.log(thread);
       if (
         thread.participants[0].id == userID ||
         thread.participants[1].id == userID
@@ -204,9 +198,7 @@ class StorePage extends React.Component {
           : this.state.selectedContactID;
       getData(`${domain}/public-accounts/${store}/`).then((res) => {
         this.setState({ currentStore: res });
-        console.log("!!!!!!!!!!");
 
-        console.log(res);
         this.getThreadID(store);
       });
     }
@@ -239,8 +231,6 @@ class StorePage extends React.Component {
             this.props.activeAccount.account_type == 3) ||
           !this.props.activeAccount
         ) {
-          console.log(222);
-
           this.setState({ activeCart: cart });
         } else if (
           typeof this.state.selectedContactID.unregisteredAccountID ===
@@ -278,9 +268,6 @@ class StorePage extends React.Component {
       getContacts(this.props.activeAccount.id, this.props.accessToken).then(
         (res) => {
           res.results.forEach((contact) => {
-            console.log(
-              contact.account_contact.name + " " + contact.account_contact.id
-            );
             contactsArr.push(
               <option value={contact.account_contact.id}>
                 {contact.account_contact.name} {contact.account_contact.id}
@@ -288,8 +275,6 @@ class StorePage extends React.Component {
             );
           });
           this.setState({ contactsArr: contactsArr });
-
-          console.log(res);
         }
       );
     }
@@ -321,7 +306,6 @@ class StorePage extends React.Component {
     if (typeof this.state.selectedContactID !== "number") {
       buyer = this.props.activeAccount.id;
 
-      console.log(this.state.selectedContactID);
       this.setState({
         cartsError: "אופס, או שלא בחרת לקוח או שיש הזמנה ללקוח זה במערכת",
       });
@@ -340,7 +324,7 @@ class StorePage extends React.Component {
       this.setState({
         cartsError: "",
       });
-      console.log(data);
+
       this.postAndRetrevData(data.id).then((data) => {
         this.editItem(data.id, this.state.changedQuantities).then(
           this.openModal("הצלחה!", "השינויים נוספו בהצלחה"),
@@ -352,7 +336,6 @@ class StorePage extends React.Component {
             "",
             ` ${this.props.accessToken}`
           ).then((res) => {
-            console.log(res);
             // this.setState({ cartsError: "" });
             this.setState({ activeCart: res });
           }),
@@ -365,7 +348,6 @@ class StorePage extends React.Component {
             this.props.checkOut(this.state.activeCart.id).then((res) => {
               this.props.getAllOrders();
 
-              console.log(res);
               if (res.order_id) {
                 window.location.assign(`/#/supplier-order/${res.order_id}`);
               }
@@ -409,11 +391,9 @@ class StorePage extends React.Component {
             ` ${this.props.accessToken}`
           ).then((res) => {
             this.setState({ activeCart: res });
-            console.log(res);
 
             if (this.props.activeAccount.account_type == 3) {
               this.props.checkOut(this.state.activeCart.id).then((res) => {
-                console.log(res);
                 if (res.order_id) {
                   this.props.getAllOrders();
 
@@ -444,7 +424,6 @@ class StorePage extends React.Component {
       this.state.currentStore !== prevState.currentStore &&
       this.props.activeAccount.account_type == 2
     ) {
-      console.log(this.state.currentStore);
       this.setState({ messagesBoardText: this.state.currentStore.messages });
     }
     if (this.props.myContacts !== prevProps.myContacts) {
@@ -480,18 +459,16 @@ class StorePage extends React.Component {
         },
       });
       this.loadStoreComponent();
-      console.log(this.state.selectedContactID);
+
       let messageUserID =
         this.props.activeAccount && this.props.activeAccount.account_type == 3
           ? this.state.selectedContactID
           : this.props.match.params.id;
       this.getBuyerCard();
-      console.log(messageUserID);
 
       this.getThreadID(messageUserID);
     }
     if (this.state.threadID !== prevState.threadID) {
-      console.log(this.state.threadID);
       this.props.getMessagesArcive(this.state.threadID).then((res) => {
         this.setState({ threadTextRespons: res });
       });
@@ -502,7 +479,6 @@ class StorePage extends React.Component {
     if (this.state.activeCart == null || this.state.activeCart.id === "notID") {
       this.creatCart();
     } else {
-      console.log(this.state.activeCart.id);
       this.postAndRetrevData(this.state.activeCart.id).then((data) => {
         this.openModal("הצלחה!", "השינויים נוספו להזמנה");
         this.editItem(data.id, this.state.changedQuantities).then(
@@ -542,10 +518,10 @@ class StorePage extends React.Component {
       //   this.state.changedQuantities[key] &&
       //   this.state.changedQuantities[key] !== 0
       // ) {
-      //   console.log(this.state.changedQuantities);
+      //
       //   let changedQuantities = this.state.changedQuantities;
       //   changedQuantities[key] = value;
-      //   console.log(this.state.changedQuantities);
+      //
       //   this.setState({ changedQuantities: changedQuantities });
       // }
 
@@ -554,12 +530,10 @@ class StorePage extends React.Component {
         { item_variation_id: key, quantity: parseInt(value) },
         ` ${this.props.accessToken}`
       ).then((data) => {
-        console.log(data);
         if (data.error) {
-          console.log(this.state.changedQuantities);
           let changedQuantities = this.state.changedQuantities;
           changedQuantities[key] = value;
-          console.log(this.state.changedQuantities);
+
           this.setState({ changedQuantities: changedQuantities });
         }
       });
@@ -619,9 +593,8 @@ class StorePage extends React.Component {
     ) {
       return <FullPageLoader></FullPageLoader>;
     }
-    console.log(this.props.MyShoppingCarts);
+
     if (this.state.activeCart) {
-      console.log(this.state.activeCart);
     }
     let messageUserID =
       this.props.activeAccount && this.props.activeAccount.account_type == 3

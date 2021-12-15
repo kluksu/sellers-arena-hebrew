@@ -44,11 +44,9 @@ export default class Profile extends Component {
         config
       )
       .then((res) => {
-        console.log(res);
         this.props.openGenericModal("מעולה", "השינויים נשמרו בהצלחה");
       })
       .catch((error) => {
-        console.log(error.response.data);
         this.setState({ error: error.response.data });
         this.props.openGenericModal(
           "אופס",
@@ -75,7 +73,6 @@ export default class Profile extends Component {
     }
   };
   componentDidMount = () => {
-    console.log(this.props.me);
     if (this.props.activeAccount) {
       this.setState({
         tax_id: this.props.activeAccount.tax_id,
@@ -88,7 +85,6 @@ export default class Profile extends Component {
     }
   };
   render() {
-    console.log(this.props.me);
     let showCategories = [];
     categoriesAndSubCategories.forEach((category) => {
       showCategories.push(

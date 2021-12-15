@@ -56,8 +56,6 @@ export default class Register extends Component {
           repetPassword: "",
           phone: "",
         });
-
-        console.log(this.state.registerData); // JSON data parsed by `data.json()` call
       });
     }
   }
@@ -131,7 +129,7 @@ export default class Register extends Component {
       ) : (
         <p className="FormRejects"> הסיסמאות אינן תואמות</p>
       );
-    console.log(this.state.phoneValidate);
+
     const phonNote =
       this.state.phoneValidate === true ? (
         ""

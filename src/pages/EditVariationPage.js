@@ -144,7 +144,6 @@ class EditVariationPage extends React.Component {
         [key]: parseFloat(value),
       }),
     });
-    console.log(this.state.newDIscount);
   };
   uploadVar = (event) => {
     // this.setState({discounts: Object.assign(  this.state.newDIscount)} )
@@ -185,11 +184,8 @@ class EditVariationPage extends React.Component {
           if (response.status == 200) {
             window.location.replace("/#/");
           }
-          console.log(response);
         },
-        (error) => {
-          console.log(error);
-        }
+        (error) => {}
       );
   };
 

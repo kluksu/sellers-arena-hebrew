@@ -4,7 +4,6 @@ import { withRouter } from "react-router-dom";
 
 class EditVariationsCard extends React.Component {
   render() {
-    console.log(this.props.match);
     let variationsARR = [];
     let discountsARR = [];
 

@@ -32,8 +32,6 @@ export default class QuantityDiscount extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
   render() {
-    console.log(this.state.key);
-    console.log(this.state.value);
     let optionsArr = [];
     for (let i = 0; i < 100; i++) {
       optionsArr.push(<option value={i / 100}>{i}% </option>);

@@ -46,7 +46,6 @@ class ProductPage extends React.Component {
       this.state.activeCart === ""
     ) {
       this.creatCart().then((res) => {
-        console.log(res);
         this.setState({ activeCart: res });
         this.addCartItems(res.id, itemID, quantity).then(this.props.getCarts());
       });
@@ -63,7 +62,6 @@ class ProductPage extends React.Component {
             ` ${this.props.accessToken}`
           ).then((res) => {
             this.props.getCarts();
-            console.log(res);
           });
         }
       });
@@ -117,7 +115,6 @@ class ProductPage extends React.Component {
   //    }
 
   addQuantity = () => {
-    console.log();
     if (this.state.selectedVariation.batch_size) {
       this.setState({
         units:
@@ -148,7 +145,6 @@ class ProductPage extends React.Component {
       this.props.activeAccount.account_type == 3
     ) {
       this.setState({ activeCart: this.props.activeCart });
-      console.log(this.props.activeCart);
     }
     if (this.props.MyShoppingCarts) {
       this.props.MyShoppingCarts.forEach((cart) => {
@@ -156,12 +152,11 @@ class ProductPage extends React.Component {
           this.props.activeAccount.account_type == 2 &&
           cart.seller_account == this.props.match.params.storeId
         ) {
-          console.log(cart);
           this.setState({ activeCart: cart });
         }
       });
     }
-    console.log(this.props.match.params);
+
     const authorization = !this.props.accessToken
       ? null
       : `Bearer ${this.props.accessToken}`;
@@ -173,7 +168,6 @@ class ProductPage extends React.Component {
       `${domain}/public-items/${this.props.match.params.productId}`,
       config
     ).then((res) => {
-      console.log(res);
       this.setState({ itemData: res });
       this.setState({ variations: res.item_variations });
     });
@@ -182,7 +176,6 @@ class ProductPage extends React.Component {
     if (this.props.activeCart.id !== prevProps.activeCart.id) {
       {
         this.setState({ activeCart: this.props.activeCart });
-        console.log(this.props.activeCart);
       }
     }
     if (
@@ -192,21 +185,15 @@ class ProductPage extends React.Component {
       this.state.activeCart !== "" &&
       this.state.activeCart.all_item_variations
     ) {
-      console.log(this.state.activeCart);
       this.setState({ units: 0 });
 
-      console.log("!!!!!!!!!!!!!!");
       this.state.activeCart.all_item_variations.forEach((variation) => {
-        console.log(variation);
-
         if (variation.item_variation.id == this.state.selectedVariation.id) {
           this.setState({ units: variation.quantity });
         }
       });
     }
     if (this.state.selectedVariationID !== prevState.selectedVariationID) {
-      console.log("!!!!!");
-      console.log(this.state.selectedVariationID);
       this.state.variations.forEach((variation) => {
         if (variation.id == this.state.selectedVariationID) {
           this.setState({ selectedVariation: variation });
@@ -223,7 +210,6 @@ class ProductPage extends React.Component {
           this.props.activeAccount.account_type == 2 &&
           cart.seller_account == this.props.match.params.storeId
         ) {
-          console.log(cart);
           this.setState({ activeCart: cart });
         }
       });
@@ -270,7 +256,6 @@ class ProductPage extends React.Component {
       </>
     ) : null;
 
-    console.log(this.state.activeCart);
     let headline =
       this.state.activeCart !== "" ? (
         <h1 className="productPageHeadLine">
@@ -278,9 +263,6 @@ class ProductPage extends React.Component {
         </h1>
       ) : null;
 
-    console.log(this.state.activeCart);
-
-    console.log(this.state.selectedVariation);
     let selectedVariationInfo =
       this.state.selectedVariationID !== null ? (
         <ProductPageVariationInfo

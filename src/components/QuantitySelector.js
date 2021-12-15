@@ -72,9 +72,6 @@ export default class QuantitySelector extends Component {
         changedQuantities[this.props.variation.id] !== undefined
           ? changedQuantities[this.props.variation.id].cost_per_item
           : this.props.price;
-      console.log(this.props.price);
-
-      console.log(changedQuantities);
 
       this.props.createDelta(this.props.variation.id, this.state.units, price);
     }
@@ -84,7 +81,7 @@ export default class QuantitySelector extends Component {
     if (this.props.activateStageChangesButton) {
       this.props.activateStageChangesButton();
     }
-    console.log();
+
     if (this.props.variation.batch_size) {
       this.setState({
         units: this.state.units + parseInt(this.props.variation.batch_size),

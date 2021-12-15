@@ -91,7 +91,7 @@ class MyNavBar extends React.Component {
         <BsPerson></BsPerson>
       </NavLink>
     ) : null;
-    console.log(this.props.me);
+
     let rootButton =
       this.props.activeAccount && this.props.activeAccount.id == 1 ? (
         <Nav.Link href="/#/rootPage">משתמש ראשי</Nav.Link>
@@ -122,7 +122,7 @@ class MyNavBar extends React.Component {
           לוח הודעות
         </NavLink>
       ) : null;
-    console.log(this.props.MyShoppingCarts);
+
     let cartDropDown = [];
     let ordersArr = [];
     let waitingDeliveryArr = [];
@@ -207,9 +207,7 @@ class MyNavBar extends React.Component {
     }
     if (this.props.MyShoppingCarts) {
       this.props.MyShoppingCarts.forEach((cart) => {
-        console.log(cart);
         this.getAccount(cart.buyer_account).then((res) => {
-          console.log(res);
           cartDropDown.push(
             <NavDropdown.Item href={`/#/StorePage/${cart.seller_account}`}>
               {res.data.name}{" "}
@@ -238,7 +236,6 @@ class MyNavBar extends React.Component {
     }
     if (this.props.MySupplierOrders) {
       this.props.MySupplierOrders.forEach((order) => {
-        console.log(order);
         ordersArr.push(
           <NavDropdown.Item href={`/#/${path}/${order.id}`}>
             {order.buyer_account.name}{" "}

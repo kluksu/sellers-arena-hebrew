@@ -3,8 +3,6 @@ import Loader from "react-loader-spinner";
 
 export default class FullPageLoader extends Component {
   render() {
-    console.log(this.props.LoaderVisibilty);
-
     return (
       <div
         className="fullPageLoader"

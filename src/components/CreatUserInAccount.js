@@ -28,7 +28,6 @@ export default class CreatUserInAccount extends Component {
   };
   authinticateForm = () => {
     if (this.state.userPermmitions !== undefined) {
-      console.log(this.state.userPermmitions);
       this.setState({ phone_numberErrorMessege: "" });
       this.setState({ emailErrorMessege: "" });
       this.setState({ passwordErrorMessege: "" });
@@ -73,7 +72,6 @@ export default class CreatUserInAccount extends Component {
           password: this.state.password,
           phone_number: this.state.phone,
         }).then((data) => {
-          console.log(data.id);
           postData(
             `${domain}/my-accounts/${this.props.activeAccount.id}/add_user/`,
             { user_id: data.id, user_type: this.state.userPermmitions },
@@ -81,7 +79,6 @@ export default class CreatUserInAccount extends Component {
           )
             .then((data) => {
               this.props.openGenericModal("הצלחה!", "המשתמש נוסף לחשבונך");
-              console.log(data);
             })
             .catch(
               this.props.openGenericModal(
@@ -101,8 +98,6 @@ export default class CreatUserInAccount extends Component {
             repetPassword: "",
             phone: "",
           });
-
-          console.log(this.state.registerData); // JSON data parsed by `data.json()` call
         });
       }
     } else {
@@ -135,7 +130,7 @@ export default class CreatUserInAccount extends Component {
       ) : (
         ""
       );
-    console.log(this.state.phoneValidate);
+
     const phonNote =
       this.state.phoneValidate === false ? (
         <p className="FormRejects">מספר הטלפון חייב להכיל עשר ספרות</p>

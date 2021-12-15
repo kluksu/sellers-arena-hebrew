@@ -66,13 +66,11 @@ export default class EmailForm extends Component {
                 חזור לעמוד הראשי{" "}
               </Button>
             );
-            console.log(result.text);
           },
           (error) => {
             this.setState({
               errorMessage: "אופס, יש תקלה, אנא נסה שנית מאוחר יותר",
             });
-            console.log(error.text);
           }
         );
       } else {

@@ -20,14 +20,10 @@ export default class ManageUsers extends Component {
       `${domain}/supplier-orders/my-users/?account_id=${this.props.activeAccount.id}`,
       { user_id: this.state.user_id, user_type: this.state.user_type },
       ` ${this.props.accessToken}`
-    ).then((data) => {
-      console.log(data);
-    });
+    ).then((data) => {});
   };
 
   render() {
-    console.log(this.props.activeAccount);
-
     const existingUsersArr = [];
     return (
       <>

@@ -22,10 +22,8 @@ class AddMyItems extends React.Component {
 
   getSearchText = (searchText) => {
     this.setState({ searchText: searchText });
-    console.log(this.state);
   };
   componentDidMount = () => {
-    console.log(this.props.match);
     let categories = [];
     let categoriesList = {};
 
@@ -36,7 +34,6 @@ class AddMyItems extends React.Component {
       },
     };
     axios.get(`${domain}/items/`, config).then((response) => {
-      console.log(response); ////////////////////////////////////////////////////////////////////////////////////
       for (let i = 0; i < response.data.results.length; i++) {
         const item = response.data.results[i];
         const category = item.category;
@@ -53,9 +50,9 @@ class AddMyItems extends React.Component {
         //        const variation =  item.item_variations[j];
         //        let fullItem={category:category, item:item, variation:variation}
         //        this.setState({fullItemsList:this.state.fullItemsList.concat(fullItem)})
-        //       console.log(categories)
+        //
         //    } this.setState({categories:categories})
-        //    console.log(this.state.fullItemsList)
+        //
       }
       //////////////////////////////////////////////////////////////
     });
@@ -64,12 +61,11 @@ class AddMyItems extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
   };
   render() {
-    console.log(this.state.fullItemsList);
     let showCategories = [];
     let showItems = [];
     for (let i = 0; i < this.state.categories.length; i++) {
       const category = this.state.categories[i];
-      console.log(category);
+
       if (
         category.toUpperCase().includes(this.state.searchText.toUpperCase())
       ) {

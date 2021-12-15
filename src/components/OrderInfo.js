@@ -28,7 +28,6 @@ class OrderInfo extends React.Component {
         "",
         ` ${this.props.accessToken}`
       ).then((data) => {
-        console.log(data);
         this.setState({ activeCart: data });
       });
     } else if (this.props.activeAccount.account_type == 3) {
@@ -128,6 +127,7 @@ class OrderInfo extends React.Component {
           size="sm"
           // className="orderInfoWindow"
         >
+          <h1></h1>
           <thead>
             <td>קוד מוצר</td>
             <td>שם</td>

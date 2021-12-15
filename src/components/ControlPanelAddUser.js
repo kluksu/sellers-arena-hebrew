@@ -18,7 +18,6 @@ export default class ControlPanelAddUser extends Component {
     )
       .then((data) => {
         this.props.openGenericModal("הצלחה!", "המשתמש נוסף בהצלחה לחשבון");
-        console.log(data);
       })
       .catch(
         this.props.openGenericModal(

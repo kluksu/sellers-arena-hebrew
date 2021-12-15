@@ -25,7 +25,7 @@ export default class PriceSelector extends Component {
         changedQuantities[this.props.variation.id] !== undefined
           ? changedQuantities[this.props.variation.id].quantity
           : this.props.quantity;
-      console.log(this.state.price);
+
       let newPrice = this.state.price === "" ? 0 : this.state.price;
 
       this.props.createDelta(

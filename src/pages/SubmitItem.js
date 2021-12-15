@@ -3,8 +3,6 @@ import { domain } from "../components/utils";
 
 export default class SubmitItem extends Component {
   uploadVar = () => {
-    console.log(this.state.newBlob);
-    console.log(JSON.stringify(this.state.newBlob));
     let productPost = new FormData();
     productPost.append("cost_per_item", this.state.cost_per_item);
     productPost.append("amount_in_stock", this.state.amount_in_stock);
@@ -18,7 +16,6 @@ export default class SubmitItem extends Component {
 
     this.setState({ itemFormData: productPost });
     for (let pair of productPost.entries()) {
-      console.log(pair[0] + ", " + pair[1]);
     }
     const config = {
       headers: {
@@ -28,12 +25,8 @@ export default class SubmitItem extends Component {
     };
 
     axios.post(`${domain}/item-variations/`, productPost, config).then(
-      (response) => {
-        console.log(response);
-      },
-      (error) => {
-        console.log(error);
-      }
+      (response) => {},
+      (error) => {}
     );
   };
 

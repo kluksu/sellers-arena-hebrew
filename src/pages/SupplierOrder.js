@@ -46,11 +46,11 @@ class SupplierOrder extends React.Component {
     this.setState({ changedQuantities: changedQuantities });
   };
   createOrderDiscount = (precentage) => {
-    // console.log(this.state.activeCart.all_item_variations);
+    //
 
     // let discountObj = {};
     // this.state.activeCart.all_item_variations.forEach((CartVariation) => {
-    //   console.log(
+    //
     //     CartVariation["item_variation"].cost_per_item * (1 - precentage / 100)
     //   );
 
@@ -70,7 +70,6 @@ class SupplierOrder extends React.Component {
       },
       ` ${this.props.accessToken}`
     ).then((data) => {
-      console.log(data);
       if (data.info.includes("successfully")) {
         this.openModal("הצלחה!", "השינויים נוספו בהצלחה");
         this.onSupplierOrderMount();
@@ -78,7 +77,6 @@ class SupplierOrder extends React.Component {
     });
   };
   editItem = (delta) => {
-    console.log(this.state.changedQuantities);
     let freeItemsWarning = "";
     let freeItemsArr = [];
     for (const [key, value] of Object.entries(this.state.changedQuantities)) {
@@ -86,7 +84,6 @@ class SupplierOrder extends React.Component {
         freeItemsArr.push(key);
       }
     }
-    console.log(freeItemsArr);
 
     freeItemsWarning =
       freeItemsArr.length > 0
@@ -94,13 +91,12 @@ class SupplierOrder extends React.Component {
         : "";
 
     let obj = { variations_json: this.state.changedQuantities };
-    console.log(obj);
+
     postData(
       `${domain}/supplier-orders/${this.props.match.params.id}/edit/`,
       obj,
       ` ${this.props.accessToken}`
     ).then((data) => {
-      console.log(data);
       if (data.status.includes("successfully")) {
         this.openModal("השינויים נוספו בהצלחה", `${freeItemsWarning}`);
         this.onSupplierOrderMount();
@@ -163,12 +159,12 @@ class SupplierOrder extends React.Component {
   //     },
   //     ` ${this.props.accessToken}`
   //   ).then((data) => {
-  //     console.log(data);
+  //
   //     if (data.info.includes("successfully")) {
   //       this.openModal("discount was");
 
   //       this.getSupplierOrder("cart_snapshot").then((data) => {
-  //         console.log(data);
+  //
   //         let snapShot = snapShotPath;
   //         this.getBuyerDits(data.data.cart_snapshot.buyer_account);
   //         this.setState({ activeCart: data.data[snapShot] });
@@ -190,17 +186,12 @@ class SupplierOrder extends React.Component {
       return axios
         .get(`${domain}/public-accounts/${buyerId}`, config)
         .then((data) => {
-          console.log(data);
-
           this.setState({ buyer: data.data });
         });
     } else {
-      console.log(this.state.activeCart);
-
       return axios
         .get(`${domain}/unregistered-accounts/${buyerId}`, config)
         .then((res) => {
-          console.log(res);
           this.setState({ buyer: res.data });
         });
     }
@@ -216,24 +207,21 @@ class SupplierOrder extends React.Component {
   }
   onSupplierOrderMount = () => {
     this.getSupplierOrder("seller_edited_snapshot").then((data) => {
-      console.log(data);
       let buyerTaxId = data.data.buyer_account.tax_id;
       this.setState({ buyerTaxId: buyerTaxId });
       this.setState({ activeCartStatus: data.data.order_status });
       let snapShot = data.data["seller_edited_snapshot"]
         ? data.data["seller_edited_snapshot"]
         : data.data["cart_snapshot"];
-      console.log(snapShot);
+
       this.setState({ activeCart: snapShot });
 
       if (
         this.state.activeCart.seller_account !==
         this.state.activeCart.buyer_account
       ) {
-        console.log("!!!!!!!!!!!!!!!!!!!!!!!");
         this.getBuyerDits(data.data.cart_snapshot.buyer_account);
       } else {
-        console.log(data);
         this.getBuyerDits(data.data.buyer_unregistered_account);
       }
     });
@@ -280,7 +268,7 @@ class SupplierOrder extends React.Component {
           </Form.Group>
         </Form>
       ) : null;
-    console.log(this.state.activeCart);
+
     let buttons = "";
     if (this.state.activeCartStatus === "submitted") {
       buttons = (
@@ -404,7 +392,7 @@ class SupplierOrder extends React.Component {
         </>
       );
     }
-    console.log(this.state.buyer);
+
     if (
       !this.state.activeCart ||
       !this.props.activeAccount ||
@@ -412,13 +400,11 @@ class SupplierOrder extends React.Component {
     ) {
       return <FullPageLoader></FullPageLoader>;
     }
-    console.log(this.props.activeAccount);
-    console.log(this.state.activeCart);
+
     let buyeraddress = "";
     if (this.state.buyer) {
       buyeraddress = this.state.buyer.store_address;
       buyeraddress = buyeraddress.replaceAll(" ", "20%");
-      console.log(buyeraddress);
     }
     if (this.state.activeCart !== "") {
       return (

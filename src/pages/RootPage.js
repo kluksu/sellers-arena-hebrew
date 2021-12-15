@@ -9,9 +9,7 @@ export default class RootPage extends Component {
       activateOrDeActivate: "",
     };
   }
-  componentDidUpdate() {
-    console.log(this.state.activateOrDeActivate, this.state.accountToActivate);
-  }
+  componentDidUpdate() {}
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };

@@ -97,10 +97,7 @@ class App extends React.Component {
   getContactsMesssageBoard = () => {
     let allMessages = [];
     this.state.myContacts.results.forEach((contact) => {
-      console.log(contact);
       this.getCurrentstore(contact.account_contact.id).then((res) => {
-        console.log(res);
-
         allMessages.push(res.data);
       });
       this.setState({ allMessages: allMessages });
@@ -108,7 +105,6 @@ class App extends React.Component {
   };
   verifyCallback = (response) => {
     if (response) {
-      console.log(response);
       this.setState({ captchaResponse: response });
       this.setState({ isRealUser: true });
       setTimeout(
@@ -122,9 +118,7 @@ class App extends React.Component {
       this.setState({ isRealUser: false });
     }
   };
-  reCaptchaLoded = () => {
-    console.log("reacptcha has loaded");
-  };
+  reCaptchaLoded = () => {};
   handleVerified = () => {
     if (this.state.isRealUser === true) {
       alert("ok");
@@ -203,8 +197,6 @@ class App extends React.Component {
     };
     axios.get(`${domain}/supplier-orders/${orderID}/`, config).then((res) => {
       if (status === "fill") {
-        console.log(res.data.cart_id);
-        console.log(orderID);
         this.deleteCart(res.data.cart_id);
       }
     });
@@ -239,7 +231,6 @@ class App extends React.Component {
     this.submitText(threadID, `wasReadBy ${this.state.activeAccount.id}`);
   };
   checkOut = (cartiD) => {
-    console.log(this.state.accessToken);
     return postData(
       `${domain}/cart/${cartiD}/checkout/`,
       "",
@@ -279,9 +270,7 @@ class App extends React.Component {
         config
       )
       .then(this.openGenericModal("רשימת אנשי הקשר עודכנה בהצלחה"))
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   };
   getContacts = () => {
     const authorization = !this.state.accessToken
@@ -299,12 +288,11 @@ class App extends React.Component {
   postAndGetContacts = (contactID) => {
     this.setState({ LoaderVisibilty: "" });
     this.addToContacts(contactID).then((res) => {
-      console.log(res);
       this.sendMessage(res.data.account_contact.id);
 
       this.getContacts().then((res) => {
         this.setState({ myContacts: res.data });
-        console.log(res);
+
         this.setState({ LoaderVisibilty: "none" });
       });
     });
@@ -327,7 +315,7 @@ class App extends React.Component {
         config
       );
       //       .then((res => {
-      //         console.log(res)
+      //
       //           this.setState({ threadTextRespons: res})
       // }))
     }
@@ -381,7 +369,7 @@ class App extends React.Component {
     };
     axios.get(`${domain}/message-threads/`, config).then((res) => {
       this.setState({ messageThreads: res.data });
-      console.log(res);
+
       let counter = 0;
 
       res.data.results.forEach((result) => {
@@ -418,10 +406,7 @@ class App extends React.Component {
         this.submitText(res.data.id /*this.state.activeAccount.id)*/);
         this.getAllActiveThreads().then((res) => {
           this.setState({ allThreads: res.data.results });
-          console.log(res.data.results);
         });
-
-        console.log(res);
       });
   };
   //לתקן את הסינכרון של ההודעות כאשר המודל נפתח מעמוד חנות
@@ -438,9 +423,8 @@ class App extends React.Component {
     this.setState({ currentStore: "" });
     if (threadID) {
       this.getMessagesArcive(threadID).then((res) => {
-        console.log(res);
         this.setState({ threadTextRespons: res });
-        console.log(res);
+
         // if (
         //   threadID &&
         //   !res.data.results[0].text.includes(
@@ -475,7 +459,6 @@ class App extends React.Component {
       headers: { "Content-Type": "application/json", authorization },
     };
     axios.delete(`${domain}/cart/${cart}`, config).then((data) => {
-      console.log(data);
       if (data.status == 204) {
         this.getCarts();
         window.location.assign("/#/");
@@ -484,7 +467,6 @@ class App extends React.Component {
   };
   resize() {
     this.setState({ screenWidth: window.innerWidth });
-    console.log(this.state.screenWidth);
   }
 
   componentWillUnmount() {
@@ -526,19 +508,17 @@ class App extends React.Component {
     window.addEventListener("resize", this.resize.bind(this));
     this.resize();
 
-    console.log("!!!!!!!!!!");
     if (localStorage.getItem("account")) {
-      console.log(localStorage.getItem("account"));
       this.setState({ activeAccount: localStorage.getItem("account") });
       this.setState({ refreshToken: localStorage.getItem("refresh") });
     }
-    console.log(localStorage.getItem("refresh"));
+
     this.refresh().then((data) => {
       this.getAllInfo(data);
     });
 
     this.setState({ LoaderVisibilty: "" });
-    // console.log(this.state.userAccounts)
+    //
     // // if(this.state.accessToken && this.state.userAccounts.)
     this.getCarts();
     this.setState({ LoaderVisibilty: "none" });
@@ -566,7 +546,6 @@ class App extends React.Component {
     axios
       .get(`${domain}/${BuyerSeller}/?order_status=${status}`, config)
       .then((data) => {
-        console.log(data);
         if (data.status == 200) {
           this.setState({ [state]: data.data.results });
         }
@@ -579,8 +558,6 @@ class App extends React.Component {
   getCarts = () => {
     this.setState({ MyShoppingCarts: [] });
     this.getCart("cart_status_reopen").then((data) => {
-      console.log(data);
-
       // this.getCart("cart_status_open").then((res) => {
       this.setState({ MyShoppingCarts: data.data.results });
       this.getCart("cart_status_open").then((res) => {
@@ -632,12 +609,11 @@ class App extends React.Component {
   openModal = () => this.setState({ isOpen: true, loginData: {} });
   closeModal = () => this.setState({ isOpen: false });
   loginPostData = (email, password) => {
-    // console.log("!!!!!!!!!!!!");
+    //
     postData(`${domain}/token/`, {
       email: email,
       password: password,
     }).then((data) => {
-      console.log(data);
       if (data) {
         this.setState({ loginData: data });
       }
@@ -649,7 +625,7 @@ class App extends React.Component {
   };
   getAllInfo = (data) => {
     this.setState({ refreshToken: data.refresh, accessToken: data.access });
-    console.log(data.refresh);
+
     if (data.refresh) {
       localStorage.setItem("refresh", data.refresh);
     }
@@ -660,7 +636,6 @@ class App extends React.Component {
       /////////////////////////////////////////////////////
       getData(`${domain}/my-accounts/`, "", ` ${this.state.accessToken}`).then(
         (data) => {
-          console.log(data);
           if (data.results.length == 0) {
             window.location.assign("/#/openAccount");
           }
@@ -685,14 +660,13 @@ class App extends React.Component {
 
   getThreadsAndMarkUnRead = () => {
     this.getAllActiveThreads().then((res) => {
-      console.log(res);
       res.data.results.forEach((thread) => {
         let participant =
           thread.participants[0].id !== this.state.activeAccount.id &&
           this.state.activeAccount
             ? thread.participants[0]
             : thread.participants[1];
-        console.log(participant);
+
         this.getMessagesArcive(thread.id, "2", false).then((res) => {
           let messagesWasReadObj = this.state.messagesWasReadObj;
           if (
@@ -721,10 +695,8 @@ class App extends React.Component {
       this.state.activeAccount !== undefined &&
       prevState.activeAccount === undefined
     ) {
-      console.log(this.state.activeAccount);
     }
     if (this.state.sellerApprovedOrders !== prevState.sellerApprovedOrders) {
-      console.log(this.state.sellerApprovedOrders);
     }
     if (this.state.accessToken !== prevState.accessToken) {
       setTimeout(() => {
@@ -735,7 +707,6 @@ class App extends React.Component {
       }, 8600000);
     }
     if (this.state.activeAccount) {
-      console.log(this.state.activeAccount.id);
       if (this.state.activeAccount !== prevState.activeAccount) {
         this.getMe();
 
@@ -750,7 +721,6 @@ class App extends React.Component {
     }
   }
   render() {
-    console.log(this.state.activeAccount);
     let unreadMessages = 0;
     for (const [key, value] of Object.entries(this.state.messagesWasReadObj)) {
       if (value === "red") {
@@ -786,7 +756,7 @@ class App extends React.Component {
     //   return <FullPageLoader></FullPageLoader>;
     // }
     /////
-    console.log(this.state.allThreads);
+
     let showMassegesRead = [];
     let showMassegesUnRead = [];
 
@@ -802,7 +772,6 @@ class App extends React.Component {
           .toLowerCase()
           .includes(this.state.searchThreadText.toLowerCase())
       ) {
-        console.log(this.state.messagesWasReadObj[participant.name]);
         let showMasseges =
           this.state.messagesWasReadObj[participant.name] === "red"
             ? showMassegesUnRead

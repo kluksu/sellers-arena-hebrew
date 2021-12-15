@@ -53,11 +53,9 @@ export default class OpenAccount extends Component {
         },
         ` ${this.props.accessToken}`
       ).then((data) => {
-        console.log(data);
         this.setState({ responseData: data });
         this.props.goToNewAccount(data);
         if (data.id) {
-          console.log(data);
           sendEmailToMe(
             data.name,
             data.email,

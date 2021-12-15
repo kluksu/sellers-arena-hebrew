@@ -19,7 +19,7 @@ export default class DeleteUserInAccount extends Component {
     //to be writen
     // postData(`${domain}/my-users/`,"",` ${this.props.accessToken}`)
     // .then(data => {
-    //     console.log(data)
+    //
     //     this.setState({users:data.results})
     //   })
   };

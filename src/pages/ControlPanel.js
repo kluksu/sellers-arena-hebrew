@@ -31,7 +31,6 @@ class ControlPanel extends React.Component {
         "",
         ` ${this.props.accessToken}`
       ).then((data) => {
-        console.log(data);
         this.setState({ myUsers: data.results });
       });
     }
