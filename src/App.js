@@ -44,6 +44,7 @@ import recaptcha from "react-recaptcha";
 import AccountNotActive from "./components/AccountNotActive";
 import Wall from "./pages/Wall";
 import WallMessages from "./components/WallMessages";
+import MyOrder from "./pages/MyOrder";
 //${domain}/
 class App extends React.Component {
   constructor(props) {
@@ -965,6 +966,16 @@ class App extends React.Component {
               activeAccount={this.state.activeAccount}
               accessToken={this.state.accessToken}
             ></EditVariationPage>
+          </Route>
+          <Route exact path="/my-order/:id">
+            <MyOrder
+              getSpecificOrder={this.getSpecificOrder}
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
+              screenWidth={this.state.screenWidth}
+              activeAccount={this.state.activeAccount}
+              accessToken={this.state.accessToken}
+            ></MyOrder>
           </Route>
           <Route exact path="/StorePage/:id">
             <StorePage

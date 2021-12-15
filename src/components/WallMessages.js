@@ -4,7 +4,7 @@ export default class WallMessages extends Component {
   render() {
     return (
       <div>
-        <h1>{this.props.userInfo.name}</h1>
+        <h4>{this.props.userInfo.name}</h4>
         <p>{this.props.userInfo.messages}</p>
       </div>
     );

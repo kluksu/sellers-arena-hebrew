@@ -147,7 +147,8 @@ body {
 }
 .wallMessages {
   margin-top: 90px;
-  text-align: right;
+  /* text-align: right; */
+  padding: 10px;
 }
 .registerContainer > p {
   margin-right: 0px;
