@@ -22,7 +22,10 @@ class OrderInfo extends React.Component {
     }
   }
   componentDidMount() {
-    if (this.props.activeAccount.account_type == 2) {
+    if (
+      this.props.activeAccount &&
+      this.props.activeAccount.account_type == 2
+    ) {
       getData(
         `${domain}/cart/${this.props.activeCart.id}/`,
         "",
@@ -30,7 +33,10 @@ class OrderInfo extends React.Component {
       ).then((data) => {
         this.setState({ activeCart: data });
       });
-    } else if (this.props.activeAccount.account_type == 3) {
+    } else if (
+      this.props.activeAccount &&
+      this.props.activeAccount.account_type == 3
+    ) {
       this.setState({ activeCart: this.props.activeCart });
     }
   }
@@ -127,7 +133,6 @@ class OrderInfo extends React.Component {
           size="sm"
           // className="orderInfoWindow"
         >
-          <h1></h1>
           <thead>
             <td>קוד מוצר</td>
             <td>שם</td>

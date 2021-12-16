@@ -530,7 +530,7 @@ class App extends React.Component {
     const config = {
       headers: { "Content-Type": "application/json", authorization },
     };
-    return axios.get(`${domain}/my-orders/${orderID}`, config);
+    return axios.get(`${domain}/my-account-orders/${orderID}`, config);
   };
   getOrders = (status, state) => {
     const authorization = !this.state.accessToken
@@ -547,6 +547,7 @@ class App extends React.Component {
       .get(`${domain}/${BuyerSeller}/?order_status=${status}`, config)
       .then((data) => {
         if (data.status == 200) {
+          console.log(data.data.results);
           this.setState({ [state]: data.data.results });
         }
       });

@@ -145,6 +145,9 @@ body {
   background-color: lightskyblue;
   color: white !important;
 }
+.myOrderPage {
+  padding-top: 60px;
+}
 .wallMessages {
   margin-top: 90px;
   /* text-align: right; */

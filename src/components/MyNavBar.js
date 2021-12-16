@@ -102,9 +102,13 @@ class MyNavBar extends React.Component {
         : "";
     let awaitingPayment = [];
     this.props.fulfilledOrders.forEach((fulfilledorder) => {
+      let sellerOrBuyer =
+        this.props.activeAccount.account_type == 3
+          ? fulfilledorder.buyer_account.name
+          : fulfilledorder.seller_account.name;
       awaitingPayment.push(
         <NavDropdown.Item href={`/#/${path}/${fulfilledorder.id}`}>
-          {fulfilledorder.buyer_account.name}
+          {sellerOrBuyer}
         </NavDropdown.Item>
       );
     });
@@ -127,9 +131,13 @@ class MyNavBar extends React.Component {
     let ordersArr = [];
     let waitingDeliveryArr = [];
     this.props.sellerApprovedOrders.forEach((approvedOrder) => {
+      let buyerOrSeller =
+        this.props.activeAccount.account_type == 3
+          ? approvedOrder.buyer_account.name
+          : approvedOrder.seller_account.name;
       waitingDeliveryArr.push(
         <NavDropdown.Item href={`/#/${path}/${approvedOrder.id}`}>
-          {approvedOrder.buyer_account.name}
+          {buyerOrSeller}
         </NavDropdown.Item>
       );
     });
@@ -236,9 +244,13 @@ class MyNavBar extends React.Component {
     }
     if (this.props.MySupplierOrders) {
       this.props.MySupplierOrders.forEach((order) => {
+        let buyerOrSeller =
+          this.props.activeAccount.account_type == 3
+            ? order.buyer_account.name
+            : order.seller_account.name;
         ordersArr.push(
           <NavDropdown.Item href={`/#/${path}/${order.id}`}>
-            {order.buyer_account.name}{" "}
+            {buyerOrSeller}{" "}
           </NavDropdown.Item>
         );
       });
