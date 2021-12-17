@@ -23,6 +23,7 @@ class SupplierOrder extends React.Component {
       isStageChangeButtonDisabled: true,
       modalTop: "",
       modalBottom: "",
+      activeOrder: {},
     };
   }
   activateStageChangesButton = () => {
@@ -232,6 +233,8 @@ class SupplierOrder extends React.Component {
       let buyerTaxId = data.data.buyer_account.tax_id;
       this.setState({ buyerTaxId: buyerTaxId });
       this.setState({ activeCartStatus: data.data.order_status });
+      console.log(data.data);
+      this.setState({ activeOrder: data.data });
       let snapShot = data.data["seller_edited_snapshot"]
         ? data.data["seller_edited_snapshot"]
         : data.data["cart_snapshot"];
@@ -464,6 +467,12 @@ class SupplierOrder extends React.Component {
                 <span>
                   {this.props.activeAccount.store_address}{" "}
                   {this.props.activeAccount.phone_number}{" "}
+                </span>
+                <span>
+                  {" "}
+                  {`   תאריך :${this.state.activeOrder.submitted_at
+                    .replace("T", " ")
+                    .slice(0, 19)}    `}{" "}
                 </span>
               </div>
               <div> {`  ח"פ: ${this.props.activeAccount.tax_id}`}</div>

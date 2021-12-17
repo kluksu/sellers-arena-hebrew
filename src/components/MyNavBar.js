@@ -73,6 +73,7 @@ class MyNavBar extends React.Component {
   // fulfilledOrders={this.state.fulfilledOrders}
   // sellerApprovedOrders={this.state.sellerApprovedOrders}
   render() {
+    let allOrders = <Nav.Link href="/#/all-orders">כל ההזמנות</Nav.Link>;
     let path =
       this.props.activeAccount && this.props.activeAccount.account_type == 2
         ? "my-order"
@@ -287,10 +288,11 @@ class MyNavBar extends React.Component {
           title={`הזמנות ${newOrderAwating}`}
         >
           {" "}
+          {creatNewSupplierOrder}
           {Orders}
           {waitingDelivery}
           {awaitingPaymentDropDown}
-          {creatNewSupplierOrder}
+          {allOrders}
         </NavDropdown>
       ) : null;
     }

@@ -306,6 +306,15 @@ label.form-label {
   top: 30%;
   /* right: 50%; */
 }
+.nav-link {
+  text-align: right;
+}
+.allOrdersPage {
+  padding-top: 80px;
+}
+.rdrDays {
+  direction: ltr !important;
+}
 .type2card.nav-link {
   padding: 0px;
 }

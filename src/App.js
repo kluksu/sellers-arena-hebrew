@@ -45,6 +45,7 @@ import AccountNotActive from "./components/AccountNotActive";
 import Wall from "./pages/Wall";
 import WallMessages from "./components/WallMessages";
 import MyOrder from "./pages/MyOrder";
+import AllOrders from "./pages/AllOrders";
 //${domain}/
 class App extends React.Component {
   constructor(props) {
@@ -1047,6 +1048,9 @@ class App extends React.Component {
               closeGenericModal={this.closeGenericModal}
               openGenericModal={this.openGenericModal}
             ></Pricing>
+          </Route>
+          <Route exact path="/all-orders">
+            <AllOrders></AllOrders>
           </Route>
 
           <NewMessageModal

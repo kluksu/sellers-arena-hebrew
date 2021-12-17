@@ -6,7 +6,8 @@ import reportWebVitals from "./reportWebVitals";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import "animate.css";
-
+import "react-date-range/dist/styles.css"; // main style file
+import "react-date-range/dist/theme/default.css"; // theme css file
 ReactDOM.render(
   <React.StrictMode>
     <App> </App>
