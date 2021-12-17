@@ -145,6 +145,12 @@ body {
   background-color: lightskyblue;
   color: white !important;
 }
+.transactionsList td {
+  white-space: nowrap;
+}
+.transactionsList td:hover {
+  cursor: pointer;
+}
 .myOrderPage {
   padding-top: 100px;
 }

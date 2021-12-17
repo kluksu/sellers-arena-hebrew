@@ -1056,6 +1056,7 @@ class App extends React.Component {
               sellerApprovedOrders={this.state.sellerApprovedOrders}
               MySupplierOrders={this.state.MySupplierOrders}
               activeAccount={this.state.activeAccount}
+              accessToken={this.state.accessToken}
             ></AllOrders>
           </Route>
 
