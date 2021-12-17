@@ -76,7 +76,7 @@ class SupplierOrder extends React.Component {
       }
     });
   };
-  editItem = (delta) => {
+  submitEdit = () => {
     let freeItemsWarning = "";
     let freeItemsArr = [];
     for (const [key, value] of Object.entries(this.state.changedQuantities)) {
@@ -102,6 +102,24 @@ class SupplierOrder extends React.Component {
         this.onSupplierOrderMount();
       }
     });
+  };
+  editItem = (delta) => {
+    if (this.state.activeCart.one_time_discount) {
+      this.openModal(
+        "שים לב!!",
+        "שינוי במוצר בשלב זה יחזיר את ההנחה על כלל ההזמנה ל-0% יש להזין הנחה מחדש לאחר השינוי",
+        <Button
+          variant="success"
+          onClick={() => {
+            this.submitEdit();
+          }}
+        >
+          המשך בשינוי
+        </Button>
+      );
+    } else {
+      this.submitEdit();
+    }
   };
 
   printOrder = () => {
@@ -204,9 +222,13 @@ class SupplierOrder extends React.Component {
     if (this.state.activeCart.id !== prevState.activeCart.id) {
       this.onSupplierOrderMount();
     }
+    if (this.props.accessToken !== prevProps.accessToken) {
+      this.onSupplierOrderMount();
+      console.log(this.props.accessToken);
+    }
   }
   onSupplierOrderMount = () => {
-    this.getSupplierOrder("seller_edited_snapshot").then((data) => {
+    this.getSupplierOrder().then((data) => {
       let buyerTaxId = data.data.buyer_account.tax_id;
       this.setState({ buyerTaxId: buyerTaxId });
       this.setState({ activeCartStatus: data.data.order_status });
@@ -215,6 +237,7 @@ class SupplierOrder extends React.Component {
         : data.data["cart_snapshot"];
 
       this.setState({ activeCart: snapShot });
+      console.log(snapShot);
 
       if (
         this.state.activeCart.seller_account !==
@@ -261,7 +284,7 @@ class SupplierOrder extends React.Component {
               className="no-print lowerForms"
               onChange={this.handleChange}
               placeholder="0"
-              step="0.01"
+              step="1"
               type="number"
               name="discountPrecentage"
             ></Form.Control>
@@ -279,7 +302,7 @@ class SupplierOrder extends React.Component {
             onClick={() =>
               this.openModal(
                 "שים לב!",
-                `האם להמשיך? ${this.state.discountPrecentage}% אתה עומד להעניק הנחה בגובה `,
+                `  אתה עומד להעניק הנחה בגובה ${this.state.discountPrecentage}% האם להמשיך? `,
                 <Button
                   variant="success"
                   onClick={() =>
@@ -392,10 +415,12 @@ class SupplierOrder extends React.Component {
         </>
       );
     }
-
+    console.log(this.state.activeCart);
+    console.log(this.props.activeAccount);
+    console.log(this.props.accessToken);
     if (
       !this.state.activeCart ||
-      !this.props.activeAccount ||
+      !this.props.accessToken ||
       !this.props.accessToken
     ) {
       return <FullPageLoader></FullPageLoader>;

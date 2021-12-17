@@ -87,6 +87,7 @@ class OrderInfo extends React.Component {
               isChangable={this.props.isChangable}
               createDelta={this.props.createDelta}
               // getNotice={this.getNotice}
+              accessToken={this.props.accessToken}
               getCartProducts={this.props.getCartProducts}
               value={variation.quantity}
               variation={variation.item_variation}
@@ -121,7 +122,7 @@ class OrderInfo extends React.Component {
         );
       });
     }
-    if (this.state.activeCart) {
+    if (this.props.accessToken) {
       return (
         <Table
           // tableDirection

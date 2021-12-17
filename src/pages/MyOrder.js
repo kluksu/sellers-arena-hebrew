@@ -40,6 +40,10 @@ class MyOrder extends Component {
     if (this.props.match.params.id !== prevProps.match.params.id) {
       this.onMountOrUpdate();
     }
+    if (this.props.accessToken !== prevProps.accessToken) {
+      console.log(this.props.accessToken);
+      this.onMountOrUpdate();
+    }
     if (this.state.orderInfo !== prevState.orderInfo) {
       this.setState({ sellerName: this.state.orderInfo.seller_account.name });
     }

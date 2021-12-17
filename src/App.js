@@ -503,6 +503,7 @@ class App extends React.Component {
     });
   };
   componentDidMount() {
+    this.keepLoggedIn();
     this.getMe();
     this.isMobile();
     window.addEventListener("resize", this.resize.bind(this));
@@ -688,7 +689,18 @@ class App extends React.Component {
       this.setState({ allThreads: res.data.results });
     });
   };
+  keepLoggedIn = () => {
+    setTimeout(() => {
+      this.refresh().then((data) => {
+        this.setState({ accessToken: data.access });
+        localStorage.setItem("refresh", data.refresh);
+      });
+    }, 8600000);
+  };
   componentDidUpdate(prevProps, prevState) {
+    if (this.state.accessToken !== prevState.accessToken) {
+      this.keepLoggedIn();
+    }
     if (this.state.myContacts.length !== prevState.myContacts.length) {
       this.getContactsMesssageBoard();
     }
@@ -699,14 +711,7 @@ class App extends React.Component {
     }
     if (this.state.sellerApprovedOrders !== prevState.sellerApprovedOrders) {
     }
-    if (this.state.accessToken !== prevState.accessToken) {
-      setTimeout(() => {
-        this.refresh().then((data) => {
-          this.setState({ accessToken: data.access });
-          localStorage.setItem("refresh", data.refresh);
-        });
-      }, 8600000);
-    }
+
     if (this.state.activeAccount) {
       if (this.state.activeAccount !== prevState.activeAccount) {
         this.getMe();
