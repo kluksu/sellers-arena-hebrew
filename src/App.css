@@ -310,7 +310,8 @@ label.form-label {
   text-align: right;
 }
 .allOrdersPage {
-  padding-top: 80px;
+  padding: 10px;
+  padding-top: 100px;
 }
 .rdrDays {
   direction: ltr !important;

@@ -1050,7 +1050,13 @@ class App extends React.Component {
             ></Pricing>
           </Route>
           <Route exact path="/all-orders">
-            <AllOrders></AllOrders>
+            <AllOrders
+              payedOrders={this.state.payedOrders}
+              fulfilledOrders={this.state.fulfilledOrders}
+              sellerApprovedOrders={this.state.sellerApprovedOrders}
+              MySupplierOrders={this.state.MySupplierOrders}
+              activeAccount={this.state.activeAccount}
+            ></AllOrders>
           </Route>
 
           <NewMessageModal
