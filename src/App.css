@@ -312,12 +312,32 @@ label.form-label {
   top: 30%;
   /* right: 50%; */
 }
-.nav-link {
+/* .nav-link {
   text-align: right;
-}
+} */
 .allOrdersPage {
   padding: 10px;
   padding-top: 100px;
+  margin-bottom: 50px;
+  overflow: hidden;
+}
+.rdrStaticRangeLabel {
+  text-align: center !important;
+}
+.allOrdersPage .form-control {
+  width: 400px;
+  margin: auto;
+}
+.allOrdersPage table {
+  margin: auto;
+  width: 740px;
+  /* height: 40px !important; */
+}
+/* .allOrdersPage table:hover {
+  overflow: scroll;
+} */
+.dropdown-menu {
+  text-align: center !important;
 }
 .rdrDays {
   direction: ltr !important;

@@ -798,9 +798,12 @@ class App extends React.Component {
       }
     });
     let showMasseges = showMassegesUnRead.concat(showMassegesRead);
-
+    let minwidth = "0px";
+    if (window.location.href.includes("/#/all-orders")) {
+      minwidth = "740px";
+    }
     return (
-      <div className="App">
+      <div className="App" style={{ minWidth: minwidth }}>
         <FullPageLoader
           LoaderVisibilty={this.state.LoaderVisibilty}
         ></FullPageLoader>
@@ -825,7 +828,6 @@ class App extends React.Component {
             {showMasseges}
           </ul>
 
-          {messagesButton}
           <MyNavBar
             me={this.state.me}
             payedOrders={this.state.payedOrders}
@@ -845,6 +847,8 @@ class App extends React.Component {
             activeAccount={this.state.activeAccount}
             loginPostData={this.loginPostData}
           ></MyNavBar>
+          {messagesButton}
+
           <Route exact path="/">
             <HomePage
               userDevice={this.state.userDevice}
@@ -1051,6 +1055,8 @@ class App extends React.Component {
           </Route>
           <Route exact path="/all-orders">
             <AllOrders
+              myContacts={this.state.myContacts}
+              screenWidth={this.state.screenWidth}
               payedOrders={this.state.payedOrders}
               fulfilledOrders={this.state.fulfilledOrders}
               sellerApprovedOrders={this.state.sellerApprovedOrders}

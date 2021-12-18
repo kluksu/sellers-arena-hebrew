@@ -17,6 +17,7 @@ class AllOrders extends Component {
       activeOrders: [],
       startDate: new Date(),
       endDate: new Date(),
+      selectedAccountID: "",
     };
   }
   handleSelect = (ranges) => {
@@ -45,12 +46,20 @@ class AllOrders extends Component {
       this.props.activeAccount.account_type == 2
         ? "my-account-orders"
         : "supplier-orders";
-    endDate = `${JSON.stringify(endDate).substring(1, 11)}T00%3a00%3a00`;
+    let buyerOrSeller =
+      this.props.activeAccount.account_type == 3
+        ? `&buyer_account=${this.state.selectedAccountID}`
+        : `&seller_account=${this.state.selectedAccountID}`;
+    let newEndDate = new Date();
+    newEndDate.setDate(endDate.getDate() + 1);
+    let newStartDate = new Date();
+    newStartDate.setDate(startDate.getDate() + 1);
+    endDate = `${JSON.stringify(newEndDate).substring(1, 11)}T00%3a00%3a00`;
     startDate = `${JSON.stringify(startDate).substring(1, 11)}T00%3a00%3a00`;
     console.log(startDate);
     axios
       .get(
-        `${domain}/${path}/?&submitted_at__gte=${startDate}&submitted_at__lte=${endDate}&order_status=${status}`,
+        `${domain}/${path}/?&submitted_at__gte=${startDate}&submitted_at__lte=${endDate}&order_status=${status}${buyerOrSeller}`,
         config
       )
       .then((data) => {
@@ -64,6 +73,7 @@ class AllOrders extends Component {
   };
   componentDidUpdate(prevProps, prevState) {
     if (
+      this.state.selectedAccountID !== prevState.selectedAccountID ||
       this.state.endDate !== prevState.endDate ||
       this.state.startDate !== prevState.startDate ||
       this.state.selectedOrdersStatus !== prevState.selectedOrdersStatus
@@ -73,7 +83,7 @@ class AllOrders extends Component {
         this.state.selectedOrdersStatus,
         this.state.startDate,
         this.state.endDate,
-        ""
+        this.state.selectedAccountID
       );
     }
     // if (this.state.selectedOrdersStatus !== prevState.selectedOrdersStatus) {
@@ -99,6 +109,18 @@ class AllOrders extends Component {
   // };
   onMount = () => {};
   render() {
+    console.log(this.props.myContacts.results);
+    let contactsArr = [];
+    if (this.props.myContacts && this.props.myContacts.results) {
+      this.props.myContacts.results.forEach((contact) => {
+        console.log(contact.account_contact);
+        contactsArr.push(
+          <option value={contact.account_contact.id}>
+            {contact.account_contact.name}
+          </option>
+        );
+      });
+    }
     let orders = this.state.activeOrders.map((order) => {
       console.log(order);
 
@@ -130,74 +152,65 @@ class AllOrders extends Component {
     });
     return (
       <div className="allOrdersPage">
-        <Row>
-          {/* payedOrders={this.state.payedOrders}
+        {/* payedOrders={this.state.payedOrders}
               fulfilledOrders={this.state.fulfilledOrders}
               sellerApprovedOrders={this.state.sellerApprovedOrders}
-              MySupplierOrders={this.state.MySupplierOrders} */}
-          <Col>
-            {" "}
-            <MyDateRange
-              handleSelect={this.handleSelect}
-              startDate={this.state.startDate}
-              endDate={this.state.endDate}
-            ></MyDateRange>
-          </Col>
-          <Col>
-            <Form.Group controlId="exampleForm.ControlSelect1">
-              <Form.Control
-                aria-label="Default select example"
-                onChange={this.handleChange}
-                name="selectedOrdersStatus"
-                as="select"
-              >
-                <option value={""}>כל ההזמנות </option>
+              MySupplierOrders={this.state.MySupplierOrders} */}{" "}
+        <MyDateRange
+          handleSelect={this.handleSelect}
+          startDate={this.state.startDate}
+          endDate={this.state.endDate}
+        ></MyDateRange>
+        <Form.Group controlId="exampleForm.ControlSelect1">
+          <Form.Control
+            aria-label="Default select example"
+            onChange={this.handleChange}
+            name="selectedAccountID"
+            as="select"
+          >
+            <option value={""}>
+              כל{" "}
+              {this.props.activeAccount &&
+              this.props.activeAccount.account_type == 3
+                ? "החנויות"
+                : "הספקים"}{" "}
+            </option>
+            {contactsArr}
+          </Form.Control>
+        </Form.Group>
+        <Form.Group controlId="exampleForm.ControlSelect1">
+          <Form.Control
+            aria-label="Default select example"
+            onChange={this.handleChange}
+            name="selectedOrdersStatus"
+            as="select"
+          >
+            <option value={""}>כל ההזמנות </option>
 
-                <option value={"submitted"}>הזמנות מחכות לאישור</option>
-                <option value={"seller_approved"}>הזמנות לפני משלוח</option>
-                <option value={"filled"}>הזמנות שנשלחו</option>
-                <option value={"payed"}>הזמנות ששולמו</option>
-              </Form.Control>
-            </Form.Group>
-            <Table hover className="transactionsList">
-              <thead>
-                <tr>
-                  <th>מספר הזמנה</th>
-                  <th>תאריך</th>
-                  <th>סטאטוס</th>
-                  <th>נוצרה ע"י</th>
-                  <th>
-                    {" "}
-                    {this.props.activeAccount &&
-                    this.props.activeAccount.account_type == 3
-                      ? "שם קונה"
-                      : "שם מוכר"}
-                  </th>
-                </tr>
-              </thead>
-              <tbody>{orders}</tbody>
-            </Table>
-          </Col>
-          <Col>
-            <Form.Group controlId="exampleForm.ControlSelect1">
-              <Form.Control
-                aria-label="Default select example"
-                onChange={this.handleChange}
-                name="selectedUser"
-                as="select"
-              >
-                <option value={""}>
-                  כל{" "}
-                  {this.props.activeAccount &&
-                  this.props.activeAccount.account_type == 3
-                    ? "החנויות"
-                    : "הספקים"}{" "}
-                </option>
-                options arr
-              </Form.Control>
-            </Form.Group>
-          </Col>
-        </Row>
+            <option value={"submitted"}>הזמנות מחכות לאישור</option>
+            <option value={"seller_approved"}>הזמנות לפני משלוח</option>
+            <option value={"filled"}>הזמנות שנשלחו</option>
+            <option value={"payed"}>הזמנות ששולמו</option>
+          </Form.Control>
+        </Form.Group>
+        <Table hover className="transactionsList">
+          <thead>
+            <tr>
+              <th>מספר הזמנה</th>
+              <th>תאריך</th>
+              <th>סטאטוס</th>
+              <th>נוצרה ע"י</th>
+              <th>
+                {" "}
+                {this.props.activeAccount &&
+                this.props.activeAccount.account_type == 3
+                  ? "שם קונה"
+                  : "שם מוכר"}
+              </th>
+            </tr>
+          </thead>
+          <tbody>{orders}</tbody>
+        </Table>
       </div>
     );
   }
