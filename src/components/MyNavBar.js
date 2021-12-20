@@ -55,9 +55,7 @@ class MyNavBar extends React.Component {
   openMessagesBoardModal = () => {
     this.setState({ isMessageBoardOpen: true });
   };
-  getAccount = (id) => {
-    return axios.get(`${domain}/public-accounts/${id}/`);
-  };
+
   deleteCartAndCloseModal = () => {
     this.props.deleteCart(this.state.modalDeleteItem.id);
     this.closeModal();
@@ -216,7 +214,7 @@ class MyNavBar extends React.Component {
     }
     if (this.props.MyShoppingCarts) {
       this.props.MyShoppingCarts.forEach((cart) => {
-        this.getAccount(cart.buyer_account).then((res) => {
+        this.props.getAccount(cart.buyer_account).then((res) => {
           cartDropDown.push(
             <NavDropdown.Item href={`/#/StorePage/${cart.seller_account}`}>
               {res.data.name}{" "}

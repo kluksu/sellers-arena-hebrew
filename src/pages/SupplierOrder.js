@@ -6,6 +6,9 @@ import { Button, Form, Container, Col, Row } from "react-bootstrap";
 import { delivered, domain, postData } from "../components/utils";
 import FullPageLoader from "../components/FullPageLoader";
 import DiscountModal from "../components/DiscountModal";
+import DetailsOnOrderSeller from "../components/DetailsOnOrderSeller";
+import detailsOnOrderBuyer from "../components/DetailsOnOrderBuyer";
+import DetailsOnOrderBuyer from "../components/DetailsOnOrderBuyer";
 
 class SupplierOrder extends React.Component {
   constructor(props) {
@@ -276,6 +279,7 @@ class SupplierOrder extends React.Component {
 
   render() {
     let headlineSize = this.props.screenWidth > 650 ? "60px" : "20px";
+
     let isChangable = this.state.activeCartStatus !== "filled" ? true : false;
     let discountForm =
       this.state.activeCartStatus === "submitted" ||
@@ -446,37 +450,12 @@ class SupplierOrder extends React.Component {
             הדפס
           </Button>
           <Container fluid className="orderSummeryContainer">
-            <h1>
-              {/* {this.state.activeCartStatus} */}
-              {this.state.activeCartStatus === "filled"
-                ? "נשלחה"
-                : null || this.state.activeCartStatus === "seller_approved"
-                ? "מחכה למשלוח"
-                : null || this.state.activeCartStatus === "submitted"
-                ? " מחכה לאישור"
-                : null}
-            </h1>
-            <div className="sellerInfoContainer">
-              <span style={{ fontSize: headlineSize }}>
-                {" "}
-                {this.props.activeAccount.name}
-              </span>
-              <div>
-                {" "}
-                <div> מספר הזמנה {this.props.match.params.id}</div>
-                <span>
-                  {this.props.activeAccount.store_address}{" "}
-                  {this.props.activeAccount.phone_number}{" "}
-                </span>
-                <span>
-                  {" "}
-                  {`   תאריך :${this.state.activeOrder.submitted_at
-                    .replace("T", " ")
-                    .slice(0, 19)}    `}{" "}
-                </span>
-              </div>
-              <div> {`  ח"פ: ${this.props.activeAccount.tax_id}`}</div>
-            </div>
+            <DetailsOnOrderSeller
+              activeAccount={this.props.activeAccount}
+              orderID={this.props.match.params.id}
+              activeOrder={this.state.activeOrder}
+              activeCartStatus={this.props.activeCartStatus}
+            ></DetailsOnOrderSeller>
             <OrderInfo
               screenWidth={this.props.screenWidth}
               activateStageChangesButton={this.activateStageChangesButton}
@@ -497,9 +476,12 @@ class SupplierOrder extends React.Component {
                 שמור שינויים
               </Button>
             ) : null}
-
-            <div className="sellerInfoContainer">
-              <span> {this.state.buyer.name}</span>
+            <DetailsOnOrderBuyer buyer={this.state.buyer}></DetailsOnOrderBuyer>
+            {/* <div className="sellerInfoContainer">
+              <span style={{ fontSize: headlineSize }}>
+                {" "}
+                {this.state.buyer.name}
+              </span>
               <div>
                 {" "}
                 <span>
@@ -509,7 +491,7 @@ class SupplierOrder extends React.Component {
               </div>
 
               <div> {`ח"פ:${this.state.buyer.tax_id}  `}</div>
-            </div>
+            </div> */}
 
             <div className="directions no-print">
               <a

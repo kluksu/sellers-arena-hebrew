@@ -1,6 +1,8 @@
 import axios from "axios";
+import { get } from "lodash";
 import React, { Component } from "react";
 import { Col, Form, Row, Table } from "react-bootstrap";
+import DetailsOnOrderSeller from "../components/DetailsOnOrderSeller";
 import MyDateRange from "../components/MyDateRange";
 import { domain } from "../components/utils";
 
@@ -9,6 +11,8 @@ class AllOrders extends Component {
     super(props);
     this.state = {
       selectedOrdersStatus: "",
+      paymentStatus: "",
+
       MySupplierOrders: [],
       sellerApprovedOrders: [],
       fulfilledOrders: [],
@@ -18,6 +22,7 @@ class AllOrders extends Component {
       startDate: new Date(),
       endDate: new Date(),
       selectedAccountID: "",
+      fromTodate: "",
     };
   }
   handleSelect = (ranges) => {
@@ -27,6 +32,8 @@ class AllOrders extends Component {
     });
   };
   getFilteredOrders = (status, startDate, endDate, otherAccount) => {
+    let statusPath =
+      status === "unpaid" || "paid" ? "payment_status=" : "order_status=";
     const authorization = !this.props.accessToken
       ? null
       : `Bearer ${this.props.accessToken}`;
@@ -53,12 +60,15 @@ class AllOrders extends Component {
     newEndDate.setDate(endDate.getDate() + 1);
     let newStartDate = new Date();
     newStartDate.setDate(startDate.getDate() + 1);
-    endDate = `${JSON.stringify(newEndDate).substring(1, 11)}T00%3a00%3a00`;
-    startDate = `${JSON.stringify(startDate).substring(1, 11)}T23%3a59%3a59`;
+
+    endDate = `${JSON.stringify(newEndDate).substring(1, 11)}`;
+    startDate = `${JSON.stringify(startDate).substring(1, 11)}`;
+    this.setState({ fromTodate: `${startDate} - ${endDate}` });
+
     console.log(startDate);
     axios
       .get(
-        `${domain}/${path}/?&submitted_at__gte=${startDate}&submitted_at__lte=${endDate}&order_status=${status}${buyerOrSeller}`,
+        `${domain}/${path}/?&submitted_at__gte=${startDate}T23%3a59%3a59&submitted_at__lte=${endDate}T00%3a00%3a00&${statusPath}${status}${buyerOrSeller}`,
         config
       )
       .then((data) => {
@@ -71,6 +81,15 @@ class AllOrders extends Component {
       });
   };
   componentDidUpdate(prevProps, prevState) {
+    if (this.state.payment_status !== prevState.payment_status) {
+      console.log(this.state.payment_status);
+    }
+    if (this.state.selectedAccountID !== prevState.selectedAccountID) {
+      this.props.getAccount(this.state.selectedAccountID).then((res) => {
+        this.setState({ selectedAccount: res.data });
+        console.log(res.data);
+      });
+    }
     if (
       this.state.selectedAccountID !== prevState.selectedAccountID ||
       this.state.endDate !== prevState.endDate ||
@@ -148,6 +167,7 @@ class AllOrders extends Component {
             {`${order.submitted_at.replace("T", " ").slice(0, 19)}    `} {}
           </td>
           <td>{order.order_status}</td>
+          <td>{order.payment_status}</td>
           <td>{order.user}</td>
           <td>
             {this.props.activeAccount &&
@@ -200,15 +220,71 @@ class AllOrders extends Component {
             <option value={"submitted"}>הזמנות מחכות לאישור</option>
             <option value={"seller_approved"}>הזמנות לפני משלוח</option>
             <option value={"filled"}>הזמנות שנשלחו</option>
-            {/* <option value={"payed"}>הזמנות ששולמו</option> */}
+            <option value={"unpaid"}> לא שולמו</option>
+            <option value={"payment_received"}> שולמו</option>
           </Form.Control>
+          <br></br>
+          <Form.Group
+            name="paymentStatus"
+            onChange={this.handleChange}
+            className="mb-3"
+          >
+            <Form.Label></Form.Label>
+            <Form.Check
+              onChange={this.handleChange}
+              inline
+              type="radio"
+              label="הכל"
+              name="paymentStatus"
+              id="formHorizontalRadios1"
+              value={""}
+            />
+            <Form.Check
+              onChange={this.handleChange}
+              inline
+              type="radio"
+              label="שולם"
+              name="paymentStatus"
+              id="formHorizontalRadios1"
+              value={"payment_received"}
+            />
+            <Form.Check
+              inline
+              onChange={this.handleChange}
+              inline
+              type="radio"
+              label="לא שולם"
+              name="paymentStatus"
+              value={"unpaid"}
+              id="formHorizontalRadios2"
+            />
+          </Form.Group>
         </Form.Group>
+        <br></br>
+        {this.props.activeAccount &&
+        this.props.activeAccount.account_type == 3 &&
+        this.state.selectedAccountID !== "" &&
+        this.state.selectedAccount ? (
+          <div className="ordersInfoPageUserInfo">
+            <div> {JSON.stringify(new Date()).substring(1, 11)}</div>
+
+            <h1 style={{ margin: "auto" }}>דוח חייבים </h1>
+            <div>{`${this.state.fromTodate}`}</div>
+            <span>{` מספר חשבון : ${this.state.selectedAccountID} `}</span>
+
+            <span>{`    שם : ${this.state.selectedAccount.name} `}</span>
+            <br></br>
+            <span>חפ : {this.state.selectedAccount.tax_id}</span>
+            <span>כתובת : {this.state.selectedAccount.store_address}</span>
+          </div>
+        ) : null}
         <Table hover className="transactionsList">
           <thead>
             <tr>
               <th>מספר הזמנה</th>
               <th>תאריך</th>
-              <th>סטאטוס</th>
+              <th> סטאטוס משלוח</th>
+              <th>סטאטוס תשלום</th>
               <th>נוצרה ע"י</th>
 
               <th>

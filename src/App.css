@@ -325,6 +325,7 @@ label.form-label {
   width: 100%;
   margin: auto;
   overflow: scroll;
+  margin-bottom: 400px;
 }
 /* @media only screen and (max-width: 600px) {
   .allOrdersPage .table {
@@ -1297,6 +1298,14 @@ input {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  transform: scale(0.7);
+}
+.ordersInfoPageUserInfo {
+  /* text-align: right; */
+}
+.ordersInfoPageUserInfo span,
+.ordersInfoPageUserInfo div {
+  margin: 20px;
 }
 .directions a {
   margin: 5px;

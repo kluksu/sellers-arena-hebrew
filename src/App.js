@@ -95,6 +95,9 @@ class App extends React.Component {
       allMessages: [],
     };
   }
+  getAccount = (id) => {
+    return axios.get(`${domain}/public-accounts/${id}/`);
+  };
   getContactsMesssageBoard = () => {
     let allMessages = [];
     this.state.myContacts.results.forEach((contact) => {
@@ -185,8 +188,8 @@ class App extends React.Component {
   getAllOrders = () => {
     this.getOrders("submitted", "MySupplierOrders");
     this.getOrders("seller_approved", "sellerApprovedOrders");
-    this.getOrders("filled", "fulfilledOrders");
-    this.getOrders("payed", "payedOrders");
+    this.getOrders("unpaid", "fulfilledOrders");
+    // this.getOrders("unpayd", "u");
   };
   markOrderAs = (orderID, status) => {
     let statusName = status === "fill" ? "delivered" : "";
@@ -535,6 +538,7 @@ class App extends React.Component {
     return axios.get(`${domain}/my-account-orders/${orderID}`, config);
   };
   getOrders = (status, state) => {
+    let path = status === "unpaid" ? "payment_status=" : "order_status=";
     const authorization = !this.state.accessToken
       ? null
       : `Bearer ${this.state.accessToken}`;
@@ -546,7 +550,7 @@ class App extends React.Component {
         ? "supplier-orders"
         : "my-account-orders";
     axios
-      .get(`${domain}/${BuyerSeller}/?order_status=${status}`, config)
+      .get(`${domain}/${BuyerSeller}/?${path}${status}`, config)
       .then((data) => {
         if (data.status == 200) {
           console.log(data.data.results);
@@ -833,6 +837,7 @@ class App extends React.Component {
           </ul>
 
           <MyNavBar
+            getAccount={this.getAccount}
             screenWidth={this.state.screenWidth}
             me={this.state.me}
             payedOrders={this.state.payedOrders}
@@ -1066,6 +1071,7 @@ class App extends React.Component {
           </Route>
           <Route exact path="/all-orders">
             <AllOrders
+              getAccount={this.getAccount}
               myContacts={this.state.myContacts}
               screenWidth={this.state.screenWidth}
               payedOrders={this.state.payedOrders}
