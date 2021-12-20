@@ -6,32 +6,50 @@ import { logo, logoWithText } from "./utils";
 export default class Search extends Component {
   render() {
     // let ticker =
-    // this.props.screenWidth > 800 ? (
-    //   <Ticker mode="chain" className="ticker" direction={"toLeft"}>
-    //     {({ index }) => (
-    //       <>
-    //         <p
-    //           style={{
-    //             color: " #ffffff",
-    //             opacity: 4,
-    //             fontSize: "0.1px",
-    //           }}
-    //         >
-    //           {index}
-    //         </p>{" "}
-    //         <img src="https://cdn.pixabay.com/photo/2017/09/07/22/35/lipstick-2726998_960_720.png"></img>
-    //         <img src="https://cdn.pixabay.com/photo/2016/06/18/16/30/bread-1465232_960_720.png"></img>
-    //         <img src="https://cdn.pixabay.com/photo/2016/11/29/08/41/apple-1868496_960_720.jpg"></img>
-    //         <img src="https://cdn.pixabay.com/photo/2016/12/09/11/33/smartphone-1894723_960_720.jpg"></img>
-    //         <img src="https://cdn.pixabay.com/photo/2014/08/29/14/53/camera-431119_960_720.jpg"></img>
-    //         <img src="https://cdn.pixabay.com/photo/2016/11/20/08/03/cactus-1842095_960_720.jpg"></img>
-    //         <img src="https://cdn.pixabay.com/photo/2017/12/05/20/43/spring-3000336_960_720.png"></img>
-    //         <img src="https://cdn.pixabay.com/photo/2017/12/20/21/42/gift-3030693_960_720.png"></img>
-    //         <img src="https://cdn.pixabay.com/photo/2018/03/09/15/57/brush-3211835_960_720.png"></img>{" "}
-    //       </>
-    //     )}
-    //   </Ticker>
-    // ) : null;
+    //   this.props.screenWidth > 800 ? (
+    //     <Ticker mode="chain" className="ticker" direction={"toLeft"}>
+    //       {({ index }) => (
+    //         <>
+    //           <p
+    //             style={{
+    //               color: " #ffffff",
+    //               opacity: 4,
+    //               fontSize: "0.1px",
+    //             }}
+    //           >
+    //             {index}
+    //             <span>
+    //               <img src="https://cdn.pixabay.com/photo/2017/09/07/22/35/lipstick-2726998_960_720.png"></img>
+    //             </span>{" "}
+    //             <span>
+    //               <img src="https://cdn.pixabay.com/photo/2016/06/18/16/30/bread-1465232_960_720.png"></img>
+    //             </span>{" "}
+    //             <span>
+    //               <img src="https://cdn.pixabay.com/photo/2016/11/29/08/41/apple-1868496_960_720.jpg"></img>
+    //             </span>{" "}
+    //             <span>
+    //               <img src="https://cdn.pixabay.com/photo/2016/12/09/11/33/smartphone-1894723_960_720.jpg"></img>
+    //             </span>
+    //             <span>
+    //               <img src="https://cdn.pixabay.com/photo/2014/08/29/14/53/camera-431119_960_720.jpg"></img>
+    //             </span>{" "}
+    //             <span>
+    //               <img src="https://cdn.pixabay.com/photo/2016/11/20/08/03/cactus-1842095_960_720.jpg"></img>
+    //             </span>{" "}
+    //             <span>
+    //               <img src="https://cdn.pixabay.com/photo/2017/12/05/20/43/spring-3000336_960_720.png"></img>
+    //             </span>{" "}
+    //             <span>
+    //               <img src="https://cdn.pixabay.com/photo/2017/12/20/21/42/gift-3030693_960_720.png"></img>
+    //             </span>{" "}
+    //             <span>
+    //               <img src="https://cdn.pixabay.com/photo/2018/03/09/15/57/brush-3211835_960_720.png"></img>{" "}
+    //             </span>
+    //           </p>{" "}
+    //         </>
+    //       )}
+    //     </Ticker>
+    //   ) : null;
     let searchLogo = this.props.screenWidth < 1300 ? "" : logoWithText;
     searchLogo = this.props.screenWidth < 650 ? "" : searchLogo;
     let storeCategoriesButtons = [];

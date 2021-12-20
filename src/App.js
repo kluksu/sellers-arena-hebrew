@@ -798,16 +798,20 @@ class App extends React.Component {
       }
     });
     let showMasseges = showMassegesUnRead.concat(showMassegesRead);
-    let minwidth = "0px";
-    if (window.location.href.includes("/#/all-orders")) {
-      minwidth = "740px";
-    }
+    // let minwidth = "0px";
+    // if (
+    //   window.location.href.includes("/#/all-orders") ||
+    //   window.location.href.includes("/#/control_panel/manage_orders")
+    // ) {
+    //   minwidth = "740px";
+    // }
     return (
-      <div className="App" style={{ minWidth: minwidth }}>
+      <div className="App">
         <FullPageLoader
           LoaderVisibilty={this.state.LoaderVisibilty}
         ></FullPageLoader>
         <AccountNotActive
+          activeAccount={this.state.activeAccount}
           is_active={
             this.state.activeAccount ? this.state.activeAccount.is_active : null
           }
@@ -829,6 +833,7 @@ class App extends React.Component {
           </ul>
 
           <MyNavBar
+            screenWidth={this.state.screenWidth}
             me={this.state.me}
             payedOrders={this.state.payedOrders}
             fulfilledOrders={this.state.fulfilledOrders}
@@ -1009,8 +1014,14 @@ class App extends React.Component {
 
           <Route exact path="/control_panel/">
             <ControlPanel
-              accessToken={this.state.accessToken}
+              myContacts={this.state.myContacts}
+              screenWidth={this.state.screenWidth}
+              payedOrders={this.state.payedOrders}
+              fulfilledOrders={this.state.fulfilledOrders}
+              sellerApprovedOrders={this.state.sellerApprovedOrders}
+              MySupplierOrders={this.state.MySupplierOrders}
               activeAccount={this.state.activeAccount}
+              accessToken={this.state.accessToken}
             ></ControlPanel>
           </Route>
           <Route exact path="/control_panel/:name">

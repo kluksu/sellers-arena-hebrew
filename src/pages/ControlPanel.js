@@ -16,6 +16,7 @@ import ManageOrders from "../components/ManageOrders";
 import { domain, getData } from "../components/utils";
 import FullPageLoader from "../components/FullPageLoader";
 import AddUnregisterdAccount from "../components/AddUnregisterdAccount";
+import AllOrders from "./AllOrders";
 
 class ControlPanel extends React.Component {
   constructor(props) {
@@ -120,7 +121,17 @@ class ControlPanel extends React.Component {
             ></ManageUsers>
           </Route>
           <Route exact path="/control_panel/manage_orders/">
-            <ManageOrders></ManageOrders>
+            {/* <ManageOrders></ManageOrders> */}
+            <AllOrders
+              myContacts={this.props.myContacts}
+              screenWidth={this.props.screenWidth}
+              payedOrders={this.props.payedOrders}
+              fulfilledOrders={this.props.fulfilledOrders}
+              sellerApprovedOrders={this.props.sellerApprovedOrders}
+              MySupplierOrders={this.props.MySupplierOrders}
+              activeAccount={this.props.activeAccount}
+              accessToken={this.props.accessToken}
+            ></AllOrders>
           </Route>
           <Route exact path="/control_panel/manage_clients/">
             <AddUnregisterdAccount

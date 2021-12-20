@@ -28,6 +28,7 @@ body {
   margin-top: 6.75rem !important;
   min-width: 300px;
 }
+
 .modal {
   /* direction: rtl; */
 }
@@ -320,7 +321,18 @@ label.form-label {
   padding-top: 100px;
   margin-bottom: 50px;
   overflow: hidden;
+  background: white;
+  width: 100%;
+  margin: auto;
+  overflow: scroll;
 }
+/* @media only screen and (max-width: 600px) {
+  .allOrdersPage .table {
+    transform: scale(0.5);
+    margin: auto;
+  }
+} */
+
 .rdrStaticRangeLabel {
   text-align: center !important;
 }
@@ -747,8 +759,8 @@ input {
     rgb(217, 233, 230) 46%,
     rgb(160, 247, 238) 70%
   ); */
-  background: teal;
-  padding: 20px;
+  /* background: teal; */
+  /* padding: 20px; */
   margin-top: 86px;
 }
 .ControlPanelPage .registerPage {
@@ -880,7 +892,7 @@ input {
   transform: translate(-50%, -50%);
 }
 .notActiveMessageContainer {
-  z-index: 100000000000;
+  z-index: 1000;
 
   position: fixed;
   background: rgba(255, 255, 255, 0.493);

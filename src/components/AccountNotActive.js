@@ -1,9 +1,12 @@
+import { object } from "prop-types";
 import React, { Component } from "react";
 
 export default class AccountNotActive extends Component {
   render() {
+    console.log(this.props.activeAccount);
     let accountNotActive =
-      this.props.is_active === false ? (
+      this.props.is_active === false ||
+      typeof this.props.activeAccount !== "object" ? (
         <div className="notActiveMessageContainer">
           {" "}
           <div className="notActiveMessage">

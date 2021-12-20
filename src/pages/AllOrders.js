@@ -21,7 +21,6 @@ class AllOrders extends Component {
     };
   }
   handleSelect = (ranges) => {
-    console.log(ranges.selection.startDate, ranges.selection.endDate);
     this.setState({
       startDate: ranges.selection.startDate,
       endDate: ranges.selection.endDate,
@@ -55,7 +54,7 @@ class AllOrders extends Component {
     let newStartDate = new Date();
     newStartDate.setDate(startDate.getDate() + 1);
     endDate = `${JSON.stringify(newEndDate).substring(1, 11)}T00%3a00%3a00`;
-    startDate = `${JSON.stringify(startDate).substring(1, 11)}T00%3a00%3a00`;
+    startDate = `${JSON.stringify(startDate).substring(1, 11)}T23%3a59%3a59`;
     console.log(startDate);
     axios
       .get(
@@ -109,11 +108,11 @@ class AllOrders extends Component {
   // };
   onMount = () => {};
   render() {
-    console.log(this.props.myContacts.results);
+    let totalSumBefore = 0;
+    let totalSumAfter = 0;
     let contactsArr = [];
     if (this.props.myContacts && this.props.myContacts.results) {
       this.props.myContacts.results.forEach((contact) => {
-        console.log(contact.account_contact);
         contactsArr.push(
           <option value={contact.account_contact.id}>
             {contact.account_contact.name}
@@ -122,7 +121,16 @@ class AllOrders extends Component {
       });
     }
     let orders = this.state.activeOrders.map((order) => {
-      console.log(order);
+      let orderSumBefore =
+        order.seller_edited_snapshot !== null
+          ? order.seller_edited_snapshot.total_price_before_tax
+          : order.cart_snapshot.total_price_before_tax;
+      totalSumBefore = totalSumBefore + orderSumBefore;
+      let orderSum =
+        order.seller_edited_snapshot !== null
+          ? order.seller_edited_snapshot.total_price_after_tax
+          : order.cart_snapshot.total_price_after_tax;
+      totalSumAfter = totalSumAfter + orderSum;
 
       return (
         <tr
@@ -147,6 +155,8 @@ class AllOrders extends Component {
               ? order.buyer_account.name
               : order.seller_account.name}
           </td>
+          <td>{orderSumBefore}</td>
+          <td>{orderSum}</td>
         </tr>
       );
     });
@@ -190,7 +200,7 @@ class AllOrders extends Component {
             <option value={"submitted"}>הזמנות מחכות לאישור</option>
             <option value={"seller_approved"}>הזמנות לפני משלוח</option>
             <option value={"filled"}>הזמנות שנשלחו</option>
-            <option value={"payed"}>הזמנות ששולמו</option>
+            {/* <option value={"payed"}>הזמנות ששולמו</option> */}
           </Form.Control>
         </Form.Group>
         <Table hover className="transactionsList">
@@ -200,6 +210,7 @@ class AllOrders extends Component {
               <th>תאריך</th>
               <th>סטאטוס</th>
               <th>נוצרה ע"י</th>
+
               <th>
                 {" "}
                 {this.props.activeAccount &&
@@ -207,9 +218,22 @@ class AllOrders extends Component {
                   ? "שם קונה"
                   : "שם מוכר"}
               </th>
+              <th> סכום לפני מע"מ</th>
+
+              <th> סכום לאחר מע"מ</th>
             </tr>
           </thead>
-          <tbody>{orders}</tbody>
+          <tbody>
+            {orders}
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>{totalSumBefore}</td> <td>{totalSumAfter}</td>
+            </tr>
+          </tbody>
         </Table>
       </div>
     );
