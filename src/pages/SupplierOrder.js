@@ -161,6 +161,7 @@ class SupplierOrder extends React.Component {
             <p className="FormRejects">בבקשה ספק סיבה</p>
           </>,
           <Button
+            className="  no-print"
             variant="danger"
             onClick={() => this.acceptAbortOrder("", "reject")}
           >
@@ -304,13 +305,14 @@ class SupplierOrder extends React.Component {
       buttons = (
         <>
           <Button
+            className="  no-print"
             variant="success"
-            className=""
             onClick={() =>
               this.openModal(
                 "שים לב!",
                 `  אתה עומד להעניק הנחה בגובה ${this.state.discountPrecentage}% האם להמשיך? `,
                 <Button
+                  className="  no-print"
                   variant="success"
                   onClick={() =>
                     this.createOrderDiscount(this.state.discountPrecentage)
@@ -357,6 +359,7 @@ class SupplierOrder extends React.Component {
                   </Form.Group>
                 </>,
                 <Button
+                  className="  no-print"
                   variant="danger"
                   onClick={() => this.acceptAbortOrder("", "reject")}
                 >
@@ -365,6 +368,7 @@ class SupplierOrder extends React.Component {
                 </Button>
               )
             }
+            className="  no-print"
             type="button"
             variant="danger"
           >
@@ -376,7 +380,7 @@ class SupplierOrder extends React.Component {
       buttons = (
         <>
           <Button
-            className="w-70"
+            className="w-70  no-print"
             variant="success"
             onClick={() =>
               this.createOrderDiscount(this.state.discountPrecentage)
@@ -470,6 +474,7 @@ class SupplierOrder extends React.Component {
             ></OrderInfo>
             {this.state.activeCartStatus !== "filled" ? (
               <Button
+                className=" printButton no-print"
                 onClick={this.editItem}
                 disabled={this.state.isStageChangeButtonDisabled}
               >

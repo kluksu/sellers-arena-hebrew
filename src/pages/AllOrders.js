@@ -23,6 +23,8 @@ class AllOrders extends Component {
       endDate: new Date(),
       selectedAccountID: "",
       fromTodate: "",
+      paid: "",
+      unpaid: "",
     };
   }
   handleSelect = (ranges) => {
@@ -32,8 +34,6 @@ class AllOrders extends Component {
     });
   };
   getFilteredOrders = (status, startDate, endDate, otherAccount) => {
-    let statusPath =
-      status === "unpaid" || "paid" ? "payment_status=" : "order_status=";
     const authorization = !this.props.accessToken
       ? null
       : `Bearer ${this.props.accessToken}`;
@@ -68,7 +68,7 @@ class AllOrders extends Component {
     console.log(startDate);
     axios
       .get(
-        `${domain}/${path}/?&submitted_at__gte=${startDate}T23%3a59%3a59&submitted_at__lte=${endDate}T00%3a00%3a00&${statusPath}${status}${buyerOrSeller}`,
+        `${domain}/${path}/?&submitted_at__gte=${startDate}T23%3a59%3a59&submitted_at__lte=${endDate}T00%3a00%3a00&order_status=${status}${buyerOrSeller}&payment_status=${this.state.paymentStatus}`,
         config
       )
       .then((data) => {
@@ -81,8 +81,8 @@ class AllOrders extends Component {
       });
   };
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.payment_status !== prevState.payment_status) {
-      console.log(this.state.payment_status);
+    if (this.state.paymentStatus !== prevState.paymentStatus) {
+      console.log(this.state.paymentStatus);
     }
     if (this.state.selectedAccountID !== prevState.selectedAccountID) {
       this.props.getAccount(this.state.selectedAccountID).then((res) => {
@@ -94,7 +94,8 @@ class AllOrders extends Component {
       this.state.selectedAccountID !== prevState.selectedAccountID ||
       this.state.endDate !== prevState.endDate ||
       this.state.startDate !== prevState.startDate ||
-      this.state.selectedOrdersStatus !== prevState.selectedOrdersStatus
+      this.state.selectedOrdersStatus !== prevState.selectedOrdersStatus ||
+      this.state.paymentStatus !== prevState.paymentStatus
     ) {
       console.log(this.state.startDate);
       this.getFilteredOrders(
@@ -111,6 +112,7 @@ class AllOrders extends Component {
   }
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
+    console.log(event.target.name);
   };
   // chooseOrdersStatus = () => {
   //   if (this.state.selectedOrdersStatus === "all") {
@@ -224,21 +226,9 @@ class AllOrders extends Component {
             <option value={"payment_received"}> שולמו</option>
           </Form.Control>
           <br></br>
-          <Form.Group
-            name="paymentStatus"
-            onChange={this.handleChange}
-            className="mb-3"
-          >
+          <Form.Group>
             <Form.Label></Form.Label>
-            <Form.Check
-              onChange={this.handleChange}
-              inline
-              type="radio"
-              label="הכל"
-              name="paymentStatus"
-              id="formHorizontalRadios1"
-              value={""}
-            />
+
             <Form.Check
               onChange={this.handleChange}
               inline
@@ -256,6 +246,16 @@ class AllOrders extends Component {
               label="לא שולם"
               name="paymentStatus"
               value={"unpaid"}
+              id="formHorizontalRadios2"
+            />
+            <Form.Check
+              inline
+              onChange={this.handleChange}
+              inline
+              type="radio"
+              label=" הכל"
+              name="paymentStatus"
+              value={""}
               id="formHorizontalRadios2"
             />
           </Form.Group>
@@ -302,6 +302,7 @@ class AllOrders extends Component {
           <tbody>
             {orders}
             <tr>
+              <td></td>
               <td></td>
               <td></td>
               <td></td>

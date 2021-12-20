@@ -148,7 +148,9 @@ class OrderInfo extends React.Component {
             {variationArr}
 
             <tr>
-              <td>מספר הזמנה </td>
+              {/* <td>מספר הזמנה </td> */}
+              <td></td>
+              <td></td>
               <td>מספר לקוח</td>
 
               <td>מספר מוכר</td>
@@ -159,7 +161,10 @@ class OrderInfo extends React.Component {
               <td>סה"כ</td>
             </tr>
             <tr>
-              <td>{this.props.activeCart.id}</td>
+              {/* <td>{this.props.activeCart.id}</td> */}
+
+              <td> </td>
+              <td> </td>
               <td> {this.props.activeCart.buyer_account}</td>
 
               <td> {this.props.activeCart.seller_account}</td>

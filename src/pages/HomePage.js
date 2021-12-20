@@ -38,6 +38,7 @@ class HomePage extends React.Component {
       previous: "",
       isColapsed: false,
       searchText: "",
+      itemsCount: this.getRandomNumberBetween(1, 300),
     };
   }
   getSearchText = (searchText) => {
@@ -51,48 +52,66 @@ class HomePage extends React.Component {
       this.setState({ isColapsed: false });
     }
   };
+  getRandomNumberBetween = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  };
 
   goToStore = () => {
     //    window.location.assign(`/#/storePage/${}`)
   };
   getItems = () => {
-    const nextfetch =
-      this.state.next !== undefined
-        ? this.state.next
-        : `${domain}/public-items/?limit=3&offset=0`;
+    let random = this.getRandomNumberBetween(1, this.state.itemsCount);
+    console.log(random);
+
+    const nextfetch = `${domain}/public-items/?limit=3&offset=${random}`;
+    // const nextfetch =
+    //   this.state.next !== undefined
+    //     ? `${domain}/public-items/?limit=3&offset=${random}`
+    //     : `${domain}/public-items/?limit=3&offset=${random}`;
+    // this.state.next
     const authorization = !this.props.accessToken
       ? null
       : `Bearer ${this.props.accessToken}`;
     const config = {
       headers: { "Content-Type": "application/json", authorization },
     };
-    axios.get(nextfetch, config).then(
-      (response) => {
-        this.setState({ ipmortedItems: response.data.results });
-        this.setState({ next: response.data.next });
-        for (let i = 0; i < this.state.ipmortedItems.length; i++) {
-          const item = this.state.ipmortedItems[i];
-          axios
-            .get(`${domain}/accounts/${item.id}`, config)
-            .then((response) => {});
-          for (let j = 0; j < item.item_variations.length; j++) {
-            const variation = item.item_variations[j];
+    axios
+      .get(nextfetch, config)
+      .then(
+        (response) => {
+          console.log(response);
+          this.setState({ ipmortedItems: response.data.results });
+          this.setState({ itemsCount: response.data.count });
+          this.setState({ next: response.data.next });
+          for (let i = 0; i < this.state.ipmortedItems.length; i++) {
+            const item = this.state.ipmortedItems[i];
+            // axios
+            //   .get(`${domain}/accounts/${item.id}`, config)
+            //   .then((response) => {});
+            for (let j = 0; j < item.item_variations.length; j++) {
+              const variation = item.item_variations[j];
 
-            this.setState({
-              variations: this.state.variations.concat(variation),
-            });
+              this.setState({
+                variations: this.state.variations.concat(variation),
+              });
 
-            let fullItem = {
-              item: item,
-              variation: variation,
-              image: variation.image,
-            };
-            this.setState({ showList: this.state.showList.concat(fullItem) });
+              let fullItem = {
+                item: item,
+                variation: variation,
+                image: variation.image,
+              };
+              this.setState({ showList: this.state.showList.concat(fullItem) });
+            }
           }
         }
-      },
-      (error) => {}
-    );
+        // () => {
+        //   this.getItems();
+        // }
+      )
+      .catch(() => {
+        console.log("!!!!!!!!!!!!!!!!!!");
+        this.getItems();
+      });
   };
 
   componentDidMount() {
