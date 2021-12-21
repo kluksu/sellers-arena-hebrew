@@ -1,7 +1,7 @@
 import axios from "axios";
 import { get } from "lodash";
 import React, { Component } from "react";
-import { Col, Form, Row, Table } from "react-bootstrap";
+import { Button, Col, Form, Row, Table } from "react-bootstrap";
 import DetailsOnOrderSeller from "../components/DetailsOnOrderSeller";
 import MyDateRange from "../components/MyDateRange";
 import { domain } from "../components/utils";
@@ -193,7 +193,7 @@ class AllOrders extends Component {
           startDate={this.state.startDate}
           endDate={this.state.endDate}
         ></MyDateRange>
-        <Form.Group controlId="exampleForm.ControlSelect1">
+        <Form.Group className="no-print" controlId="exampleForm.ControlSelect1">
           <Form.Control
             aria-label="Default select example"
             onChange={this.handleChange}
@@ -210,7 +210,7 @@ class AllOrders extends Component {
             {contactsArr}
           </Form.Control>
         </Form.Group>
-        <Form.Group controlId="exampleForm.ControlSelect1">
+        <Form.Group className="no-print" controlId="exampleForm.ControlSelect1">
           <Form.Control
             aria-label="Default select example"
             onChange={this.handleChange}
@@ -226,7 +226,7 @@ class AllOrders extends Component {
             <option value={"payment_received"}> שולמו</option>
           </Form.Control>
           <br></br>
-          <Form.Group>
+          <Form.Group className="no-print">
             <Form.Label></Form.Label>
 
             <Form.Check
@@ -266,12 +266,16 @@ class AllOrders extends Component {
         this.state.selectedAccountID !== "" &&
         this.state.selectedAccount ? (
           <div className="ordersInfoPageUserInfo">
-            <div> {JSON.stringify(new Date()).substring(1, 11)}</div>
-
-            <h1 style={{ margin: "auto" }}>דוח חייבים </h1>
+            {/* <span> {JSON.stringify(new Date()).substring(1, 11)}</span> */}
             <div>{`${this.state.fromTodate}`}</div>
+            {this.state.selectedAccount &&
+            this.state.paymentStatus === "unpaid" ? (
+              <span style={{ margin: "auto" }}>דוח חייבים </span>
+            ) : null}{" "}
+            {this.state.selectedAccount && this.state.paymentStatus === "" ? (
+              <span style={{ margin: "auto" }}> פירוט חיובים </span>
+            ) : null}
             <span>{` מספר חשבון : ${this.state.selectedAccountID} `}</span>
-
             <span>{`    שם : ${this.state.selectedAccount.name} `}</span>
             <br></br>
             <span>חפ : {this.state.selectedAccount.tax_id}</span>
@@ -312,6 +316,14 @@ class AllOrders extends Component {
             </tr>
           </tbody>
         </Table>
+        <Button
+          style={{ display: this.props.screenWidth > 650 ? "" : "none" }}
+          className="printButton no-print "
+          onClick={window.print}
+          type="button"
+        >
+          הדפס
+        </Button>
       </div>
     );
   }

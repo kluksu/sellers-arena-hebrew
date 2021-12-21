@@ -10,6 +10,7 @@ export default class MyDateRange extends Component {
     };
     return (
       <DateRangePicker
+        className="no-print"
         ranges={[selectionRange]}
         onChange={this.props.handleSelect}
       />

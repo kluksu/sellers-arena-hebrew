@@ -715,8 +715,24 @@ input {
   border: outset;
   background-color: white;
   /* min-width: 1140px; */
+  width: 2480px;
 }
 @media print {
+  .allOrdersPage {
+    overflow: visible;
+    padding-top: 0px;
+  }
+  html,
+  body {
+    width: 210mm;
+  }
+  .orderSummeryContainer {
+    width: 100%;
+    border: 0px;
+  }
+  .OrderSummeryPage {
+    padding: 0px;
+  }
   .no-print,
   .no-print * {
     display: none !important;
@@ -729,7 +745,13 @@ input {
   width: 100px;
   margin-top: 32px;
 }
-
+.allOrdersPage > .printButton.btn {
+  position: fixed;
+  right: 20px;
+  top: 60px;
+  width: 100px;
+  margin-top: 32px;
+}
 .OrderSummeryPage td {
   border: 0.1px solid black !important;
 }

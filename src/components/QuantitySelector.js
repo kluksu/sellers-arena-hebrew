@@ -106,7 +106,12 @@ export default class QuantitySelector extends Component {
       return (
         <>
           <div className="CardUnitsForm">
-            <Button type="button" variant="primary" onClick={this.addQuantity}>
+            <Button
+              type="button"
+              className="no-print"
+              variant="primary"
+              onClick={this.addQuantity}
+            >
               +
             </Button>
             <Form>
@@ -122,6 +127,7 @@ export default class QuantitySelector extends Component {
               </Form.Group>
             </Form>
             <Button
+              className="no-print"
               type="button"
               variant="primary"
               onClick={this.decreaseQuantity}

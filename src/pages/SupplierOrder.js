@@ -27,6 +27,7 @@ class SupplierOrder extends React.Component {
       modalTop: "",
       modalBottom: "",
       activeOrder: {},
+      copyOriginal: "",
     };
   }
   activateStageChangesButton = () => {
@@ -126,7 +127,11 @@ class SupplierOrder extends React.Component {
     }
   };
 
-  printOrder = () => {
+  printOrder = async () => {
+    await this.setState({ copyOriginal: " תעודת משלוח - העתק" });
+    window.print();
+    await this.setState({ copyOriginal: "תעודת משלוח - מקור " });
+
     window.print();
   };
   acceptAbortOrder = (reject, approve) => {
@@ -445,13 +450,14 @@ class SupplierOrder extends React.Component {
     if (this.state.activeCart !== "") {
       return (
         <div className="OrderSummeryPage">
+          <h1 className="printOnly">{this.state.copyOriginal}</h1>
           <Button
             style={{ display: this.props.screenWidth > 650 ? "" : "none" }}
             className="printButton no-print "
             onClick={this.printOrder}
             type="button"
           >
-            הדפס
+            הדפס תעודת משלוח
           </Button>
           <Container fluid className="orderSummeryContainer">
             <DetailsOnOrderSeller
@@ -482,6 +488,7 @@ class SupplierOrder extends React.Component {
               </Button>
             ) : null}
             <DetailsOnOrderBuyer buyer={this.state.buyer}></DetailsOnOrderBuyer>
+            <div>מקבל הסחורה____________________ חתימה___________________</div>
             {/* <div className="sellerInfoContainer">
               <span style={{ fontSize: headlineSize }}>
                 {" "}
