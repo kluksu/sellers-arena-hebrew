@@ -762,11 +762,11 @@ input {
   font-weight: 700;
 }
 .ControlPanelPage nav.nav-tabs {
-  background-color: rgb(249 238 238);
+  background-color: #f7aa8c;
   border-radius: 5px;
 }
 .ControlPanelPage .nav-item.nav-link:hover {
-  background-color: rgb(226, 221, 221);
+  background-color: rgb(247, 188, 188);
 }
 .ControlPanelPage .nav-item.nav-link.active {
   background-color: rgb(52, 106, 255);
@@ -787,9 +787,10 @@ input {
   margin-top: 86px;
 }
 .ControlPanelPage .registerPage {
-  background-image: none;
+  background: #eaf3ff;
   padding-top: 36px;
   padding-right: 0px;
+  height: 100vh;
 }
 .ControlPanelPage .registerContainer {
   width: 80% !important;

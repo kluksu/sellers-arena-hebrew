@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { Component } from "react";
 import { Button, Form, Container, Col, Row, Tabs } from "react-bootstrap";
-import { getData, postData } from "./utils";
+import { getData, handleKeyDown, postData } from "./utils";
 
 export default class DeleteUserInAccount extends Component {
   constructor(props) {
@@ -38,7 +38,7 @@ export default class DeleteUserInAccount extends Component {
     return (
       <div className="registerPage">
         <Container className="registerContainer">
-          <Form>
+          <Form onKeyDown={(event) => handleKeyDown(event, this.deleteUser)}>
             <Row>
               <Col xl={12}>
                 <Form.Group controlId="exampleForm.ControlSelect1">

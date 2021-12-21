@@ -7,6 +7,7 @@ import {
   domain,
   postData,
   postFormData,
+  handleKeyDown,
 } from "../components/utils";
 import ImageUploader from "react-images-upload";
 import Crop from "../components/Crop";
@@ -187,7 +188,10 @@ class Uploadpage extends React.Component {
     const itemForVerified = '{"price":2,"item":2}';
     return (
       <div className="Uploadpage">
-        <Container className="productUploadContainer">
+        <Container
+          onKeyDown={(event) => handleKeyDown(event, this.uploadItem)}
+          className="productUploadContainer"
+        >
           <p className="FormRejects"> {this.state.responsData.detail}</p>
           <Form>
             <h1>דף העלאת מוצר</h1>

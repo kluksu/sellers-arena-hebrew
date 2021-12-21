@@ -95,6 +95,11 @@ class App extends React.Component {
       allMessages: [],
     };
   }
+  handleKeyDown = (event, refreshCallback) => {
+    if (event.key === "Enter") {
+      refreshCallback();
+    }
+  };
   getAccount = (id) => {
     return axios.get(`${domain}/public-accounts/${id}/`);
   };
@@ -837,6 +842,7 @@ class App extends React.Component {
           </ul>
 
           <MyNavBar
+            handleKeyDown={this.handleKeyDown}
             getAccount={this.getAccount}
             screenWidth={this.state.screenWidth}
             me={this.state.me}

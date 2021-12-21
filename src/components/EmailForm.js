@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import emailjs from "emailjs-com";
 import { Button, Container, Form } from "react-bootstrap";
-import { sendEmailToMe } from "./utils";
+import { handleKeyDown, sendEmailToMe } from "./utils";
 import Recaptcha from "react-recaptcha";
 
 export default class EmailForm extends Component {
@@ -89,7 +89,7 @@ export default class EmailForm extends Component {
         style={{ display: this.props.display }}
         className="connectComponent"
       >
-        <Form>
+        <Form onKeyDown={(event) => handleKeyDown(event, this.sendEmail)}>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label>נושא הפניה</Form.Label>
             <Form.Control

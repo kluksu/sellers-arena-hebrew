@@ -6,7 +6,7 @@ import Crop from "../components/Crop";
 import AddVars from "./addVars";
 import QuantityDiscount from "../components/QuantityDiscount";
 import { withRouter } from "react-router-dom";
-import { domain } from "../components/utils";
+import { domain, handleKeyDown } from "../components/utils";
 
 class EditVariationPage extends React.Component {
   constructor(props) {
@@ -309,7 +309,10 @@ class EditVariationPage extends React.Component {
     }
     return (
       <div className="Uploadpage">
-        <Container className="productUploadContainer">
+        <Container
+          onKeyDown={(event) => handleKeyDown(event, this.uploadVar)}
+          className="productUploadContainer"
+        >
           <Form className="varUploadForm">
             <Row>
               <Col xl={6}>

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider";
-import { postData } from "./utils";
+import { handleKeyDown, postData } from "./utils";
 
 export default class LoginModal extends Component {
   constructor(props) {
@@ -33,7 +33,15 @@ export default class LoginModal extends Component {
     );
 
     return (
-      <Modal show={this.props.isOpen} onHide={this.props.closeModal}>
+      <Modal
+        onKeyDown={(event) =>
+          handleKeyDown(event, () =>
+            this.props.loginPostData(this.state.email, this.state.password)
+          )
+        }
+        show={this.props.isOpen}
+        onHide={this.props.closeModal}
+      >
         <Modal.Header closeButton>
           <Modal.Title>התחבר</Modal.Title>
         </Modal.Header>

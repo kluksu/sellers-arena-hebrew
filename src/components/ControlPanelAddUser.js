@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Col, Row, Form, Button, Container } from "react-bootstrap";
-import { domain, postData } from "./utils";
+import { domain, handleKeyDown, postData } from "./utils";
 
 export default class ControlPanelAddUser extends Component {
   constructor(props) {
@@ -32,7 +32,10 @@ export default class ControlPanelAddUser extends Component {
   render() {
     return (
       <div className="registerPage">
-        <Container className="registerContainer">
+        <Container
+          onKeyDown={(event) => handleKeyDown(event, this.addUser)}
+          className="registerContainer"
+        >
           <Form>
             <Row>
               <Col xl={12}>

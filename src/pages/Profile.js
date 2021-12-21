@@ -1,7 +1,11 @@
 import axios from "axios";
 import React, { Component } from "react";
 import { Button, Container, Form } from "react-bootstrap";
-import { categoriesAndSubCategories, domain } from "../components/utils";
+import {
+  categoriesAndSubCategories,
+  domain,
+  handleKeyDown,
+} from "../components/utils";
 
 export default class Profile extends Component {
   constructor(props) {
@@ -96,7 +100,10 @@ export default class Profile extends Component {
         <>
           {" "}
           <div style={{ marginTop: "70px" }}>
-            <Container style={{ maxWidth: "400px", marginBottom: "100px" }}>
+            <Container
+              onKeyDown={(event) => handleKeyDown(event, this.submitChanges)}
+              style={{ maxWidth: "400px", marginBottom: "100px" }}
+            >
               <Form>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label>שם העסק</Form.Label>

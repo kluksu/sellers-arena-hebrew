@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { Component } from "react";
 import { Button, Col, Container, Form, Row, Tab, Tabs } from "react-bootstrap";
-import { domain } from "./utils";
+import { domain, handleKeyDown } from "./utils";
 
 export default class AddUnregisterdAccount extends Component {
   constructor(props) {
@@ -62,7 +62,12 @@ export default class AddUnregisterdAccount extends Component {
         <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
           <Tab eventKey="" title="צור לקוח">
             <div className="registerPage">
-              <Container className="registerContainer">
+              <Container
+                onKeyDown={(event) =>
+                  handleKeyDown(event, this.createNewClient)
+                }
+                className="registerContainer"
+              >
                 <Form>
                   <Row>
                     <Col xl={12}>

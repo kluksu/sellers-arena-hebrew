@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Button, Container, Form } from "react-bootstrap";
+import { handleKeyDown } from "../components/utils";
 
 export default class RootPage extends Component {
   constructor(props) {
@@ -16,7 +17,16 @@ export default class RootPage extends Component {
   render() {
     return (
       <div className="registerPage">
-        <Container>
+        <Container
+          onKeyDown={(event) =>
+            handleKeyDown(event, () =>
+              this.props.activateDeActivateAccount(
+                this.state.accountToActivate,
+                this.state.activateOrDeActivate
+              )
+            )
+          }
+        >
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label> activate account</Form.Label>
             <Form.Control

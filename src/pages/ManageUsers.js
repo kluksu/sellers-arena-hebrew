@@ -6,6 +6,7 @@ import CreatUserInAccount from "../components/CreatUserInAccount";
 import DeleteUserInAccount from "../components/DeleteUserInAccount";
 import UserPremmitions from "../components/UserPremmitions";
 import { Route } from "react-router-dom";
+import MyUsers from "../components/MyUsers";
 
 export default class ManageUsers extends Component {
   constructor(props) {
@@ -28,6 +29,16 @@ export default class ManageUsers extends Component {
     return (
       <>
         <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
+          <Tab eventKey="myUsers" title=" המשתמשים שלי">
+            <MyUsers
+              myUsers={this.props.myUsers}
+              getMyUsers={this.props.getMyUsers}
+              closeGenericModal={this.props.closeGenericModal}
+              openGenericModal={this.props.openGenericModal}
+              activeAccount={this.props.activeAccount}
+              accessToken={this.props.accessToken}
+            ></MyUsers>
+          </Tab>
           <Tab eventKey="add-user" title=" הוסף משתמש קיים">
             <ControlPanelAddUser
               closeGenericModal={this.props.closeGenericModal}

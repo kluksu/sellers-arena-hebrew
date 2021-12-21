@@ -20,7 +20,7 @@ import { BsPerson } from "react-icons/bs";
 import { MdRemoveShoppingCart } from "react-icons/md";
 import { CgMenuGridR } from "react-icons/cg";
 import { AiOutlineMail } from "react-icons/ai";
-import { domain, logo } from "./utils";
+import { domain, handleKeyDown, logo } from "./utils";
 
 class MyNavBar extends React.Component {
   constructor(props) {
@@ -330,6 +330,7 @@ class MyNavBar extends React.Component {
           </Navbar.Collapse>
         </Navbar>
         <LoginModal
+          handleKeyDown={this.props.handleKeyDown}
           loginData={this.props.loginData}
           loginPostData={this.props.loginPostData}
           isOpen={this.props.isOpen}
@@ -355,7 +356,11 @@ class MyNavBar extends React.Component {
             </Modal.Footer>
           </Modal>
         </>
-        <Modal show={this.state.isMessageBoardOpen} onHide={this.closeModal}>
+        <Modal
+          show={this.state.isMessageBoardOpen}
+          onHide={this.closeModal}
+          onKeyDown={(event) => handleKeyDown(event, this.updateMessageBoard)}
+        >
           <Modal.Header closeButton>
             <Modal.Title>שנה את לוח המודעות</Modal.Title>
           </Modal.Header>

@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import { Container, Form, Button } from "react-bootstrap";
-import { domain, getInfo, handleChange, postData } from "../components/utils";
+import {
+  domain,
+  getInfo,
+  handleChange,
+  handleKeyDown,
+  postData,
+} from "../components/utils";
 
 export default class Register extends Component {
   constructor(props) {
@@ -144,7 +150,9 @@ export default class Register extends Component {
     ) : (
       <>
         {" "}
-        <Form>
+        <Form
+          onKeyDown={(event) => handleKeyDown(event, this.authinticateForm)}
+        >
           <p className="info-p-registerContainer">
             רק משתמשים רשומים יכולים:<br></br>
             -לראות את מרבית המחירים.<br></br>

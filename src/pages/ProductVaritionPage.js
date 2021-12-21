@@ -6,7 +6,7 @@ import Crop from "../components/Crop";
 import AddVars from "./addVars";
 import QuantityDiscount from "../components/QuantityDiscount";
 import { withRouter } from "react-router-dom";
-import { domain } from "../components/utils";
+import { domain, handleKeyDown } from "../components/utils";
 
 class ProductVaritionPage extends React.Component {
   constructor(props) {
@@ -277,7 +277,10 @@ class ProductVaritionPage extends React.Component {
     }
     return (
       <div className="Uploadpage">
-        <Container className="productUploadContainer">
+        <Container
+          onKeyDown={(event) => handleKeyDown(event, this.uploadVar)}
+          className="productUploadContainer"
+        >
           <h1>צור וריאציה</h1>
           <Form className="varUploadForm">
             <Row>

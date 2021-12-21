@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { Component } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
-import { domain } from "./utils";
+import { domain, handleKeyDown } from "./utils";
 
 export default class NewMessageModal extends Component {
   constructor(props) {
@@ -59,7 +59,11 @@ export default class NewMessageModal extends Component {
     }
     return (
       <>
-        <Modal show={this.props.isOpen} onHide={() => this.props.handleClose()}>
+        <Modal
+          show={this.props.isOpen}
+          onHide={() => this.props.handleClose()}
+          onKeyDown={(event) => handleKeyDown(event, this.props.sendMessage)}
+        >
           <Modal.Header closeButton>
             <Modal.Title>
               שלח הודעה ל {this.props.currentStore.name}{" "}

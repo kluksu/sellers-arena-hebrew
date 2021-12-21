@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, Form, Container, Col, Row, Tabs } from "react-bootstrap";
 import FullPageLoader from "./FullPageLoader";
-import { getData } from "./utils";
+import { getData, handleKeyDown } from "./utils";
 
 export default class UserPremmitions extends Component {
   constructor(props) {
@@ -35,7 +35,9 @@ export default class UserPremmitions extends Component {
     return (
       <div className="registerPage">
         <Container className="registerContainer">
-          <Form>
+          <Form
+            onKeyDown={(event) => handleKeyDown(event, this.changePermissions)}
+          >
             <Row>
               <Col xl={12}>
                 <Form.Group controlId="exampleForm.ControlSelect1">

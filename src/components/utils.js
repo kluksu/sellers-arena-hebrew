@@ -65,6 +65,11 @@ export const getPublicAccountID = (id, accessToken) => {
   return getData(`${domain}/public-accounts/${id}/`, "", ` ${accessToken}`);
 };
 
+export function handleKeyDown(event, refreshCallback) {
+  if (event.key === "Enter") {
+    refreshCallback();
+  }
+}
 export async function postFormData(URL = "", data = {}, token) {
   // Default options are marked with *
   const response = await fetch(URL, {

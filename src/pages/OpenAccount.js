@@ -4,6 +4,7 @@ import {
   categoriesAndSubCategories,
   categoriesList,
   domain,
+  handleKeyDown,
   hebrewCategoriesAndSubCategories,
   postData,
   sendEmailToMe,
@@ -86,7 +87,10 @@ export default class OpenAccount extends Component {
     });
     return (
       <div className="registerPage">
-        <Container className="registerContainer">
+        <Container
+          onKeyDown={(event) => handleKeyDown(event, this.creatAccount)}
+          className="registerContainer"
+        >
           <Form>
             <p className="info-p-registerContainer">
               כאן עליך למלא מידע אודות העסק שלך <br></br>

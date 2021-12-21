@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button, Form, Container, Col, Row, Tabs } from "react-bootstrap";
-import { domain, postData } from "./utils";
+import { domain, handleKeyDown, postData } from "./utils";
 
 export default class CreatUserInAccount extends Component {
   constructor(props) {
@@ -144,7 +144,9 @@ export default class CreatUserInAccount extends Component {
           {" "}
           <>
             {" "}
-            <Form>
+            <Form
+              onKeyDown={(event) => handleKeyDown(event, this.authinticateForm)}
+            >
               <Form.Group controlId="formGroupEmail">
                 <Form.Label>כתובת מייל</Form.Label>
                 <Form.Control

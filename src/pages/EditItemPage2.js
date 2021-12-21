@@ -12,6 +12,7 @@ import {
   categoriesAndSubCategories,
   categoriesList,
   domain,
+  handleKeyDown,
 } from "../components/utils";
 
 class EditItemPage2 extends React.Component {
@@ -207,7 +208,10 @@ class EditItemPage2 extends React.Component {
     }
     return (
       <div className="Uploadpage">
-        <Container className="productUploadContainer">
+        <Container
+          onKeyDown={(event) => handleKeyDown(event, this.uploadItem)}
+          className="productUploadContainer"
+        >
           <p className="FormRejects"> {this.state.responsData.detail}</p>
           <Form>
             <Row>
