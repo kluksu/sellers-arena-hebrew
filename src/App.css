@@ -715,10 +715,11 @@ input {
   border: outset;
   background-color: white;
   /* min-width: 1140px; */
-  width: 2480px;
+  /* width: 2480px; */
+  width: 100%;
 }
 @media print {
-  /* .allOrdersPage {
+  .allOrdersPage {
     overflow: visible;
     padding-top: 0px;
   }
@@ -732,7 +733,7 @@ input {
   }
   .OrderSummeryPage {
     padding: 0px;
-  } */
+  }
   .no-print,
   .no-print * {
     display: none !important;
