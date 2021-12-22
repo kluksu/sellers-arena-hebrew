@@ -39,6 +39,7 @@ class ProductVaritionPage extends React.Component {
     };
     this.onDrop = this.onDrop.bind(this);
   }
+
   onDrop(picture) {
     this.setState({
       image: picture,
@@ -65,10 +66,27 @@ class ProductVaritionPage extends React.Component {
     //   IsDiscountsButtonDisabled: false,
     // });
   };
-
+  removeVars = (key) => {
+    this.setState({
+      varsInfo: Object.assign(
+        {},
+        this.state.varsInfo,
+        delete this.state.varsInfo[key]
+      ),
+    });
+  };
+  removeDiscount = (key) => {
+    this.setState({
+      discounts: Object.assign(
+        {},
+        this.state.discounts,
+        delete this.state.discounts[key]
+      ),
+    });
+  };
   addVar = (key, value) => {
     this.setState({ varCounter: this.state.varCounter + 1 });
-    this.setState({ IsVarButtonDisabled: true });
+    // this.setState({ IsVarButtonDisabled: true });
   };
   addDiscount = (key, value) => {
     this.setState({ discountCounter: this.state.discountCounter + 1 });
@@ -79,6 +97,8 @@ class ProductVaritionPage extends React.Component {
 
   updateObj = (key, value) => {
     let obj = {};
+    key = key.trim();
+    value = value.trim();
     obj[key] = value;
 
     this.setState({
@@ -87,6 +107,8 @@ class ProductVaritionPage extends React.Component {
   };
   updateDiscounts = (key, value) => {
     let discounts = {};
+    key = key.trim();
+    value = value.trim();
     discounts[key] = value;
 
     this.setState({
@@ -150,7 +172,8 @@ class ProductVaritionPage extends React.Component {
               >
                 חזור לעמוד הבית
               </Button>
-            </>
+            </>,
+            "prevent"
           );
         }
       },
@@ -259,6 +282,7 @@ class ProductVaritionPage extends React.Component {
     for (let i = 0; i < this.state.varCounter; i++) {
       varform.push(
         <AddVars
+          removeVars={this.removeVars}
           varCounter={this.state.varCounter}
           addVar={this.addVar}
           updateObj={this.updateObj}
@@ -269,6 +293,7 @@ class ProductVaritionPage extends React.Component {
     for (let i = 0; i < this.state.discountCounter; i++) {
       discounts.push(
         <QuantityDiscount
+          removeDiscount={this.removeDiscount}
           updateDiscounts={this.updateDiscounts}
           discountCounter={this.state.discountCounter}
           addDiscount={this.addDiscount}

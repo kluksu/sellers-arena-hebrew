@@ -45,6 +45,7 @@ export default class AddVars extends Component {
                   disabled={this.state.isDisabled}
                   placeholder="לדוגמה - צבע"
                   name="key"
+                  value={this.state.key}
                 />
               </Form.Group>
               <p className="FormRejects">{this.state.warning}</p>
@@ -58,15 +59,29 @@ export default class AddVars extends Component {
                   type="text"
                   placeholder="לדוגמה - כחול"
                   name="value"
+                  value={this.state.value}
                 />
               </Form.Group>
             </Col>
 
             <Col xl={2}>
               <Button
-                onClick={this.lockAndSend}
+                onClick={
+                  this.state.variant === "danger"
+                    ? () => {
+                        this.props.removeVars(this.state.key);
+                        this.setState({ variant: "primary" });
+                        this.setState({ isDisabled: false });
+                        this.setState({
+                          buttonText: "הוסף וריאציה",
+                          key: "",
+                          value: "",
+                        });
+                      }
+                    : this.lockAndSend
+                }
                 type="button"
-                disabled={this.state.isDisabled}
+                // disabled={this.state.isDisabled}
                 variant={this.state.variant}
               >
                 {this.state.buttonText}

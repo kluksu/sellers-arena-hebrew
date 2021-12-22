@@ -36,14 +36,29 @@ class OrderSummery extends React.Component {
   };
   editItem = (delta) => {
     let obj = { variations_json: this.state.changedQuantities };
+
     postData(
       `${domain}/cart/${this.props.match.params.id}/edit/`,
       obj,
       ` ${this.props.accessToken}`
-    ).then((res) => {
-      if (res.status.includes("successfully")) this.getActiveCart();
-      this.openModal();
-    });
+    )
+      .then((res) => {
+        if (res.status.includes("successfully")) this.getActiveCart();
+        console.log();
+        for (const [key, value] of Object.entries(obj.variations_json)) {
+          if (value == 0) {
+            delete obj.variations_json[key];
+            this.setState({ changedQuantities: obj.variations_json });
+          }
+        }
+        this.openModal();
+      })
+      .catch((res) => {
+        this.props.openGenericModal(
+          ", אופס",
+          "יש לנו שגיאה,  אנא נסה שנית, אם השגיאה נמשכת נסה לרענן את העמוד"
+        );
+      });
   };
   checkOutAndGoHome = () => {
     this.props.checkOut(this.props.match.params.id).then((data) => {

@@ -50,6 +50,7 @@ export default class QuantityDiscount extends Component {
                   disabled={this.state.isDisabled}
                   placeholder="כמות להנחה"
                   name="key"
+                  value={this.state.key}
                 />
               </Form.Group>
               <p className="FormRejects">{this.state.warning}</p>
@@ -64,6 +65,7 @@ export default class QuantityDiscount extends Component {
                   type="number"
                   // placeholder="0%"
                   name="value"
+                  value={this.state.value}
                 >
                   {optionsArr}
                 </Form.Control>
@@ -71,9 +73,22 @@ export default class QuantityDiscount extends Component {
             </Col>
             <Col xl={2}>
               <Button
-                onClick={this.lockAndSend}
+                onClick={
+                  this.state.variant === "danger"
+                    ? () => {
+                        this.props.removeDiscount(this.state.key);
+                        this.setState({ variant: "primary" });
+                        this.setState({ isDisabled: false });
+                        this.setState({
+                          buttonText: "הוסף וריאציה",
+                          key: "",
+                          value: "",
+                        });
+                      }
+                    : this.lockAndSend
+                }
                 type="button"
-                disabled={this.state.isDisabled}
+                // disabled={this.state.isDisabled}
                 variant={this.state.variant}
               >
                 {this.state.buttonText}

@@ -95,11 +95,12 @@ class App extends React.Component {
       allMessages: [],
     };
   }
-  handleKeyDown = (event, refreshCallback) => {
-    if (event.key === "Enter") {
-      refreshCallback();
-    }
-  };
+  // handleKeyDown = (event, refreshCallback) => {
+  //   if (event.key === "Enter") {
+  //     refreshCallback();
+  //   }
+
+  // };
   getAccount = (id) => {
     return axios.get(`${domain}/public-accounts/${id}/`);
   };
@@ -153,12 +154,10 @@ class App extends React.Component {
   ///////root account only functions end
 
   closeGenericModal = () => {
-    if (this.state.preventModalDefult !== true) {
-      this.setState({ modalText: "" });
-      this.setState({ modalTop: "" });
-      this.setState({ modalBottom: "" });
-      this.setState({ isGenericModalOpen: false });
-    }
+    this.setState({ modalText: "" });
+    this.setState({ modalTop: "" });
+    this.setState({ modalBottom: "" });
+    this.setState({ isGenericModalOpen: false });
   };
   openGenericModal = (top, text, bottom, prevent) => {
     prevent =
@@ -512,6 +511,7 @@ class App extends React.Component {
     });
   };
   componentDidMount() {
+    this.setState({ windowLocation: window.location.href });
     this.keepLoggedIn();
     this.getMe();
     this.isMobile();
@@ -708,6 +708,10 @@ class App extends React.Component {
     }, 8600000);
   };
   componentDidUpdate(prevProps, prevState) {
+    if (this.state.windowLocation !== prevState.windowLocation) {
+      this.closeGenericModal();
+    }
+    window.onhashchange = this.closeGenericModal;
     if (this.state.accessToken !== prevState.accessToken) {
       this.keepLoggedIn();
     }
@@ -1000,6 +1004,8 @@ class App extends React.Component {
           </Route>
           <Route exact path="/order-summery/:id">
             <OrderSummery
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
               openGenericModalOrderSummery={this.openGenericModalOrderSummery}
               getSpecificOrder={this.getSpecificOrder}
               checkOut={this.checkOut}
