@@ -706,6 +706,9 @@ input {
 .table-bordered thead th {
   white-space: nowrap;
 }
+.myOrderPage .orderSummeryContainer {
+  border: none;
+}
 .orderSummeryContainer {
   padding: 0px 15px 0px 15px !important;
   margin-top: 50px;

@@ -50,7 +50,61 @@ class OrderInfo extends React.Component {
       this.props.activeCart &&
       this.props.activeCart.all_item_variations
     ) {
-      this.props.activeCart.all_item_variations.forEach((variation) => {
+      this.props.activeCart.all_item_variations.forEach((variation, i) => {
+        let rowColor = "";
+        let priceEqualColor = "";
+        let quantityEqualcolor = "";
+
+        let eqaul = true;
+        if (
+          this.props.activeCart2 &&
+          this.props.activeCart2.all_item_variations &&
+          this.props.activeCart2.all_item_variations[i]
+        ) {
+          console.log(this.props.activeCart2.all_item_variations[i], variation);
+          eqaul =
+            this.props.activeCart2.all_item_variations[i].quantity !==
+              variation.quantity ||
+            this.props.activeCart2.all_item_variations[i].item_variation
+              .cost_per_item !== variation.item_variation.cost_per_item
+              ? false
+              : true;
+          if (eqaul === false) {
+            if (
+              this.props.activeCart2.all_item_variations[i].quantity >
+                variation.quantity ||
+              (this.props.activeCart2.all_item_variations[i].quantity !==
+                variation.quantity &&
+                this.props.defultColor === true)
+            ) {
+              quantityEqualcolor = "#fcb0b0";
+            } else if (
+              this.props.activeCart2.all_item_variations[i].quantity <
+              variation.quantity
+            ) {
+              quantityEqualcolor = "lightgray";
+            }
+            if (
+              this.props.activeCart2.all_item_variations[i].item_variation
+                .cost_per_item > variation.item_variation.cost_per_item &&
+              this.props.defultColor !== true
+            ) {
+              priceEqualColor = "lightgreen";
+            } else if (
+              this.props.activeCart2.all_item_variations[i].item_variation
+                .cost_per_item < variation.item_variation.cost_per_item ||
+              (this.props.activeCart2.all_item_variations[i].item_variation
+                .cost_per_item !== variation.item_variation.cost_per_item &&
+                this.props.defultColor === true)
+            ) {
+              priceEqualColor = "#fcb0b0";
+            }
+
+            console.log(eqaul);
+            rowColor = "lightblue";
+          }
+        }
+
         let miniVarArr = [];
 
         //fix bug here : all variations are shown right now, not just the right one
@@ -97,18 +151,18 @@ class OrderInfo extends React.Component {
             variation.quantity
           );
         variationArr.push(
-          <tr>
+          <tr style={{ background: rowColor }}>
             <td>{variation.item_variation.id}</td>
 
             <td>{variation.item_variation.item.name}</td>
             <td style={{ whiteSpace: "normal" }}>{miniVarArr}</td>
 
-            <td>
+            <td style={{ background: quantityEqualcolor }}>
               {" "}
               {quantity}
               {/* <p className="FormRejects">{this.state.notice}</p> */}
             </td>
-            <td>{priceSelector}</td>
+            <td style={{ background: priceEqualColor }}>{priceSelector}</td>
             <td>{variation.total_price_of_item_variation_before_discount}</td>
             <td>
               {(1 -

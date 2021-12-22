@@ -9,7 +9,8 @@ class MyOrder extends Component {
     super(props);
     this.state = {
       orderInfo: {},
-      activeCart: {},
+      activeCartSellerEdited: {},
+      activeCartSnapshot: {},
       sellerName: "",
     };
   }
@@ -26,11 +27,15 @@ class MyOrder extends Component {
     this.props.getSpecificOrder(this.props.match.params.id).then((res) => {
       this.setState({ orderInfo: res.data });
       console.log(res.data);
-      let activeCart =
-        res.data.seller_edited_snapshot !== null
-          ? res.data.seller_edited_snapshot
-          : res.data.cart_snapshot;
-      this.setState({ activeCart: activeCart });
+      // let activeCart =
+      //   res.data.seller_edited_snapshot !== null
+      //     ? res.data.seller_edited_snapshot
+      //     : res.data.cart_snapshot;
+      this.setState({
+        activeCartSellerEdited: res.data.seller_edited_snapshot,
+      });
+      console.log(res.data.seller_edited_snapshot);
+      this.setState({ activeCartSnapshot: res.data.cart_snapshot });
     });
   };
   componentDidMount() {
@@ -56,15 +61,39 @@ class MyOrder extends Component {
   render() {
     return (
       <div className="myOrderPage">
-        <h1>{this.state.sellerName}</h1>
         <div className="orderSummeryContainer">
+          {this.state.activeCartSellerEdited !== null ? (
+            <>
+              <h1>הזמנה ערוכה</h1>
+              <p>
+                ההזמנה שמופיעה בטבלה היא לאחר עריכה של המוכר, יש להשוות להזמנה
+                מתחת על מנת לזהות חריגות מההזמנה המקורית
+              </p>
+              <h6>{this.state.sellerName}</h6>
+              <OrderInfo
+                cartsDelta={this.state.cartsDelta}
+                isPriceFiledDisabled={"disabled"}
+                getCartProducts={this.getCartProducts}
+                accessToken={this.props.accessToken}
+                orderID={this.props.match.params.id}
+                isChangable={false}
+                activeCart={this.state.activeCartSellerEdited}
+                activeCart2={this.state.activeCartSnapshot}
+                activeAccount={this.props.activeAccount}
+              ></OrderInfo>
+            </>
+          ) : null}
+          <h1>הזמנה מקורית</h1>
+          <p>ההזמנה שמופיע בטבלה למטה הינה ההזמנה המקורית ששלחת</p>
           <OrderInfo
+            defultColor={true}
             isPriceFiledDisabled={"disabled"}
             getCartProducts={this.getCartProducts}
             accessToken={this.props.accessToken}
             orderID={this.props.match.params.id}
             isChangable={false}
-            activeCart={this.state.activeCart}
+            activeCart2={this.state.activeCartSellerEdited}
+            activeCart={this.state.activeCartSnapshot}
             activeAccount={this.props.activeAccount}
           ></OrderInfo>
           {/* <div className="sellerInfoContainer">
