@@ -135,6 +135,11 @@ body {
   font-size: 18px;
   font-weight: 600;
 }
+.mikra {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .navbar.navbar-expand-xl.navbar-light.bg-light {
   background-color: white !important;
   z-index: 10000000000000000000;

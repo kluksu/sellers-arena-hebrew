@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { Component } from "react";
 import { withRouter } from "react-router";
 import OrderInfo from "../components/OrderInfo";
+import Squre from "../components/Squre";
 import { domain } from "../components/utils";
 
 class MyOrder extends Component {
@@ -71,6 +72,32 @@ class MyOrder extends Component {
                 השורות שעברו שינוי יחשוף את השורה המקורית מתחת.
               </p>
               <h6>{this.state.sellerName}</h6>
+              <span className="mikra">
+                <Squre
+                  height={"20px"}
+                  width={"20px"}
+                  background={"lightblue"}
+                ></Squre>{" "}
+                - שינוי בערכי המוצר בהזמנה
+                <Squre
+                  height={"20px"}
+                  width={"20px"}
+                  background={"lightyellow"}
+                ></Squre>{" "}
+                - שינוי בכמות
+                <Squre
+                  height={"20px"}
+                  width={"20px"}
+                  background={"#fcb0b0"}
+                ></Squre>{" "}
+                - עליה במחיר
+                <Squre
+                  height={"20px"}
+                  width={"20px"}
+                  background={"lightgreen"}
+                ></Squre>{" "}
+                - ירידה במחיר
+              </span>
               <OrderInfo
                 cartsDelta={this.state.cartsDelta}
                 isPriceFiledDisabled={"disabled"}

@@ -140,7 +140,7 @@ class StorePage extends React.Component {
     const next =
       this.state.next !== undefined
         ? this.state.next
-        : `${domain}/public-items/?limit=1000&offset=0&account_id=${this.props.match.params.id}`;
+        : `${domain}/public-items/?limit=50&offset=0&account_id=${this.props.match.params.id}`;
     const tokenfull = this.props.accessToken ? this.props.accessToken : token;
     const authorization = !this.props.accessToken
       ? null
@@ -174,6 +174,7 @@ class StorePage extends React.Component {
 
         this.setState({ itemsLangh: response.data.results.length });
         this.setState({ next: response.data.next });
+        this.getItems(); ///load all items 50 each time, can be deleted when ever
       });
     }
     this.setState({ loadShowList: false });
