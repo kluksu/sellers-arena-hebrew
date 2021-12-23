@@ -22,50 +22,36 @@ class ControlPanel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      myUsers: [],
+      // myUsers: [],
     };
   }
-  getMyUsers = () => {
-    if (this.props.activeAccount) {
-      getData(
-        `${domain}/my-users/?account_id=${this.props.activeAccount.id}`,
-        "",
-        ` ${this.props.accessToken}`
-      ).then((data) => {
-        this.setState({ myUsers: data.results });
-      });
-    }
-  };
+
   componentDidMount() {
-    this.getMyUsers();
+    // this.getMyUsers();
   }
   componentDidUpdate(prevProps, prevState) {
     if (this.props.activeAccount !== prevProps.activeAccount) {
-      this.getMyUsers();
+      // this.getMyUsers();
     }
   }
   render() {
-    if (!this.state.myUsers) {
-      return <FullPageLoader></FullPageLoader>;
-    } else
-      return (
-        <div className="ControlPanelPage">
-          <Navbar expand="lg" bg="primary" variant="dark">
-            <Container>
-              <Nav>
-                <NavLink href="/#/control_panel/manage_users">משתמשים </NavLink>
-                <NavLink href="/#/control_panel/manage_clients">
-                  לקוחות{" "}
-                </NavLink>
-                <NavLink href="/#/control_panel/manage_orders">הזמנות </NavLink>
-                <NavLink href="/#/control_panel/manage_discounts">
-                  הנחות{" "}
-                </NavLink>
-              </Nav>
-            </Container>
-          </Navbar>
+    // if (!this.props.myUsers) {
+    //   return <FullPageLoader></FullPageLoader>;
+    // } else
+    return (
+      <div className="ControlPanelPage">
+        <Navbar expand="lg" bg="primary" variant="dark">
+          <Container>
+            <Nav>
+              <NavLink href="/#/control_panel/manage_users">משתמשים </NavLink>
+              <NavLink href="/#/control_panel/manage_clients">לקוחות </NavLink>
+              <NavLink href="/#/control_panel/manage_orders">הזמנות </NavLink>
+              <NavLink href="/#/control_panel/manage_discounts">הנחות </NavLink>
+            </Nav>
+          </Container>
+        </Navbar>
 
-          {/* <Col xl={2} xs={3}>
+        {/* <Col xl={2} xs={3}>
               <ListGroup>
                 <ListGroup.Item action variant="light">
                   <NavLink href="/#/control_panel/manage_users">
@@ -109,41 +95,41 @@ class ControlPanel extends React.Component {
                 </ListGroup.Item>
               </ListGroup>
             </Col> */}
-          <Route exact path="/control_panel/manage_users/">
-            <ManageUsers
-              closeGenericModal={this.props.closeGenericModal}
-              openGenericModal={this.props.openGenericModal}
-              getMyUsers={this.getMyUsers}
-              myUsers={this.state.myUsers}
-              accessToken={this.props.accessToken}
-              activeAccount={this.props.activeAccount}
-              link={"/#/control_panel/manage_users"}
-            ></ManageUsers>
-          </Route>
-          <Route exact path="/control_panel/manage_orders/">
-            {/* <ManageOrders></ManageOrders> */}
-            <AllOrders
-              myContacts={this.props.myContacts}
-              screenWidth={this.props.screenWidth}
-              payedOrders={this.props.payedOrders}
-              fulfilledOrders={this.props.fulfilledOrders}
-              sellerApprovedOrders={this.props.sellerApprovedOrders}
-              MySupplierOrders={this.props.MySupplierOrders}
-              activeAccount={this.props.activeAccount}
-              accessToken={this.props.accessToken}
-            ></AllOrders>
-          </Route>
-          <Route exact path="/control_panel/manage_clients/">
-            <AddUnregisterdAccount
-              closeGenericModal={this.props.closeGenericModal}
-              openGenericModal={this.props.openGenericModal}
-              accessToken={this.props.accessToken}
-              activeAccount={this.props.activeAccount}
-            ></AddUnregisterdAccount>
-            {/* <ManageOrders></ManageOrders> */}
-          </Route>
-        </div>
-      );
+        <Route exact path="/control_panel/manage_users/">
+          <ManageUsers
+            closeGenericModal={this.props.closeGenericModal}
+            openGenericModal={this.props.openGenericModal}
+            // getMyUsers={this.getMyUsers}
+            myUsers={this.props.myUsers}
+            accessToken={this.props.accessToken}
+            activeAccount={this.props.activeAccount}
+            link={"/#/control_panel/manage_users"}
+          ></ManageUsers>
+        </Route>
+        <Route exact path="/control_panel/manage_orders/">
+          {/* <ManageOrders></ManageOrders> */}
+          <AllOrders
+            myContacts={this.props.myContacts}
+            screenWidth={this.props.screenWidth}
+            payedOrders={this.props.payedOrders}
+            fulfilledOrders={this.props.fulfilledOrders}
+            sellerApprovedOrders={this.props.sellerApprovedOrders}
+            MySupplierOrders={this.props.MySupplierOrders}
+            activeAccount={this.props.activeAccount}
+            accessToken={this.props.accessToken}
+          ></AllOrders>
+        </Route>
+        <Route exact path="/control_panel/manage_clients/">
+          <AddUnregisterdAccount
+            closeGenericModal={this.props.closeGenericModal}
+            openGenericModal={this.props.openGenericModal}
+            accessToken={this.props.accessToken}
+            activeAccount={this.props.activeAccount}
+          ></AddUnregisterdAccount>
+          {/* <ManageOrders></ManageOrders> */}
+        </Route>
+      </div>
+    );
   }
 }
 export default withRouter(ControlPanel);

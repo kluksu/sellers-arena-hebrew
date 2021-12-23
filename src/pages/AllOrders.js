@@ -5,6 +5,7 @@ import { Button, Col, Form, Row, Table } from "react-bootstrap";
 import DetailsOnOrderSeller from "../components/DetailsOnOrderSeller";
 import MyDateRange from "../components/MyDateRange";
 import { domain } from "../components/utils";
+import OrderSummery from "./OrderSummery";
 
 class AllOrders extends Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class AllOrders extends Component {
     this.state = {
       selectedOrdersStatus: "",
       paymentStatus: "",
-
+      madeBy: "",
       MySupplierOrders: [],
       sellerApprovedOrders: [],
       fulfilledOrders: [],
@@ -129,6 +130,7 @@ class AllOrders extends Component {
   // };
   onMount = () => {};
   render() {
+    console.log(this.props.activeAccount);
     let totalSumBefore = 0;
     let totalSumAfter = 0;
     let contactsArr = [];
@@ -141,7 +143,63 @@ class AllOrders extends Component {
         );
       });
     }
-    let orders = this.state.activeOrders.map((order) => {
+    console.log(this.props.myUsers);
+
+    let myUsersIDs = this.props.myUsers
+      ? this.props.myUsers.map((user) => {
+          return user.id;
+        })
+      : null;
+
+    console.log(myUsersIDs);
+    let fillterdBymadeBy = [];
+
+    this.state.activeOrders.forEach((order) => {
+      if (
+        this.props.activeAccount.account_type == 2 &&
+        this.state.madeBy === "buyer" &&
+        myUsersIDs.includes(order.user)
+      ) {
+        fillterdBymadeBy.push(order);
+      } else if (
+        this.props.activeAccount.account_type == 3 &&
+        this.state.madeBy === "seller" &&
+        myUsersIDs.includes(order.user)
+      ) {
+        fillterdBymadeBy.push(order);
+      } else if (
+        this.props.activeAccount.account_type == 2 &&
+        this.state.madeBy === "seller" &&
+        !myUsersIDs.includes(order.user)
+      ) {
+        fillterdBymadeBy.push(order);
+      } else if (
+        this.props.activeAccount.account_type == 3 &&
+        this.state.madeBy === "buyer" &&
+        !myUsersIDs.includes(order.user)
+      ) {
+        fillterdBymadeBy.push(order);
+      } else if (this.state.madeBy === "") {
+        fillterdBymadeBy.push(order);
+      }
+    });
+    let contectsObj = {};
+    fillterdBymadeBy.forEach((order) => {
+      console.log(order);
+      let account =
+        this.props.activeAccount == 2
+          ? order.seller_account
+          : order.buyer_account;
+      if (!contectsObj[account.id]) {
+        contactsArr.push(<option value={account.id}>{account.name}</option>);
+        contectsObj[account.id] = account.name;
+      }
+    });
+
+    ////////////////////////////////////////////////////////////////////
+    let orders = fillterdBymadeBy.map((order) => {
+      console.log(order);
+
       let orderSumBefore =
         order.seller_edited_snapshot !== null
           ? order.seller_edited_snapshot.total_price_before_tax
@@ -256,6 +314,39 @@ class AllOrders extends Component {
               label=" הכל"
               name="paymentStatus"
               value={""}
+              id="formHorizontalRadios2"
+            />
+          </Form.Group>
+          <Form.Group className="no-print">
+            <Form.Label></Form.Label>
+
+            <Form.Check
+              onChange={this.handleChange}
+              inline
+              type="radio"
+              label="הכל"
+              name="madeBy"
+              id="formHorizontalRadios1"
+              value={""}
+            />
+            <Form.Check
+              inline
+              onChange={this.handleChange}
+              inline
+              type="radio"
+              label='נעשו ע"י קונה'
+              name="madeBy"
+              value={"buyer"}
+              id="formHorizontalRadios2"
+            />
+            <Form.Check
+              inline
+              onChange={this.handleChange}
+              inline
+              type="radio"
+              label='נעשו ע"י מוכר'
+              name="madeBy"
+              value={"seller"}
               id="formHorizontalRadios2"
             />
           </Form.Group>

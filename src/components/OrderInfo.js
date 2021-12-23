@@ -54,6 +54,10 @@ class OrderInfo extends React.Component {
         let rowColor = "";
         let priceEqualColor = "";
         let quantityEqualcolor = "";
+        let variation2 =
+          this.props.activeCart2 && this.props.activeCart2.all_item_variations
+            ? this.props.activeCart2.all_item_variations[i]
+            : null;
 
         let eqaul = true;
         if (
@@ -77,12 +81,12 @@ class OrderInfo extends React.Component {
                 variation.quantity &&
                 this.props.defultColor === true)
             ) {
-              quantityEqualcolor = "#fcb0b0";
+              quantityEqualcolor = "lightyellow";
             } else if (
               this.props.activeCart2.all_item_variations[i].quantity <
               variation.quantity
             ) {
-              quantityEqualcolor = "lightgray";
+              quantityEqualcolor = "lightyellow";
             }
             if (
               this.props.activeCart2.all_item_variations[i].item_variation
@@ -151,7 +155,7 @@ class OrderInfo extends React.Component {
             variation.quantity
           );
         variationArr.push(
-          <tr style={{ background: rowColor }}>
+          <tr className="orderRow" style={{ background: rowColor }}>
             <td>{variation.item_variation.id}</td>
 
             <td>{variation.item_variation.item.name}</td>
@@ -174,6 +178,42 @@ class OrderInfo extends React.Component {
             <td>{variation.total_price_of_item_variation_after_discount}</td>
           </tr>
         );
+        if (eqaul === false && this.props.hover === true) {
+          variationArr.push(
+            <tr className="hidden" style={{ opacity: 0.6 }}>
+              <td style={{ opacity: 0.6 }}>{variation2.item_variation.id}</td>
+
+              <td style={{ opacity: 0.6 }}>
+                {variation2.item_variation.item.name}
+              </td>
+              <td style={{ whiteSpace: "normal", opacity: 0.6 }}>
+                {miniVarArr}
+              </td>
+
+              <td style={{ background: quantityEqualcolor, opacity: 0.6 }}>
+                {" "}
+                {variation2.quantity}
+                {/* <p className="FormRejects">{this.state.notice}</p> */}
+              </td>
+              <td style={{ background: priceEqualColor, opacity: 0.6 }}>
+                {variation2.item_variation.cost_per_item}
+              </td>
+              <td style={{ opacity: 0.6 }}>
+                {variation2.total_price_of_item_variation_before_discount}
+              </td>
+              <td style={{ opacity: 0.6 }}>
+                {(1 -
+                  variation2.total_price_of_item_variation_after_discount /
+                    variation2.total_price_of_item_variation_before_discount) *
+                  100}
+                %
+              </td>
+              <td style={{ opacity: 0.6 }}>
+                {variation2.total_price_of_item_variation_after_discount}
+              </td>
+            </tr>
+          );
+        }
       });
     }
     if (this.props.accessToken) {

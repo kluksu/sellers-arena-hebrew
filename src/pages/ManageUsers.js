@@ -32,7 +32,7 @@ export default class ManageUsers extends Component {
           <Tab eventKey="myUsers" title=" המשתמשים שלי">
             <MyUsers
               myUsers={this.props.myUsers}
-              getMyUsers={this.props.getMyUsers}
+              // getMyUsers={this.props.getMyUsers}
               closeGenericModal={this.props.closeGenericModal}
               openGenericModal={this.props.openGenericModal}
               activeAccount={this.props.activeAccount}
@@ -59,7 +59,7 @@ export default class ManageUsers extends Component {
             <DeleteUserInAccount
               closeGenericModal={this.props.closeGenericModal}
               openGenericModal={this.props.openGenericModal}
-              getMyUsers={this.props.getMyUsers}
+              // getMyUsers={this.props.getMyUsers}
               myUsers={this.props.myUsers}
               activeAccount={this.props.activeAccount}
               accessToken={this.props.accessToken}
@@ -69,7 +69,7 @@ export default class ManageUsers extends Component {
             <UserPremmitions
               closeGenericModal={this.props.closeGenericModal}
               openGenericModal={this.props.openGenericModal}
-              getMyUsers={this.props.getMyUsers}
+              // getMyUsers={this.props.getMyUsers}
               myUsers={this.props.myUsers}
               activeAccount={this.props.activeAccount}
               accessToken={this.props.accessToken}

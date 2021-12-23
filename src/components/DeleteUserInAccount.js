@@ -12,7 +12,7 @@ export default class DeleteUserInAccount extends Component {
     };
   }
   componentDidMount() {
-    this.props.getMyUsers();
+    // this.props.getMyUsers();
   }
 
   deleteUser = () => {

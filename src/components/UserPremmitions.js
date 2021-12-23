@@ -15,7 +15,7 @@ export default class UserPremmitions extends Component {
   }
 
   componentDidMount() {
-    this.props.getMyUsers();
+    // this.props.getMyUsers();
   }
   changePermissions = () => {};
 

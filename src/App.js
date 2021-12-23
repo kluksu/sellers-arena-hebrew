@@ -93,6 +93,7 @@ class App extends React.Component {
       isRealUser: true,
       preventModalDefult: false,
       allMessages: [],
+      myUsers: [],
     };
   }
   // handleKeyDown = (event, refreshCallback) => {
@@ -189,6 +190,17 @@ class App extends React.Component {
   // getUnregisteredAccount=()=>{
 
   // }
+  getMyUsers = () => {
+    if (this.state.activeAccount) {
+      getData(
+        `${domain}/my-users/?account_id=${this.state.activeAccount.id}`,
+        "",
+        ` ${this.state.accessToken}`
+      ).then((data) => {
+        this.setState({ myUsers: data.results });
+      });
+    }
+  };
   getAllOrders = () => {
     this.getOrders("submitted", "MySupplierOrders");
     this.getOrders("seller_approved", "sellerApprovedOrders");
@@ -511,7 +523,6 @@ class App extends React.Component {
     });
   };
   componentDidMount() {
-    this.setState({ windowLocation: window.location.href });
     this.keepLoggedIn();
     this.getMe();
     this.isMobile();
@@ -708,10 +719,6 @@ class App extends React.Component {
     }, 8600000);
   };
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.windowLocation !== prevState.windowLocation) {
-      this.closeGenericModal();
-    }
-    window.onhashchange = this.closeGenericModal;
     if (this.state.accessToken !== prevState.accessToken) {
       this.keepLoggedIn();
     }
@@ -735,7 +742,7 @@ class App extends React.Component {
           this.setState({ myContacts: res.data });
         });
         this.getAllOrders();
-
+        this.getMyUsers();
         this.getAllActiveThreads();
       }
     }
@@ -1031,6 +1038,7 @@ class App extends React.Component {
 
           <Route exact path="/control_panel/">
             <ControlPanel
+              myUsers={this.state.myUsers}
               myContacts={this.state.myContacts}
               screenWidth={this.state.screenWidth}
               payedOrders={this.state.payedOrders}
@@ -1043,6 +1051,7 @@ class App extends React.Component {
           </Route>
           <Route exact path="/control_panel/:name">
             <ControlPanel
+              myUsers={this.state.myUsers}
               closeGenericModal={this.closeGenericModal}
               openGenericModal={this.openGenericModal}
               accessToken={this.state.accessToken}
@@ -1083,6 +1092,7 @@ class App extends React.Component {
           </Route>
           <Route exact path="/all-orders">
             <AllOrders
+              myUsers={this.state.myUsers}
               getAccount={this.getAccount}
               myContacts={this.state.myContacts}
               screenWidth={this.state.screenWidth}

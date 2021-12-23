@@ -139,6 +139,13 @@ body {
   background-color: white !important;
   z-index: 10000000000000000000;
 }
+
+.orderRow:hover + .hidden {
+  display: contents;
+}
+.myOrderPage .hidden:hover {
+  display: contents;
+}
 .navbar.navbar-expand-xl.navbar-light.bg-light a.nav-link {
   color: black !important;
 }

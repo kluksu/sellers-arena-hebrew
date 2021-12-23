@@ -14,11 +14,11 @@ export default class MyUsers extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
   componentDidMount() {
-    this.props.getMyUsers();
+    // this.props.getMyUsers();
   }
   componentDidUpdate(prevProps, prevState) {
     if (this.props.activeAccount !== prevProps.activeAccount) {
-      this.props.getMyUsers();
+      //   this.props.getMyUsers();
     }
     if (this.state.selectedUserID !== prevState.selectedUserID) {
       this.props.myUsers.forEach((user) => {

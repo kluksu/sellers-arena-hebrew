@@ -67,7 +67,8 @@ class MyOrder extends Component {
               <h1>הזמנה ערוכה</h1>
               <p>
                 ההזמנה שמופיעה בטבלה היא לאחר עריכה של המוכר, יש להשוות להזמנה
-                מתחת על מנת לזהות חריגות מההזמנה המקורית
+                מתחת על מנת לזהות חריגות מההזמנה המקורית, ריחוף עם העכבר מעל
+                השורות שעברו שינוי יחשוף את השורה המקורית מתחת.
               </p>
               <h6>{this.state.sellerName}</h6>
               <OrderInfo
@@ -77,6 +78,7 @@ class MyOrder extends Component {
                 accessToken={this.props.accessToken}
                 orderID={this.props.match.params.id}
                 isChangable={false}
+                hover={true}
                 activeCart={this.state.activeCartSellerEdited}
                 activeCart2={this.state.activeCartSnapshot}
                 activeAccount={this.props.activeAccount}
@@ -92,6 +94,7 @@ class MyOrder extends Component {
             accessToken={this.props.accessToken}
             orderID={this.props.match.params.id}
             isChangable={false}
+            hover={false}
             activeCart2={this.state.activeCartSellerEdited}
             activeCart={this.state.activeCartSnapshot}
             activeAccount={this.props.activeAccount}
