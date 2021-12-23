@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Form, Button, Container, Col, Row } from "react-bootstrap";
 import Ticker from "react-ticker";
-import { logo, logoWithText } from "./utils";
+import { handleKeyDown, logo, logoWithText } from "./utils";
 
 export default class Search extends Component {
   render() {
@@ -77,8 +77,12 @@ export default class Search extends Component {
     return (
       <div className="searchPage">
         {/* {ticker} */}
-        <Container className="searchContainer">
+        <Container
+          // onKeyDown={(event) => handleKeyDown(event, this.props.searchItems)}
+          className="searchContainer"
+        >
           {searchLogo}
+
           {/* <p>earch for suppliers</p> */}
           <Form className="search">
             <Form.Group controlId="formBasicEmail">
@@ -90,6 +94,13 @@ export default class Search extends Component {
                 placeholder="...חפש"
               />
             </Form.Group>
+            {/* <Button
+              type="button"
+              className="w-100"
+              onClick={this.props.searchItems}
+            >
+              חפש
+            </Button> */}
           </Form>
         </Container>
         <div>{storeCategoriesButtons}</div>

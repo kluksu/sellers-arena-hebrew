@@ -136,11 +136,16 @@ class StorePage extends React.Component {
     cart[item_variation_id] = parseInt(quantity);
     this.setState({ cartItems: cart });
   };
+  searchItems = async () => {
+    this.setState({ next: undefined });
+    await this.setState({ showList: [] });
+    this.getItems();
+  };
   getItems = (token) => {
     const next =
       this.state.next !== undefined
         ? this.state.next
-        : `${domain}/public-items/?limit=50&offset=0&account_id=${this.props.match.params.id}`;
+        : `${domain}/public-items/?limit=3&offset=0&account_id=${this.props.match.params.id}&search=${this.state.searchText}&subcategory=${this.state.activeSubCategory}`;
     const tokenfull = this.props.accessToken ? this.props.accessToken : token;
     const authorization = !this.props.accessToken
       ? null
@@ -174,7 +179,6 @@ class StorePage extends React.Component {
 
         this.setState({ itemsLangh: response.data.results.length });
         this.setState({ next: response.data.next });
-        this.getItems(); ///load all items 50 each time, can be deleted when ever
       });
     }
     this.setState({ loadShowList: false });
@@ -761,138 +765,130 @@ class StorePage extends React.Component {
 
         // cards.push(<ProductCard productName={`${shortName}.....`} price="register to see prices"
         // pictures={element.image}>  </ProductCard>)
-        let searchTextsplit = this.state.searchText.toUpperCase().split(" ");
-        let lastWord = searchTextsplit[searchTextsplit.length - 1];
-        searchTextsplit.pop();
-        let variationValues = [];
-        let category = item.category.toUpperCase().split(" ");
+        // let searchTextsplit = this.state.searchText.toUpperCase().split(" ");
+        // let lastWord = searchTextsplit[searchTextsplit.length - 1];
+        // searchTextsplit.pop();
+        // let variationValues = [];
+        // let category = item.category.toUpperCase().split(" ");
 
-        let itemName = item.name.toUpperCase();
-        let spltName = itemName.split(" ");
-        if (!this.state.storeSubCategories.includes(item.subcategory)) {
-          this.setState({
-            storeSubCategories: this.state.storeSubCategories.concat(
-              item.subcategory
-            ),
-          });
-        }
-        if (!this.state.storeSubCategories.includes("אפס חיפוש")) {
-          ////change to clear all
-          this.setState({
-            storeSubCategories:
-              this.state.storeSubCategories.concat("אפס חיפוש"),
-          });
-        }
-        Object.values(variation.variation).forEach((value) => {
-          variationValues.push(value.toUpperCase());
-        });
-        let allValuesArr = variationValues.concat(spltName, category);
+        // let itemName = item.name.toUpperCase();
+        // let spltName = itemName.split(" ");
+        // if (!this.state.storeSubCategories.includes(item.subcategory)) {
+        //   this.setState({
+        //     storeSubCategories: this.state.storeSubCategories.concat(
+        //       item.subcategory
+        //     ),
+        //   });
+        // }
+        // if (!this.state.storeSubCategories.includes("אפס חיפוש")) {
+        //   ////change to clear all
+        //   this.setState({
+        //     storeSubCategories:
+        //       this.state.storeSubCategories.concat("אפס חיפוש"),
+        //   });
+        // }
+        // Object.values(variation.variation).forEach((value) => {
+        //   variationValues.push(value.toUpperCase());
+        // });
+        // let allValuesArr = variationValues.concat(spltName, category);
 
-        const found = allValuesArr.find((element) =>
-          element.includes(lastWord)
-        );
+        // const found = allValuesArr.find((element) =>
+        //   element.includes(lastWord)
+        // );
 
-        searchTextsplit.push(found);
-        function isSubset(array1, array2) {
-          // returns true if array2 is a subset of array1
+        // searchTextsplit.push(found);
+        // function isSubset(array1, array2) {
+        //   // returns true if array2 is a subset of array1
 
-          return array2.every(function (element) {
-            return array1.includes(element);
-          });
-        }
-        if (
-          !this.state.activeSubCategory ||
-          this.state.activeSubCategory.toUpperCase() ===
-            item.subcategory.toUpperCase()
-        ) {
-          if (
-            isSubset(allValuesArr, searchTextsplit) === true ||
-            !this.state.searchText
-          ) {
-            if (!cardsIdObj[variation.id]) {
-              cardsIdObj[variation.id] = variation.id;
-              if (!this.props.accessToken) {
-                let card =
-                  variation.cost_per_item === null ? (
-                    <ProductCard
-                      userDevice={this.props.userDevice}
-                      screenWidth={this.props.screenWidth}
-                      activeAccount={this.props.activeAccount}
-                      getCartProducts={this.getCartProducts}
-                      variation={variation}
-                      item={item}
-                      productInfoLink={`/#/storePage/${this.props.match.params.id}/product_page/${item.id}`}
-                      currency={""}
-                      productName={item.name}
-                      price="הרשם על מנת לראות מחירים"
-                      pictures={variation.image}
-                    >
-                      {" "}
-                    </ProductCard>
-                  ) : (
-                    <ProductCard
-                      screenWidth={this.props.screenWidth}
-                      userDevice={this.props.userDevice}
-                      activeAccount={this.props.activeAccount}
-                      getCartProducts={this.getCartProducts}
-                      variation={variation}
-                      item={item}
-                      productInfoLink={`/#/storePage/${this.props.match.params.id}/product_page/${item.id}`}
-                      productName={item.name}
-                      price={variation.cost_per_item}
-                      pictures={variation.image}
-                      currency={item.currency}
-                    >
-                      {" "}
-                    </ProductCard>
-                  );
+        //   return array2.every(function (element) {
+        //     return array1.includes(element);
+        //   });
+        // }
+        // if (
+        //   !this.state.activeSubCategory ||
+        //   this.state.activeSubCategory.toUpperCase() ===
+        //     item.subcategory.toUpperCase()
+        // ) {
+        //   if (
+        //     this.props.activeAccount
+        //     // isSubset(allValuesArr, searchTextsplit) === true ||
+        //     // !this.state.searchText
+        //   ) {
+        //     if (!cardsIdObj[variation.id]) {
+        //       cardsIdObj[variation.id] = variation.id;
+        if (!this.props.accessToken) {
+          let card =
+            variation.cost_per_item === null ? (
+              <ProductCard
+                userDevice={this.props.userDevice}
+                screenWidth={this.props.screenWidth}
+                activeAccount={this.props.activeAccount}
+                getCartProducts={this.getCartProducts}
+                variation={variation}
+                item={item}
+                productInfoLink={`/#/storePage/${this.props.match.params.id}/product_page/${item.id}`}
+                currency={""}
+                productName={item.name}
+                price="הרשם על מנת לראות מחירים"
+                pictures={variation.image}
+              >
+                {" "}
+              </ProductCard>
+            ) : (
+              <ProductCard
+                screenWidth={this.props.screenWidth}
+                userDevice={this.props.userDevice}
+                activeAccount={this.props.activeAccount}
+                getCartProducts={this.getCartProducts}
+                variation={variation}
+                item={item}
+                productInfoLink={`/#/storePage/${this.props.match.params.id}/product_page/${item.id}`}
+                productName={item.name}
+                price={variation.cost_per_item}
+                pictures={variation.image}
+                currency={item.currency}
+              >
+                {" "}
+              </ProductCard>
+            );
 
-                cards.push(card);
-              } else if (
-                this.props.accessToken &&
-                variation.cost_per_item !== null
-              ) {
-                cards.push(
-                  <ProductCard
-                    screenWidth={this.props.screenWidth}
-                    userDevice={this.props.userDevice}
-                    activeAccount={this.props.activeAccount}
-                    value={value}
-                    getCartProducts={this.getCartProducts}
-                    variation={variation}
-                    item={item}
-                    productInfoLink={`/#/storePage/${this.props.match.params.id}/product_page/${item.id}`}
-                    productName={item.name}
-                    currency={item.currency}
-                    price={variation.cost_per_item}
-                    pictures={variation.image}
-                  ></ProductCard>
-                );
-              } else if (
-                this.props.accessToken &&
-                variation.cost_per_item == null
-              )
-                cards.push(
-                  <ProductCard
-                    screenWidth={this.props.screenWidth}
-                    userDevice={this.props.userDevice}
-                    activeAccount={this.props.activeAccount}
-                    value={value}
-                    getCartProducts={this.getCartProducts}
-                    variation={variation}
-                    item={item}
-                    productInfoLink={`/#/storePage/${this.props.match.params.id}/product_page/${item.id}`}
-                    productName={item.name}
-                    price="עליך להיות ברשימת אנשי הקשר של ספק זה על מנת לראות מחירים"
-                    currency={""}
-                    pictures={variation.image}
-                  >
-                    {" "}
-                  </ProductCard>
-                );
-            }
-          }
-        }
+          cards.push(card);
+        } else if (this.props.accessToken && variation.cost_per_item !== null) {
+          cards.push(
+            <ProductCard
+              screenWidth={this.props.screenWidth}
+              userDevice={this.props.userDevice}
+              activeAccount={this.props.activeAccount}
+              value={value}
+              getCartProducts={this.getCartProducts}
+              variation={variation}
+              item={item}
+              productInfoLink={`/#/storePage/${this.props.match.params.id}/product_page/${item.id}`}
+              productName={item.name}
+              currency={item.currency}
+              price={variation.cost_per_item}
+              pictures={variation.image}
+            ></ProductCard>
+          );
+        } else if (this.props.accessToken && variation.cost_per_item == null)
+          cards.push(
+            <ProductCard
+              screenWidth={this.props.screenWidth}
+              userDevice={this.props.userDevice}
+              activeAccount={this.props.activeAccount}
+              value={value}
+              getCartProducts={this.getCartProducts}
+              variation={variation}
+              item={item}
+              productInfoLink={`/#/storePage/${this.props.match.params.id}/product_page/${item.id}`}
+              productName={item.name}
+              price="עליך להיות ברשימת אנשי הקשר של ספק זה על מנת לראות מחירים"
+              currency={""}
+              pictures={variation.image}
+            >
+              {" "}
+            </ProductCard>
+          );
       }
     }
 
@@ -913,6 +909,7 @@ class StorePage extends React.Component {
           {supplierCard}
           <Col className="searchPageContainer storePage" xl={12}>
             <Search
+              searchItems={this.searchItems}
               screenWidth={this.props.screenWidth}
               activeSubCategory={this.state.activeSubCategory}
               getStoreSubCategory={this.getStoreSubCategory}
@@ -940,29 +937,33 @@ class StorePage extends React.Component {
                     </ProSidebar>
                 </Col> */}
           <Col>
-            {/* <InfiniteScroll className="homePage" dataLength={cards.length} next={() => this.getItems()} hasMore={true} loader={loader}> */}
-
-            <Row className="productCardsRow">
-              {" "}
-              {<br></br>}
-              {(this.props.activeAccount &&
-                this.props.activeAccount.account_type == 3 &&
-                this.state.selectedContactID &&
-                this.state.selectedContactID !== 0) ||
-              (this.props.activeAccount &&
-                this.props.activeAccount.account_type == 2) ||
-              !this.props.activeAccount ? (
-                cards
-              ) : (
-                <h1 style={{ color: "red" }}>
-                  {this.props.activeAccount.id == this.props.match.params.id
-                    ? "בבקשה בחר לקוח מהאפשרויות למעלה"
-                    : "רק חשבונות קונים יכולים לראות את המידע המוצג בעמוד זה"}
-                </h1>
-              )}
-            </Row>
-
-            {/* </InfiniteScroll> */}
+            <InfiniteScroll
+              className="homePage"
+              dataLength={cards.length}
+              next={() => this.getItems()}
+              hasMore={true}
+              loader={loader}
+            >
+              <Row className="productCardsRow">
+                {" "}
+                {<br></br>}
+                {(this.props.activeAccount &&
+                  this.props.activeAccount.account_type == 3 &&
+                  this.state.selectedContactID &&
+                  this.state.selectedContactID !== 0) ||
+                (this.props.activeAccount &&
+                  this.props.activeAccount.account_type == 2) ||
+                !this.props.activeAccount ? (
+                  cards
+                ) : (
+                  <h1 style={{ color: "red" }}>
+                    {this.props.activeAccount.id == this.props.match.params.id
+                      ? "בבקשה בחר לקוח מהאפשרויות למעלה"
+                      : "רק חשבונות קונים יכולים לראות את המידע המוצג בעמוד זה"}
+                  </h1>
+                )}
+              </Row>
+            </InfiniteScroll>
           </Col>
         </Row>
         <Row>{orderInfo}</Row>

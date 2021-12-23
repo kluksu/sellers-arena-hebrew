@@ -272,7 +272,6 @@ class SupplierOrder extends React.Component {
     const config = {
       headers: { "Content-Type": "application/json", authorization },
     };
-
     return axios.get(
       `${domain}/supplier-orders/${this.props.match.params.id}`,
       config
@@ -284,6 +283,46 @@ class SupplierOrder extends React.Component {
   };
 
   render() {
+    let rejectbutton = (
+      <Button
+        className="no-print "
+        // onClick={() => this.acceptAbortOrder("", "reject")}
+        onClick={() =>
+          this.openModal(
+            "שים לב!",
+            <>
+              "אתה עומד לדחות את ההזמנה, מה ברצונך לעשות?"
+              <Form.Group controlId="exampleForm.ControlSelect1">
+                <Form.Label className="no-print">
+                  {" "}
+                  אם אתה דוחה את הזמנה זו בבקשה ספק סיבה{" "}
+                </Form.Label>
+                <Form.Control
+                  className="no-print lowerForms rejectOrderForm"
+                  onChange={this.handleChange}
+                  placeholder="add notes here..."
+                  as="textarea"
+                  name="declineReason"
+                ></Form.Control>
+              </Form.Group>
+            </>,
+            <Button
+              className="  no-print"
+              variant="danger"
+              onClick={() => this.acceptAbortOrder("", "reject")}
+            >
+              {" "}
+              דחה
+            </Button>
+          )
+        }
+        className="  no-print"
+        type="button"
+        variant="danger"
+      >
+        דחה הזמנה
+      </Button>
+    );
     let headlineSize = this.props.screenWidth > 650 ? "60px" : "20px";
 
     let isChangable = this.state.activeCartStatus !== "filled" ? true : false;
@@ -340,45 +379,7 @@ class SupplierOrder extends React.Component {
           >
             אשר הזמנה
           </Button>
-
-          <Button
-            className="no-print "
-            // onClick={() => this.acceptAbortOrder("", "reject")}
-            onClick={() =>
-              this.openModal(
-                "שים לב!",
-                <>
-                  "אתה עומד לדחות את ההזמנה, מה ברצונך לעשות?"
-                  <Form.Group controlId="exampleForm.ControlSelect1">
-                    <Form.Label className="no-print">
-                      {" "}
-                      אם אתה דוחה את הזמנה זו בבקשה ספק סיבה{" "}
-                    </Form.Label>
-                    <Form.Control
-                      className="no-print lowerForms rejectOrderForm"
-                      onChange={this.handleChange}
-                      placeholder="add notes here..."
-                      as="textarea"
-                      name="declineReason"
-                    ></Form.Control>
-                  </Form.Group>
-                </>,
-                <Button
-                  className="  no-print"
-                  variant="danger"
-                  onClick={() => this.acceptAbortOrder("", "reject")}
-                >
-                  {" "}
-                  דחה
-                </Button>
-              )
-            }
-            className="  no-print"
-            type="button"
-            variant="danger"
-          >
-            דחה הזמנה
-          </Button>
+          {rejectbutton}
         </>
       );
     } else if (this.state.activeCartStatus === "seller_approved") {
@@ -404,6 +405,7 @@ class SupplierOrder extends React.Component {
           >
             סמן כנשלח
           </Button>
+          {rejectbutton}
           {/* <Button
             className="no-print "
             onClick={() => this.acceptAbortOrder("", "reject")}

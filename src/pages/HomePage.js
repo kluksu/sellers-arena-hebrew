@@ -41,6 +41,11 @@ class HomePage extends React.Component {
       itemsCount: this.getRandomNumberBetween(1, 300),
     };
   }
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.searchText !== prevState.searchText) {
+      this.searchItems();
+    }
+  }
   getSearchText = (searchText) => {
     this.setState({ searchText: searchText });
   };
@@ -59,22 +64,28 @@ class HomePage extends React.Component {
   goToStore = () => {
     //    window.location.assign(`/#/storePage/${}`)
   };
+  searchItems = async () => {
+    this.setState({ next: undefined });
+    await this.setState({ showList: [] });
+    this.getItems();
+  };
   getItems = () => {
     let random = this.getRandomNumberBetween(1, this.state.itemsCount);
-    console.log(random);
-
-    const nextfetch = `${domain}/public-items/?limit=3&offset=${random}`;
-    // const nextfetch =
-    //   this.state.next !== undefined
-    //     ? `${domain}/public-items/?limit=3&offset=${random}`
-    //     : `${domain}/public-items/?limit=3&offset=${random}`;
-    // this.state.next
+    console.log(this.state.searchText);
+    let searchTerm = this.state.searchText;
+    // const nextfetch = `${domain}/public-items/?limit=3&offset=${random}`;
+    const nextfetch =
+      this.state.next !== undefined
+        ? this.state.next
+        : `${domain}/public-items/?limit=3&search=${searchTerm}`;
+    console.log(nextfetch);
     const authorization = !this.props.accessToken
       ? null
       : `Bearer ${this.props.accessToken}`;
     const config = {
       headers: { "Content-Type": "application/json", authorization },
     };
+
     axios
       .get(nextfetch, config)
       .then(
@@ -109,8 +120,7 @@ class HomePage extends React.Component {
         // }
       )
       .catch(() => {
-        console.log("!!!!!!!!!!!!!!!!!!");
-        this.getItems();
+        // this.getItems();
       });
   };
 
@@ -164,55 +174,32 @@ class HomePage extends React.Component {
           : element.item.name;
       // cards.push(<ProductCard productName={`${shortName}.....`} price="register to see prices"
       // pictures={element.image}>  </ProductCard>)
-      /*search if*/ if (
-        element.item.name
-          .toUpperCase()
-          .includes(this.state.searchText.toUpperCase())
-      ) {
-        if (!this.props.accessToken) {
-          let card =
-            element.variation.cost_per_item === null ? (
-              <ProductCard
-                // type={1}
-                userDevice={this.props.userDevice}
-                screenWidth={this.props.screenWidth}
-                activeAccount={this.props.activeAccount}
-                item={element.item}
-                variation={element.variation}
-                productInfoLink={`/#/StorePage/${element.item.account}/product_page/${element.item.id}`}
-                linkAllAround={`/#/StorePage/${element.item.account}`}
-                currency={""}
-                productName={`${shortName}.....`}
-                price="הרשם על מנת לראות את המחיר"
-                pictures={element.image}
-              >
-                {" "}
-              </ProductCard>
-            ) : (
-              <ProductCard
-                // type={1}
-                userDevice={this.props.userDevice}
-                screenWidth={this.props.screenWidth}
-                activeAccount={this.props.activeAccount}
-                item={element.item}
-                variation={element.variation}
-                productInfoLink={`/#/StorePage/${element.item.account}/product_page/${element.item.id}`}
-                linkAllAround={`/#/StorePage/${element.item.account}`}
-                productName={`${shortName}.....`}
-                price={element.variation.cost_per_item}
-                pictures={element.image}
-                currency={element.item.currency}
-              >
-                {" "}
-              </ProductCard>
-            );
-
-          cards.push(card);
-        } else if (
-          this.props.accessToken &&
-          element.variation.cost_per_item !== null
-        ) {
-          cards.push(
+      /*search if*/
+      //  if (
+      //   element.item.name
+      //     .toUpperCase()
+      //     .includes(this.state.searchText.toUpperCase())
+      // ) {
+      if (!this.props.accessToken) {
+        let card =
+          element.variation.cost_per_item === null ? (
+            <ProductCard
+              // type={1}
+              userDevice={this.props.userDevice}
+              screenWidth={this.props.screenWidth}
+              activeAccount={this.props.activeAccount}
+              item={element.item}
+              variation={element.variation}
+              productInfoLink={`/#/StorePage/${element.item.account}/product_page/${element.item.id}`}
+              linkAllAround={`/#/StorePage/${element.item.account}`}
+              currency={""}
+              productName={`${shortName}.....`}
+              price="הרשם על מנת לראות את המחיר"
+              pictures={element.image}
+            >
+              {" "}
+            </ProductCard>
+          ) : (
             <ProductCard
               // type={1}
               userDevice={this.props.userDevice}
@@ -223,39 +210,63 @@ class HomePage extends React.Component {
               productInfoLink={`/#/StorePage/${element.item.account}/product_page/${element.item.id}`}
               linkAllAround={`/#/StorePage/${element.item.account}`}
               productName={`${shortName}.....`}
-              currency={element.item.currency}
               price={element.variation.cost_per_item}
               pictures={element.image}
+              currency={element.item.currency}
             >
               {" "}
             </ProductCard>
           );
-        } else if (
-          this.props.accessToken &&
-          element.variation.cost_per_item == null
-        )
-          cards.push(
-            <>
+
+        cards.push(card);
+      } else if (
+        this.props.accessToken &&
+        element.variation.cost_per_item !== null
+      ) {
+        cards.push(
+          <ProductCard
+            // type={1}
+            userDevice={this.props.userDevice}
+            screenWidth={this.props.screenWidth}
+            activeAccount={this.props.activeAccount}
+            item={element.item}
+            variation={element.variation}
+            productInfoLink={`/#/StorePage/${element.item.account}/product_page/${element.item.id}`}
+            linkAllAround={`/#/StorePage/${element.item.account}`}
+            productName={`${shortName}.....`}
+            currency={element.item.currency}
+            price={element.variation.cost_per_item}
+            pictures={element.image}
+          >
+            {" "}
+          </ProductCard>
+        );
+      } else if (
+        this.props.accessToken &&
+        element.variation.cost_per_item == null
+      )
+        cards.push(
+          <>
+            {" "}
+            <ProductCard
+              // type={1}
+              userDevice={this.props.userDevice}
+              screenWidth={this.props.screenWidth}
+              activeAccount={this.props.activeAccount}
+              item={element.item}
+              variation={element.variation}
+              productInfoLink={`/#/StorePage/${element.item.account}/product_page/${element.item.id}`}
+              linkAllAround={`/#/StorePage/${element.item.account}`}
+              productName={`${shortName}.....`}
+              price="על מנת לראות את המחיר עליך להיות ברשימת אנשי הקשר של ספק זה"
+              currency={""}
+              pictures={element.image}
+            >
               {" "}
-              <ProductCard
-                // type={1}
-                userDevice={this.props.userDevice}
-                screenWidth={this.props.screenWidth}
-                activeAccount={this.props.activeAccount}
-                item={element.item}
-                variation={element.variation}
-                productInfoLink={`/#/StorePage/${element.item.account}/product_page/${element.item.id}`}
-                linkAllAround={`/#/StorePage/${element.item.account}`}
-                productName={`${shortName}.....`}
-                price="על מנת לראות את המחיר עליך להיות ברשימת אנשי הקשר של ספק זה"
-                currency={""}
-                pictures={element.image}
-              >
-                {" "}
-              </ProductCard>
-            </>
-          );
-      }
+            </ProductCard>
+          </>
+        );
+      // }
     }
 
     // {  <Col xl={4} className="productCardContainer">
@@ -276,6 +287,7 @@ class HomePage extends React.Component {
 
                 </Container> */}
         <Search
+          searchItems={this.searchItems}
           screenWidth={this.props.screenWidth}
           getSearchText={this.getSearchText}
         ></Search>

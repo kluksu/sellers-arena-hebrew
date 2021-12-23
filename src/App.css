@@ -561,6 +561,7 @@ input {
   /* padding: 40px 0px 40px 26px; */
   flex-wrap: wrap;
   justify-content: center;
+  min-height: 200vh;
 
   flex-direction: row;
 }
