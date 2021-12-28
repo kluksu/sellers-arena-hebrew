@@ -27,7 +27,7 @@ class MyOrder extends Component {
   onMountOrUpdate = () => {
     this.props.getSpecificOrder(this.props.match.params.id).then((res) => {
       this.setState({ orderInfo: res.data });
-      console.log(res.data);
+
       // let activeCart =
       //   res.data.seller_edited_snapshot !== null
       //     ? res.data.seller_edited_snapshot
@@ -35,7 +35,7 @@ class MyOrder extends Component {
       this.setState({
         activeCartSellerEdited: res.data.seller_edited_snapshot,
       });
-      console.log(res.data.seller_edited_snapshot);
+
       this.setState({ activeCartSnapshot: res.data.cart_snapshot });
     });
   };
@@ -47,7 +47,6 @@ class MyOrder extends Component {
       this.onMountOrUpdate();
     }
     if (this.props.accessToken !== prevProps.accessToken) {
-      console.log(this.props.accessToken);
       this.onMountOrUpdate();
     }
     if (this.state.orderInfo !== prevState.orderInfo) {

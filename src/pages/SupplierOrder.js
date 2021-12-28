@@ -234,7 +234,6 @@ class SupplierOrder extends React.Component {
     }
     if (this.props.accessToken !== prevProps.accessToken) {
       this.onSupplierOrderMount();
-      console.log(this.props.accessToken);
     }
   }
   onSupplierOrderMount = () => {
@@ -242,14 +241,13 @@ class SupplierOrder extends React.Component {
       let buyerTaxId = data.data.buyer_account.tax_id;
       this.setState({ buyerTaxId: buyerTaxId });
       this.setState({ activeCartStatus: data.data.order_status });
-      console.log(data.data);
+
       this.setState({ activeOrder: data.data });
       let snapShot = data.data["seller_edited_snapshot"]
         ? data.data["seller_edited_snapshot"]
         : data.data["cart_snapshot"];
 
       this.setState({ activeCart: snapShot });
-      console.log(snapShot);
 
       if (
         this.state.activeCart.seller_account !==
@@ -433,9 +431,7 @@ class SupplierOrder extends React.Component {
         </>
       );
     }
-    console.log(this.state.activeCart);
-    console.log(this.props.activeAccount);
-    console.log(this.props.accessToken);
+
     if (
       !this.state.activeCart ||
       !this.props.accessToken ||

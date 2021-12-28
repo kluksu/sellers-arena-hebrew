@@ -828,6 +828,7 @@ input {
   /* margin-bottom: 36px; */
   /* border-radius: 10px; */
   /* border: outset; */
+  flex-direction: row;
   margin: none;
 }
 
@@ -877,7 +878,7 @@ input {
 }
 
 .searchPage .btn {
-  margin: 10px;
+  /* margin: 10px; */
 }
 .CarouslContainer {
   max-width: 80vh;

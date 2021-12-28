@@ -24,7 +24,6 @@ export default class MyUsers extends Component {
       this.props.myUsers.forEach((user) => {
         if (user.id == this.state.selectedUserID) {
           this.setState({ selectedUserInfo: user });
-          console.log(user);
         }
       });
     }
@@ -33,7 +32,6 @@ export default class MyUsers extends Component {
     let userInfo = [];
 
     for (const [key, value] of Object.entries(this.state.selectedUserInfo)) {
-      console.log(typeof value);
       if (typeof value === "object") {
         for (const [innerKey, innerValue] of Object.entries(value[0])) {
           userInfo.push(<div>{`${innerKey} : ${innerValue}`}</div>);

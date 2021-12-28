@@ -569,7 +569,6 @@ class App extends React.Component {
       .get(`${domain}/${BuyerSeller}/?${path}${status}`, config)
       .then((data) => {
         if (data.status == 200) {
-          console.log(data.data.results);
           this.setState({ [state]: data.data.results });
         }
       });

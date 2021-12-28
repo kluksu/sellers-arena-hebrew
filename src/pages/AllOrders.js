@@ -66,7 +66,6 @@ class AllOrders extends Component {
     startDate = `${JSON.stringify(startDate).substring(1, 11)}`;
     this.setState({ fromTodate: `${startDate} - ${endDate}` });
 
-    console.log(startDate);
     axios
       .get(
         `${domain}/${path}/?&submitted_at__gte=${startDate}T23%3a59%3a59&submitted_at__lte=${endDate}T00%3a00%3a00&order_status=${status}${buyerOrSeller}&payment_status=${this.state.paymentStatus}`,
@@ -74,21 +73,18 @@ class AllOrders extends Component {
       )
       .then((data) => {
         if (data.status == 200) {
-          console.log(data);
           this.setState({ activeOrders: data.data.results });
-          // console.log(data.data.results);
+          //
           // this.setState({ [state]: data.data.results });
         }
       });
   };
   componentDidUpdate(prevProps, prevState) {
     if (this.state.paymentStatus !== prevState.paymentStatus) {
-      console.log(this.state.paymentStatus);
     }
     if (this.state.selectedAccountID !== prevState.selectedAccountID) {
       this.props.getAccount(this.state.selectedAccountID).then((res) => {
         this.setState({ selectedAccount: res.data });
-        console.log(res.data);
       });
     }
     if (
@@ -98,7 +94,6 @@ class AllOrders extends Component {
       this.state.selectedOrdersStatus !== prevState.selectedOrdersStatus ||
       this.state.paymentStatus !== prevState.paymentStatus
     ) {
-      console.log(this.state.startDate);
       this.getFilteredOrders(
         this.state.selectedOrdersStatus,
         this.state.startDate,
@@ -107,13 +102,12 @@ class AllOrders extends Component {
       );
     }
     // if (this.state.selectedOrdersStatus !== prevState.selectedOrdersStatus) {
-    //   console.log(this.state.selectedOrdersStatus);
+    //
     //   this.chooseOrdersStatus();
     // }
   }
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
-    console.log(event.target.name);
   };
   // chooseOrdersStatus = () => {
   //   if (this.state.selectedOrdersStatus === "all") {
@@ -130,7 +124,6 @@ class AllOrders extends Component {
   // };
   onMount = () => {};
   render() {
-    console.log(this.props.activeAccount);
     let totalSumBefore = 0;
     let totalSumAfter = 0;
     let contactsArr = [];
@@ -143,7 +136,6 @@ class AllOrders extends Component {
         );
       });
     }
-    console.log(this.props.myUsers);
 
     let myUsersIDs = this.props.myUsers
       ? this.props.myUsers.map((user) => {
@@ -151,7 +143,6 @@ class AllOrders extends Component {
         })
       : null;
 
-    console.log(myUsersIDs);
     let fillterdBymadeBy = [];
 
     this.state.activeOrders.forEach((order) => {
@@ -185,7 +176,6 @@ class AllOrders extends Component {
     });
     let contectsObj = {};
     fillterdBymadeBy.forEach((order) => {
-      console.log(order);
       let account =
         this.props.activeAccount == 2
           ? order.seller_account
@@ -198,8 +188,6 @@ class AllOrders extends Component {
 
     ////////////////////////////////////////////////////////////////////
     let orders = fillterdBymadeBy.map((order) => {
-      console.log(order);
-
       let orderSumBefore =
         order.seller_edited_snapshot !== null
           ? order.seller_edited_snapshot.total_price_before_tax

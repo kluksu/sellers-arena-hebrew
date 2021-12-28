@@ -44,7 +44,7 @@ class OrderSummery extends React.Component {
     )
       .then((res) => {
         if (res.status.includes("successfully")) this.getActiveCart();
-        console.log();
+
         for (const [key, value] of Object.entries(obj.variations_json)) {
           if (value == 0) {
             delete obj.variations_json[key];

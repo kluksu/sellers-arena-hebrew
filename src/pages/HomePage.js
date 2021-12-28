@@ -41,11 +41,11 @@ class HomePage extends React.Component {
       itemsCount: this.getRandomNumberBetween(1, 300),
     };
   }
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.searchText !== prevState.searchText) {
-      this.searchItems();
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (this.state.searchText !== prevState.searchText) {
+  //     this.searchItems();
+  //   }
+  // }
   getSearchText = (searchText) => {
     this.setState({ searchText: searchText });
   };
@@ -71,14 +71,14 @@ class HomePage extends React.Component {
   };
   getItems = () => {
     let random = this.getRandomNumberBetween(1, this.state.itemsCount);
-    console.log(this.state.searchText);
+
     let searchTerm = this.state.searchText;
     // const nextfetch = `${domain}/public-items/?limit=3&offset=${random}`;
     const nextfetch =
       this.state.next !== undefined
         ? this.state.next
         : `${domain}/public-items/?limit=3&search=${searchTerm}`;
-    console.log(nextfetch);
+
     const authorization = !this.props.accessToken
       ? null
       : `Bearer ${this.props.accessToken}`;
@@ -90,7 +90,6 @@ class HomePage extends React.Component {
       .get(nextfetch, config)
       .then(
         (response) => {
-          console.log(response);
           this.setState({ ipmortedItems: response.data.results });
           this.setState({ itemsCount: response.data.count });
           this.setState({ next: response.data.next });

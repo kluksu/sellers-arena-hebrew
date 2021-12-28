@@ -55,12 +55,12 @@ export default class Search extends Component {
     let storeCategoriesButtons = [];
     if (this.props.storeSubCategories) {
       this.props.storeSubCategories.forEach((subCategory) => {
-        let clearAll = subCategory === " אפס חיפוש" ? "warning" : "primary";
+        let clearAll = subCategory === " אפס חיפוש " ? "warning" : "primary";
         let fontSize = this.props.storeSubCategories.length > 15 ? 10 : 12;
         let variant =
           this.props.activeSubCategory === subCategory ? "success" : clearAll;
-
-        let funcCatogory = subCategory === "אפס חיפוש" ? "" : subCategory;
+        //
+        let funcCatogory = subCategory === " אפס חיפוש " ? "" : subCategory;
 
         storeCategoriesButtons.push(
           <Button
@@ -78,7 +78,7 @@ export default class Search extends Component {
       <div className="searchPage">
         {/* {ticker} */}
         <Container
-          // onKeyDown={(event) => handleKeyDown(event, this.props.searchItems)}
+          onKeyDown={(event) => handleKeyDown(event, this.props.searchItems)}
           className="searchContainer"
         >
           {searchLogo}
@@ -94,13 +94,13 @@ export default class Search extends Component {
                 placeholder="...חפש"
               />
             </Form.Group>
-            {/* <Button
+            <Button
               type="button"
               className="w-100"
               onClick={this.props.searchItems}
             >
               חפש
-            </Button> */}
+            </Button>
           </Form>
         </Container>
         <div>{storeCategoriesButtons}</div>

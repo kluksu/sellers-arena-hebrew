@@ -37,8 +37,13 @@ class FiltteredCategoryPage extends React.Component {
       previous: "",
       isColapsed: false,
       selectedCategory: "",
+      searchText: "",
     };
   }
+  getSearchText = (searchText) => {
+    this.setState({ searchText: searchText });
+  };
+
   filterCategory = (category) => {
     let newPhraseArr = [];
     let splitArr = this.props.match.params.name.split("");
@@ -66,11 +71,16 @@ class FiltteredCategoryPage extends React.Component {
   goToStore = () => {
     //    window.location.assign(`/#/storePage/${}`)
   };
+  searchItems = async () => {
+    this.setState({ next: undefined });
+    await this.setState({ showList: [] });
+    this.getItems();
+  };
   getItems = () => {
     const nextfetch =
       this.state.next !== undefined
         ? this.state.next
-        : `${domain}/public-items/?limit=3&offset=0&category=${this.state.selectedCategory}`;
+        : `${domain}/public-items/?limit=3&offset=0&category=${this.state.selectedCategory}&search=${this.state.searchText}`;
     const authorization = !this.props.accessToken
       ? null
       : `Bearer ${this.props.accessToken}`;
@@ -262,6 +272,8 @@ class FiltteredCategoryPage extends React.Component {
 
                 </Container> */}
         <Search
+          getSearchText={this.getSearchText}
+          searchItems={this.searchItems}
           userDevice={this.props.userDevice}
           screenWidth={this.props.screenWidth}
         ></Search>

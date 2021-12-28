@@ -67,6 +67,8 @@ export const getPublicAccountID = (id, accessToken) => {
 
 export function handleKeyDown(event, refreshCallback) {
   if (event.key === "Enter") {
+    event.preventDefault();
+
     refreshCallback();
   }
 }

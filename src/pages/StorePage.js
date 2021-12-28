@@ -123,6 +123,11 @@ class StorePage extends React.Component {
   // <p>{this.state.currentStore.name}</p>
   // <p>{this.state.currentStore.store_address}</p>
   // <p> phone number: {this.state.currentStore.phone_number}</p>
+  getStoreSubCategoriesList = () => {
+    return axios.get(
+      `${domain}/account-subcategories/${this.props.match.params.id}`
+    );
+  };
   getStoreSubCategory = (subCategory) => {
     this.setState({ activeSubCategory: subCategory });
   };
@@ -138,14 +143,20 @@ class StorePage extends React.Component {
   };
   searchItems = async () => {
     this.setState({ next: undefined });
-    await this.setState({ showList: [] });
+    this.setState({ showList: [] });
     this.getItems();
   };
   getItems = (token) => {
+    let searchText =
+      this.state.searchText !== "" ? `&search=${this.state.searchText}` : "";
+    let subcategory =
+      this.state.activeSubCategory !== ""
+        ? `&subcategory=${this.state.activeSubCategory}`
+        : "";
     const next =
-      this.state.next !== undefined
+      this.state.next !== undefined && this.state.next !== null
         ? this.state.next
-        : `${domain}/public-items/?limit=3&offset=0&account_id=${this.props.match.params.id}&search=${this.state.searchText}&subcategory=${this.state.activeSubCategory}`;
+        : `${domain}/public-items/?limit=25&offset=0&account_id=${this.props.match.params.id}${searchText}${subcategory}`;
     const tokenfull = this.props.accessToken ? this.props.accessToken : token;
     const authorization = !this.props.accessToken
       ? null
@@ -155,6 +166,8 @@ class StorePage extends React.Component {
     };
     if (next !== null) {
       axios.get(next, config).then((response) => {
+        this.setState({ next: response.data.next });
+
         response.data.results.forEach((item) => {
           if (item.item_variations.length > 0) {
             this.setState({ loadShowList: true });
@@ -178,7 +191,6 @@ class StorePage extends React.Component {
         // }
 
         this.setState({ itemsLangh: response.data.results.length });
-        this.setState({ next: response.data.next });
       });
     }
     this.setState({ loadShowList: false });
@@ -247,11 +259,27 @@ class StorePage extends React.Component {
         }
       });
     }
-    this.getItems();
+    this.getStoreSubCategoriesList().then((res) => {
+      this.setState({ storeSubCategories: [] });
+      let subCategoies = [];
+      res.data.results.forEach((dual) => {
+        subCategoies = this.state.storeSubCategories;
+        subCategoies.push(dual.subcategory);
+        console.log(subCategoies);
+
+        this.setState({
+          storeSubCategories: subCategoies,
+        });
+      });
+      let apes = this.state.storeSubCategories;
+      apes.push(" אפס חיפוש ");
+
+      this.setState({
+        storeSubCategories: apes,
+      });
+    });
   };
   getContactsList = () => {
-    let contactsArr = [];
-
     if (this.props.activeAccount.account_type == 3) {
       let contactsArr = [];
 
@@ -297,6 +325,8 @@ class StorePage extends React.Component {
     ) {
       this.getContactsList();
     }
+    this.getItems();
+
     this.loadStoreComponent();
 
     /////
@@ -310,10 +340,6 @@ class StorePage extends React.Component {
         : this.state.selectedContactID;
     if (typeof this.state.selectedContactID !== "number") {
       buyer = this.props.activeAccount.id;
-
-      this.setState({
-        cartsError: "אופס, או שלא בחרת לקוח או שיש הזמנה ללקוח זה במערכת",
-      });
     }
     postData(
       `${domain}/cart/`,
@@ -325,50 +351,56 @@ class StorePage extends React.Component {
         seller_account: this.props.match.params.id,
       },
       ` ${this.props.accessToken}`
-    ).then((data) => {
-      this.setState({
-        cartsError: "",
-      });
+    )
+      .then((data) => {
+        this.setState({
+          cartsError: "",
+        });
 
-      this.postAndRetrevData(data.id).then((data) => {
-        this.editItem(data.id, this.state.changedQuantities).then(
-          this.openModal("הצלחה!", "השינויים נוספו בהצלחה"),
-          this.setState({ changedQuantities: {} }),
+        this.postAndRetrevData(data.id).then((data) => {
+          this.editItem(data.id, this.state.changedQuantities).then(
+            this.openModal("הצלחה!", "השינויים נוספו בהצלחה"),
+            this.setState({ changedQuantities: {} }),
 
-          this.setState({ activeCart: data }),
-          getData(
-            `${domain}/cart/${this.state.activeCart.id}/`,
-            "",
-            ` ${this.props.accessToken}`
-          ).then((res) => {
-            // this.setState({ cartsError: "" });
-            this.setState({ activeCart: res });
-          }),
-          this.setState({ LoaderVisibilty: "none" }),
-          this.props.getCarts()
-        );
+            this.setState({ activeCart: data }),
+            getData(
+              `${domain}/cart/${this.state.activeCart.id}/`,
+              "",
+              ` ${this.props.accessToken}`
+            ).then((res) => {
+              // this.setState({ cartsError: "" });
+              this.setState({ activeCart: res });
+            }),
+            this.setState({ LoaderVisibilty: "none" }),
+            this.props.getCarts()
+          );
 
-        if (isChangingPage === true) {
-          if (this.props.activeAccount.account_type == 3) {
-            this.props.checkOut(this.state.activeCart.id).then((res) => {
-              this.props.getAllOrders();
+          if (isChangingPage === true) {
+            if (this.props.activeAccount.account_type == 3) {
+              this.props.checkOut(this.state.activeCart.id).then((res) => {
+                this.props.getAllOrders();
 
-              if (res.order_id) {
-                window.location.assign(`/#/supplier-order/${res.order_id}`);
-              }
-            });
-          } else if (this.props.activeAccount.account_type == 2) {
-            this.postAndRetrevData(this.state.activeCart.id).then(
-              window.location.assign(
-                `/#/order-summery/${this.state.activeCart.id}`
-              )
-            );
+                if (res.order_id) {
+                  window.location.assign(`/#/supplier-order/${res.order_id}`);
+                }
+              });
+            } else if (this.props.activeAccount.account_type == 2) {
+              this.postAndRetrevData(this.state.activeCart.id).then(
+                window.location.assign(
+                  `/#/order-summery/${this.state.activeCart.id}`
+                )
+              );
+            }
           }
-        }
-      });
+        });
 
-      this.setState({ activeCart: data });
-    });
+        this.setState({ activeCart: data });
+      })
+      .catch((res) => {
+        this.setState({
+          cartsError: "אופס, או שלא בחרת לקוח או שיש הזמנה ללקוח זה במערכת",
+        });
+      });
 
     // this.setState({
     //   cartsError: "",
@@ -419,6 +451,14 @@ class StorePage extends React.Component {
     }
   };
   componentDidUpdate(prevProps, prevState) {
+    if (this.state.activeSubCategory !== prevState.activeSubCategory) {
+      if (this.state.activeSubCategory === "אפס חיפוש") {
+        this.setState({ activeSubCategory: "" });
+      }
+      console.log(this.state.activeSubCategory);
+      console.log(this.state.next);
+      this.searchItems();
+    }
     if (this.props.match.params.id !== prevProps.match.params.id) {
       this.getContactsList();
     }
@@ -941,7 +981,11 @@ class StorePage extends React.Component {
               className="homePage"
               dataLength={cards.length}
               next={() => this.getItems()}
-              hasMore={true}
+              hasMore={
+                this.state.next !== null && this.state.next !== undefined
+                  ? true
+                  : false
+              }
               loader={loader}
             >
               <Row className="productCardsRow">

@@ -23,7 +23,7 @@ export default class Wall extends Component {
     this.props.allMessages.forEach((message) => {
       allMessages.push(<WallMessages userInfo={message}></WallMessages>);
     });
-    console.log(this.props.allMessages);
+
     {
       return <div className="wallMessages">{allMessages}</div>;
     }

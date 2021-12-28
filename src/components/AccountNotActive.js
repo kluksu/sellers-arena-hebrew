@@ -4,7 +4,7 @@ import React, { Component } from "react";
 export default class AccountNotActive extends Component {
   render() {
     let display = window.location.href.includes("register") ? "none" : "";
-    console.log(this.props.activeAccount);
+
     let accountNotActive =
       this.props.is_active === false ||
       typeof this.props.activeAccount !== "object" ? (

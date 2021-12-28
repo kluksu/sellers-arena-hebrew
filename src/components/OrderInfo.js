@@ -65,7 +65,6 @@ class OrderInfo extends React.Component {
           this.props.activeCart2.all_item_variations &&
           this.props.activeCart2.all_item_variations[i]
         ) {
-          console.log(this.props.activeCart2.all_item_variations[i], variation);
           eqaul =
             this.props.activeCart2.all_item_variations[i].quantity !==
               variation.quantity ||
@@ -104,7 +103,6 @@ class OrderInfo extends React.Component {
               priceEqualColor = "#fcb0b0";
             }
 
-            console.log(eqaul);
             rowColor = "lightblue";
           }
         }
