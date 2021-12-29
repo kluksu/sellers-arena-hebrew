@@ -88,6 +88,7 @@ class ProductCard extends React.Component {
     if (this.props.type == 10) {
       return (
         <Col
+          onKeyDown={(event) => event.preventDefault()}
           xl={2}
           lg={4}
           className={`productCardContainer  zoomCard ${cardZoom} ${this.props.extraClassName}`}

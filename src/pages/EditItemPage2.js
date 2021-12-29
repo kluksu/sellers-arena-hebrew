@@ -78,7 +78,7 @@ class EditItemPage2 extends React.Component {
   getCropedBlob = (blob) => {
     this.setState({ pictures: blob });
   };
-  componentDidMount() {
+  getItemDits = () => {
     const config = {
       headers: {
         Authorization: `Bearer ${this.props.accessToken}`,
@@ -91,8 +91,16 @@ class EditItemPage2 extends React.Component {
       .then((res) => {
         this.setState({ selectedItemDits: res.data });
       });
+  };
+  componentDidMount() {
+    if (this.props.accessToken) {
+      this.getItemDits();
+    }
   }
   componentDidUpdate(prevProps, prevState) {
+    if (this.props.accessToken !== prevProps.accessToken) {
+      this.getItemDits();
+    }
     if (this.state.selectedItemDits !== prevState.selectedItemDits) {
       let res = this.state.selectedItemDits;
 

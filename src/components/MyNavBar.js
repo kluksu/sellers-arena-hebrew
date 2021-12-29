@@ -71,21 +71,21 @@ class MyNavBar extends React.Component {
   // fulfilledOrders={this.state.fulfilledOrders}
   // sellerApprovedOrders={this.state.sellerApprovedOrders}
   render() {
-    let allOrders = <Nav.Link href="/?#/all-orders">כל ההזמנות</Nav.Link>;
+    let allOrders = <Nav.Link href="/#/all-orders">כל ההזמנות</Nav.Link>;
     let path =
       this.props.activeAccount && this.props.activeAccount.account_type == 2
         ? "my-order"
         : "supplier-order";
     let wall =
       this.props.activeAccount && this.props.activeAccount.account_type == 2 ? (
-        <Nav.Link href="/?#/wall"> בית</Nav.Link>
+        <Nav.Link href="/#/wall"> בית</Nav.Link>
       ) : null;
     let vibretOrders =
       this.props.MySupplierOrders.length > 0
         ? "animate__animated animate__headShake animate__repeat-3		"
         : "";
     let profile = this.props.activeAccount ? (
-      <NavLink href="/?#/me">
+      <NavLink href="/#/me">
         {" "}
         <BsPerson></BsPerson>
       </NavLink>
@@ -93,7 +93,7 @@ class MyNavBar extends React.Component {
 
     let rootButton =
       this.props.activeAccount && this.props.activeAccount.id == 1 ? (
-        <Nav.Link href="/?#/rootPage">משתמש ראשי</Nav.Link>
+        <Nav.Link href="/#/rootPage">משתמש ראשי</Nav.Link>
       ) : null;
     let newOrderAwating =
       this.props.MySupplierOrders.length > 0
@@ -106,7 +106,7 @@ class MyNavBar extends React.Component {
           ? fulfilledorder.buyer_account.name
           : fulfilledorder.seller_account.name;
       awaitingPayment.push(
-        <NavDropdown.Item href={`/?#/${path}/${fulfilledorder.id}`}>
+        <NavDropdown.Item href={`/#/${path}/${fulfilledorder.id}`}>
           {sellerOrBuyer}
         </NavDropdown.Item>
       );
@@ -135,7 +135,7 @@ class MyNavBar extends React.Component {
           ? approvedOrder.buyer_account.name
           : approvedOrder.seller_account.name;
       waitingDeliveryArr.push(
-        <NavDropdown.Item href={`/?#/${path}/${approvedOrder.id}`}>
+        <NavDropdown.Item href={`/#/${path}/${approvedOrder.id}`}>
           {buyerOrSeller}
         </NavDropdown.Item>
       );
@@ -151,18 +151,18 @@ class MyNavBar extends React.Component {
       ) : null;
     }
     const controlPanel = this.props.activeAccount ? (
-      <Nav.Link href="/?#/control_panel">
+      <Nav.Link href="/#/control_panel">
         <CgMenuGridR />
       </Nav.Link>
     ) : null;
     // const massages = this.props.accessToken ? (
     //   <NavDropdown title={<AiOutlineMail />}>
     //     {" "}
-    //     <NavDropdown.Item href="/?#/todays-messages/">
+    //     <NavDropdown.Item href="/#/todays-messages/">
     //       {" "}
     //       today`s massages
     //     </NavDropdown.Item>
-    //     <NavDropdown.Item href="/?#/today-messages/">
+    //     <NavDropdown.Item href="/#/today-messages/">
     //       {" "}
     //       all massages
     //     </NavDropdown.Item>
@@ -172,7 +172,7 @@ class MyNavBar extends React.Component {
     const user_account =
       this.props.accessToken && this.props.userAccounts == 0 ? (
         <>
-          <Nav.Link href="/?#/openAccount">צור חשבון</Nav.Link>{" "}
+          <Nav.Link href="/#/openAccount">צור חשבון</Nav.Link>{" "}
         </>
       ) : null;
     const register = !this.props.accessToken ? (
@@ -180,7 +180,7 @@ class MyNavBar extends React.Component {
         className={
           "animate__animated animate__headShake animate__infinite animate__slower animate__delay-2s	"
         }
-        href="/?#/register"
+        href="/#/register"
       >
         הירשם
       </Nav.Link>
@@ -205,8 +205,8 @@ class MyNavBar extends React.Component {
         this.props.activeAccount.account_type == 3 ? (
           <>
             {" "}
-            <Nav.Link href="/?#/uploadpage">העלאת מוצר</Nav.Link>
-            <Nav.Link href="/?#/add_items">עריכת מוצר</Nav.Link>
+            <Nav.Link href="/#/uploadpage">העלאת מוצר</Nav.Link>
+            <Nav.Link href="/#/add_items">עריכת מוצר</Nav.Link>
           </>
         ) : (
           ""
@@ -216,7 +216,7 @@ class MyNavBar extends React.Component {
       this.props.MyShoppingCarts.forEach((cart) => {
         this.props.getAccount(cart.buyer_account).then((res) => {
           cartDropDown.push(
-            <NavDropdown.Item href={`/?#/StorePage/${cart.seller_account}`}>
+            <NavDropdown.Item href={`/#/StorePage/${cart.seller_account}`}>
               {res.data.name}{" "}
               <Button
                 onClick={() => this.openModal(cart)}
@@ -248,7 +248,7 @@ class MyNavBar extends React.Component {
             ? order.buyer_account.name
             : order.seller_account.name;
         ordersArr.push(
-          <NavDropdown.Item href={`/?#/${path}/${order.id}`}>
+          <NavDropdown.Item href={`/#/${path}/${order.id}`}>
             {buyerOrSeller}{" "}
           </NavDropdown.Item>
         );
@@ -264,7 +264,7 @@ class MyNavBar extends React.Component {
     }
 
     let brand = this.props.activeAccount ? (
-      <Navbar.Brand href="/?#/">
+      <Navbar.Brand href="/#/">
         {/*this.props.activeAccount.id*/}
         {logo}
       </Navbar.Brand>
@@ -274,7 +274,7 @@ class MyNavBar extends React.Component {
     let creatNewSupplierOrder =
       this.props.activeAccount &&
       this.props.activeAccount.account_type === 3 ? (
-        <Nav.Link href={`/?#/StorePage/${this.props.activeAccount.id}`}>
+        <Nav.Link href={`/#/StorePage/${this.props.activeAccount.id}`}>
           צור הזמנה
         </Nav.Link>
       ) : null;
@@ -305,10 +305,10 @@ class MyNavBar extends React.Component {
           />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="ml-auto">
-              <Nav.Link href="/?#/">ראשי</Nav.Link>
-              {/* <Nav.Link href="/?#/features">שימושים</Nav.Link> */}
-              <Nav.Link href="/?#/pricing">מחירון</Nav.Link>
-              <Nav.Link href="/?#/suppliers">ספקים</Nav.Link>
+              <Nav.Link href="/#/">ראשי</Nav.Link>
+              {/* <Nav.Link href="/#/features">שימושים</Nav.Link> */}
+              <Nav.Link href="/#/pricing">מחירון</Nav.Link>
+              <Nav.Link href="/#/suppliers">ספקים</Nav.Link>
             </Nav>
             <Nav>
               {rootButton}

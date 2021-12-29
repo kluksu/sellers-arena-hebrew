@@ -327,7 +327,7 @@ class SupplierOrder extends React.Component {
     let discountForm =
       this.state.activeCartStatus === "submitted" ||
       this.state.activeCartStatus === "seller_approved" ? (
-        <Form>
+        <Form onKeyDown={(event) => event.preventDefault()}>
           <Form.Group controlId="exampleForm.ControlSelect1">
             <Form.Label className="no-print"> precentage discount</Form.Label>
             <Form.Control
@@ -347,6 +347,7 @@ class SupplierOrder extends React.Component {
       buttons = (
         <>
           <Button
+            type="button"
             className="  no-print"
             variant="success"
             onClick={() =>

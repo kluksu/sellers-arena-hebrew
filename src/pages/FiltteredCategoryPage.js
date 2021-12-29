@@ -38,6 +38,7 @@ class FiltteredCategoryPage extends React.Component {
       isColapsed: false,
       selectedCategory: "",
       searchText: "",
+      hasMore: false,
     };
   }
   getSearchText = (searchText) => {
@@ -77,6 +78,7 @@ class FiltteredCategoryPage extends React.Component {
     this.getItems();
   };
   getItems = () => {
+    this.setState({ hasMore: false });
     const nextfetch =
       this.state.next !== undefined
         ? this.state.next
@@ -91,6 +93,9 @@ class FiltteredCategoryPage extends React.Component {
       (response) => {
         this.setState({ ipmortedItems: response.data.results });
         this.setState({ next: response.data.next });
+        if (response.data.results !== null) {
+          this.setState({ hasMore: true });
+        }
         for (let i = 0; i < this.state.ipmortedItems.length; i++) {
           const item = this.state.ipmortedItems[i];
           axios
@@ -302,7 +307,7 @@ class FiltteredCategoryPage extends React.Component {
               className="homePage"
               dataLength={cards.length}
               next={() => this.getItems()}
-              hasMore={true}
+              hasMore={this.state.hasMore}
               loader={<h4>Loading...</h4>}
             >
               <Row>{cards}</Row>

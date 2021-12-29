@@ -7,6 +7,7 @@ import ProductCard from "../components/ProductCard";
 import EditItemPage2 from "../pages/EditItemPage2";
 import { HashRouter, Route, withRouter } from "react-router-dom";
 import { domain } from "../components/utils";
+import { isThisSecond } from "date-fns";
 
 class AddMyItems extends React.Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class AddMyItems extends React.Component {
   getSearchText = (searchText) => {
     this.setState({ searchText: searchText });
   };
-  componentDidMount = () => {
+  getMyItems = () => {
     let categories = [];
     let categoriesList = {};
 
@@ -33,29 +34,44 @@ class AddMyItems extends React.Component {
         "Content-Type": "application/json",
       },
     };
-    axios.get(`${domain}/items/`, config).then((response) => {
-      for (let i = 0; i < response.data.results.length; i++) {
-        const item = response.data.results[i];
-        const category = item.category;
-        let subcategory = item.subcategory;
-        let fullItem = { category: category, item: item };
-        this.setState({
-          fullItemsList: this.state.fullItemsList.concat(fullItem),
-        });
-        if (!(`${category}` in categoriesList)) {
-          categoriesList[category] = category;
-          categories.push(category);
+    axios
+      .get(
+        `${domain}/items/?limit=1&account_id=${this.props.activeAccount.id}`,
+        config
+      )
+      .then((response) => {
+        for (let i = 0; i < response.data.results.length; i++) {
+          const item = response.data.results[i];
+          const category = item.category;
+          let subcategory = item.subcategory;
+          let fullItem = { category: category, item: item };
+          this.setState({
+            fullItemsList: this.state.fullItemsList.concat(fullItem),
+          });
+          if (!(`${category}` in categoriesList)) {
+            categoriesList[category] = category;
+            categories.push(category);
+          }
+          //    for (let j = 0; j < item.item_variations.length; j++) {
+          //        const variation =  item.item_variations[j];
+          //        let fullItem={category:category, item:item, variation:variation}
+          //        this.setState({fullItemsList:this.state.fullItemsList.concat(fullItem)})
+          //
+          //    } this.setState({categories:categories})
+          //
         }
-        //    for (let j = 0; j < item.item_variations.length; j++) {
-        //        const variation =  item.item_variations[j];
-        //        let fullItem={category:category, item:item, variation:variation}
-        //        this.setState({fullItemsList:this.state.fullItemsList.concat(fullItem)})
-        //
-        //    } this.setState({categories:categories})
-        //
-      }
-      //////////////////////////////////////////////////////////////
-    });
+        //////////////////////////////////////////////////////////////
+      });
+  };
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.activeAccount !== prevProps.activeAccount) {
+      this.getMyItems();
+    }
+  }
+  componentDidMount = () => {
+    if (this.props.accessToken) {
+      this.getMyItems();
+    }
   };
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });

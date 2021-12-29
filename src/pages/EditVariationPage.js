@@ -45,9 +45,28 @@ class EditVariationPage extends React.Component {
       image: picture,
     });
   }
+  removeVars = (key) => {
+    this.setState({
+      varsInfo: Object.assign(
+        {},
+        this.state.varsInfo,
+        delete this.state.varsInfo[key]
+      ),
+    });
+  };
+  removeDiscount = (key) => {
+    this.setState({
+      discounts: Object.assign(
+        {},
+        this.state.discounts,
+        delete this.state.discounts[key]
+      ),
+    });
+  };
   deleteInnerVariation = (key) => {
     let obj = this.state.newVariations;
     delete obj[key];
+
     this.setState({ newVariations: obj });
   };
   deletDiscount = (key) => {
@@ -131,6 +150,8 @@ class EditVariationPage extends React.Component {
 
   updateObj = (key, value) => {
     let obj = {};
+    key = key.trim();
+    value = value.trim();
     obj[key] = value;
     this.setState({
       varsInfo: Object.assign({}, this.state.varsInfo, { [key]: value }),
@@ -138,6 +159,8 @@ class EditVariationPage extends React.Component {
   };
   updateDiscounts = (key, value) => {
     let discounts = {};
+    key = key.trim();
+    value = value.trim();
     discounts[key] = value;
     this.setState({
       discounts: Object.assign({}, this.state.discounts, {
@@ -248,6 +271,7 @@ class EditVariationPage extends React.Component {
     for (let i = 0; i < this.state.varCounter; i++) {
       varform.push(
         <AddVars
+          removeVars={this.removeVars}
           varCounter={this.state.varCounter}
           addVar={this.addVar}
           updateObj={this.updateObj}
@@ -258,6 +282,7 @@ class EditVariationPage extends React.Component {
     for (let i = 0; i < this.state.discountCounter; i++) {
       discounts.push(
         <QuantityDiscount
+          removeDiscount={this.removeDiscount}
           updateDiscounts={this.updateDiscounts}
           discountCounter={this.state.discountCounter}
           addDiscount={this.addDiscount}

@@ -147,51 +147,53 @@ class StorePage extends React.Component {
     this.getItems();
   };
   getItems = (token) => {
-    let searchText =
-      this.state.searchText !== "" ? `&search=${this.state.searchText}` : "";
-    let subcategory =
-      this.state.activeSubCategory !== ""
-        ? `&subcategory=${this.state.activeSubCategory}`
-        : "";
-    const next =
-      this.state.next !== undefined && this.state.next !== null
-        ? this.state.next
-        : `${domain}/public-items/?limit=25&offset=0&account_id=${this.props.match.params.id}${searchText}${subcategory}`;
-    const tokenfull = this.props.accessToken ? this.props.accessToken : token;
-    const authorization = !this.props.accessToken
-      ? null
-      : `Bearer ${tokenfull}`;
-    const config = {
-      headers: { "Content-Type": "application/json", authorization },
-    };
-    if (next !== null) {
-      axios.get(next, config).then((response) => {
-        this.setState({ next: response.data.next });
+    if (this.props.accessToken) {
+      let searchText =
+        this.state.searchText !== "" ? `&search=${this.state.searchText}` : "";
+      let subcategory =
+        this.state.activeSubCategory !== ""
+          ? `&subcategory=${this.state.activeSubCategory}`
+          : "";
+      const next =
+        this.state.next !== undefined && this.state.next !== null
+          ? this.state.next
+          : `${domain}/public-items/?limit=25&offset=0&account_id=${this.props.match.params.id}${searchText}${subcategory}`;
+      const tokenfull = this.props.accessToken ? this.props.accessToken : token;
+      const authorization = !this.props.accessToken
+        ? null
+        : `Bearer ${tokenfull}`;
+      const config = {
+        headers: { "Content-Type": "application/json", authorization },
+      };
+      if (next !== null) {
+        axios.get(next, config).then((response) => {
+          this.setState({ next: response.data.next });
 
-        response.data.results.forEach((item) => {
-          if (item.item_variations.length > 0) {
-            this.setState({ loadShowList: true });
-            return;
-          } else if (
-            response.data.results.length > 0 &&
-            item.item_variations.length === 0
-          ) {
-            this.setState({ loadMoreItems: true });
-            return;
+          response.data.results.forEach((item) => {
+            if (item.item_variations.length > 0) {
+              this.setState({ loadShowList: true });
+              return;
+            } else if (
+              response.data.results.length > 0 &&
+              item.item_variations.length === 0
+            ) {
+              this.setState({ loadMoreItems: true });
+              return;
+            }
+          });
+          if (this.state.loadMoreItems === true) {
+            this.getItems();
           }
-        });
-        if (this.state.loadMoreItems === true) {
-          this.getItems();
-        }
-        ////not sure
-        // if (this.state.loadShowList === true ) {
-        this.setState({
-          showList: this.state.showList.concat(response.data.results),
-        });
-        // }
+          ////not sure
+          // if (this.state.loadShowList === true ) {
+          this.setState({
+            showList: this.state.showList.concat(response.data.results),
+          });
+          // }
 
-        this.setState({ itemsLangh: response.data.results.length });
-      });
+          this.setState({ itemsLangh: response.data.results.length });
+        });
+      }
     }
     this.setState({ loadShowList: false });
     this.setState({ loadMoreItems: false });
@@ -451,6 +453,9 @@ class StorePage extends React.Component {
     }
   };
   componentDidUpdate(prevProps, prevState) {
+    if (this.props.accessToken !== prevProps.accessToken) {
+      this.getItems();
+    }
     if (this.state.activeSubCategory !== prevState.activeSubCategory) {
       if (this.state.activeSubCategory === "אפס חיפוש") {
         this.setState({ activeSubCategory: "" });
