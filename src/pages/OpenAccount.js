@@ -204,12 +204,12 @@ export default class OpenAccount extends Component {
             </Form.Group>
           </Form>
           <br></br>
-          <Recaptcha
+          {/* <Recaptcha
             sitekey="6LeVP1MdAAAAAIiCocQV_iqctlgartuvAu9LHfn8"
             render="explicit"
             onloadCallback={this.props.reCaptchaLoded}
             verifyCallback={this.props.verifyCallback}
-          />
+          /> */}
           <p className="FormRejects">{this.state.captchaError}</p>
           <Button onClick={this.creatAccount} type="button">
             {" "}
