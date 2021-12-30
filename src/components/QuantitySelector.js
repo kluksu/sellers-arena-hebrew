@@ -46,6 +46,7 @@ export default class QuantitySelector extends Component {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
   };
   componentDidMount() {
+    console.log(this.props.stockWarnning, this.props.inStock);
     this.setState({ units: this.props.value });
   }
   componentDidUpdate(prevProps, prevState) {
@@ -135,14 +136,14 @@ export default class QuantitySelector extends Component {
               -
             </Button>
           </div>
-          {this.state.stockWarnning ? (
-            <div
-              className="no-print"
-              style={{ background: this.props.stockWarnning }}
-            >
-              מלאי זמין: {this.props.inStock}
-            </div>
-          ) : null}
+          {/* {this.props.stockWarnning ? ( */}
+          <div
+            className="no-print"
+            style={{ background: this.props.stockWarnning }}
+          >
+            מלאי זמין: {this.props.inStock}
+          </div>
+          {/* ) : null} */}
           <p className="FormRejects">{this.state.notice}</p>
         </>
       );
