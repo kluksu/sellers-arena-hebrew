@@ -46,6 +46,7 @@ import Wall from "./pages/Wall";
 import WallMessages from "./components/WallMessages";
 import MyOrder from "./pages/MyOrder";
 import AllOrders from "./pages/AllOrders";
+import BulkEditing from "./pages/BulkEditing";
 //${domain}/
 class App extends React.Component {
   constructor(props) {
@@ -96,6 +97,39 @@ class App extends React.Component {
       myUsers: [],
     };
   }
+
+  patchVariation = (varID, inStock, price, batch) => {
+    const authorization = !this.state.accessToken
+      ? null
+      : `Bearer ${this.state.accessToken}`;
+    const config = {
+      headers: { "Content-Type": "application/json", authorization },
+    };
+    return axios.patch(
+      `${domain}/item-variations/${varID}/`,
+      {
+        cost_per_item: price,
+        batch_size: batch,
+        amount_in_stock: inStock,
+
+        // "variation": {},
+        // "discounts": {},
+        // "image": "string",
+        // "item": 0,
+        // "description": "string"
+      },
+      config
+    );
+  };
+  getMyItems = () => {
+    const authorization = !this.state.accessToken
+      ? null
+      : `Bearer ${this.state.accessToken}`;
+    const config = {
+      headers: { "Content-Type": "application/json", authorization },
+    };
+    return axios.get(`${domain}/items/`, config);
+  };
   // handleKeyDown = (event, refreshCallback) => {
   //   if (event.key === "Enter") {
   //     refreshCallback();
@@ -858,7 +892,6 @@ class App extends React.Component {
             </Form.Group>
             {showMasseges}
           </ul>
-
           <MyNavBar
             handleKeyDown={this.handleKeyDown}
             getAccount={this.getAccount}
@@ -882,7 +915,6 @@ class App extends React.Component {
             loginPostData={this.loginPostData}
           ></MyNavBar>
           {messagesButton}
-
           <Route exact path="/">
             <HomePage
               userDevice={this.state.userDevice}
@@ -944,7 +976,6 @@ class App extends React.Component {
               accessToken={this.state.accessToken}
             ></Wall>
           </Route>
-
           <Route exact path="/ProductVaritionPage/:id">
             <ProductVaritionPage
               closeGenericModal={this.closeGenericModal}
@@ -1042,7 +1073,6 @@ class App extends React.Component {
               activeAccount={this.state.activeAccount}
             ></SupplierOrder>
           </Route>
-
           <Route exact path="/control_panel/">
             <ControlPanel
               myUsers={this.state.myUsers}
@@ -1055,6 +1085,16 @@ class App extends React.Component {
               activeAccount={this.state.activeAccount}
               accessToken={this.state.accessToken}
             ></ControlPanel>
+          </Route>{" "}
+          <Route exact path="/edit-multiple/">
+            <BulkEditing
+              patchVariation={this.patchVariation}
+              getMyItems={this.getMyItems}
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
+              accessToken={this.state.accessToken}
+              activeAccount={this.state.activeAccount}
+            ></BulkEditing>
           </Route>
           <Route exact path="/control_panel/:name">
             <ControlPanel
@@ -1111,7 +1151,6 @@ class App extends React.Component {
               accessToken={this.state.accessToken}
             ></AllOrders>
           </Route>
-
           <NewMessageModal
             removeContact={this.removeContact}
             postAndGetContacts={this.postAndGetContacts}

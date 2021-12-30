@@ -9,6 +9,7 @@ import {
   Nav,
   Navbar,
   NavDropdown,
+  NavItem,
   NavLink,
   Row,
 } from "react-bootstrap";
@@ -206,7 +207,11 @@ class MyNavBar extends React.Component {
           <>
             {" "}
             <Nav.Link href="/#/uploadpage">העלאת מוצר</Nav.Link>
-            <Nav.Link href="/#/add_items">עריכת מוצר</Nav.Link>
+            <NavDropdown title="עריכת מוצר">
+              {" "}
+              <NavLink href="/#/add_items">עריכת מוצר</NavLink>
+              <NavLink href="/#/edit-multiple">עריכה מהירה</NavLink>
+            </NavDropdown>
           </>
         ) : (
           ""

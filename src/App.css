@@ -717,6 +717,32 @@ input {
 .table th {
   vertical-align: middle !important;
 }
+.BulkEditingPage img {
+  height: 90px;
+}
+.BulkEditingPage {
+  padding-top: 80px;
+}
+.BulkEditingPage thead {
+  position: sticky;
+  top: 0;
+  background-color: #fafafa;
+  height: 97px;
+}
+.BulkEditingPage .form-control {
+  text-align: center;
+  align-items: center;
+  font-weight: 800;
+  border: none;
+}
+.BulkEditingPage .btn {
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in;
+}
+.BulkEditingPage > div:first-of-type {
+  padding: 15px;
+  background-color: rgb(255, 154, 38);
+}
 .table-bordered thead td,
 .table-bordered thead th {
   white-space: nowrap;
