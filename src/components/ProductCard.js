@@ -16,6 +16,7 @@ class ProductCard extends React.Component {
     this.setState({ notice: notice });
   };
   render() {
+    console.log(this.props);
     //not sure
     let cardZoom = this.props.screenWidth > 1000 ? "" : "scale(1)";
     //not sure
@@ -88,7 +89,7 @@ class ProductCard extends React.Component {
     if (this.props.type == 10) {
       return (
         <Col
-          onKeyDown={(event) => event.preventDefault()}
+          onSubmit={(event) => event.preventDefault()}
           xl={2}
           lg={4}
           className={`productCardContainer  zoomCard ${cardZoom} ${this.props.extraClassName}`}

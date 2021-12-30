@@ -135,6 +135,14 @@ export default class QuantitySelector extends Component {
               -
             </Button>
           </div>
+          {this.state.stockWarnning ? (
+            <div
+              className="no-print"
+              style={{ background: this.props.stockWarnning }}
+            >
+              מלאי זמין: {this.props.inStock}
+            </div>
+          ) : null}
           <p className="FormRejects">{this.state.notice}</p>
         </>
       );

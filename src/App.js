@@ -478,12 +478,20 @@ class App extends React.Component {
     const config = {
       headers: { "Content-Type": "application/json", authorization },
     };
-    axios.delete(`${domain}/cart/${cart}`, config).then((data) => {
-      if (data.status == 204) {
-        this.getCarts();
-        window.location.assign("/#/");
-      }
-    });
+    axios
+      .delete(`${domain}/cart/${cart}`, config)
+      .then((data) => {
+        if (data.status == 204) {
+          this.getCarts();
+          window.location.assign("/#/");
+        }
+      })
+      .catch((error) => {
+        this.openGenericModal(
+          "אופס",
+          "הפעולה נכשלה, ייתכן שהעגלה הזו כבר נמחקה או שההזמנה נשלחה לספק, אם הבעיה נמשכת נסה לרענן את העמוד"
+        );
+      });
   };
   resize() {
     this.setState({ screenWidth: window.innerWidth });

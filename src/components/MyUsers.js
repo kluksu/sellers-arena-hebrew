@@ -48,7 +48,7 @@ export default class MyUsers extends Component {
     return (
       <div className="registerPage">
         <Container
-          onKeyDown={(event) => event.preventDefault()}
+          onSubmit={(event) => event.preventDefault()}
           className="registerContainer"
         >
           <Form.Group controlId="exampleForm.ControlSelect1">

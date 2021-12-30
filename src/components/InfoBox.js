@@ -57,6 +57,10 @@ export default class InfoBox extends Component {
               <td>מחיר ליחידה</td>
               <td>{cost_per_item}</td>
             </tr>
+            <tr>
+              <td>תיאור</td>
+              <td>{this.props.item.description}</td>
+            </tr>
             {varArr}
             {info}
             {this.props.link}

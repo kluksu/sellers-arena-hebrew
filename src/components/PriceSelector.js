@@ -45,7 +45,11 @@ export default class PriceSelector extends Component {
   };
   render() {
     return (
-      <Form onKeyDown={(event) => event.preventDefault()}>
+      <Form
+        onSubmit={(event) => {
+          event.preventDefault();
+        }}
+      >
         <Form.Group controlId="exampleForm.ControlInput1">
           <Form.Control
             disabled={this.props.isPriceFiledDisabled}

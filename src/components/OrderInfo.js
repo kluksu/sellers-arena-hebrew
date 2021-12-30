@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { Component } from "react";
 import { Table, Container } from "react-bootstrap";
 import { withRouter } from "react-router-dom";
@@ -11,16 +12,29 @@ class OrderInfo extends React.Component {
     this.state = {
       // notice: "",
       activeCart: "",
+      itemsQuantityArr: {},
     };
   }
 
   // getNotice = (notice) => {
   //   this.setState({ notice: notice });
   // };
+  getItemDits = (itemID) => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${this.props.accessToken}`,
+        "Content-Type": "application/json",
+      },
+    };
+
+    return axios.get(`${domain}/item-variations/${itemID}/`, config);
+  };
   componentDidUpdate(prevProps, prevState) {
     if (this.props.activeCart !== prevProps.activeCart) {
+      this.getQuantities();
     }
   }
+
   componentDidMount() {
     if (
       this.props.activeAccount &&
@@ -38,9 +52,25 @@ class OrderInfo extends React.Component {
       this.props.activeAccount.account_type == 3
     ) {
       this.setState({ activeCart: this.props.activeCart });
+      this.getQuantities();
     }
   }
-
+  getQuantities = () => {
+    this.props.activeCart.all_item_variations.forEach((variation, i) => {
+      this.getItemDits(variation.item_variation.id).then((res) => {
+        let obj = this.state.itemsQuantityArr;
+        obj[variation.item_variation.id] = res.data.amount_in_stock;
+        this.setState((prevState) => {
+          let obj = Object.assign({}, prevState.itemsQuantityArr); // creating copy of state variable jasper
+          obj[variation.item_variation.id] = res.data.amount_in_stock;
+        });
+        this.setState({
+          itemsQuantityArr: obj,
+        });
+        console.log(this.state.itemsQuantityArr);
+      });
+    });
+  };
   render() {
     // let tableDirection = this.props.screenWidth > 774 ? "" : "horizontal";
     let variationArr = [];
@@ -51,6 +81,8 @@ class OrderInfo extends React.Component {
       this.props.activeCart.all_item_variations
     ) {
       this.props.activeCart.all_item_variations.forEach((variation, i) => {
+        let inStock = this.state.itemsQuantityArr[variation.item_variation.id];
+
         let rowColor = "";
         let priceEqualColor = "";
         let quantityEqualcolor = "";
@@ -59,6 +91,7 @@ class OrderInfo extends React.Component {
             ? this.props.activeCart2.all_item_variations[i]
             : null;
 
+        let stockWarnning = inStock < variation.quantity ? "#fcb0b0" : "";
         let eqaul = true;
         if (
           this.props.activeCart2 &&
@@ -136,6 +169,9 @@ class OrderInfo extends React.Component {
         let quantity =
           this.props.isChangable === true ? (
             <QuantitySelector
+              stockWarnning={stockWarnning}
+              getItemDits={this.getItemDits}
+              inStock={inStock}
               activateStageChangesButton={this.props.activateStageChangesButton}
               orderID={this.props.orderID}
               changedQuantities={this.props.changedQuantities}
@@ -153,7 +189,10 @@ class OrderInfo extends React.Component {
             variation.quantity
           );
         variationArr.push(
-          <tr className="orderRow" style={{ background: rowColor }}>
+          <tr
+            className="orderRow "
+            style={{ background: `${rowColor}${/*stockWarnning*/ ""}` }}
+          >
             <td>{variation.item_variation.id}</td>
 
             <td>{variation.item_variation.item.name}</td>
