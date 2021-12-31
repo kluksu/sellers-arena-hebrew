@@ -142,6 +142,7 @@ body {
 }
 .navbar.navbar-expand-xl.navbar-light.bg-light {
   background-color: white !important;
+  white-space: nowrap;
   z-index: 10000000000000000000;
 }
 
@@ -720,29 +721,54 @@ input {
 .BulkEditingPage img {
   height: 90px;
 }
-.BulkEditingPage {
-  padding-top: 80px;
-}
+
 .BulkEditingPage thead {
   position: sticky;
   top: 0;
   background-color: #fafafa;
   height: 97px;
 }
+@media only screen and (max-width: 1268px) {
+  .BulkEditingPage .form-control {
+    text-align: center;
+    align-items: center;
+    font-weight: 800;
+    /* border: none; */
+    min-width: max-content;
+    /* background-color: lightgrey; */
+  }
+
+  .BulkEditingPage {
+    width: 100%;
+    overflow-y: hidden;
+    height: fit-content;
+  }
+  .BulkEditingPage:hover {
+    overflow-y: scroll;
+  }
+}
+
 .BulkEditingPage .form-control {
   text-align: center;
   align-items: center;
   font-weight: 800;
-  border: none;
+  /* border: none; */
+  min-width: max-content;
+  /* background-color: lightgrey; */
 }
-.BulkEditingPage .btn {
-  transition-duration: 0.2s;
-  transition-timing-function: ease-in;
-}
-.BulkEditingPage > div:first-of-type {
+
+.myItemsSearch {
+  margin-top: 80px;
   padding: 15px;
   background-color: rgb(255, 154, 38);
 }
+.BulkEditingPage {
+  width: 100%;
+  height: fit-content;
+}
+.BulkEditingPage:hover {
+}
+
 .table-bordered thead td,
 .table-bordered thead th {
   white-space: nowrap;

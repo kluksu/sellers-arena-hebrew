@@ -55,7 +55,9 @@ export default class BulkEditRow extends Component {
         <td>
           {" "}
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label></Form.Label>
+            <Form.Label>
+              {this.props.screenWidth <= 1268 ? "מנה" : null}
+            </Form.Label>
             <Form.Control
               onChange={this.handleChange}
               type="number"
@@ -68,7 +70,9 @@ export default class BulkEditRow extends Component {
         </td>
         <td>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label></Form.Label>
+            <Form.Label>
+              {this.props.screenWidth <= 1268 ? "מחיר" : null}
+            </Form.Label>
             <Form.Control
               type="number"
               onChange={this.handleChange}
@@ -80,7 +84,9 @@ export default class BulkEditRow extends Component {
         </td>
         <td>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label></Form.Label>
+            <Form.Label>
+              {this.props.screenWidth <= 1268 ? "מלאי" : null}
+            </Form.Label>
             <Form.Control
               type="number"
               onChange={this.handleChange}
@@ -90,7 +96,7 @@ export default class BulkEditRow extends Component {
             <Form.Text></Form.Text>
           </Form.Group>
         </td>
-        <td>{this.props.variation.description}</td>
+        {/* <td>{this.props.variation.description}</td> */}
         <td>
           <Button
             variant={this.state.buttonVar}

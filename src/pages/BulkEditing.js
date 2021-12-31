@@ -52,6 +52,7 @@ export default class BulkEditing extends Component {
           console.log(variation);
           rowsArr.push(
             <BulkEditRow
+              screenWidth={this.props.screenWidth}
               item={item}
               patchVariation={this.props.patchVariation}
               variation={variation}
@@ -61,20 +62,8 @@ export default class BulkEditing extends Component {
       });
     });
     return (
-      <div className="BulkEditingPage">
-        {/* <Table>
-          <thead>
-            <tr>
-              <th></th>
-              <th>קוד וריאציה</th>
-
-              <th>גודל מנה</th>
-              <th>מחיר יחידה</th>
-              <th>תיאור</th>
-            </tr>
-          </thead>
-        </Table> */}
-        <div>
+      <>
+        <div className="myItemsSearch">
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label></Form.Label>
             <Form.Control
@@ -86,27 +75,42 @@ export default class BulkEditing extends Component {
             <Form.Text></Form.Text>
           </Form.Group>
         </div>
-        <Table hover>
+        <div className="BulkEditingPage">
+          {/* <Table>
           <thead>
             <tr>
-              <th>קוד מוצר</th>
-
+              <th></th>
               <th>קוד וריאציה</th>
-
-              <th>תמונה</th>
-              <th>שם</th>
 
               <th>גודל מנה</th>
               <th>מחיר יחידה</th>
-              <th>מלאי זמין</th>
-
               <th>תיאור</th>
-              <th></th>
             </tr>
           </thead>
-          <tbody>{rowsArr}</tbody>
-        </Table>
-      </div>
+        </Table> */}
+
+          <Table className="" hover striped>
+            <thead>
+              <tr>
+                <th>קוד מוצר</th>
+
+                <th>קוד וריאציה</th>
+
+                <th>תמונה</th>
+                <th>שם</th>
+
+                <th>גודל מנה</th>
+                <th>מחיר יחידה</th>
+                <th>מלאי זמין</th>
+
+                {/* <th>תיאור</th> */}
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>{rowsArr}</tbody>
+          </Table>
+        </div>
+      </>
     );
   }
 }

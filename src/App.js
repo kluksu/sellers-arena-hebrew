@@ -1088,6 +1088,7 @@ class App extends React.Component {
           </Route>{" "}
           <Route exact path="/edit-multiple/">
             <BulkEditing
+              screenWidth={this.state.screenWidth}
               patchVariation={this.patchVariation}
               getMyItems={this.getMyItems}
               closeGenericModal={this.closeGenericModal}
