@@ -32,8 +32,20 @@ export default class BulkEditing extends Component {
     this.state.myItems.forEach((item) => {
       let dataArr = [];
       Object.values(item.item_variations).forEach((variation) => {
+        let propsArr = Object.values(variation.variation);
+        let isPropsIncluds = false;
+        propsArr.forEach((prop) => {
+          if (
+            prop.toUpperCase().includes(this.state.serachText.toUpperCase())
+          ) {
+            return (isPropsIncluds = true);
+          }
+        });
+
+        console.log(isPropsIncluds);
         if (
           `${variation.id}`.includes(this.state.serachText) ||
+          isPropsIncluds === true ||
           `${item.id}`.includes(this.state.serachText) ||
           variation.description
             .toUpperCase()
