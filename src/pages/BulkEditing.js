@@ -31,6 +31,7 @@ export default class BulkEditing extends Component {
     let rowsArr = [];
     this.state.myItems.forEach((item) => {
       let dataArr = [];
+      console.log(item);
       Object.values(item.item_variations).forEach((variation) => {
         let propsArr = Object.values(variation.variation);
         let isPropsIncluds = false;
@@ -82,7 +83,7 @@ export default class BulkEditing extends Component {
               onChange={this.handleChange}
               type="text"
               name="serachText"
-              placeholder="search.."
+              placeholder="חפש מספר מוצר,שם מוצר, מספר וריאציה, תיאור או ערך לדוגמא 'אדום'"
             />
             <Form.Text></Form.Text>
           </Form.Group>

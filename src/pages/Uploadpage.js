@@ -182,7 +182,7 @@ class Uploadpage extends React.Component {
     });
 
     const priceForAll = '{"price":1,"item":1}';
-    const priceForVerified = '{"price":2,"item":1}';
+    const priceForVerified = '{"price":5,"item":1}';
     const sellerContacts = '{"price":3,"item":1}';
     const noBody = '{"price":4,"item":1}';
     const itemForVerified = '{"price":2,"item":2}';

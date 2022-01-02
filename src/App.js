@@ -47,6 +47,7 @@ import WallMessages from "./components/WallMessages";
 import MyOrder from "./pages/MyOrder";
 import AllOrders from "./pages/AllOrders";
 import BulkEditing from "./pages/BulkEditing";
+import BulkItemsEdit from "./pages/BulkItemsEdit";
 //${domain}/
 class App extends React.Component {
   constructor(props) {
@@ -1096,6 +1097,17 @@ class App extends React.Component {
               accessToken={this.state.accessToken}
               activeAccount={this.state.activeAccount}
             ></BulkEditing>
+          </Route>
+          <Route exact path="/edit-multiple-items/">
+            <BulkItemsEdit
+              screenWidth={this.state.screenWidth}
+              patchVariation={this.patchVariation}
+              getMyItems={this.getMyItems}
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
+              accessToken={this.state.accessToken}
+              activeAccount={this.state.activeAccount}
+            ></BulkItemsEdit>
           </Route>
           <Route exact path="/control_panel/:name">
             <ControlPanel
