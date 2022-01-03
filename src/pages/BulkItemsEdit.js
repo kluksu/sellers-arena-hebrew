@@ -77,16 +77,20 @@ export default class BulkItemsEdit extends Component {
     if (this.state.selectedItems !== prevState.selectedItems) {
       console.log(this.state.selectedItems);
     }
-    // if(this.state.allSelected!==prevState.allSelected){
-    //   Object.keys(this.state.selectedItems).forEach(item => {
-    //          this.setState((prevState) => {
-    //       let obj = Object.assign({}, prevState.selectedItems); // creating copy of state variable jasper
-    //       obj[item.id] = false; // update the name property, assign a new value
-    //       this.setState({ selectedItems: obj });
-    //       console.log(obj);
-    //     });
-    //   });
-    // }
+    if (this.state.allSelected !== prevState.allSelected) {
+      console.log(this.state.allSelected);
+      Object.keys(this.state.selectedItems).forEach((item) => {
+        console.log(item);
+        this.setState((prevState) => {
+          let obj = Object.assign({}, prevState.selectedItems);
+          console.log(obj[item]); // creating copy of state variable jasper
+          obj[item] = this.state.allSelected;
+          console.log(obj[item]); // creating copy of state variable jasper
+          // update the name property, assign a new value
+          this.setState({ selectedItems: obj });
+        });
+      });
+    }
   }
   editAll = () => {
     this.setState({ updatedItems: [] });
@@ -189,6 +193,7 @@ export default class BulkItemsEdit extends Component {
       ) {
         rowsArr.push(
           <BulkItemsRow
+            isSelected={this.state.selectedItems[item.id]}
             selectedItems={this.state.selectedItems}
             allSelected={this.state.allSelected}
             createEditArr={this.createEditArr}

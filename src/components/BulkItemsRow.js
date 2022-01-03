@@ -19,6 +19,9 @@ export default class BulkItemsRow extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    // if(this.props.selectedItems[this.props.item.id]!==prevProps.selectedItems[this.props.item.id]){
+    //   this.setState({isSelected:this.props.selectedItems[this.props.item.id]})
+    // }
     if (this.props.item.id !== prevProps.item.id) {
       this.setState({ isSelected: false });
       if (this.props.selectedItems[this.props.item.id]) {
@@ -35,8 +38,7 @@ export default class BulkItemsRow extends Component {
     }
   }
   componentDidMount() {
-    this.setState({ isSelected: false });
-    console.log(this.props.seleteItems);
+    // this.setState({ isSelected: this.props.isSelected });
     if (this.props.selectedItems[this.props.item.id]) {
       this.setState({
         isSelected: this.props.selectedItems[this.props.item.id],
