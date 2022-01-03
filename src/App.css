@@ -92,6 +92,14 @@ body {
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.link {
+  color: rgb(41, 41, 211);
+  text-decoration: underline;
+}
+.link:hover {
+  color: black;
+  transform: scale(1.2);
+}
 
 .App-link {
   color: #61dafb;

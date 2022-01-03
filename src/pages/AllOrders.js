@@ -200,16 +200,19 @@ class AllOrders extends Component {
       totalSumAfter = totalSumAfter + orderSum;
 
       return (
-        <tr
-          onClick={() => {
-            window.location.assign(
-              this.props.activeAccount.account_type == 3
-                ? `/#/supplier-order/${order.id}`
-                : `/#/my-order/${order.id}`
-            );
-          }}
-        >
-          <td>{order.id}</td>
+        <tr>
+          <td
+            className="link"
+            onClick={() => {
+              window.location.assign(
+                this.props.activeAccount.account_type == 3
+                  ? `/#/supplier-order/${order.id}`
+                  : `/#/my-order/${order.id}`
+              );
+            }}
+          >
+            {order.id}
+          </td>
           <td>
             {" "}
             {`${order.submitted_at.replace("T", " ").slice(0, 19)}    `} {}
