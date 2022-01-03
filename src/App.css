@@ -351,7 +351,7 @@ label.form-label {
   padding: 10px;
   padding-top: 100px;
   margin-bottom: 50px;
-  overflow: hidden;
+  /* overflow: hidden; */
   background: white;
   width: 100%;
   margin: auto;
@@ -359,11 +359,11 @@ label.form-label {
   margin-bottom: 400px;
 }
 .allOrdersTableDiv {
-  overflow: hidden;
-}
-.allOrdersTableDiv:hover {
   overflow: scroll;
 }
+/* .allOrdersTableDiv:hover {
+  overflow: scroll;
+} */
 .allOrdersPageForms {
   /* width: 80%; */
 }
@@ -386,14 +386,14 @@ label.form-label {
     overflow: scroll;
   }
 
-  .allOrdersPageForms {
+  /* .allOrdersPageForms {
     overflow: hidden;
   }
   .allOrdersPageForms:hover {
     overflow: scroll;
-  }
+  } */
   .rdrDefinedRangesWrapper {
-    margin-right: -112px;
+    margin-right: -200px;
   }
   .rdrDateRangePickerWrapper {
     transform: scale(0.5);
