@@ -1023,6 +1023,31 @@ class App extends React.Component {
               accessToken={this.state.accessToken}
             ></MyOrder>
           </Route>
+          <Route exact path={"/storePageLoadAll:/id"}>
+            <StorePageLoadAll
+              getAllOrders={this.getAllOrders}
+              userDevice={this.state.userDevice}
+              screenWidth={this.state.screenWidth}
+              getUnregistered={this.getUnregistered}
+              getActiveCart={this.getActiveCart}
+              checkOut={this.checkOut}
+              myContacts={this.state.myContacts}
+              removeContact={this.removeContact}
+              getMessagesArcive={this.getMessagesArcive}
+              postAndGetContacts={this.postAndGetContacts}
+              refreshToken={this.state.refreshToken}
+              allThreads={this.state.allThreads}
+              getCurrentstore={this.getCurrentstore}
+              handleOpenMessage={this.handleOpenMessage}
+              modalMessages={this.state.modalMessages}
+              getThreads={this.getThreads}
+              getCarts={this.getCarts}
+              deleteCart={this.deleteCart}
+              MyShoppingCarts={this.state.MyShoppingCarts}
+              accessToken={this.state.accessToken}
+              activeAccount={this.state.activeAccount}
+            ></StorePageLoadAll>
+          </Route>
           <Route exact path="/StorePage/:id">
             <StorePage
               getAllOrders={this.getAllOrders}
