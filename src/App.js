@@ -48,6 +48,7 @@ import MyOrder from "./pages/MyOrder";
 import AllOrders from "./pages/AllOrders";
 import BulkEditing from "./pages/BulkEditing";
 import BulkItemsEdit from "./pages/BulkItemsEdit";
+import StorePageLoadAll from "./pages/StorePageLoadAll";
 //${domain}/
 class App extends React.Component {
   constructor(props) {
@@ -1023,7 +1024,7 @@ class App extends React.Component {
               accessToken={this.state.accessToken}
             ></MyOrder>
           </Route>
-          <Route exact path={"/storePageLoadAll:/id"}>
+          <Route exact path={"/StorePage/:id"}>
             <StorePageLoadAll
               getAllOrders={this.getAllOrders}
               userDevice={this.state.userDevice}
@@ -1048,7 +1049,7 @@ class App extends React.Component {
               activeAccount={this.state.activeAccount}
             ></StorePageLoadAll>
           </Route>
-          <Route exact path="/StorePage/:id">
+          {/* <Route exact path="/StorePage/:id">
             <StorePage
               getAllOrders={this.getAllOrders}
               userDevice={this.state.userDevice}
@@ -1072,7 +1073,7 @@ class App extends React.Component {
               accessToken={this.state.accessToken}
               activeAccount={this.state.activeAccount}
             ></StorePage>
-          </Route>
+          </Route> */}
           <Route exact path="/order-summery/:id">
             <OrderSummery
               closeGenericModal={this.closeGenericModal}

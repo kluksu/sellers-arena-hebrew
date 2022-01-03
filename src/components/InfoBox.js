@@ -16,6 +16,9 @@ export default class InfoBox extends Component {
         this.props.variation.cost_per_item !== undefined
           ? variation.cost_per_item
           : null;
+      let is_in_stock = this.props.variation.is_in_stock
+        ? variation.is_in_stock
+        : null;
 
       if (this.props.variation && this.props.variation.variation !== {}) {
         for (const [key, value] of Object.entries(variation.variation)) {
@@ -41,6 +44,10 @@ export default class InfoBox extends Component {
       return (
         <Table striped bordered hover size="sm" variant="light hidden ">
           <tbody>
+            <tr>
+              <td>זמין במלאי </td>
+              <td>{is_in_stock === true ? "כן" : "לא"}</td>
+            </tr>
             <tr>
               <td>שם מוצר</td>
               <td>{item.name}</td>

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Col, NavLink, Row, Button, Form } from "react-bootstrap";
 import { HashRouter, Route, Router, withRouter } from "react-router-dom";
+import { NIL } from "uuid";
 import InfoBox from "../components/InfoBox";
 import CardDiscounts from "./CardDiscounts";
 import QuantitySelector from "./QuantitySelector";
@@ -16,7 +17,6 @@ class ProductCard extends React.Component {
     this.setState({ notice: notice });
   };
   render() {
-    console.log(this.props);
     //not sure
     let cardZoom = this.props.screenWidth > 1000 ? "" : "scale(1)";
     //not sure
@@ -139,7 +139,20 @@ class ProductCard extends React.Component {
         >
           <NavLink href={this.props.linkAllAround} className={`type2card`}>
             <div className="type2cardImage">
-              <img className="zoomCardImg" src={picture} alt="no picture" />
+              <div className="centered">
+                {this.props.variation.is_in_stock === false
+                  ? "out of stock"
+                  : null}
+              </div>
+              <img
+                style={{
+                  opacity:
+                    this.props.variation.is_in_stock === false ? 0.5 : null,
+                }}
+                className="zoomCardImg"
+                src={picture}
+                alt="no picture"
+              />
             </div>
             <CardDiscounts
               variation={this.props.variation}
