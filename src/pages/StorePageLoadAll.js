@@ -570,6 +570,9 @@ class StorePageLoadAll extends React.Component {
   };
 
   render() {
+    if (this.state.next !== null) {
+      return <FullPageLoader></FullPageLoader>;
+    }
     let unregisterDisable =
       this.state.currentStore &&
       this.state.currentStore.parent_account == this.props.match.params.id

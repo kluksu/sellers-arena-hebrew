@@ -347,9 +347,19 @@ label.form-label {
   background: white;
   width: 100%;
   margin: auto;
-  overflow: scroll;
+  /* overflow: scroll; */
   margin-bottom: 400px;
 }
+.allOrdersTableDiv {
+  overflow: hidden;
+}
+.allOrdersTableDiv:hover {
+  overflow: scroll;
+}
+.allOrdersPageForms {
+  /* width: 80%; */
+}
+
 /* @media only screen and (max-width: 600px) {
   .allOrdersPage .table {
     transform: scale(0.5);
@@ -360,8 +370,30 @@ label.form-label {
 .rdrStaticRangeLabel {
   text-align: center !important;
 }
+@media only screen and (max-width: 600px) {
+  .dateRangeDiv {
+    overflow: hidden;
+  }
+  .dateRangeDiv:hover {
+    overflow: scroll;
+  }
+
+  .allOrdersPageForms {
+    overflow: hidden;
+  }
+  .allOrdersPageForms:hover {
+    overflow: scroll;
+  }
+  .rdrDefinedRangesWrapper {
+    margin-right: -112px;
+  }
+  .rdrDateRangePickerWrapper {
+    transform: scale(0.5);
+  }
+}
 .allOrdersPage .form-control {
-  width: 400px;
+  max-width: 400px;
+  width: 80%;
   margin: auto;
 }
 .allOrdersPage table {

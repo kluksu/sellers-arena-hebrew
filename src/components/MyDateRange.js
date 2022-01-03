@@ -9,11 +9,13 @@ export default class MyDateRange extends Component {
       key: "selection",
     };
     return (
-      <DateRangePicker
-        className="no-print"
-        ranges={[selectionRange]}
-        onChange={this.props.handleSelect}
-      />
+      <div className="dateRangeDiv">
+        <DateRangePicker
+          className="no-print"
+          ranges={[selectionRange]}
+          onChange={this.props.handleSelect}
+        />
+      </div>
     );
   }
 }

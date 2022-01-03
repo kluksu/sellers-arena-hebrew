@@ -234,111 +234,119 @@ class AllOrders extends Component {
               fulfilledOrders={this.state.fulfilledOrders}
               sellerApprovedOrders={this.state.sellerApprovedOrders}
               MySupplierOrders={this.state.MySupplierOrders} */}{" "}
-        <MyDateRange
-          handleSelect={this.handleSelect}
-          startDate={this.state.startDate}
-          endDate={this.state.endDate}
-        ></MyDateRange>
-        <Form.Group className="no-print" controlId="exampleForm.ControlSelect1">
-          <Form.Control
-            aria-label="Default select example"
-            onChange={this.handleChange}
-            name="selectedAccountID"
-            as="select"
+        <div className="allOrdersPageForms">
+          <MyDateRange
+            handleSelect={this.handleSelect}
+            startDate={this.state.startDate}
+            endDate={this.state.endDate}
+          ></MyDateRange>
+          <Form.Group
+            className="no-print"
+            controlId="exampleForm.ControlSelect1"
           >
-            <option value={""}>
-              כל{" "}
-              {this.props.activeAccount &&
-              this.props.activeAccount.account_type == 3
-                ? "החנויות"
-                : "הספקים"}{" "}
-            </option>
-            {contactsArr}
-          </Form.Control>
-        </Form.Group>
-        <Form.Group className="no-print" controlId="exampleForm.ControlSelect1">
-          <Form.Control
-            aria-label="Default select example"
-            onChange={this.handleChange}
-            name="selectedOrdersStatus"
-            as="select"
+            <Form.Control
+              aria-label="Default select example"
+              onChange={this.handleChange}
+              name="selectedAccountID"
+              as="select"
+            >
+              <option value={""}>
+                כל{" "}
+                {this.props.activeAccount &&
+                this.props.activeAccount.account_type == 3
+                  ? "החנויות"
+                  : "הספקים"}{" "}
+              </option>
+              {contactsArr}
+            </Form.Control>
+          </Form.Group>
+          <Form.Group
+            className="no-print"
+            controlId="exampleForm.ControlSelect1"
           >
-            <option value={""}>כל ההזמנות </option>
+            <Form.Control
+              aria-label="Default select example"
+              onChange={this.handleChange}
+              name="selectedOrdersStatus"
+              as="select"
+            >
+              <option value={""}>כל ההזמנות </option>
 
-            <option value={"submitted"}>הזמנות מחכות לאישור</option>
-            <option value={"seller_approved"}>הזמנות לפני משלוח</option>
-            <option value={"filled"}>הזמנות שנשלחו</option>
-            <option value={"unpaid"}> לא שולמו</option>
-            <option value={"payment_received"}> שולמו</option>
-          </Form.Control>
-          <br></br>
-          <Form.Group className="no-print">
-            <Form.Label></Form.Label>
+              <option value={"submitted"}>הזמנות מחכות לאישור</option>
+              <option value={"seller_approved"}>הזמנות לפני משלוח</option>
+              <option value={"filled"}>הזמנות שנשלחו</option>
+              <option value={"unpaid"}> לא שולמו</option>
+              <option value={"payment_received"}> שולמו</option>
+            </Form.Control>
+            <br></br>
+            <Form.Group className="no-print">
+              <Form.Label></Form.Label>
 
-            <Form.Check
-              onChange={this.handleChange}
-              inline
-              type="radio"
-              label="שולם"
-              name="paymentStatus"
-              id="formHorizontalRadios1"
-              value={"payment_received"}
-            />
-            <Form.Check
-              inline
-              onChange={this.handleChange}
-              inline
-              type="radio"
-              label="לא שולם"
-              name="paymentStatus"
-              value={"unpaid"}
-              id="formHorizontalRadios2"
-            />
-            <Form.Check
-              inline
-              onChange={this.handleChange}
-              inline
-              type="radio"
-              label=" הכל"
-              name="paymentStatus"
-              value={""}
-              id="formHorizontalRadios2"
-            />
+              <Form.Check
+                onChange={this.handleChange}
+                inline
+                type="radio"
+                label="שולם"
+                name="paymentStatus"
+                id="formHorizontalRadios1"
+                value={"payment_received"}
+              />
+              <Form.Check
+                inline
+                onChange={this.handleChange}
+                inline
+                type="radio"
+                label="לא שולם"
+                name="paymentStatus"
+                value={"unpaid"}
+                id="formHorizontalRadios2"
+              />
+              <Form.Check
+                inline
+                onChange={this.handleChange}
+                inline
+                type="radio"
+                label=" הכל"
+                name="paymentStatus"
+                value={""}
+                id="formHorizontalRadios2"
+              />
+            </Form.Group>
+            <Form.Group className="no-print">
+              <Form.Label></Form.Label>
+
+              <Form.Check
+                onChange={this.handleChange}
+                inline
+                type="radio"
+                label="הכל"
+                name="madeBy"
+                id="formHorizontalRadios1"
+                value={""}
+              />
+              <Form.Check
+                inline
+                onChange={this.handleChange}
+                inline
+                type="radio"
+                label='נעשו ע"י קונה'
+                name="madeBy"
+                value={"buyer"}
+                id="formHorizontalRadios2"
+              />
+              <Form.Check
+                inline
+                onChange={this.handleChange}
+                inline
+                type="radio"
+                label='נעשו ע"י מוכר'
+                name="madeBy"
+                value={"seller"}
+                id="formHorizontalRadios2"
+              />
+            </Form.Group>
           </Form.Group>
-          <Form.Group className="no-print">
-            <Form.Label></Form.Label>
-
-            <Form.Check
-              onChange={this.handleChange}
-              inline
-              type="radio"
-              label="הכל"
-              name="madeBy"
-              id="formHorizontalRadios1"
-              value={""}
-            />
-            <Form.Check
-              inline
-              onChange={this.handleChange}
-              inline
-              type="radio"
-              label='נעשו ע"י קונה'
-              name="madeBy"
-              value={"buyer"}
-              id="formHorizontalRadios2"
-            />
-            <Form.Check
-              inline
-              onChange={this.handleChange}
-              inline
-              type="radio"
-              label='נעשו ע"י מוכר'
-              name="madeBy"
-              value={"seller"}
-              id="formHorizontalRadios2"
-            />
-          </Form.Group>
-        </Form.Group>
+        </div>
         <br></br>
         {this.props.activeAccount &&
         this.props.activeAccount.account_type == 3 &&
@@ -361,48 +369,51 @@ class AllOrders extends Component {
             <span>כתובת : {this.state.selectedAccount.store_address}</span>
           </div>
         ) : null}
-        <Table hover className="transactionsList">
-          <thead>
-            <tr>
-              <th>מספר הזמנה</th>
-              <th>תאריך</th>
-              <th> סטאטוס משלוח</th>
-              <th>סטאטוס תשלום</th>
-              <th>נוצרה ע"י</th>
+        <div className="allOrdersTableDiv">
+          {" "}
+          <Table hover className="transactionsList">
+            <thead>
+              <tr>
+                <th>מספר הזמנה</th>
+                <th>תאריך</th>
+                <th> סטאטוס משלוח</th>
+                <th>סטאטוס תשלום</th>
+                <th>נוצרה ע"י</th>
 
-              <th>
-                {" "}
-                {this.props.activeAccount &&
-                this.props.activeAccount.account_type == 3
-                  ? "שם קונה"
-                  : "שם מוכר"}
-              </th>
-              <th> סכום לפני מע"מ</th>
+                <th>
+                  {" "}
+                  {this.props.activeAccount &&
+                  this.props.activeAccount.account_type == 3
+                    ? "שם קונה"
+                    : "שם מוכר"}
+                </th>
+                <th> סכום לפני מע"מ</th>
 
-              <th> סכום לאחר מע"מ</th>
-            </tr>
-          </thead>
-          <tbody>
-            {orders}
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>{totalSumBefore}</td> <td>{totalSumAfter}</td>
-            </tr>
-          </tbody>
-        </Table>
-        <Button
-          style={{ display: this.props.screenWidth > 650 ? "" : "none" }}
-          className="printButton no-print "
-          onClick={window.print}
-          type="button"
-        >
-          הדפס
-        </Button>
+                <th> סכום לאחר מע"מ</th>
+              </tr>
+            </thead>
+            <tbody>
+              {orders}
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{totalSumBefore}</td> <td>{totalSumAfter}</td>
+              </tr>
+            </tbody>
+          </Table>
+          <Button
+            style={{ display: this.props.screenWidth > 650 ? "" : "none" }}
+            className="printButton no-print "
+            onClick={window.print}
+            type="button"
+          >
+            הדפס
+          </Button>
+        </div>
       </div>
     );
   }
