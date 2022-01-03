@@ -41,11 +41,12 @@ class HomePage extends React.Component {
       itemsCount: this.getRandomNumberBetween(1, 300),
     };
   }
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (this.state.searchText !== prevState.searchText) {
-  //     this.searchItems();
-  //   }
-  // }
+  componentDidUpdate = async (prevProps, prevState) => {
+    if (this.props.accessToken !== prevProps.accessToken) {
+      await this.setState({ showList: [], next: undefined });
+      this.getItems();
+    }
+  };
   getSearchText = (searchText) => {
     this.setState({ searchText: searchText });
   };
