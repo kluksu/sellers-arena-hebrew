@@ -204,10 +204,10 @@ class AllOrders extends Component {
           <td
             className="link"
             onClick={() => {
-              window.location.assign(
+              this.props.history.push(
                 this.props.activeAccount.account_type == 3
-                  ? `/#/supplier-order/${order.id}`
-                  : `/#/my-order/${order.id}`
+                  ? `supplier-order/${order.id}`
+                  : `my-order/${order.id}`
               );
             }}
           >

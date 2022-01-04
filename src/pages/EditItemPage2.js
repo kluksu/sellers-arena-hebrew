@@ -148,7 +148,7 @@ class EditItemPage2 extends React.Component {
           if (response.status == "200") {
             this.setState({ newProductID: response.data.id });
             this.props.getCurrentUploadItemId(this.state.selectedItemDits.id);
-            window.location.replace("/#/add_items");
+            this.props.history.push("add_items");
           }
         },
         (error) => {}

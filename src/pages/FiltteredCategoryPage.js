@@ -70,7 +70,7 @@ class FiltteredCategoryPage extends React.Component {
   };
 
   goToStore = () => {
-    //    window.location.assign(`/#/storePage/${}`)
+    //    this.props.history.push(`storePage/${}`)
   };
   searchItems = async () => {
     this.setState({ next: undefined });
@@ -189,7 +189,7 @@ class FiltteredCategoryPage extends React.Component {
               item={element.item}
               variation={element.variation}
               productInfoLink={`/#/StorePage/${element.item.account}/product_page/${element.item.id}`}
-              linkAllAround={`/#/StorePage/${element.item.account}`}
+              linkAllAround={`StorePage/${element.item.account}`}
               currency={""}
               productName={element.item.name}
               price="הרשם על מנת לראות את המחיר"
@@ -204,7 +204,7 @@ class FiltteredCategoryPage extends React.Component {
               item={element.item}
               variation={element.variation}
               productInfoLink={`/#/StorePage/${element.item.account}/product_page/${element.item.id}`}
-              linkAllAround={`/#/StorePage/${element.item.account}`}
+              linkAllAround={`StorePage/${element.item.account}`}
               productName={element.item.name}
               price={element.variation.cost_per_item}
               pictures={element.image}
@@ -225,7 +225,7 @@ class FiltteredCategoryPage extends React.Component {
             item={element.item}
             variation={element.variation}
             productInfoLink={`/#/StorePage/${element.item.account}/product_page/${element.item.id}`}
-            linkAllAround={`/#/StorePage/${element.item.account}`}
+            linkAllAround={`StorePage/${element.item.account}`}
             productName={element.item.name}
             currency={element.item.currency}
             price={element.variation.cost_per_item}
@@ -247,7 +247,7 @@ class FiltteredCategoryPage extends React.Component {
               item={element.item}
               variation={element.variation}
               productInfoLink={`/#/StorePage/${element.item.account}/product_page/${element.item.id}`}
-              linkAllAround={`/#/StorePage/${element.item.account}`}
+              linkAllAround={`StorePage/${element.item.account}`}
               productName={element.item.name}
               price="על מנת לראות את המחיר עליך להיות ברשימת אנשי הקשר של ספק זה"
               currency={""}

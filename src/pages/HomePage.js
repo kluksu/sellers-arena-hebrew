@@ -63,7 +63,7 @@ class HomePage extends React.Component {
   };
 
   goToStore = () => {
-    //    window.location.assign(`/#/storePage/${}`)
+    //    this.props.history.push(`storePage/${}`)
   };
   searchItems = async () => {
     this.setState({ next: undefined });

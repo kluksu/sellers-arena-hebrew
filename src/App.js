@@ -213,7 +213,7 @@ class App extends React.Component {
       "",
       <Button
         onClick={() => {
-          window.location.assign("/#/");
+          this.props.history.push("");
           this.setState({ isGenericModalOpen: false });
           this.closeGenericModal();
         }}
@@ -519,7 +519,7 @@ class App extends React.Component {
       .then((data) => {
         if (data.status == 204) {
           this.getCarts();
-          window.location.assign("/#/");
+          this.props.history.push("");
         }
       })
       .catch((error) => {
@@ -703,7 +703,7 @@ class App extends React.Component {
       getData(`${domain}/my-accounts/`, "", ` ${this.state.accessToken}`).then(
         (data) => {
           if (data.results.length == 0) {
-            window.location.assign("/#/openAccount");
+            this.props.history.push("openAccount");
           }
           this.setState({ userAccounts: data.results });
           if (data.results.length === 1) {

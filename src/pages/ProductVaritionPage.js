@@ -159,7 +159,7 @@ class ProductVaritionPage extends React.Component {
               <Button
                 onClick={() => {
                   this.props.closeGenericModal();
-                  window.location.assign("/#/uploadpage");
+                  this.props.history.push("uploadpage");
                 }}
               >
                 להעלות מוצר אחר
@@ -167,7 +167,7 @@ class ProductVaritionPage extends React.Component {
               <Button
                 onClick={() => {
                   this.props.closeGenericModal();
-                  window.location.assign("/#/");
+                  this.props.history.push("");
                 }}
               >
                 חזור לעמוד הבית

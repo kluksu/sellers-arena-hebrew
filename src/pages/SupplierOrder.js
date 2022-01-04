@@ -142,7 +142,7 @@ class SupplierOrder extends React.Component {
       ` ${this.props.accessToken}`
     ).then((data) => {
       if (data && data.info && data.info.includes("successfully")) {
-        // window.location.assign("/#/");
+        // this.props.history.push("");
 
         this.props.openGenericModalOrderSummery();
       } else {

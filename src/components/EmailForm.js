@@ -18,7 +18,7 @@ export default class EmailForm extends Component {
   }
 
   closeModalAndGoBackHome = () => {
-    window.location.assign("/#/");
+    this.props.history.push("");
     this.props.closeGenericModal();
   };
   handleChange = (event) => {
