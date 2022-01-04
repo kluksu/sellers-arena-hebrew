@@ -144,14 +144,14 @@ class ProductCard extends React.Component {
           >
             <div
               onClick={(e) => {
-                this.props.history.push(this.props.linkAllAround);
+                if (this.props.linkAllAround) {
+                  window.location.assign(this.props.linkAllAround);
+                }
               }}
               className="type2cardImage"
             >
               <div className="centered45">
-                {this.props.variation.is_in_stock === false
-                  ? "out of stock"
-                  : null}
+                {this.props.variation.is_in_stock === false ? "מלאי חסר" : null}
               </div>
               <img
                 // onClick={window.location.assign(this.props.linkAllAround)}
@@ -172,41 +172,68 @@ class ProductCard extends React.Component {
               <div>{this.props.productName}</div>
               {/* <div>{`${this.props.price} ${this.props.currency}`}</div> */}
               {batchSize}
-              <div
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  // e.cancelBubble = true;
-                  // e.stopPropagation();
-                  // e.preventDefault();
-                  e.stopImmediatePropagation();
-                }}
-                className="cardInfo"
-              >
-                i
-              </div>
+              <div className="cardInfo">i</div>
               <InfoBox
                 link={
-                  <NavLink
+                  <div
                     style={{ fontSize: "20px" }}
-                    onClick={(e) => {
-                      e.cancelBubble = true;
-                      e.stopPropagation();
-                      window.location.assign(this.props.productInfoLink);
-                    }}
+                    onClick={
+                      window.location.href.includes("storePage")
+                        ? () =>
+                            this.props.openGenericModal(
+                              "שים לב!",
+                              "לא שמרת את הפריטים בעגלה, אם תעבור עמוד המידע שלא נשמר ימחק",
+                              <>
+                                <Button
+                                  type="button"
+                                  onClick={() => {
+                                    this.props.closeGenericModal();
+                                    this.props.addCartItems();
+                                  }}
+                                >
+                                  שמור את המוצרים
+                                </Button>
+                                <Button
+                                  type="button"
+                                  variant="warning"
+                                  onClick={() => {
+                                    this.props.closeGenericModal();
+                                    window.location.assign(
+                                      this.props.productInfoLink
+                                    );
+                                  }}
+                                >
+                                  המשך ללא שמירה
+                                </Button>
+                              </>
+                            )
+                        : () =>
+                            window.location.assign(this.props.productInfoLink)
+                    }
+                    // onClick={async (e) => {
+                    //   await this.props.addCartItems();
+                    //   window.location.assign(this.props.productInfoLink);
+                    // }}
                   >
                     למוצר
-                  </NavLink>
+                  </div>
                 }
                 variation={this.props.variation}
                 item={this.props.item}
               ></InfoBox>
             </div>
             <div className="CardUnitsFormContainer">{buttons}</div>
-
-            <p className="FormRejects absoluteCardNotice">
+            <div
+              style={{ width: "100%", height: "100%" }}
+              onClick={(e) => {
+                if (this.props.linkAllAround) {
+                  window.location.assign(this.props.linkAllAround);
+                }
+              }}
+            ></div>
+            {/* <p className="FormRejects absoluteCardNotice">
               {this.state.notice}
-            </p>
+            </p> */}
           </div>
         </div>
       );

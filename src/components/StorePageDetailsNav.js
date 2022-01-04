@@ -3,6 +3,12 @@ import { Navbar, Nav, Form, Button, FormControl } from "react-bootstrap";
 import { withRouter } from "react-router-dom";
 
 class StorePageDetailsNav extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isExpanded: true,
+    };
+  }
   render() {
     let buttonsMargin = this.props.screenWith < 479 ? "" : "10px";
     if (!this.props.activeAccount) {
@@ -10,8 +16,21 @@ class StorePageDetailsNav extends React.Component {
     } else {
       return (
         <div className="stickyNav">
-          <Navbar collapseOnSelect expand="xl" bg="light" variant="light">
-            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar
+            expanded={this.state.isExpanded}
+            collapseOnSelect
+            expand="xl"
+            bg="light"
+            variant="light"
+          >
+            <Navbar.Toggle
+              onClick={() => {
+                this.setState({
+                  isExpanded: this.state.isExpanded === true ? false : true,
+                });
+              }}
+              aria-controls="responsive-navbar-nav"
+            />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="mr-auto">
                 <p className="FormRejects">{this.props.cartsError}</p>

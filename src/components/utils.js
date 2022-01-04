@@ -52,7 +52,7 @@ export const handleChange = (event) => {
 };
 
 export const takeMeHome = () => {
-  this.props.history.push("");
+  window.location.assign("/#/");
 };
 export const getContacts = (id, accessToken) => {
   return getData(

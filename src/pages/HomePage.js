@@ -62,9 +62,7 @@ class HomePage extends React.Component {
     return Math.floor(Math.random() * (max - min + 1) + min);
   };
 
-  goToStore = () => {
-    //    this.props.history.push(`storePage/${}`)
-  };
+  goToStore = () => {};
   searchItems = async () => {
     this.setState({ next: undefined });
     await this.setState({ showList: [] });
@@ -191,7 +189,7 @@ class HomePage extends React.Component {
               item={element.item}
               variation={element.variation}
               productInfoLink={`/#/StorePage/${element.item.account}/product_page/${element.item.id}`}
-              linkAllAround={`StorePage/${element.item.account}`}
+              linkAllAround={`/#/StorePage/${element.item.account}`}
               currency={""}
               productName={`${shortName}.....`}
               price="הרשם על מנת לראות את המחיר"
@@ -208,7 +206,7 @@ class HomePage extends React.Component {
               item={element.item}
               variation={element.variation}
               productInfoLink={`/#/StorePage/${element.item.account}/product_page/${element.item.id}`}
-              linkAllAround={`StorePage/${element.item.account}`}
+              linkAllAround={`/#/StorePage/${element.item.account}`}
               productName={`${shortName}.....`}
               price={element.variation.cost_per_item}
               pictures={element.image}
@@ -232,7 +230,7 @@ class HomePage extends React.Component {
             item={element.item}
             variation={element.variation}
             productInfoLink={`/#/StorePage/${element.item.account}/product_page/${element.item.id}`}
-            linkAllAround={`StorePage/${element.item.account}`}
+            linkAllAround={`/#/StorePage/${element.item.account}`}
             productName={`${shortName}.....`}
             currency={element.item.currency}
             price={element.variation.cost_per_item}
@@ -256,7 +254,7 @@ class HomePage extends React.Component {
               item={element.item}
               variation={element.variation}
               productInfoLink={`/#/StorePage/${element.item.account}/product_page/${element.item.id}`}
-              linkAllAround={`StorePage/${element.item.account}`}
+              Around={`/#/StorePage/${element.item.account}`}
               productName={`${shortName}.....`}
               price="על מנת לראות את המחיר עליך להיות ברשימת אנשי הקשר של ספק זה"
               currency={""}

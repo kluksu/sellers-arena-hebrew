@@ -66,7 +66,7 @@ export default class OpenAccount extends Component {
             "template_bnhobxj",
             this.props.captchaResponse
           );
-          this.props.history.push("");
+          window.location.assign("/#/");
         }
       });
     } else {

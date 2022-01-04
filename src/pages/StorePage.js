@@ -383,13 +383,13 @@ class StorePage extends React.Component {
                 this.props.getAllOrders();
 
                 if (res.order_id) {
-                  this.props.history.push(`supplier-order/${res.order_id}`);
+                  window.location.assign(`/#/supplier-order/${res.order_id}`);
                 }
               });
             } else if (this.props.activeAccount.account_type == 2) {
               this.postAndRetrevData(this.state.activeCart.id).then(
-                this.props.history.push(
-                  `order-summery/${this.state.activeCart.id}`
+                window.location.assign(
+                  `/#/order-summery/${this.state.activeCart.id}`
                 )
               );
             }
@@ -436,7 +436,7 @@ class StorePage extends React.Component {
                 if (res.order_id) {
                   this.props.getAllOrders();
 
-                  this.props.history.push(`supplier-order/${res.order_id}`);
+                  window.location.assign(`/#/supplier-order/${res.order_id}`);
                 }
               });
             }
@@ -445,7 +445,9 @@ class StorePage extends React.Component {
         if (this.props.activeAccount.account_type == 2) {
           this.props.getCarts();
           this.setState({ LoaderVisibilty: "none" });
-          this.props.history.push(`order-summery/${this.state.activeCart.id}`);
+          window.location.assign(
+            `/#/order-summery/${this.state.activeCart.id}`
+          );
         }
       });
     }

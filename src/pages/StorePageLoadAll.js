@@ -215,7 +215,16 @@ class StorePageLoadAll extends React.Component {
         showList: [],
         loadShowList: false,
       });
-      this.getItems();
+      if (
+        this.state.selectedContactID === "" &&
+        this.props.activeAccount &&
+        this.props.activeAccount.account_type == 3
+      ) {
+      } else {
+        //if account type 3 prevent first items load
+        console.log(this.state);
+        this.getItems();
+      }
     }
     let userID =
       this.props.activeAccount && this.props.activeAccount.account_type == 2
@@ -362,13 +371,13 @@ class StorePageLoadAll extends React.Component {
               this.props.getAllOrders();
 
               if (res.order_id) {
-                this.props.history.push(`supplier-order/${res.order_id}`);
+                window.location.assign(`/#/supplier-order/${res.order_id}`);
               }
             });
           } else if (this.props.activeAccount.account_type == 2) {
             this.postAndRetrevData(this.state.activeCart.id).then(
-              this.props.history.push(
-                `order-summery/${this.state.activeCart.id}`
+              window.location.assign(
+                `/#/order-summery/${this.state.activeCart.id}`
               )
             );
           }
@@ -410,7 +419,7 @@ class StorePageLoadAll extends React.Component {
                 if (res.order_id) {
                   this.props.getAllOrders();
 
-                  this.props.history.push(`supplier-order/${res.order_id}`);
+                  window.location.assign(`/#/supplier-order/${res.order_id}`);
                 }
               });
             }
@@ -419,7 +428,9 @@ class StorePageLoadAll extends React.Component {
         if (this.props.activeAccount.account_type == 2) {
           this.props.getCarts();
           this.setState({ LoaderVisibilty: "none" });
-          this.props.history.push(`order-summery/${this.state.activeCart.id}`);
+          window.location.assign(
+            `/#/order-summery/${this.state.activeCart.id}`
+          );
         }
       });
     }
@@ -569,7 +580,13 @@ class StorePageLoadAll extends React.Component {
 
   render() {
     if (this.state.next !== null) {
-      return <FullPageLoader></FullPageLoader>;
+      if (
+        !this.props.activeAccount ||
+        this.props.activeAccount.account_type == 2 ||
+        this.state.selectedContactID !== ""
+      ) {
+        return <FullPageLoader></FullPageLoader>;
+      }
     }
     let unregisterDisable =
       this.state.currentStore &&
@@ -828,6 +845,9 @@ class StorePageLoadAll extends React.Component {
                 let card =
                   variation.cost_per_item === null ? (
                     <ProductCard
+                      closeGenericModal={this.props.closeGenericModal}
+                      openGenericModal={this.props.openGenericModal}
+                      addCartItems={this.addCartItems}
                       userDevice={this.props.userDevice}
                       screenWidth={this.props.screenWidth}
                       activeAccount={this.props.activeAccount}
@@ -844,6 +864,9 @@ class StorePageLoadAll extends React.Component {
                     </ProductCard>
                   ) : (
                     <ProductCard
+                      closeGenericModal={this.props.closeGenericModal}
+                      openGenericModal={this.props.openGenericModal}
+                      addCartItems={this.addCartItems}
                       screenWidth={this.props.screenWidth}
                       userDevice={this.props.userDevice}
                       activeAccount={this.props.activeAccount}
@@ -867,6 +890,9 @@ class StorePageLoadAll extends React.Component {
               ) {
                 cards.push(
                   <ProductCard
+                    closeGenericModal={this.props.closeGenericModal}
+                    openGenericModal={this.props.openGenericModal}
+                    addCartItems={this.addCartItems}
                     screenWidth={this.props.screenWidth}
                     userDevice={this.props.userDevice}
                     activeAccount={this.props.activeAccount}
@@ -887,6 +913,9 @@ class StorePageLoadAll extends React.Component {
               )
                 cards.push(
                   <ProductCard
+                    closeGenericModal={this.props.closeGenericModal}
+                    openGenericModal={this.props.openGenericModal}
+                    addCartItems={this.addCartItems}
                     screenWidth={this.props.screenWidth}
                     userDevice={this.props.userDevice}
                     activeAccount={this.props.activeAccount}

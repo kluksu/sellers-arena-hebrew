@@ -186,8 +186,13 @@ export default class BulkItemsEdit extends Component {
         isVarInfoIncluds === true ||
         `${item.id}`.includes(this.state.serachText) ||
         item.name.toUpperCase().includes(this.state.serachText.toUpperCase()) ||
-        item.description
+        item.category
           .toUpperCase()
+          .includes(this.state.serachText.toUpperCase()) ||
+        item.subcategory
+          .toUpperCase()
+          .includes(this.state.serachText.toUpperCase()) ||
+        item.description
           .toUpperCase()
           .includes(this.state.serachText.toUpperCase())
       ) {

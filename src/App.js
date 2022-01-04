@@ -213,7 +213,7 @@ class App extends React.Component {
       "",
       <Button
         onClick={() => {
-          this.props.history.push("");
+          window.location.assign("/#/");
           this.setState({ isGenericModalOpen: false });
           this.closeGenericModal();
         }}
@@ -519,7 +519,7 @@ class App extends React.Component {
       .then((data) => {
         if (data.status == 204) {
           this.getCarts();
-          this.props.history.push("");
+          window.location.assign("/#/");
         }
       })
       .catch((error) => {
@@ -703,7 +703,7 @@ class App extends React.Component {
       getData(`${domain}/my-accounts/`, "", ` ${this.state.accessToken}`).then(
         (data) => {
           if (data.results.length == 0) {
-            this.props.history.push("openAccount");
+            window.location.assign("/#/openAccount");
           }
           this.setState({ userAccounts: data.results });
           if (data.results.length === 1) {
@@ -1027,6 +1027,8 @@ class App extends React.Component {
           </Route>
           <Route exact path={"/StorePage/:id"}>
             <StorePageLoadAll
+              openGenericModal={this.openGenericModal}
+              closeGenericModal={this.closeGenericModal}
               getAllOrders={this.getAllOrders}
               userDevice={this.state.userDevice}
               screenWidth={this.state.screenWidth}
