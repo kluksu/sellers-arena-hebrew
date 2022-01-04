@@ -821,6 +821,7 @@ class App extends React.Component {
           <span style={{ color: "" }}> {`(${unreadMessages})`}</span>
         </Button>
       );
+
     //start bug here
     // if (this.state.refreshToken && !this.state.accessToken) {
     //   return <FullPageLoader></FullPageLoader>;

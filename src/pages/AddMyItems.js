@@ -113,7 +113,7 @@ class AddMyItems extends React.Component {
             price={""}
             currency=""
             fullItem={fullItem}
-            linkAllAround={`/#/edit_item/${fullItem.item.id}`}
+            linkAllAround={`edit_item/${fullItem.item.id}`}
           ></ProductCard>
         );
       }

@@ -137,14 +137,24 @@ class ProductCard extends React.Component {
           className={`type2card   zoomCard ${cardZoom}`}
           style={{ transform: cardZoom }}
         >
-          <NavLink href={this.props.linkAllAround} className={`type2card`}>
-            <div className="type2cardImage">
-              <div className="centered">
+          <div
+            // onClick={(e) => e.stopPropagation()}
+            // href={this.props.linkAllAround}
+            className={`type2card`}
+          >
+            <div
+              onClick={(e) => {
+                this.props.history.push(this.props.linkAllAround);
+              }}
+              className="type2cardImage"
+            >
+              <div className="centered45">
                 {this.props.variation.is_in_stock === false
                   ? "out of stock"
                   : null}
               </div>
               <img
+                // onClick={window.location.assign(this.props.linkAllAround)}
                 style={{
                   opacity:
                     this.props.variation.is_in_stock === false ? 0.5 : null,
@@ -162,14 +172,28 @@ class ProductCard extends React.Component {
               <div>{this.props.productName}</div>
               {/* <div>{`${this.props.price} ${this.props.currency}`}</div> */}
               {batchSize}
-              <div className="cardInfo">i</div>
+              <div
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  // e.cancelBubble = true;
+                  // e.stopPropagation();
+                  // e.preventDefault();
+                  e.stopImmediatePropagation();
+                }}
+                className="cardInfo"
+              >
+                i
+              </div>
               <InfoBox
                 link={
                   <NavLink
                     style={{ fontSize: "20px" }}
-                    onClick={() =>
-                      window.location.assign(this.props.productInfoLink)
-                    }
+                    onClick={(e) => {
+                      e.cancelBubble = true;
+                      e.stopPropagation();
+                      window.location.assign(this.props.productInfoLink);
+                    }}
                   >
                     למוצר
                   </NavLink>
@@ -183,7 +207,7 @@ class ProductCard extends React.Component {
             <p className="FormRejects absoluteCardNotice">
               {this.state.notice}
             </p>
-          </NavLink>
+          </div>
         </div>
       );
     }

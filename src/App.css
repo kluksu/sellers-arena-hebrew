@@ -3,6 +3,7 @@
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   direction: rtl;
+  /* overflow: hidden; */
   /* text-align: right; */
 }
 
@@ -16,7 +17,7 @@ font-family: 'Syncopate', sans-serif; */
 body {
   text-align: right;
 }
-.centered {
+.centered45 {
   transform: rotate(45deg);
 
   position: absolute;
@@ -37,8 +38,12 @@ body {
 .modal-dialog {
   margin-top: 6.75rem !important;
   min-width: 300px;
+  /* max-width: 80%; */
 }
-
+.modal-open .modal {
+  background-color: rgba(0, 0, 0, 0.664);
+  z-index: 1000000000000000;
+}
 .modal {
   /* direction: rtl; */
 }
@@ -142,6 +147,7 @@ body {
 }
 .ControlPanelPage > .navbar-expand-lg .navbar-nav .nav-link {
   margin: 0px 30px 0px 30px;
+  overflow: hidden;
 }
 .ControlPanelPage nav.nav-tabs {
   justify-content: center;
@@ -152,6 +158,7 @@ body {
   font-family: "Montserrat", sans-serif;
   font-size: 18px;
   font-weight: 600;
+  /* overflow: hidden; */
 }
 .mikra {
   display: flex;
@@ -351,7 +358,7 @@ label.form-label {
   padding: 10px;
   padding-top: 100px;
   margin-bottom: 50px;
-  /* overflow: hidden; */
+  overflow: hidden;
   background: white;
   width: 100%;
   margin: auto;
@@ -382,18 +389,18 @@ label.form-label {
   .dateRangeDiv {
     overflow: hidden;
   }
-  .dateRangeDiv:hover {
+  /* .dateRangeDiv:hover {
     overflow: scroll;
-  }
+  } */
 
-  /* .allOrdersPageForms {
-    overflow: hidden;
+  .allOrdersPageForms {
+    /* overflow: scroll; */
   }
-  .allOrdersPageForms:hover {
+  /* .allOrdersPageForms:hover {
     overflow: scroll;
   } */
   .rdrDefinedRangesWrapper {
-    margin-right: -200px;
+    margin-right: -112px;
   }
   .rdrDateRangePickerWrapper {
     transform: scale(0.5);
@@ -1381,6 +1388,9 @@ input {
 .messageContainer span:nth-of-type(2) {
   font-size: 12px;
   font-weight: 600;
+}
+.messageContainer {
+  padding: 15px;
 }
 .EditVariationsCard > div:first-of-type {
   border-radius: 10px 0 0 0;

@@ -82,7 +82,7 @@ class FiltteredCategoryPage extends React.Component {
     const nextfetch =
       this.state.next !== undefined
         ? this.state.next
-        : `${domain}/public-items/?limit=3&offset=0&category=${this.state.selectedCategory}&search=${this.state.searchText}`;
+        : `${domain}/public-items/?limit=25&offset=0&category=${this.state.selectedCategory}&search=${this.state.searchText}`;
     const authorization = !this.props.accessToken
       ? null
       : `Bearer ${this.props.accessToken}`;
