@@ -3,6 +3,8 @@
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   direction: rtl;
+  scrollbar-width: thin;
+
   /* overflow: hidden; */
   /* text-align: right; */
 }
@@ -22,14 +24,81 @@ body {
 
   position: absolute;
   top: 43%;
-  left: 25%;
+  left: 35%;
   color: rgb(248, 4, 4);
   font-size: 24px;
   z-index: 1;
   /* transform: translate(-50%, -50%); */
 }
+
+.inStoreCategoryButton .centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 36px;
+}
+.inStoreCategoryButton {
+  position: relative;
+  text-align: center;
+  color: white;
+  transition: transform 0.2s;
+}
+.searchPage .inStoreCategoryButton > img {
+  height: 300px;
+}
+
+.subcategoryButtonsDiv {
+  display: flex;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  /* justify-content: center; */
+
+  /* overflow-y: visible; */
+  /* -ms-overflow-style: none; */
+  /*hide scroll bar IE and Edge */
+  /* scrollbar-width: none; */
+  /*hide scroll bar Firefox */
+}
+
+.productCardsRow::-webkit-scrollbar {
+  /* display: none; */
+  /* //hide scroll bar chrome */
+}
+.inStoreCategoryButton:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+  z-index: 10;
+}
+.subcategoryButtonsDiv:hover {
+}
+
+@media only screen and (max-width: 600px) {
+  .productCardsRow.row {
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+  }
+  .inStoreCategoryButton {
+    position: relative;
+    text-align: center;
+    color: white;
+  }
+  .searchPage .inStoreCategoryButton > img {
+    max-width: 100%;
+    width: 100vmax;
+    height: auto;
+  }
+  .subcategoryButtonsDiv {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: fit-content;
+    padding-bottom: 3px;
+  }
+}
 .App {
   text-align: center;
+  overflow-x: hidden;
   /* min-width: 800px; */
 }
 .controlPanelBar {
@@ -166,7 +235,7 @@ body {
   align-items: center;
 }
 .navbar.navbar-expand-xl.navbar-light.bg-light {
-  background-color: white !important;
+  background-color: white;
   white-space: nowrap;
   z-index: 10000000000000000000;
 }
@@ -252,16 +321,19 @@ label.form-label {
   cursor: pointer;
 }
 .productCardsRow {
-  margin-top: 30px;
+  /* margin-top: 30px; */
   display: flex;
   flex-wrap: wrap;
   margin-right: -15px;
   margin-left: -15px;
   justify-content: center;
-  margin-bottom: 42px;
+  /* margin-bottom: 42px; */
 }
 .stickyNav .btn.btn-success {
-  margin-bottom: 10px;
+  margin: 10px;
+}
+.stickyNav .fixed-bottom {
+  padding-bottom: 40px;
 }
 .orderSummeryContainer .lowerForms,
 .orderSummeryContainer .btn.btn-success {
@@ -482,6 +554,7 @@ label.form-label {
   align-items: center;
   margin-top: 15px;
 }
+
 .CardUnitsFormContainer .form-control {
   max-width: 150px;
   width: fit-content;
@@ -496,21 +569,21 @@ label.form-label {
 .CardUnitsFormContainer button {
   margin: auto;
 }
-.cardInfo {
-  /* position: absolute; */
-  background-color: rgba(255, 255, 255, 0.603);
-
+.lowerProductCard .cardInfo {
+  color: black !important;
   width: 30px;
   border-radius: 50%;
-  border: 2px solid rgb(0, 0, 0);
+  background-color: #f7aa8c;
   height: 30px;
-  font-size: 16px;
-  font-weight: 800;
+  font-size: 30px;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: center;
   /* z-index: 4; */
 }
+
 .orderSummeryContainer > .btn:last-of-type {
   width: 70%;
   margin-top: 30px;
@@ -528,7 +601,7 @@ label.form-label {
 .cardInfo:hover + .hidden {
   display: block;
   font-size: 10px;
-  bottom: 70px;
+  bottom: 0px;
   z-index: 100;
   right: 0px;
   width: auto;
@@ -547,6 +620,7 @@ table.hidden:hover {
   text-align: right;
   /* min-width: ; */
   max-width: 80%;
+  color: #1d1237;
   border: 1px solid black;
   background: whitesmoke;
   z-index: 100000000000000000000000000000;
@@ -771,7 +845,51 @@ input {
 .stickyNav {
   position: sticky;
   bottom: 0px;
+  /* flex-grow: 1; */
+  /* background-color: #132347 !important; */
+  /* direction: unset !important; */
+
   z-index: 100;
+}
+.storePageRow {
+  padding: 0px;
+  padding-bottom: 0px;
+}
+
+/* ::-webkit-scrollbar {
+  width: 1px !important;
+}
+
+::-webkit-scrollbar-track {
+  background: lightgray;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #343a40;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+} */
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(199, 197, 197);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 .orderInfoWindow.table.table-light.table-sm.table-striped.table-bordered.table-hover {
   background-color: rgba(255, 255, 255, 0.897);
@@ -968,7 +1086,7 @@ input {
 
 .searchPage {
   width: 100%;
-  background-color: #ffad35;
+  background-color: #1d1237;
   /* background-image: url("https://images.pexels.com/photos/999089/pexels-photo-999089.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"); */
   margin-top: 80px;
   /* height: 234px;
@@ -1212,7 +1330,7 @@ input {
 }
 
 .profileIcon {
-  color: black;
+  color: rgb(255, 255, 255);
   font-size: 265px;
   padding-left: 36px;
   padding-right: 36px;
@@ -1220,7 +1338,8 @@ input {
 }
 .avatarDiv {
   margin-top: 86px;
-  background-color: #ffffff;
+  background-color: #1d1237;
+  color: white;
   /* background: linear-gradient(
     180deg,
     rgba(131, 184, 215, 1) -62%,
@@ -1241,12 +1360,16 @@ input {
   margin-top: 30px;
   margin-bottom: -8px;
 } */
-
-.storePage.searchPageContainer .searchPage {
-  margin-top: 86px;
+.storePageOrderInfoRow {
+  margin-bottom: 4rem;
 }
-.storePage.searchPageContainer .searchPage img {
+.storePage.searchPageContainer .searchPage {
+  margin-top: 0px;
+}
+.storePage.searchPageContainer .searchPage .container img {
   left: 14px;
+  margin-top: -2px;
+  border-radius: 10px;
 }
 .searchPageContainer {
   padding: 0px !important;
@@ -1264,9 +1387,12 @@ input {
 .searchPageContainer .searchPage {
   margin-top: 40px;
 }
+.productCardsCol {
+  padding-top: 0px;
+}
 .avatarDiv .ticker {
-  background: gainsboro;
-  border: 0.1px outset black;
+  /* background: gainsboro;
+  border: 0.1px outset black; */
   max-height: 70px !important;
 }
 .ticker h1 {

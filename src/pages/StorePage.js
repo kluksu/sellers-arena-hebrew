@@ -274,7 +274,7 @@ class StorePage extends React.Component {
         });
       });
       let apes = this.state.storeSubCategories;
-      apes.push(" אפס חיפוש ");
+      apes.push("כל החנות");
 
       this.setState({
         storeSubCategories: apes,
@@ -457,7 +457,7 @@ class StorePage extends React.Component {
       this.getItems();
     }
     if (this.state.activeSubCategory !== prevState.activeSubCategory) {
-      if (this.state.activeSubCategory === "אפס חיפוש") {
+      if (this.state.activeSubCategory === "כל החנות") {
         this.setState({ activeSubCategory: "" });
       }
       console.log(this.state.activeSubCategory);
@@ -825,11 +825,11 @@ class StorePage extends React.Component {
         //     ),
         //   });
         // }
-        // if (!this.state.storeSubCategories.includes("אפס חיפוש")) {
+        // if (!this.state.storeSubCategories.includes("כל החנות")) {
         //   ////change to clear all
         //   this.setState({
         //     storeSubCategories:
-        //       this.state.storeSubCategories.concat("אפס חיפוש"),
+        //       this.state.storeSubCategories.concat("כל החנות"),
         //   });
         // }
         // Object.values(variation.variation).forEach((value) => {

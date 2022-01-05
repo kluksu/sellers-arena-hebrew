@@ -17,11 +17,12 @@ class StorePageDetailsNav extends React.Component {
       return (
         <div className="stickyNav">
           <Navbar
+            fixed="bottom"
             expanded={this.state.isExpanded}
             collapseOnSelect
             expand="xl"
-            bg="light"
-            variant="light"
+            bg="dark"
+            variant="dark"
           >
             <Navbar.Toggle
               onClick={() => {
@@ -32,11 +33,13 @@ class StorePageDetailsNav extends React.Component {
               aria-controls="responsive-navbar-nav"
             />
             <Navbar.Collapse id="responsive-navbar-nav">
-              <Nav className="mr-auto">
+              <Nav
+              //  className="mr-auto"
+              >
                 <p className="FormRejects">{this.props.cartsError}</p>
               </Nav>
               <Button
-                style={{ marginBottom: buttonsMargin }}
+                // style={{ marginBottom: buttonsMargin }}
                 type="button"
                 onClick={this.props.addCartItems}
                 variant="success"

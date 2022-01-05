@@ -125,6 +125,7 @@ class StorePageLoadAll extends React.Component {
   // <p> phone number: {this.state.currentStore.phone_number}</p>
   getStoreSubCategory = (subCategory) => {
     this.setState({ activeSubCategory: subCategory });
+    window.scrollTo(0, document.body.scrollHeight);
   };
 
   getSearchText = (searchText) => {
@@ -806,11 +807,11 @@ class StorePageLoadAll extends React.Component {
             ),
           });
         }
-        if (!this.state.storeSubCategories.includes(" אפס חיפוש ")) {
+        if (!this.state.storeSubCategories.includes("כל החנות")) {
           ////change to clear all
           this.setState({
             storeSubCategories:
-              this.state.storeSubCategories.concat(" אפס חיפוש "),
+              this.state.storeSubCategories.concat("כל החנות"),
           });
         }
         Object.values(variation.variation).forEach((value) => {
@@ -951,10 +952,11 @@ class StorePageLoadAll extends React.Component {
         
                         </Container> */}
 
-        <Row>
+        <Row className="storePageRow">
           {supplierCard}
           <Col className="searchPageContainer storePage" xl={12}>
             <Search
+              searchButton={false}
               screenWidth={this.props.screenWidth}
               activeSubCategory={this.state.activeSubCategory}
               getStoreSubCategory={this.getStoreSubCategory}
@@ -981,12 +983,10 @@ class StorePageLoadAll extends React.Component {
           {/* </Menu>
                     </ProSidebar>
                 </Col> */}
-          <Col>
+          <Col className="productCardsCol">
             {/* <InfiniteScroll className="homePage" dataLength={cards.length} next={() => this.getItems()} hasMore={true} loader={loader}> */}
 
             <Row className="productCardsRow">
-              {" "}
-              {<br></br>}
               {(this.props.activeAccount &&
                 this.props.activeAccount.account_type == 3 &&
                 this.state.selectedContactID &&
@@ -1007,7 +1007,7 @@ class StorePageLoadAll extends React.Component {
             {/* </InfiniteScroll> */}
           </Col>
         </Row>
-        <Row>{orderInfo}</Row>
+        <Row className="storePageOrderInfoRow">{orderInfo}</Row>
         <StorePageDetailsNav
           screenWidth={this.props.screenWidth}
           activeAccount={this.props.activeAccount}

@@ -1149,6 +1149,8 @@ class App extends React.Component {
           </Route>
           <Route exact path="/storePage/:storeId/product_page/:productId">
             <ProductPage
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
               activeCart={this.state.activeCart}
               MyShoppingCarts={this.state.MyShoppingCarts}
               accessToken={this.state.accessToken}

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Form, Button, Container, Col, Row } from "react-bootstrap";
 import Ticker from "react-ticker";
+import InStoreCategoryButton from "./InStoreCategoryButton";
 import { handleKeyDown, logo, logoWithText } from "./utils";
 
 export default class Search extends Component {
@@ -55,28 +56,29 @@ export default class Search extends Component {
     let storeCategoriesButtons = [];
     if (this.props.storeSubCategories) {
       this.props.storeSubCategories.forEach((subCategory) => {
-        let clearAll = subCategory === " אפס חיפוש " ? "warning" : "primary";
+        let clearAll = subCategory === "כל החנות" ? "warning" : "primary";
         let fontSize = this.props.storeSubCategories.length > 15 ? 10 : 12;
         let variant =
           this.props.activeSubCategory === subCategory ? "success" : clearAll;
         //
-        let funcCatogory = subCategory === " אפס חיפוש " ? "" : subCategory;
+        let funcCatogory = subCategory === "כל החנות" ? "" : subCategory;
 
         storeCategoriesButtons.push(
-          <Button
+          <InStoreCategoryButton
             style={{ fontSize: fontSize }}
-            type="button"
-            variant={`${variant}`}
-            onClick={() => this.props.getStoreSubCategory(funcCatogory)}
-          >
-            {subCategory}
-          </Button>
+            funcCatogory={funcCatogory}
+            getStoreSubCategory={this.props.getStoreSubCategory}
+            // onClick={() => this.props.getStoreSubCategory(funcCatogory)}
+            subCategory={subCategory}
+          ></InStoreCategoryButton>
         );
       });
     }
     return (
       <div className="searchPage">
         {/* {ticker} */}
+        <div className="subcategoryButtonsDiv">{storeCategoriesButtons}</div>
+
         <Container
           onKeyDown={(event) => handleKeyDown(event, this.props.searchItems)}
           className="searchContainer"
@@ -94,16 +96,18 @@ export default class Search extends Component {
                 placeholder="...חפש"
               />
             </Form.Group>
-            <Button
-              type="button"
-              className="w-100"
-              onClick={this.props.searchItems}
-            >
-              חפש
-            </Button>
+
+            {this.props.searchButton === true ? (
+              <Button
+                type="button"
+                className="w-100"
+                onClick={this.props.searchItems}
+              >
+                חפש
+              </Button>
+            ) : null}
           </Form>
         </Container>
-        <div>{storeCategoriesButtons}</div>
       </div>
     );
   }

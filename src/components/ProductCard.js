@@ -222,9 +222,10 @@ class ProductCard extends React.Component {
                 item={this.props.item}
               ></InfoBox>
             </div>
+
             <div className="CardUnitsFormContainer">{buttons}</div>
             <div
-              style={{ width: "100%", height: "100%" }}
+              // style={{ width: "100%", height: "100%" }}
               onClick={(e) => {
                 if (this.props.linkAllAround) {
                   window.location.assign(this.props.linkAllAround);

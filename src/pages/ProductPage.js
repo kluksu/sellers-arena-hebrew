@@ -45,15 +45,24 @@ class ProductPage extends React.Component {
       this.props.activeAccount.account_type == 2 &&
       this.state.activeCart === ""
     ) {
-      this.creatCart().then((res) => {
-        this.setState({ activeCart: res });
-        this.addCartItems(res.id, itemID, quantity).then(this.props.getCarts());
-      });
+      this.creatCart()
+        .then((res) => {
+          this.setState({ activeCart: res });
+          this.addCartItems(res.id, itemID, quantity).then(() => {
+            this.props.openGenericModal("הפריט נוסף בהצלחה לעגלת הקניות");
+            this.props.getCarts();
+          });
+        })
+        .catch((res) => {
+          this.props.openGenericModal("אופס", "ישנה תקלה, נסה שנית מאוחר יותר");
+        });
     } else {
       this.addCartItems(cartID, itemID, quantity).then((res) => {
         if (!res.error) {
+          this.props.openGenericModal("הפריט נוסף בהצלחה לעגלת הקניות");
           this.props.getCarts();
         }
+
         if (res.error) {
           let obj = { variations_json: { [itemID]: quantity } };
           return postData(
@@ -61,6 +70,8 @@ class ProductPage extends React.Component {
             obj,
             ` ${this.props.accessToken}`
           ).then((res) => {
+            this.props.openGenericModal("הפריט נוסף בהצלחה לעגלת הקניות");
+
             this.props.getCarts();
           });
         }

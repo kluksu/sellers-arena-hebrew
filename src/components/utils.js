@@ -179,6 +179,24 @@ export const categoriesAndSubCategories = [
     ],
   },
 ];
+export const subcategoriesAndPics = {
+  "לגו ומשחקי הרכבה":
+    "https://images.pexels.com/photos/3852577/pexels-photo-3852577.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+  "משחקי קופסא":
+    "https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+  "משחקי חשיבה":
+    "https://images.pexels.com/photos/10327189/pexels-photo-10327189.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+  "בובות ודמויות":
+    "https://images.pexels.com/photos/1364562/pexels-photo-1364562.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+  "משחקי התפתחות ופעוטות":
+    "https://images.pexels.com/photos/3944891/pexels-photo-3944891.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+  "בתי בובות":
+    "https://images.pexels.com/photos/8293720/pexels-photo-8293720.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+  "מטוסים, מכוניות ותנועה":
+    "https://images.pexels.com/photos/9397849/pexels-photo-9397849.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+  "כל החנות":
+    "https://images.pexels.com/photos/1727684/pexels-photo-1727684.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+};
 
 export const englishCategoriesAndSubCategories = [
   {
