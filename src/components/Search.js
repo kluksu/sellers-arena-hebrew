@@ -1,10 +1,27 @@
 import React, { Component } from "react";
-import { Form, Button, Container, Col, Row } from "react-bootstrap";
+import { Form, Button, Container, Col, Row, Carousel } from "react-bootstrap";
 import Ticker from "react-ticker";
 import InStoreCategoryButton from "./InStoreCategoryButton";
-import { handleKeyDown, logo, logoWithText } from "./utils";
+import MyCarousl from "./MyCarousl";
+import {
+  handleKeyDown,
+  logo,
+  logoWithText,
+  subcategoriesAndPics,
+} from "./utils";
+import ScrollButtons from "./ScrollButtons";
 
 export default class Search extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      scrollNum: 0,
+    };
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.scrollNum !== prevState.scrollNum) {
+    }
+  }
   render() {
     // let ticker =
     //   this.props.screenWidth > 800 ? (
@@ -54,6 +71,7 @@ export default class Search extends Component {
     let searchLogo = this.props.screenWidth < 1300 ? "" : logoWithText;
     searchLogo = this.props.screenWidth < 650 ? "" : searchLogo;
     let storeCategoriesButtons = [];
+    let carouselItems = [];
     if (this.props.storeSubCategories) {
       this.props.storeSubCategories.forEach((subCategory) => {
         let clearAll = subCategory === "כל החנות" ? "warning" : "primary";
@@ -63,27 +81,58 @@ export default class Search extends Component {
         //
         let funcCatogory = subCategory === "כל החנות" ? "" : subCategory;
 
+        carouselItems.push(
+          <Carousel.Item>
+            {" "}
+            <img
+              onClick={() => this.props.getStoreSubCategory(funcCatogory)}
+              // className="d-block w-100"
+              src={subcategoriesAndPics[subCategory]}
+              alt={subCategory}
+            />{" "}
+            <Carousel.Caption>
+              {" "}
+              <h3>{subCategory}</h3>
+            </Carousel.Caption>{" "}
+          </Carousel.Item>
+        );
+
         storeCategoriesButtons.push(
-          <InStoreCategoryButton
-            style={{ fontSize: fontSize }}
-            funcCatogory={funcCatogory}
-            getStoreSubCategory={this.props.getStoreSubCategory}
-            // onClick={() => this.props.getStoreSubCategory(funcCatogory)}
-            subCategory={subCategory}
-          ></InStoreCategoryButton>
+          <>
+            <InStoreCategoryButton
+              style={{ fontSize: fontSize }}
+              funcCatogory={funcCatogory}
+              getStoreSubCategory={this.props.getStoreSubCategory}
+              // onClick={() => this.props.getStoreSubCategory(funcCatogory)}
+              subCategory={subCategory}
+            ></InStoreCategoryButton>
+          </>
         );
       });
     }
     return (
       <div className="searchPage">
         {/* {ticker} */}
-        <div className="subcategoryButtonsDiv">{storeCategoriesButtons}</div>
+        <div className="subcategoryButtonsDiv" id="subcategoryButtonsDiv">
+          {" "}
+          <Carousel fade className="storeCategoriesCarousel">
+            {carouselItems}
+          </Carousel>
+          {storeCategoriesButtons}
+          {window.location.href.includes("Store") ? (
+            <ScrollButtons
+              elementID={"subcategoryButtonsDiv"}
+              scrollLeft={this.props.screenWidth}
+              scrollRight={this.props.screenWidth}
+            ></ScrollButtons>
+          ) : null}
+        </div>
 
         <Container
           onKeyDown={(event) => handleKeyDown(event, this.props.searchItems)}
           className="searchContainer"
         >
-          {searchLogo}
+          {/* {searchLogo} */}
 
           {/* <p>earch for suppliers</p> */}
           <Form className="search">

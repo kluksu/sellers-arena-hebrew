@@ -3,7 +3,8 @@
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   direction: rtl;
-  scrollbar-width: thin;
+  /* scrollbar-width: thin; */
+  scroll-behavior: smooth;
 
   /* overflow: hidden; */
   /* text-align: right; */
@@ -72,29 +73,98 @@ body {
 }
 .subcategoryButtonsDiv:hover {
 }
+.storeCategoriesCarousel {
+  display: none;
+}
 
+.scrollButtons {
+  position: absolute;
+  display: flex;
+  color: rgba(255, 255, 255, 0.705);
+  justify-content: space-between;
+  font-size: 80px;
+  top: 30%;
+  width: 100%;
+  z-index: 100;
+}
+.rightScroll {
+  margin-right: 50px;
+  border-radius: 50%;
+  background: #ffffffd4;
+  /* padding: 2em; */
+  color: #000000b8;
+}
+
+.leftScroll {
+  margin-left: 50px;
+
+  border-radius: 50%;
+  background: #ffffffd4;
+  /* padding: 2em; */
+  color: #000000b8;
+  /* padding: 2em; */
+}
+.leftScroll:hover,
+.rightScroll:hover {
+  color: #ffffff;
+  background-color: lightgray;
+  cursor: pointer;
+}
+.productCardsRow .scrollButtons {
+  display: none;
+}
 @media only screen and (max-width: 600px) {
+  .subcategoryButtonsDiv .scrollButtons {
+    display: none;
+  }
+  .productCardsRow .scrollButtons {
+    display: flex;
+    font-size: 40px;
+  }
+  .carousel-control-next-icon,
+  .carousel-control-prev-icon {
+    width: 48px;
+    height: 69px;
+  }
+  .carousel-indicators {
+    padding: 0px;
+  }
   .productCardsRow.row {
     flex-wrap: nowrap;
     overflow-x: scroll;
+    background-color: #1d1237;
+  }
+  .type2card {
   }
   .inStoreCategoryButton {
+    display: none;
+  }
+  .storeCategoriesCarousel,
+  .storeCategoriesCarousel img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+  }
+  /* .inStoreCategoryButton {
     position: relative;
     text-align: center;
     color: white;
-  }
-  .searchPage .inStoreCategoryButton > img {
+  }*/
+  .searchPage .storeCategoriesCarousel img {
     max-width: 100%;
     width: 100vmax;
     height: auto;
   }
+  /*
   .subcategoryButtonsDiv {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     height: fit-content;
     padding-bottom: 3px;
-  }
+  } */
 }
 .App {
   text-align: center;
@@ -366,14 +436,17 @@ label.form-label {
   margin-top: 30px;
 } */
 .type2card {
-  max-width: 280px;
+  max-width: 140px;
+  min-width: 280px;
   /* max-width: 300px; */
   height: 492px;
   border: 1px solid black;
   border-color: #eaefe9;
   background-color: white;
   /* margin: auto; */
-  margin-right: 0px;
+  margin: 20px;
+  border-radius: 10px;
+
   /* margin-bottom: 30px; */
 }
 .borderRight {
@@ -457,7 +530,15 @@ label.form-label {
 .rdrStaticRangeLabel {
   text-align: center !important;
 }
+@media only screen and (max-width: 1200px) {
+  .profileIcon {
+    display: none;
+  }
+}
 @media only screen and (max-width: 600px) {
+  /* .type2card {
+    transform: scale(0.4);
+  } */
   .dateRangeDiv {
     overflow: hidden;
   }
@@ -506,11 +587,11 @@ label.form-label {
   color: white;
 }
 .type2cardImage img {
-  height: 250px;
-  width: 250px;
+  height: auto;
+  width: 100%;
   /* margin-top: 20px; */
-  border-radius: 5px;
-  margin-bottom: 10px;
+  border-radius: 10px;
+  /* margin-bottom: 10px; */
 }
 .type2card:hover {
   cursor: pointer;
@@ -553,13 +634,14 @@ label.form-label {
   display: flex;
   align-items: center;
   margin-top: 15px;
+  /* justify-content: center; */
 }
 
 .CardUnitsFormContainer .form-control {
   max-width: 150px;
   width: fit-content;
   text-align: center;
-  margin-top: 1px;
+  margin-top: 10px;
 }
 .productPageContainer .CardUnitsFormContainer {
   width: 100%;
@@ -568,12 +650,16 @@ label.form-label {
 }
 .CardUnitsFormContainer button {
   margin: auto;
+  background-color: white;
+  border: none;
+  color: black;
+  font-size: 30px;
 }
 .lowerProductCard .cardInfo {
   color: black !important;
   width: 30px;
   border-radius: 50%;
-  background-color: #f7aa8c;
+  /* background-color: #f7aa8c; */
   height: 30px;
   font-size: 30px;
   font-family: "Times New Roman", Times, serif;
@@ -709,6 +795,7 @@ input {
   /* justify-content: space-around; */
   align-content: flex-start;
 }
+
 .homePage .productCardContainer {
   /* overflow: hidden; */
   margin: auto;
@@ -873,8 +960,8 @@ input {
 } */
 /* width */
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: 10px;
+  height: 10px;
 }
 
 /* Track */
@@ -1335,6 +1422,9 @@ input {
   padding-left: 36px;
   padding-right: 36px;
   margin-top: -36px;
+}
+.avatarDiv .m-auto.form-control {
+  max-width: 50%;
 }
 .avatarDiv {
   margin-top: 86px;

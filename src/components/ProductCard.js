@@ -137,106 +137,111 @@ class ProductCard extends React.Component {
           className={`type2card   zoomCard ${cardZoom}`}
           style={{ transform: cardZoom }}
         >
-          <div
+          {/* <div
             // onClick={(e) => e.stopPropagation()}
             // href={this.props.linkAllAround}
             className={`type2card`}
+          > */}
+          <div
+            onClick={(e) => {
+              if (this.props.linkAllAround) {
+                window.location.assign(this.props.linkAllAround);
+              }
+            }}
+            className="type2cardImage"
           >
-            <div
-              onClick={(e) => {
-                if (this.props.linkAllAround) {
-                  window.location.assign(this.props.linkAllAround);
-                }
-              }}
-              className="type2cardImage"
-            >
-              <div className="centered45">
-                {this.props.variation.is_in_stock === false ? "מלאי חסר" : null}
-              </div>
-              <img
-                // onClick={window.location.assign(this.props.linkAllAround)}
-                style={{
-                  opacity:
-                    this.props.variation.is_in_stock === false ? 0.5 : null,
-                }}
-                className="zoomCardImg"
-                src={picture}
-                alt="no picture"
-              />
+            <div className="centered45">
+              {this.props.variation &&
+              this.props.variation.is_in_stock === false
+                ? "מלאי חסר"
+                : null}
             </div>
-            <CardDiscounts
+            <img
+              // onClick={window.location.assign(this.props.linkAllAround)}
+              style={{
+                opacity:
+                  this.props.variation &&
+                  this.props.variation.is_in_stock === false
+                    ? 0.5
+                    : null,
+              }}
+              className="zoomCardImg"
+              src={picture}
+              alt="no picture"
+            />
+          </div>
+          <CardDiscounts
+            variation={this.props.variation}
+            price={this.props.price}
+          ></CardDiscounts>
+          <div className="lowerProductCard">
+            <div>{this.props.productName}</div>
+            {/* <div>{`${this.props.price} ${this.props.currency}`}</div> */}
+            {batchSize}
+            <div className="cardInfo">i</div>
+            <InfoBox
+              link={
+                <div
+                  style={{ fontSize: "20px" }}
+                  onClick={
+                    window.location.href.includes("storePage")
+                      ? () =>
+                          this.props.openGenericModal(
+                            "שים לב!",
+                            "לא שמרת את הפריטים בעגלה, אם תעבור עמוד המידע שלא נשמר ימחק",
+                            <>
+                              <Button
+                                type="button"
+                                onClick={() => {
+                                  this.props.closeGenericModal();
+                                  this.props.addCartItems();
+                                }}
+                              >
+                                שמור את המוצרים
+                              </Button>
+                              <Button
+                                type="button"
+                                variant="warning"
+                                onClick={() => {
+                                  this.props.closeGenericModal();
+                                  window.location.assign(
+                                    this.props.productInfoLink
+                                  );
+                                }}
+                              >
+                                המשך ללא שמירה
+                              </Button>
+                            </>
+                          )
+                      : () => window.location.assign(this.props.productInfoLink)
+                  }
+                  // onClick={async (e) => {
+                  //   await this.props.addCartItems();
+                  //   window.location.assign(this.props.productInfoLink);
+                  // }}
+                >
+                  למוצר
+                </div>
+              }
               variation={this.props.variation}
-              price={this.props.price}
-            ></CardDiscounts>
-            <div className="lowerProductCard">
-              <div>{this.props.productName}</div>
-              {/* <div>{`${this.props.price} ${this.props.currency}`}</div> */}
-              {batchSize}
-              <div className="cardInfo">i</div>
-              <InfoBox
-                link={
-                  <div
-                    style={{ fontSize: "20px" }}
-                    onClick={
-                      window.location.href.includes("storePage")
-                        ? () =>
-                            this.props.openGenericModal(
-                              "שים לב!",
-                              "לא שמרת את הפריטים בעגלה, אם תעבור עמוד המידע שלא נשמר ימחק",
-                              <>
-                                <Button
-                                  type="button"
-                                  onClick={() => {
-                                    this.props.closeGenericModal();
-                                    this.props.addCartItems();
-                                  }}
-                                >
-                                  שמור את המוצרים
-                                </Button>
-                                <Button
-                                  type="button"
-                                  variant="warning"
-                                  onClick={() => {
-                                    this.props.closeGenericModal();
-                                    window.location.assign(
-                                      this.props.productInfoLink
-                                    );
-                                  }}
-                                >
-                                  המשך ללא שמירה
-                                </Button>
-                              </>
-                            )
-                        : () =>
-                            window.location.assign(this.props.productInfoLink)
-                    }
-                    // onClick={async (e) => {
-                    //   await this.props.addCartItems();
-                    //   window.location.assign(this.props.productInfoLink);
-                    // }}
-                  >
-                    למוצר
-                  </div>
-                }
-                variation={this.props.variation}
-                item={this.props.item}
-              ></InfoBox>
-            </div>
+              item={this.props.item}
+            ></InfoBox>
+          </div>
 
-            <div className="CardUnitsFormContainer">{buttons}</div>
-            <div
-              // style={{ width: "100%", height: "100%" }}
-              onClick={(e) => {
-                if (this.props.linkAllAround) {
-                  window.location.assign(this.props.linkAllAround);
-                }
-              }}
-            ></div>
-            {/* <p className="FormRejects absoluteCardNotice">
+          <div className="CardUnitsFormContainer">{buttons}</div>
+          <div
+            // style={{ width: "100%", height: "100%" }}
+            onClick={(e) => {
+              if (this.props.linkAllAround) {
+                window.location.assign(this.props.linkAllAround);
+              }
+            }}
+          ></div>
+          {/* <p className="FormRejects absoluteCardNotice">
               {this.state.notice}
             </p> */}
-          </div>
         </div>
+        // </div>
       );
     }
   }

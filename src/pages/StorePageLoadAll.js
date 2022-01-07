@@ -31,6 +31,7 @@ import { RiContactsLine } from "react-icons/ri";
 import { object } from "prop-types";
 import Ticker from "react-ticker";
 import DiscountModal from "../components/DiscountModal";
+import ScrollButtons from "../components/ScrollButtons";
 // import MessageBoard from "../components/MessageBoard";
 
 class StorePageLoadAll extends React.Component {
@@ -986,7 +987,7 @@ class StorePageLoadAll extends React.Component {
           <Col className="productCardsCol">
             {/* <InfiniteScroll className="homePage" dataLength={cards.length} next={() => this.getItems()} hasMore={true} loader={loader}> */}
 
-            <Row className="productCardsRow">
+            <Row className="productCardsRow" id="productCardsRow">
               {(this.props.activeAccount &&
                 this.props.activeAccount.account_type == 3 &&
                 this.state.selectedContactID &&
@@ -1002,6 +1003,12 @@ class StorePageLoadAll extends React.Component {
                     : "רק חשבונות קונים יכולים לראות את המידע המוצג בעמוד זה"}
                 </h1>
               )}
+              <ScrollButtons
+                elementID={"productCardsRow"}
+                scrollLeft={this.props.screenWidth}
+                scrollRight={this.props.screenWidth}
+                // fontSize={"40px"}
+              ></ScrollButtons>
             </Row>
 
             {/* </InfiniteScroll> */}
