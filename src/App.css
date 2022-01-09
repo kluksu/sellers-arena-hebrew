@@ -130,6 +130,8 @@ body {
     padding: 0px;
   }
   .productCardsRow.row {
+    justify-content: right;
+
     flex-wrap: nowrap;
     overflow-x: scroll;
     background-color: #1d1237;
