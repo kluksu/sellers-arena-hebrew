@@ -573,8 +573,8 @@ class App extends React.Component {
     window.addEventListener("resize", this.resize.bind(this));
     this.resize();
 
-    if (localStorage.getItem("account")) {
-      this.setState({ activeAccount: localStorage.getItem("account") });
+    if (localStorage.getItem("refresh")) {
+      // this.setState({ activeAccount: localStorage.getItem("account") });
       this.setState({ refreshToken: localStorage.getItem("refresh") });
     }
 
@@ -619,7 +619,7 @@ class App extends React.Component {
   };
   goToNewAccount = (newAccount) => {
     this.setState({ activeAccount: newAccount });
-    localStorage.setItem("account", newAccount);
+    // localStorage.setItem("account", newAccount);
   };
   getCarts = () => {
     this.setState({ MyShoppingCarts: [] });
@@ -655,7 +655,7 @@ class App extends React.Component {
       if (element.name === selectedAccount) {
         let account = element;
         this.setState({ activeAccount: account });
-        localStorage.setItem("account", account);
+        // localStorage.setItem("account", account);
       }
     }
     takeMeHome();
@@ -708,7 +708,7 @@ class App extends React.Component {
           this.setState({ userAccounts: data.results });
           if (data.results.length === 1) {
             this.setState({ activeAccount: this.state.userAccounts[0] });
-            localStorage.setItem("account", this.state.userAccounts[0]);
+            // localStorage.setItem("account", this.state.userAccounts[0]);
           }
         }
       );

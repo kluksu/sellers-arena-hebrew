@@ -6,7 +6,7 @@
   /* scrollbar-width: thin; */
   scroll-behavior: smooth;
 
-  /* overflow: hidden; */
+  /* overflow-x: hidden; */
   /* text-align: right; */
 }
 
@@ -113,6 +113,9 @@ body {
   color: #ffffff;
   background-color: lightgray;
   cursor: pointer;
+}
+.row {
+  overflow: hidden;
 }
 .productCardsRow .scrollButtons {
   display: none;
@@ -452,7 +455,7 @@ label.form-label {
 } */
 .type2card {
   position: relative;
-  overflow: hidden;
+  /* overflow: hidden; */
   max-width: 240px;
   min-width: 240px;
   /* max-width: 300px; */
@@ -569,6 +572,10 @@ label.form-label {
   .productCardsRow .type2card {
     /* margin-left: 70px;
     margin-right: 70px; */
+  }
+  .type2card .table {
+    max-width: 100%;
+    overflow: scroll;
   }
   .dateRangeDiv {
     overflow: hidden;
@@ -736,7 +743,7 @@ label.form-label {
   bottom: 0px;
   z-index: 100;
   left: 0px;
-  width: auto;
+
   overflow-y: scroll;
 }
 table.hidden:hover {
@@ -985,9 +992,10 @@ input {
 
   z-index: 100;
 }
-.storePageRow {
+.storePageRow.row {
   padding: 0px;
   padding-bottom: 0px;
+  /* overflow: hidden; */
 }
 
 /* ::-webkit-scrollbar {

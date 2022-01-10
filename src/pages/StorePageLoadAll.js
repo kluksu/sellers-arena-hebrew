@@ -73,6 +73,7 @@ class StorePageLoadAll extends React.Component {
       scrollBehavior: "smooth",
       // scrollLeft: "",
       arrowShown: "left",
+      wasNextNull: false,
     };
   }
   closeModal = () => this.setState({ isDiscountModalOpen: false });
@@ -143,23 +144,27 @@ class StorePageLoadAll extends React.Component {
     this.setState({ cartItems: cart });
   };
   getItems = (token) => {
-    const path =
-      this.props.activeAccount && this.props.activeAccount.account_type == 3
-        ? "items"
-        : "public-items";
-    const next =
-      this.state.next !== undefined
-        ? this.state.next
-        : `${domain}/${path}/?limit=50&offset=0&account_id=${this.props.match.params.id}`;
-    const tokenfull = this.props.accessToken ? this.props.accessToken : token;
-    const authorization = !this.props.accessToken
-      ? null
-      : `Bearer ${tokenfull}`;
-    const config = {
-      headers: { "Content-Type": "application/json", authorization },
-    };
-    if (next !== null) {
+    if (this.state.next !== null) {
+      console.log(this.state.next);
+      const path =
+        this.props.activeAccount &&
+        this.props.activeAccount.id == this.props.match.params.id
+          ? "items"
+          : "public-items";
+      const next =
+        this.state.next !== undefined
+          ? this.state.next
+          : `${domain}/${path}/?limit=50&offset=0&account_id=${this.props.match.params.id}`;
+      const tokenfull = this.props.accessToken ? this.props.accessToken : token;
+      const authorization = !this.props.accessToken
+        ? null
+        : `Bearer ${tokenfull}`;
+      const config = {
+        headers: { "Content-Type": "application/json", authorization },
+      };
       axios.get(next, config).then((response) => {
+        this.setState({ next: response.data.next });
+
         response.data.results.forEach((item) => {
           if (item.item_variations.length > 0) {
             this.setState({ loadShowList: true });
@@ -172,9 +177,9 @@ class StorePageLoadAll extends React.Component {
             return;
           }
         });
-        if (this.state.loadMoreItems === true) {
-          this.getItems();
-        }
+        // if (this.state.loadMoreItems === true) {
+        //   this.getItems();
+        // }
         ////not sure
         // if (this.state.loadShowList === true ) {
         this.setState({
@@ -183,8 +188,10 @@ class StorePageLoadAll extends React.Component {
         // }
 
         this.setState({ itemsLangh: response.data.results.length });
-        this.setState({ next: response.data.next });
-        this.getItems(); ///load all items 50 each time, can be deleted when ever
+        if (this.state.wasNextNull === false) {
+          this.getItems();
+        }
+        ///load all items 50 each time, can be deleted when ever
       });
     }
     this.setState({ loadShowList: false });
@@ -215,23 +222,25 @@ class StorePageLoadAll extends React.Component {
     }
   };
   loadStoreComponent = async () => {
-    if (this.props.accessToken) {
-      await this.setState({
-        next: undefined,
-        showList: [],
-        loadShowList: false,
-      });
-      if (
-        this.state.selectedContactID === "" &&
-        this.props.activeAccount &&
-        this.props.activeAccount.account_type == 3
-      ) {
-      } else {
-        //if account type 3 prevent first items load
-        console.log(this.state);
-        this.getItems();
-      }
+    // if (this.props.accessToken) {
+    await this.setState({
+      next: undefined,
+      showList: [],
+      loadShowList: false,
+    });
+
+    if (
+      this.state.selectedContactID === "" &&
+      this.props.activeAccount &&
+      this.props.activeAccount.account_type == 3
+    ) {
+      // this.getItems();
+    } else {
+      //if account type 3 prevent first items load
+      console.log(this.state);
+      this.getItems();
     }
+    // }
     let userID =
       this.props.activeAccount && this.props.activeAccount.account_type == 2
         ? this.props.match.params.id
@@ -442,6 +451,9 @@ class StorePageLoadAll extends React.Component {
     }
   };
   componentDidUpdate(prevProps, prevState) {
+    if (this.state.next !== prevState.next && this.state.next === null) {
+      this.setState({ wasNextNull: true });
+    }
     // if (this.state.scrollLeft !== prevState.scrollLeft) {
     //   if (this.state.scrollLeft - prevState.scrollLeft > 0) {
     //     this.setState({ scrollDiraction: "right" });
@@ -469,6 +481,7 @@ class StorePageLoadAll extends React.Component {
     }
     if (
       this.state.currentStore !== prevState.currentStore &&
+      this.props.activeAccount &&
       this.props.activeAccount.account_type == 2
     ) {
       this.setState({ messagesBoardText: this.state.currentStore.messages });
@@ -635,6 +648,7 @@ class StorePageLoadAll extends React.Component {
     }
   };
   render() {
+    console.log(this.state.next);
     if (this.state.next !== null) {
       if (
         !this.props.activeAccount ||
@@ -1066,7 +1080,8 @@ class StorePageLoadAll extends React.Component {
                 this.state.selectedContactID !== 0) ||
               (this.props.activeAccount &&
                 this.props.activeAccount.account_type == 2) ||
-              !this.props.activeAccount ? (
+              !this.props.activeAccount ||
+              this.props.activeAccount === undefined ? (
                 cards
               ) : (
                 <h1 style={{ color: "red" }}>
