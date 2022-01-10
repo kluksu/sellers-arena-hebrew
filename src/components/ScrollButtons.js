@@ -3,8 +3,8 @@ import { TiChevronLeft, TiChevronRight } from "react-icons/ti";
 
 export default class ScrollButtons extends Component {
   render() {
-    return (
-      <div className="scrollButtons">
+    let rightArrow =
+      this.props.arrowShown !== "left" ? (
         <TiChevronRight
           onMouseDown={() => {
             document.getElementById(this.props.elementID).scrollLeft +=
@@ -12,7 +12,11 @@ export default class ScrollButtons extends Component {
           }}
           className="rightScroll"
         />
-
+      ) : (
+        <div></div>
+      );
+    let leftArrow =
+      this.props.arrowShown !== "right" ? (
         <TiChevronLeft
           className="leftScroll"
           onMouseDown={() => {
@@ -20,6 +24,13 @@ export default class ScrollButtons extends Component {
               this.props.scrollRight;
           }}
         />
+      ) : (
+        <div></div>
+      );
+    return (
+      <div className="scrollButtons">
+        {rightArrow}
+        {leftArrow}
       </div>
     );
   }

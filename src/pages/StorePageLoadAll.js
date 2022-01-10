@@ -28,7 +28,7 @@ import FullPageLoader from "../components/FullPageLoader";
 import Loader from "react-loader-spinner";
 import MyLoader from "../components/myLoader";
 import { RiContactsLine } from "react-icons/ri";
-import { object } from "prop-types";
+import { element, object } from "prop-types";
 import Ticker from "react-ticker";
 import DiscountModal from "../components/DiscountModal";
 import ScrollButtons from "../components/ScrollButtons";
@@ -70,6 +70,9 @@ class StorePageLoadAll extends React.Component {
       modalText: "",
       modalTop: "",
       modalBottom: "",
+      scrollBehavior: "smooth",
+      // scrollLeft: "",
+      arrowShown: "left",
     };
   }
   closeModal = () => this.setState({ isDiscountModalOpen: false });
@@ -126,7 +129,8 @@ class StorePageLoadAll extends React.Component {
   // <p> phone number: {this.state.currentStore.phone_number}</p>
   getStoreSubCategory = (subCategory) => {
     this.setState({ activeSubCategory: subCategory });
-    window.scrollTo(0, document.body.scrollHeight);
+    // window.scrollTo(0, document.getElementById("productCardsRow").scrollHeight);
+    document.getElementById("productCardsRow").scrollIntoView();
   };
 
   getSearchText = (searchText) => {
@@ -438,6 +442,25 @@ class StorePageLoadAll extends React.Component {
     }
   };
   componentDidUpdate(prevProps, prevState) {
+    // if (this.state.scrollLeft !== prevState.scrollLeft) {
+    //   if (this.state.scrollLeft - prevState.scrollLeft > 0) {
+    //     this.setState({ scrollDiraction: "right" });
+    //   } else {
+    //     this.setState({ scrollDiraction: "left" });
+    //   }
+    //   console.log(this.state.scrollDiraction);
+    // }
+    // if (this.state.scrollDiraction !== prevState.scrollDiraction) {
+    //   if (this.state.scrollDiraction === "left") {
+    //     let showList = this.state.showList;
+    //     console.log(showList);
+
+    //     showList.push(showList[0]);
+    //     console.log(showList);
+    //     this.setState({ showList: showList });
+    //   }
+    // }
+
     if (this.props.match.params.id !== prevProps.match.params.id) {
       this.getContactsList();
     }
@@ -579,7 +602,38 @@ class StorePageLoadAll extends React.Component {
       this.setState({ isColapsed: false });
     }
   };
+  handleScroll = async (e, element) => {
+    console.log(element.scrollWidth, element.scrollLeft, element.clientWidth);
+    this.setState({ scrollLeft: element.scrollLeft });
+    if (
+      Math.round(element.scrollWidth + element.scrollLeft) ===
+      element.clientWidth
+      //   &&
+      // this.state.scrollDiraction === "left"
+    ) {
+      this.setState({ arrowShown: "right" });
+      // await this.setState({ scrollBehavior: "auto" });
+      // element.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      // this.setState({ scrollBehavior: "smooth" });
+      // console.log("!!!!!!!!!!!!");
+    } else if (
+      element.scrollLeft === 0
+      //  &&
+      // this.state.scrollDiraction === "right"
+    ) {
+      this.setState({ arrowShown: "left" });
 
+      // await this.setState({ scrollBehavior: "auto" });
+      // element.scrollTo({
+      //   top: 0,
+      //   left: -element.scrollWidth,
+      //   behavior: "auto",
+      // });
+      // this.setState({ scrollBehavior: "smooth" });
+    } else {
+      this.setState({ arrowShown: "both" });
+    }
+  };
   render() {
     if (this.state.next !== null) {
       if (
@@ -935,6 +989,11 @@ class StorePageLoadAll extends React.Component {
                   </ProductCard>
                 );
             }
+            // if (
+            //   this.state.scrollDiraction === "left"
+            // ) {
+            //   cards.unshift(cards[0]);
+            // }
           }
         }
       }
@@ -987,7 +1046,21 @@ class StorePageLoadAll extends React.Component {
           <Col className="productCardsCol">
             {/* <InfiniteScroll className="homePage" dataLength={cards.length} next={() => this.getItems()} hasMore={true} loader={loader}> */}
 
-            <Row className="productCardsRow" id="productCardsRow">
+            <Row
+              className="productCardsRow"
+              id="productCardsRow"
+              style={{ scrollBehavior: this.state.scrollBehavior }}
+              onScroll={
+                cards.length > 6
+                  ? (e) =>
+                      this.handleScroll(
+                        e,
+                        document.getElementById("productCardsRow")
+                        // console.log(e);
+                      )
+                  : () => ""
+              }
+            >
               {(this.props.activeAccount &&
                 this.props.activeAccount.account_type == 3 &&
                 this.state.selectedContactID &&
@@ -1004,6 +1077,7 @@ class StorePageLoadAll extends React.Component {
                 </h1>
               )}
               <ScrollButtons
+                arrowShown={this.state.arrowShown}
                 elementID={"productCardsRow"}
                 scrollLeft={this.props.screenWidth}
                 scrollRight={this.props.screenWidth}

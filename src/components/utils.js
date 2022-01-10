@@ -24,6 +24,7 @@ export async function postData(URL = "", data = {}, token) {
     referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
     body: JSON.stringify(data), // body data type must match "Content-Type" header
   });
+
   return response.json(); // parses JSON response into native JavaScript objects
 } ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Example POST method implementation:
@@ -50,7 +51,14 @@ export async function getData(URL = "", data = {}, token) {
 export const handleChange = (event) => {
   this.setState({ [event.target.name]: event.target.value });
 };
+export function scrolled(e, element, func) {
+  element = document.getElementById(`${element}`);
+  // if (element.offsetHeight + element.scrollTop >= element.scrollLeft) {
+  console.log(element.offsetWidth, element.scrollLeft, element.scrollWidth);
 
+  // func(e);
+  // }
+}
 export const takeMeHome = () => {
   window.location.assign("/#/");
 };

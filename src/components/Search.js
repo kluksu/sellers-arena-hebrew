@@ -68,12 +68,14 @@ export default class Search extends Component {
     //       )}
     //     </Ticker>
     //   ) : null;
+    let categoriesArr = [];
+
     let searchLogo = this.props.screenWidth < 1300 ? "" : logoWithText;
     searchLogo = this.props.screenWidth < 650 ? "" : searchLogo;
     let storeCategoriesButtons = [];
     let carouselItems = [];
     if (this.props.storeSubCategories) {
-      this.props.storeSubCategories.forEach((subCategory) => {
+      this.props.storeSubCategories.forEach((subCategory, i) => {
         let clearAll = subCategory === "כל החנות" ? "warning" : "primary";
         let fontSize = this.props.storeSubCategories.length > 15 ? 10 : 12;
         let variant =
@@ -96,7 +98,18 @@ export default class Search extends Component {
             </Carousel.Caption>{" "}
           </Carousel.Item>
         );
-
+        categoriesArr.push(
+          <div
+            className="instoreCategoryNames"
+            onClick={() => this.props.getStoreSubCategory(funcCatogory)}
+          >
+            {" "}
+            <>
+              &nbsp; {subCategory} &nbsp;
+              {i !== this.props.storeSubCategories.length - 1 ? `${"| "} ` : ""}
+            </>{" "}
+          </div>
+        );
         storeCategoriesButtons.push(
           <>
             <InStoreCategoryButton
@@ -157,6 +170,7 @@ export default class Search extends Component {
             ) : null}
           </Form>
         </Container>
+        <div className="subCategoriesDiv"> {categoriesArr}</div>
       </div>
     );
   }
