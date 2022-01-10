@@ -254,7 +254,7 @@ class HomePage extends React.Component {
               item={element.item}
               variation={element.variation}
               productInfoLink={`/#/StorePage/${element.item.account}/product_page/${element.item.id}`}
-              Around={`/#/StorePage/${element.item.account}`}
+              linkAllAround={`/#/StorePage/${element.item.account}`}
               productName={`${shortName}.....`}
               price="על מנת לראות את המחיר עליך להיות ברשימת אנשי הקשר של ספק זה"
               currency={""}

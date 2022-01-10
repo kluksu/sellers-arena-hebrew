@@ -171,66 +171,74 @@ class ProductCard extends React.Component {
             />
           </div>
           <CardDiscounts
+            onClick={(e) => {
+              if (this.props.linkAllAround) {
+                window.location.assign(this.props.linkAllAround);
+              }
+            }}
             variation={this.props.variation}
             price={this.props.price}
           ></CardDiscounts>
           <div className="lowerProductCard">
-            <div>{this.props.productName}</div>
+            <div className="infoAndButtons">
+              <span> {this.props.productName}</span>{" "}
+              <span className="cardInfo">i</span>{" "}
+              <InfoBox
+                link={
+                  <div
+                    style={{ fontSize: "20px" }}
+                    onClick={
+                      window.location.href.includes("storePage")
+                        ? () =>
+                            this.props.openGenericModal(
+                              "שים לב!",
+                              "לא שמרת את הפריטים בעגלה, אם תעבור עמוד המידע שלא נשמר ימחק",
+                              <>
+                                <Button
+                                  type="button"
+                                  onClick={() => {
+                                    this.props.closeGenericModal();
+                                    this.props.addCartItems();
+                                  }}
+                                >
+                                  שמור את המוצרים
+                                </Button>
+                                <Button
+                                  type="button"
+                                  variant="warning"
+                                  onClick={() => {
+                                    this.props.closeGenericModal();
+                                    window.location.assign(
+                                      this.props.productInfoLink
+                                    );
+                                  }}
+                                >
+                                  המשך ללא שמירה
+                                </Button>
+                              </>
+                            )
+                        : () =>
+                            window.location.assign(this.props.productInfoLink)
+                    }
+                    // onClick={async (e) => {
+                    //   await this.props.addCartItems();
+                    //   window.location.assign(this.props.productInfoLink);
+                    // }}
+                  >
+                    למוצר
+                  </div>
+                }
+                variation={this.props.variation}
+                item={this.props.item}
+              ></InfoBox>
+            </div>
             {/* <div>{`${this.props.price} ${this.props.currency}`}</div> */}
             {batchSize}
-            <div className="cardInfo">i</div>
-            <InfoBox
-              link={
-                <div
-                  style={{ fontSize: "20px" }}
-                  onClick={
-                    window.location.href.includes("storePage")
-                      ? () =>
-                          this.props.openGenericModal(
-                            "שים לב!",
-                            "לא שמרת את הפריטים בעגלה, אם תעבור עמוד המידע שלא נשמר ימחק",
-                            <>
-                              <Button
-                                type="button"
-                                onClick={() => {
-                                  this.props.closeGenericModal();
-                                  this.props.addCartItems();
-                                }}
-                              >
-                                שמור את המוצרים
-                              </Button>
-                              <Button
-                                type="button"
-                                variant="warning"
-                                onClick={() => {
-                                  this.props.closeGenericModal();
-                                  window.location.assign(
-                                    this.props.productInfoLink
-                                  );
-                                }}
-                              >
-                                המשך ללא שמירה
-                              </Button>
-                            </>
-                          )
-                      : () => window.location.assign(this.props.productInfoLink)
-                  }
-                  // onClick={async (e) => {
-                  //   await this.props.addCartItems();
-                  //   window.location.assign(this.props.productInfoLink);
-                  // }}
-                >
-                  למוצר
-                </div>
-              }
-              variation={this.props.variation}
-              item={this.props.item}
-            ></InfoBox>
           </div>
+          <span className="CardUnitsFormContainer">{buttons}</span>
 
-          <div className="CardUnitsFormContainer">{buttons}</div>
           <div
-            // style={{ width: "100%", height: "100%" }}
+            style={{ width: "100%", height: "100%" }}
             onClick={(e) => {
               if (this.props.linkAllAround) {
                 window.location.assign(this.props.linkAllAround);

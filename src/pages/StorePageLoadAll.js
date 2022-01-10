@@ -127,7 +127,7 @@ class StorePageLoadAll extends React.Component {
   // <p>{this.state.currentStore.name}</p>
   // <p>{this.state.currentStore.store_address}</p>
   // <p> phone number: {this.state.currentStore.phone_number}</p>
-  getStoreSubCategory = (subCategory) => {
+  getStoreSubCategory = (e, subCategory) => {
     this.setState({ activeSubCategory: subCategory });
     // window.scrollTo(0, document.getElementById("productCardsRow").scrollHeight);
     document.getElementById("productCardsRow").scrollIntoView();
@@ -752,16 +752,18 @@ class StorePageLoadAll extends React.Component {
               <p> טלפון: {this.state.currentStore.phone_number}</p>
             </Col>
             <Col className="buttonsCol" xl={4} lg={12}>
-              <Button
-                disabled={unregisterDisable}
-                onclick={() =>
-                  window.open(`tel:${this.state.currentStore.phone_number}`)
-                }
-                className="w-50"
-                variant="success"
-              >
-                התקשר <FiPhoneCall />
-              </Button>{" "}
+              {this.props.screenWidth < 1000 ? (
+                <Button
+                  disabled={unregisterDisable}
+                  onclick={() =>
+                    window.open(`tel:${this.state.currentStore.phone_number}`)
+                  }
+                  className="w-50"
+                  variant="success"
+                >
+                  התקשר <FiPhoneCall />
+                </Button>
+              ) : null}
               <Button
                 disabled={unregisterDisable}
                 className="w-50"
@@ -1050,15 +1052,12 @@ class StorePageLoadAll extends React.Component {
               className="productCardsRow"
               id="productCardsRow"
               style={{ scrollBehavior: this.state.scrollBehavior }}
-              onScroll={
-                cards.length > 6
-                  ? (e) =>
-                      this.handleScroll(
-                        e,
-                        document.getElementById("productCardsRow")
-                        // console.log(e);
-                      )
-                  : () => ""
+              onScroll={(e) =>
+                this.handleScroll(
+                  e,
+                  document.getElementById("productCardsRow")
+                  // console.log(e);
+                )
               }
             >
               {(this.props.activeAccount &&

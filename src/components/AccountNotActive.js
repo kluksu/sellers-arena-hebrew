@@ -6,8 +6,7 @@ export default class AccountNotActive extends Component {
     let display = window.location.href.includes("register") ? "none" : "";
 
     let accountNotActive =
-      this.props.is_active === false ||
-      typeof this.props.activeAccount !== "object" ? (
+      this.props.is_active === false ? (
         <div style={{ display: display }} className="notActiveMessageContainer">
           {" "}
           <div className="notActiveMessage">

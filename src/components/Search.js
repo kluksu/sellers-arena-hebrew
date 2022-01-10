@@ -101,7 +101,7 @@ export default class Search extends Component {
         categoriesArr.push(
           <div
             className="instoreCategoryNames"
-            onClick={() => this.props.getStoreSubCategory(funcCatogory)}
+            onClick={(e) => this.props.getStoreSubCategory(e, funcCatogory)}
           >
             {" "}
             <>

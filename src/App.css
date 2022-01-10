@@ -451,10 +451,13 @@ label.form-label {
   margin-top: 30px;
 } */
 .type2card {
-  max-width: 280px;
-  min-width: 280px;
+  position: relative;
+  overflow: hidden;
+  max-width: 240px;
+  min-width: 240px;
   /* max-width: 300px; */
-  height: 492px;
+  height: 373px;
+  /* height: auto; */
   border: 1px solid black;
   border-color: #eaefe9;
   background-color: white;
@@ -474,19 +477,22 @@ label.form-label {
   overflow-x: scroll;
 }
 .productCardDiscounts {
+  margin-bottom: 5px;
   direction: ltr;
-  transition: transform 0.2s; /* Animation */
+  transition: transform 0.2s;
   font-size: 12px;
-  padding: 5px;
+  /* padding: 5px; */
   color: black;
   overflow: hidden;
+  white-space: nowrap;
   background-color: #fcc3ad;
   font-weight: 600;
-  border: 0.1px outset black;
-  border-radius: 5px;
-  margin: 3px;
+  /* border: 0.1px outset black; */
+  /* border-radius: 5px; */
+  /* margin: 3px; */
   display: flex;
   justify-content: center;
+  z-index: 1000000;
   /* justify-content: space-evenly; */
 }
 .productCardDiscounts:hover {
@@ -550,13 +556,19 @@ label.form-label {
     display: none;
   }
 }
+@media only screen and (min-width: 601px) {
+}
+
 @media only screen and (max-width: 600px) {
+  .productCardDiscounts {
+    overflow: scroll;
+  }
   .stickyNav .fixed-bottom {
     padding-bottom: 40px;
   }
   .productCardsRow .type2card {
-    margin-left: 70px;
-    margin-right: 70px;
+    /* margin-left: 70px;
+    margin-right: 70px; */
   }
   .dateRangeDiv {
     overflow: hidden;
@@ -609,7 +621,7 @@ label.form-label {
   height: auto;
   width: 100%;
   /* margin-top: 20px; */
-  border-radius: 10px;
+  border-radius: 10px 10px 0px 0px;
   /* margin-bottom: 10px; */
 }
 .type2card:hover {
@@ -642,41 +654,56 @@ label.form-label {
   display: flex;
   justify-content: center;
   height: 40px;
-  width: 172px;
+  /* width: 172px; */
   margin: auto;
 }
 .CardUnitsForm .form {
   font-size: 8px;
 }
+.infoAndButtons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.infoAndButtons > span:first-of-type {
+  overflow: scroll;
+  max-width: 184px;
+}
 .CardUnitsFormContainer {
   width: 100%;
+  height: auto;
   display: flex;
   align-items: center;
-  margin-top: 15px;
+  position: absolute;
+  bottom: 5px;
+  /* margin-bottom: 5px; */
+  /* margin-top: 15px; */
   /* justify-content: center; */
 }
 
 .CardUnitsFormContainer .form-control {
   max-width: 150px;
-  width: fit-content;
+  /* width: fit-content; */
   text-align: center;
-  margin-top: 10px;
+  /* margin-top: 10px; */
 }
 .productPageContainer .CardUnitsFormContainer {
   width: 100%;
   display: flex;
-  margin-bottom: 50px;
+  /* margin-bottom: 50px; */
 }
 .CardUnitsFormContainer button {
   margin: auto;
   background-color: white;
   border: none;
   color: black;
-  font-size: 30px;
+  font-size: 14px;
+  font-weight: 900;
 }
 .lowerProductCard .cardInfo {
   color: black !important;
   width: 30px;
+  margin-left: 20px;
   border-radius: 50%;
   /* background-color: #f7aa8c; */
   height: 30px;
@@ -708,15 +735,16 @@ label.form-label {
   font-size: 10px;
   bottom: 0px;
   z-index: 100;
-  right: 0px;
+  left: 0px;
   width: auto;
+  overflow-y: scroll;
 }
 table.hidden:hover {
   display: block;
   font-size: 10px;
   bottom: 70px;
   z-index: 100;
-  right: 0px;
+  left: 0px;
   width: auto;
   bottom: 0px;
 }
@@ -767,7 +795,7 @@ table.hidden:hover {
   align-items: flex-start;
   flex-wrap: wrap;
   margin-top: 0px;
-  padding-right: 24px;
+  padding-right: 5px;
 }
 .cardButtonsContainer {
   display: flex;
@@ -980,7 +1008,7 @@ input {
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
-  height: 10px;
+  height: 3px;
 }
 
 /* Track */
@@ -990,7 +1018,7 @@ input {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgb(199, 197, 197);
+  background: rgb(20, 19, 19);
 }
 
 /* Handle on hover */
@@ -1332,7 +1360,7 @@ input {
 .pro-sidebar > .pro-sidebar-inner > .pro-sidebar-layout {
   padding-top: 10px;
   padding-bottom: 10px;
-  background-color: #ffad35;
+  background-color: #1d1237;
   color: white;
   font-family: initial;
   font-weight: 800;
