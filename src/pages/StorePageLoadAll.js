@@ -782,16 +782,19 @@ class StorePageLoadAll extends React.Component {
             </Col>
             <Col className="buttonsCol" xl={4} lg={12}>
               {this.props.screenWidth < 1000 ? (
-                <Button
-                  disabled={unregisterDisable}
-                  onclick={() =>
-                    window.open(`tel:${this.state.currentStore.phone_number}`)
-                  }
-                  className="w-50"
-                  variant="success"
-                >
-                  התקשר <FiPhoneCall />
-                </Button>
+                <a href={`tel:${this.state.currentStore.phone_number}`}>
+                  {" "}
+                  <Button
+                    disabled={unregisterDisable}
+                    onclick={() =>
+                      window.open(`tel:${this.state.currentStore.phone_number}`)
+                    }
+                    className="w-50"
+                    variant="success"
+                  >
+                    התקשר <FiPhoneCall />
+                  </Button>
+                </a>
               ) : null}
               <Button
                 disabled={unregisterDisable}
