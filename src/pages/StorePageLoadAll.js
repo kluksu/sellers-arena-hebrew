@@ -145,7 +145,6 @@ class StorePageLoadAll extends React.Component {
   };
   getItems = (token) => {
     if (this.state.next !== null) {
-      console.log(this.state.next);
       const path =
         this.props.activeAccount &&
         this.props.activeAccount.id == this.props.match.params.id
@@ -164,7 +163,9 @@ class StorePageLoadAll extends React.Component {
       };
       axios.get(next, config).then((response) => {
         this.setState({ next: response.data.next });
-
+        if (response.data.next === null) {
+          this.setState({ wasNextNull: true });
+        }
         response.data.results.forEach((item) => {
           if (item.item_variations.length > 0) {
             this.setState({ loadShowList: true });
@@ -227,6 +228,7 @@ class StorePageLoadAll extends React.Component {
       next: undefined,
       showList: [],
       loadShowList: false,
+      // wasNextNull: false,
     });
 
     if (
@@ -237,7 +239,6 @@ class StorePageLoadAll extends React.Component {
       // this.getItems();
     } else {
       //if account type 3 prevent first items load
-      console.log(this.state);
       this.getItems();
     }
     // }
@@ -450,9 +451,20 @@ class StorePageLoadAll extends React.Component {
       });
     }
   };
+  // updateActiveCart = (cartID) => {
+  //   const authorization = !this.props.accessToken
+  //     ? null
+  //     : `Bearer ${this.props.accessToken}`;
+  //   const config = {
+  //     headers: { "Content-Type": "application/json", authorization },
+  //   };
+
+  //   axios.get(`${domain}/cart/${cartID}/`, config).then((data) => {
+  //     this.setState({ activeCart: data.data });
+  //   });
+  // };
   componentDidUpdate(prevProps, prevState) {
     if (this.state.next !== prevState.next && this.state.next === null) {
-      this.setState({ wasNextNull: true });
     }
     // if (this.state.scrollLeft !== prevState.scrollLeft) {
     //   if (this.state.scrollLeft - prevState.scrollLeft > 0) {
@@ -477,7 +489,10 @@ class StorePageLoadAll extends React.Component {
       this.getContactsList();
     }
     if (this.state.activeCart !== prevState.activeCart) {
+      this.setState({ cartItems: {} });
+      // this.setState({ wasNextNull: false });
       this.props.getActiveCart(this.state.activeCart);
+      // this.loadStoreComponent();
     }
     if (
       this.state.currentStore !== prevState.currentStore &&
@@ -506,6 +521,7 @@ class StorePageLoadAll extends React.Component {
     }
     if (this.state.selectedContactID !== prevState.selectedContactID) {
       this.setState({
+        wasNextNull: false,
         activeCart: {
           all_item_variations: [],
           buyer_account: 0,
@@ -518,7 +534,8 @@ class StorePageLoadAll extends React.Component {
           total_price_before_tax: 0,
         },
       });
-      this.loadStoreComponent();
+      this.props.getCarts();
+      // this.loadStoreComponent();
 
       let messageUserID =
         this.props.activeAccount && this.props.activeAccount.account_type == 3
@@ -616,7 +633,6 @@ class StorePageLoadAll extends React.Component {
     }
   };
   handleScroll = async (e, element) => {
-    console.log(element.scrollWidth, element.scrollLeft, element.clientWidth);
     this.setState({ scrollLeft: element.scrollLeft });
     if (
       Math.round(element.scrollWidth + element.scrollLeft) ===
@@ -648,8 +664,7 @@ class StorePageLoadAll extends React.Component {
     }
   };
   render() {
-    console.log(this.state.next);
-    if (this.state.next !== null) {
+    if (this.state.wasNextNull !== true) {
       if (
         !this.props.activeAccount ||
         this.props.activeAccount.account_type == 2 ||

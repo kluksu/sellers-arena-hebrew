@@ -46,6 +46,7 @@ export default class QuantitySelector extends Component {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
   };
   componentDidMount() {
+    this.setState({ units: 0 });
     console.log(this.props.stockWarnning, this.props.inStock);
     this.setState({ units: this.props.value });
   }
