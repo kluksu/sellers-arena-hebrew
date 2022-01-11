@@ -269,14 +269,15 @@ class MyNavBar extends React.Component {
       ) : null;
     }
 
-    let brand = this.props.activeAccount ? (
-      <Navbar.Brand href="/#/">
-        {/*this.props.activeAccount.id*/}
-        {logo}
-      </Navbar.Brand>
-    ) : (
-      ""
-    );
+    let brand =
+      this.props.activeAccount || !this.props.activeAccount ? (
+        <Navbar.Brand href="/#/">
+          {/*this.props.activeAccount.id*/}
+          {logo}
+        </Navbar.Brand>
+      ) : (
+        ""
+      );
     let creatNewSupplierOrder =
       this.props.activeAccount &&
       this.props.activeAccount.account_type === 3 ? (
