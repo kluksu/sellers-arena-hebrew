@@ -308,7 +308,7 @@ class HomePage extends React.Component {
               </Menu>
             </ProSidebar>
           </Col>
-          <Col style={{ paddingLeft: "0px" }}>
+          <Col className="homePageCol" style={{ paddingLeft: "0px" }}>
             <InfiniteScroll
               style={{
                 // paddingRight: infiniteCrollPaddingLeft,

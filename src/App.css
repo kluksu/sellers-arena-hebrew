@@ -610,6 +610,9 @@ label.form-label {
 /* .allOrdersPage table:hover {
   overflow: scroll;
 } */
+.homePageCol {
+  overflow-x: hidden;
+}
 .dropdown-menu {
   text-align: center !important;
 }
