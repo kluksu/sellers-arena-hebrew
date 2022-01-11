@@ -253,6 +253,7 @@ class ProductPage extends React.Component {
           </Button>
         </div>
         <Button
+          variant="primary"
           onClick={() => {
             this.addItemsToCart(
               this.state.activeCart.id,
@@ -262,7 +263,7 @@ class ProductPage extends React.Component {
           }}
         >
           {" "}
-          הוסף לעלה
+          הוסף לעגלה
         </Button>
       </>
     ) : null;

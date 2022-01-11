@@ -19,7 +19,7 @@ export default class DetailsOnOrderSeller extends Component {
         <div className="sellerInfoContainer">
           <span style={{ fontSize: headlineSize }}>
             {" "}
-            {this.props.activeAccount.name}
+            {this.props.activeAccount ? this.props.activeAccount.name : null}
           </span>
           <div>
             {" "}
