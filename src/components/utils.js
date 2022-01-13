@@ -4,7 +4,7 @@ import emailjs from "emailjs-com";
 
 // Example POST method implementation:
 //https://supplierzz.herokuapp.com
-//https://supplierzz.westeurope.cloudapp.azure.com
+// export let domain ="https://supplierzz.westeurope.cloudapp.azure.com"
 export let domain = "https://supplierzz.herokuapp.com";
 export async function postData(URL = "", data = {}, token) {
   // Default options are marked with *
@@ -51,13 +51,15 @@ export async function getData(URL = "", data = {}, token) {
 export const handleChange = (event) => {
   this.setState({ [event.target.name]: event.target.value });
 };
-export function scrolled(e, element, func) {
+export function scrolled(e, element, func1, func2) {
   element = document.getElementById(`${element}`);
-  // if (element.offsetHeight + element.scrollTop >= element.scrollLeft) {
-  console.log(element.offsetWidth, element.scrollLeft, element.scrollWidth);
+  if (element.offsetWidth - element.scrollLeft + 10 >= element.scrollLeft) {
+    console.log(element.offsetWidth, element.scrollLeft, element.scrollWidth);
 
-  // func(e);
-  // }
+    func1();
+  } else if (element.scrollLeft == 0) {
+    func2();
+  }
 }
 export const takeMeHome = () => {
   window.location.assign("/#/");
