@@ -44,6 +44,9 @@ class EditItemPage2 extends React.Component {
       image: picture,
     });
   }
+  getCropedSizes = (width, height) => {
+    this.setState({ width: width, height: height });
+  };
   handleClose = () => this.setState({ isOpen: false });
   handleShow = () => this.setState({ isOpen: true });
   deleteItem = () => {
@@ -143,16 +146,46 @@ class EditItemPage2 extends React.Component {
         productPost,
         config
       )
-      .then(
-        (response) => {
-          if (response.status == "200") {
-            this.setState({ newProductID: response.data.id });
-            this.props.getCurrentUploadItemId(this.state.selectedItemDits.id);
-            window.location.assign("/#/add_items");
-          }
-        },
-        (error) => {}
-      );
+      .then((response) => {
+        if (response.status == "200") {
+          this.setState({ newProductID: response.data.id });
+          this.props.getCurrentUploadItemId(this.state.selectedItemDits.id);
+          window.location.assign("/#/add_items");
+        }
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+        let errorsArr = [];
+        Object.entries(error.response.data).forEach((error) => {
+          console.log(error);
+          errorsArr.push(
+            <>
+              {`${error[0]} - ${error[1][0]} `}
+              <br></br>
+            </>
+          );
+        });
+        this.props.openGenericModal("אופס", errorsArr);
+
+        this.setState({
+          productNameError: "",
+          productCategoryError: "",
+          productSubCategoryError: "",
+        });
+        if (this.state.productName === "") {
+          this.setState({ productNameError: "שדה חובה" });
+        }
+        if (this.state.category === "") {
+          this.setState({
+            productCategoryError: "שדה חובה",
+          });
+        }
+        if (this.state.subcategory === "") {
+          this.setState({
+            productSubCategoryError: "שדה חובה",
+          });
+        }
+      });
   };
 
   handleChange = (event) => {
@@ -224,7 +257,12 @@ class EditItemPage2 extends React.Component {
           <Form>
             <Row>
               <Col xl={6} sm={12}>
+                <p className="FormRejects">
+                  {" "}
+                  {`רוחב - ${this.state.width}  גובה-${this.state.height}`}
+                </p>
                 <Crop
+                  getCropedSizes={this.getCropedSizes}
                   className="cropper"
                   getCropedBlob={this.getCropedBlob}
                   getBase64={this.getBase64}
@@ -247,7 +285,9 @@ class EditItemPage2 extends React.Component {
                     name="productName"
                   />
                 </Form.Group>
-                <p className="FormRejects"> {this.state.responsData.name}</p>
+
+                <p className="FormRejects">{this.state.responsData.name}</p>
+                <p className="FormRejects">{this.state.productNameError}</p>
               </Col>
               <Col xl={6}>
                 <Form.Group controlId="exampleForm.ControlSelect1">
@@ -281,10 +321,14 @@ class EditItemPage2 extends React.Component {
                     value={this.state.category}
                     name="category"
                   >
-                    <option>----------</option>
+                    <option value={""}>----------</option>
                     {showCategories}
                   </Form.Control>
                 </Form.Group>
+                <p className="FormRejects">
+                  {" "}
+                  {this.state.productCategoryError}
+                </p>{" "}
                 <p className="FormRejects">
                   {" "}
                   {this.state.responsData.category}
@@ -299,13 +343,17 @@ class EditItemPage2 extends React.Component {
                     value={this.state.subcategory}
                     name="subcategory"
                   >
-                    <option>-----------</option>
+                    <option value={""}>-----------</option>
                     {showSubCategories}
                   </Form.Control>
                 </Form.Group>
                 <p className="FormRejects">
                   {" "}
                   {this.state.responsData.subcategory}
+                </p>{" "}
+                <p className="FormRejects">
+                  {" "}
+                  {this.state.productSubCategoryError}
                 </p>
               </Col>
               <Col xl={4}>

@@ -16,6 +16,7 @@ import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css
 import axios from "axios";
 import { HashRouter, Route, withRouter } from "react-router-dom";
 import { RiTShirtAirFill } from "react-icons/ri";
+import { object } from "prop-types";
 
 class Uploadpage extends React.Component {
   constructor(props) {
@@ -38,6 +39,8 @@ class Uploadpage extends React.Component {
       productNameError: "",
       productCategoryError: "",
       productSubCategoryError: "",
+      height: "",
+      width: "",
     };
 
     this.onDrop = this.onDrop.bind(this);
@@ -47,7 +50,9 @@ class Uploadpage extends React.Component {
       image: picture,
     });
   }
-
+  getCropedSizes = (width, height) => {
+    this.setState({ width: width, height: height });
+  };
   getBase64 = (base64) => {
     this.setState({ newBlob: base64 });
 
@@ -89,15 +94,30 @@ class Uploadpage extends React.Component {
       },
     };
 
-    axios.post(`${domain}/items/`, productPost, config).then(
-      (response) => {
+    axios
+      .post(`${domain}/items/`, productPost, config)
+      .then((response) => {
+        console.log(response);
         if (response.statusText === "Created") {
           this.setState({ newProductID: response.data.id });
           this.props.getCurrentUploadItemId(response.data.id);
           window.location.replace(`/#/ProductVaritionPage/${response.data.id}`);
         }
-      },
-      (error) => {
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+        let errorsArr = [];
+        Object.entries(error.response.data).forEach((error) => {
+          console.log(error);
+          errorsArr.push(
+            <>
+              {`${error[0]} - ${error[1][0]} `}
+              <br></br>
+            </>
+          );
+        });
+        this.props.openGenericModal("אופס", errorsArr);
+
         this.setState({
           productNameError: "",
           productCategoryError: "",
@@ -116,8 +136,7 @@ class Uploadpage extends React.Component {
             productSubCategoryError: "שדה חובה",
           });
         }
-      }
-    );
+      });
   };
 
   // postFormData("${domain}/items/", this.state.productPost, ` ${this.props.accessToken}` )
@@ -202,7 +221,12 @@ class Uploadpage extends React.Component {
                 xl={6}
                 sm={12}
               >
+                <p className="FormRejects">
+                  {" "}
+                  {`רוחב - ${this.state.width}  גובה-${this.state.height}`}
+                </p>
                 <Crop
+                  getCropedSizes={this.getCropedSizes}
                   className="cropper "
                   getCropedBlob={this.getCropedBlob}
                   getBase64={this.getBase64}

@@ -964,6 +964,8 @@ class App extends React.Component {
           </Route> */}
           <Route exact path="/uploadpage">
             <Uploadpage
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
               getCurrentUploadItemId={this.getCurrentUploadItemId}
               currency={this.state.currency}
               accessToken={this.state.accessToken}
@@ -1000,6 +1002,8 @@ class App extends React.Component {
           </Route>
           <Route exact path="/edit_item/:id">
             <EditItemPage2
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
               screenWidth={this.state.screenWidth}
               accessToken={this.state.accessToken}
               getCurrentUploadItemId={this.getCurrentUploadItemId}

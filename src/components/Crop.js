@@ -11,8 +11,8 @@ class Crop extends PureComponent {
       base64: "",
       blob: "",
       crop: {
-        unit: "%",
-        width: 100,
+        unit: "px",
+        width: 500,
         aspect: 5 / 5,
       },
     };
@@ -28,6 +28,9 @@ class Crop extends PureComponent {
     }
   };
   componentDidUpdate(prevProps, prevState) {
+    if (this.state.crop !== prevState.crop) {
+      this.props.getCropedSizes(this.state.crop.width, this.state.crop.height);
+    }
     if (this.state.croppedImageUrl !== prevState.croppedImageUrl) {
       this.props.getCropedBlob(this.state.croppedImageUrl);
     }

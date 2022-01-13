@@ -76,7 +76,9 @@ body {
 .storeCategoriesCarousel {
   display: none;
 }
-
+.editItemsPage .scrollButtons {
+  top: 58%;
+}
 .scrollButtons {
   position: absolute;
   display: flex;
@@ -611,6 +613,10 @@ label.form-label {
   overflow: scroll;
 } */
 .homePageCol {
+  overflow-x: hidden;
+}
+.categoryPageRow.row {
+  flex-wrap: nowrap;
   overflow-x: hidden;
 }
 .dropdown-menu {

@@ -20,6 +20,7 @@ export default class CardDiscounts extends Component {
     }
   };
   render() {
+    let onlyNumbers = new RegExp("^[0-9]*$");
     let discountsArr = [];
     let prev = 0;
     let price = 0;
@@ -60,9 +61,18 @@ export default class CardDiscounts extends Component {
           </span>
         );
       } else {
-        discountsArr.push(<div>{` ${this.props.price}₪ ליחידה`} </div>);
+        discountsArr.push(
+          <div>
+            {` ${this.props.price} ${
+              onlyNumbers.test(this.props.price) ? "₪ ליחידה" : ""
+            }`}{" "}
+          </div>
+        );
       }
     }
+    console.log(discountsArr);
+    let anyNumbers = new RegExp(/\d/);
+    console.log(anyNumbers.test(this.props.price));
     return (
       <>
         <div
@@ -73,7 +83,10 @@ export default class CardDiscounts extends Component {
         </div>
         <div
           style={{
-            justifyContent: discountsArr.length !== 1 ? "flex-start" : "center",
+            justifyContent:
+              discountsArr.length !== 1 || !anyNumbers.test(this.props.price)
+                ? "flex-end"
+                : "center",
           }}
           onMouseEnter={this.getPositionAndShow}
           onMouseLeave={() => this.setState({ isHIdden: "none" })}

@@ -125,14 +125,13 @@ export default class Search extends Component {
     }
     return (
       <div className="searchPage">
-        {/* {ticker} */}
+        {/* {ticker} */}{" "}
+        <Carousel fade className="storeCategoriesCarousel">
+          {carouselItems}
+        </Carousel>
         <div className="subcategoryButtonsDiv" id="subcategoryButtonsDiv">
-          {" "}
-          <Carousel fade className="storeCategoriesCarousel">
-            {carouselItems}
-          </Carousel>
           {storeCategoriesButtons}
-          {window.location.href.includes("Store") ? (
+          {this.props.storeSubCategories ? (
             <ScrollButtons
               elementID={"subcategoryButtonsDiv"}
               scrollLeft={this.props.screenWidth}
@@ -140,7 +139,6 @@ export default class Search extends Component {
             ></ScrollButtons>
           ) : null}
         </div>
-
         <Container
           onKeyDown={(event) => handleKeyDown(event, this.props.searchItems)}
           className="searchContainer"

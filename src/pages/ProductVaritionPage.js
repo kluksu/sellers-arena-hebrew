@@ -45,6 +45,9 @@ class ProductVaritionPage extends React.Component {
       image: picture,
     });
   }
+  getCropedSizes = (width, height) => {
+    this.setState({ width: width, height: height });
+  };
   resetPage = () => {
     this.props.closeGenericModal();
     window.location.reload();
@@ -310,7 +313,12 @@ class ProductVaritionPage extends React.Component {
           <Form className="varUploadForm">
             <Row>
               <Col xl={6} sm={12}>
+                <p className="FormRejects">
+                  {" "}
+                  {`רוחב - ${this.state.width}  גובה-${this.state.height}`}
+                </p>
                 <Crop
+                  getCropedSizes={this.getCropedSizes}
                   className="cropper"
                   getCropedBlob={this.getCropedBlob}
                   getBase64={this.getBase64}

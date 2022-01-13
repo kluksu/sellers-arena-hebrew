@@ -280,9 +280,12 @@ class FiltteredCategoryPage extends React.Component {
           userDevice={this.props.userDevice}
           screenWidth={this.props.screenWidth}
         ></Search>
-        <Row>
+        <Row className="categoryPageRow">
           <Col xl={0.1}>
-            <ProSidebar collapsed={this.state.isColapsed}>
+            <ProSidebar
+              // style={{ position: "absolute" }}
+              collapsed={this.state.isColapsed}
+            >
               <Menu>
                 <MenuItem> {toggleIcon} </MenuItem>
               </Menu>
@@ -299,8 +302,12 @@ class FiltteredCategoryPage extends React.Component {
               </Menu>
             </ProSidebar>
           </Col>
-          <Col style={{ paddingLeft: "0px" }}>
+          <Col
+            className="homePageCol"
+            //  style={{ paddingRight: "79px" }}
+          >
             <InfiniteScroll
+              style={{ overflowX: "hidden" }}
               style={{ paddingLeft: infiniteCrollPaddingLeft }}
               className="homePage"
               dataLength={cards.length}
@@ -308,7 +315,7 @@ class FiltteredCategoryPage extends React.Component {
               hasMore={this.state.hasMore}
               loader={<h4>Loading...</h4>}
             >
-              <Row>{cards}</Row>
+              <Row className="homePage">{cards}</Row>
             </InfiniteScroll>
           </Col>
         </Row>
