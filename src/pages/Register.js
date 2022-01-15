@@ -6,6 +6,8 @@ import {
   handleChange,
   handleKeyDown,
   postData,
+  scrollToHeighest,
+  takeMeHome,
 } from "../components/utils";
 
 export default class Register extends Component {
@@ -50,17 +52,28 @@ export default class Register extends Component {
         password: this.state.password,
         phone_number: this.state.phone,
       }).then((data) => {
+        if (data.id) {
+          this.props.openGenericModal(
+            "הצלחה",
+            " 'הודעת אימות נשלחה למייל שלך, נא אשר את הרשמתך ולאחר מכן התחבר לאתר דרך לחצן 'התחבר' בצד שמאל למעלה. במידה ואינך רואה את הודעת האימות חפש בתקיית דואר הזבל. אם ישנן בעיות נוספות צור איתנו קשר דרך עמוד 'צור קשר"
+          );
+        }
         this.setState({ registerData: data });
         this.setState({
           emailErrorMessege: data.email,
           passwordErrorMessege: data.password,
           phone_numberErrorMessege: data.phone_number,
         });
+
         this.setState({
           password: "",
           email: "",
           repetPassword: "",
           phone: "",
+          repetPasswordValidate: true, /////MIGHT CAUSE A BUG
+          passwordValidate: true, /////MIGHT CAUSE A BUG
+          phoneValidate: true, /////MIGHT CAUSE A BUG
+          emailValidate: true, /////MIGHT CAUSE A BUG
         });
       });
     }
@@ -68,15 +81,15 @@ export default class Register extends Component {
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
-  authinticateForm = () => {
+  authinticateForm = async () => {
     this.setState({ phone_numberErrorMessege: "" });
     this.setState({ emailErrorMessege: "" });
-    this.setState({ passwordErrorMessege: "" });
+    await this.setState({ passwordErrorMessege: "" });
 
     if (this.state.email.includes("@" && ".")) {
-      this.setState({ emailValidate: true });
+      await this.setState({ emailValidate: true });
     } else {
-      this.setState({ emailValidate: false });
+      await this.setState({ emailValidate: false });
     }
 
     let passwordFormat = new RegExp(
@@ -84,22 +97,22 @@ export default class Register extends Component {
     );
 
     if (passwordFormat.test(this.state.password) === true) {
-      this.setState({ passwordValidate: true });
+      await this.setState({ passwordValidate: true });
     } else {
-      this.setState({ passwordValidate: false });
+      await this.setState({ passwordValidate: false });
     }
     if (
       this.state.password === this.state.repetPassword &&
       this.state.repetPassword.length > 7
     ) {
-      this.setState({ repetPasswordValidate: true });
+      await this.setState({ repetPasswordValidate: true });
     } else {
-      this.setState({ repetPasswordValidate: false });
+      await this.setState({ repetPasswordValidate: false });
     }
     if (this.state.phone.length === 10) {
-      this.setState({ phoneValidate: true });
+      await this.setState({ phoneValidate: true });
     } else {
-      this.setState({ phoneValidate: false });
+      await this.setState({ phoneValidate: false });
     }
     if (
       this.state.repetPasswordValidate === true &&
@@ -108,8 +121,24 @@ export default class Register extends Component {
       this.state.phoneValidate === true &&
       this.state.emailValidate === true
     ) {
-      this.setState({ allValidationStates: true });
+      await this.setState({ allValidationStates: true });
     }
+    scrollToHeighest([
+      this.state.emailErrorMessege !== "" || this.state.emailValidate === false
+        ? "registerEmailError"
+        : null,
+      this.state.passwordErrorMessege !== "" ||
+      this.state.passwordValidate === false
+        ? "registerPasswordError"
+        : null,
+      this.state.phone_numberErrorMessege !== "" ||
+      this.state.phoneValidate === false
+        ? "registerPhoneError"
+        : null,
+      this.state.repetPasswordValidate === false
+        ? "registerRepetPasswordError"
+        : null,
+    ]);
   };
 
   render() {
@@ -143,10 +172,10 @@ export default class Register extends Component {
         <p className="FormRejects">10 ספרות</p>
       );
     const success = this.state.registerData.id ? (
-      <p>
+      <p onClick={takeMeHome()}>
         הודעת אימות נשלחה למייל שלך, נא אשר את הרשמתך ולאחר מכן התחבר לאתר דרך
-        לחצן "התחבר" בצד שמאל למעלה. במידה ואינך רואה את הודעת האימות חפש בתקיית
-        דואר הזבל. אם ישנן בעיות נוספות צור איתנו קשר דרך עמוד "צור קשר"
+        לחצן 'התחבר' בצד שמאל למעלה. במידה ואינך רואה את הודעת האימות חפש בתקיית
+        דואר הזבל. אם ישנן בעיות נוספות צור איתנו קשר דרך עמוד 'צור קשר'
       </p>
     ) : (
       <>
@@ -172,9 +201,11 @@ export default class Register extends Component {
               placeholder="john@mail.com"
             />
           </Form.Group>
-          {emailNote}
-          <p className="FormRejects">{this.state.emailErrorMessege}</p>
-
+          <div id="registerEmailError">
+            {" "}
+            {emailNote}
+            <p className="FormRejects">{this.state.emailErrorMessege}</p>
+          </div>
           <Form.Group controlId="formGroupPassword">
             <Form.Label>סיסמא</Form.Label>
             <Form.Control
@@ -185,9 +216,10 @@ export default class Register extends Component {
               name="password"
             />
           </Form.Group>
-          {PasswordNote}
-          <p className="FormRejects">{this.state.passwordErrorMessege}</p>
-
+          <div id="registerPasswordError">
+            {PasswordNote}
+            <p className="FormRejects">{this.state.passwordErrorMessege}</p>
+          </div>
           <Form.Group controlId="formGroupRepetPassword">
             <Form.Label> הקש סיסמתך בשנית</Form.Label>
             <Form.Control
@@ -198,8 +230,7 @@ export default class Register extends Component {
               name="repetPassword"
             />
           </Form.Group>
-          {repetPasswordNote}
-
+          <div id="registerRepetPasswordError">{repetPasswordNote}</div>
           <Form.Group controlId="formGroupPhoneNumber">
             <Form.Label> טלפון</Form.Label>
             <Form.Control
@@ -210,8 +241,10 @@ export default class Register extends Component {
               name="phone"
             />
           </Form.Group>
-          {phonNote}
-          <p className="FormRejects">{this.state.phone_numberErrorMessege}</p>
+          <div id="registerPhoneError">
+            {phonNote}
+            <p className="FormRejects">{this.state.phone_numberErrorMessege}</p>
+          </div>
         </Form>
         <p className="FormRejects">{this.state.errorMessege}</p>
         <Button onClick={this.authinticateForm} type="button">

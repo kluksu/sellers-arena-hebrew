@@ -93,7 +93,7 @@ class App extends React.Component {
       modalText: "",
       modalTop: "",
       modalBottom: "",
-      isRealUser: true,
+      isRealUser: false,
       preventModalDefult: false,
       allMessages: [],
       myUsers: [],
@@ -790,6 +790,27 @@ class App extends React.Component {
       }
     }
   }
+  resetPassword = (email) => {
+    const authorization = !this.state.accessToken
+      ? null
+      : `Bearer ${this.state.accessToken}`;
+    const config = {
+      headers: { "Content-Type": "application/json", authorization },
+    };
+    axios
+      .post(`${domain}/password/reset-request/`, { email: email }, config)
+      .then((res) => {
+        if (res.status == 200) {
+          this.openGenericModal(
+            "הודעת איפוס סיסמא נשלחה לאימייל שלך",
+            "אנא צור סיסמא חדשה ולאחר מכן התחבר מחדש, במידה ואינך מוצא את ההודעה יש לבדוק בתיקיית דואר זבל או ספאם"
+          );
+        }
+      })
+      .catch((error) => {
+        this.openGenericModal("אופס", `${error.respons}`);
+      });
+  };
   render() {
     let unreadMessages = 0;
     for (const [key, value] of Object.entries(this.state.messagesWasReadObj)) {
@@ -896,6 +917,9 @@ class App extends React.Component {
             {showMasseges}
           </ul>
           <MyNavBar
+            openGenericModal={this.openGenericModal}
+            closeGenericModal={this.closeGenericModal}
+            resetPassword={this.resetPassword}
             handleKeyDown={this.handleKeyDown}
             getAccount={this.getAccount}
             screenWidth={this.state.screenWidth}
@@ -954,7 +978,10 @@ class App extends React.Component {
             ></OpenAccount>
           </Route>
           <Route exact path="/register">
-            <Register></Register>
+            <Register
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
+            ></Register>
           </Route>
           {/* <Route exact path="/login">
             <Login
@@ -1167,6 +1194,7 @@ class App extends React.Component {
           </Route>
           <Route exact path="/me">
             <Profile
+              resetPassword={this.resetPassword}
               closeGenericModal={this.closeGenericModal}
               openGenericModal={this.openGenericModal}
               me={this.state.me}

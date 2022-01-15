@@ -79,6 +79,19 @@ body {
 .editItemsPage .scrollButtons {
   top: 58%;
 }
+.profilePage {
+  margin-top: 100px;
+}
+.profilePage .btn {
+  width: 100%;
+}
+.forgotPassword {
+}
+.forgotPassword:hover {
+  color: rgb(75, 75, 253);
+  text-decoration: underline;
+  cursor: pointer;
+}
 .scrollButtons {
   position: absolute;
   display: flex;

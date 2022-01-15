@@ -220,21 +220,29 @@ class MyNavBar extends React.Component {
     }
     if (this.props.MyShoppingCarts) {
       this.props.MyShoppingCarts.forEach((cart) => {
-        this.props.getAccount(cart.buyer_account).then((res) => {
-          cartDropDown.push(
-            <NavDropdown.Item href={`/#/StorePage/${cart.seller_account}`}>
-              {res.data.name}{" "}
-              <Button
-                onClick={() => this.openModal(cart)}
-                className="dropDownBtn"
-                type="button"
-                variant="danger"
-              >
-                {<MdRemoveShoppingCart />}
-              </Button>
-            </NavDropdown.Item>
-          );
-        });
+        console.log(cart);
+        this.props
+          .getAccount(
+            this.props.activeAccount.account_type == 2
+              ? cart.seller_account
+              : cart.buyer_account
+          )
+          .then((res) => {
+            // console.log(res);
+            cartDropDown.push(
+              <NavDropdown.Item href={`/#/StorePage/${cart.seller_account}`}>
+                {res.data.name}{" "}
+                <Button
+                  onClick={() => this.openModal(cart)}
+                  className="dropDownBtn"
+                  type="button"
+                  variant="danger"
+                >
+                  {<MdRemoveShoppingCart />}
+                </Button>
+              </NavDropdown.Item>
+            );
+          });
       });
     }
     let shoppingCart = "";
@@ -337,6 +345,9 @@ class MyNavBar extends React.Component {
           </Navbar.Collapse>
         </Navbar>
         <LoginModal
+          openGenericModal={this.props.openGenericModal}
+          closeGenericModal={this.props.closeGenericModal}
+          resetPassword={this.props.resetPassword}
           handleKeyDown={this.props.handleKeyDown}
           loginData={this.props.loginData}
           loginPostData={this.props.loginPostData}

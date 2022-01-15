@@ -1,11 +1,12 @@
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 import emailjs from "emailjs-com";
+import { el } from "date-fns/locale";
 
 // Example POST method implementation:
 //https://supplierzz.herokuapp.com
-export let domain = "https://supplierzz.westeurope.cloudapp.azure.com";
-// export let domain = "https://supplierzz.herokuapp.com";
+// export let domain = "https://supplierzz.westeurope.cloudapp.azure.com";
+export let domain = "https://supplierzz.herokuapp.com";
 export async function postData(URL = "", data = {}, token) {
   // Default options are marked with *
   const response = await fetch(URL, {
@@ -74,7 +75,27 @@ export const getContacts = (id, accessToken) => {
 export const getPublicAccountID = (id, accessToken) => {
   return getData(`${domain}/public-accounts/${id}/`, "", ` ${accessToken}`);
 };
+export const scrollToHeighest = (IDarr) => {
+  if (IDarr !== []) {
+    let highest = -10000000;
+    let highestName = "";
+    IDarr.forEach((id) => {
+      if (id !== null) {
+        let element = document.getElementById(id);
+        let elementHeight = window.screenTop - element.offsetTop;
+        highestName = elementHeight > highest ? element : highestName;
 
+        highest = elementHeight > highest ? elementHeight : highest;
+      }
+    });
+    console.log(highest);
+
+    console.log(highestName);
+    if (highestName !== "") {
+      highestName.scrollIntoView({ block: "center" });
+    }
+  }
+};
 export function handleKeyDown(event, refreshCallback) {
   if (event.key === "Enter") {
     event.preventDefault();

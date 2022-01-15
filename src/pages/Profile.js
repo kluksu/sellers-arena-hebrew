@@ -99,12 +99,21 @@ export default class Profile extends Component {
       return (
         <>
           {" "}
-          <div style={{ marginTop: "70px" }}>
+          <div
+          //  style={{ marginTop: "70px" }}
+          >
             <Container
+              className="profilePage"
               onKeyDown={(event) => handleKeyDown(event, this.submitChanges)}
               style={{ maxWidth: "400px", marginBottom: "100px" }}
             >
               <Form>
+                <Button
+                  onClick={() => this.props.resetPassword(this.props.me.email)}
+                  type="button"
+                >
+                  אפס סיסמא
+                </Button>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label>שם העסק</Form.Label>
                   <Form.Control

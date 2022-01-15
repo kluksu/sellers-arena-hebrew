@@ -80,6 +80,35 @@ export default class LoginModal extends Component {
           <Button variant="primary" onClick={this.props.closeModal}>
             סגור
           </Button>
+          <p
+            className="forgotPassword"
+            onClick={() =>
+              this.props.openGenericModal(
+                "על מנת לשחזר את הסיסמא הזן את כתובת המייל של החשבון ולאחר מכן לחץ על המשך",
+                <Form.Group controlId="exampleForm.ControlSelect1">
+                  <Form.Label> אימייל לשחזור סיסמא</Form.Label>
+                  <Form.Control
+                    onChange={this.handleChange}
+                    name="category"
+                    type="email"
+                    name="email"
+                  ></Form.Control>
+                </Form.Group>,
+                <Button
+                  onClick={() => {
+                    this.props.resetPassword(this.state.email);
+                    this.props.closeModal();
+                    this.props.closeGenericModal();
+                  }}
+                >
+                  {" "}
+                  שחזר סיסמא
+                </Button>
+              )
+            }
+          >
+            שכחתי סיסמא
+          </p>
         </Modal.Footer>
       </Modal>
     );
