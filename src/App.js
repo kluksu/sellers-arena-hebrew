@@ -808,7 +808,11 @@ class App extends React.Component {
         }
       })
       .catch((error) => {
-        this.openGenericModal("אופס", `${error.respons}`);
+        console.log(error);
+        this.openGenericModal(
+          "אופס",
+          `ישנה שגיאה, אנא ודא כי האימייל שהזנת הוא אכן האימייל שאיתו השתמשת לפתיחת החשבון`
+        );
       });
   };
   render() {
@@ -1001,6 +1005,8 @@ class App extends React.Component {
           </Route>
           <Route exact path="/wall">
             <Wall
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
               allMessages={this.state.allMessages}
               getContactsMesssageBoard={this.getContactsMesssageBoard}
               myContacts={this.state.myContacts}

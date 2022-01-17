@@ -87,6 +87,68 @@ body {
 }
 .forgotPassword {
 }
+.wall {
+  padding-top: 90px;
+  max-width: 50%;
+  min-width: 320px;
+  margin: auto;
+}
+
+.wall textarea.form-control {
+  min-height: 127px;
+}
+.postComponent {
+  border-radius: 5px 5px 0px 0px;
+  /* width: 50%;
+  min-width: 300px;
+  margin: auto; */
+}
+.formBar {
+  background-color: lightgrey;
+  height: 40px;
+  width: 100%;
+  border-radius: 0px 0px 5px 5px;
+  display: flex;
+  justify-content: left;
+  /* overflow-y: scroll; */
+}
+.formBar svg {
+  font-size: 39px;
+  transition: transform 0.2s;
+  /* margin: auto; */
+}
+.formBar .btn {
+  /* margin: auto; */
+  max-width: 50%;
+  /* margin: 0px 5px 0px 5px; */
+  height: 39px;
+}
+.formBar .form-group {
+  display: flex;
+}
+.formBar .form-control {
+  width: fit-content;
+}
+.emoji-picker-react .emoji-categories {
+  padding: 0px !important;
+  width: 100%;
+}
+/* 
+aside.emoji-picker-react {
+  display: none ;
+  height: 40px !important;
+}
+aside.emoji-picker-react:hover {
+  display: none ;
+  height: 320px !important;
+} */
+
+.formBar svg:hover {
+  cursor: pointer;
+
+  transform: scale(1.2);
+}
+
 .forgotPassword:hover {
   color: rgb(75, 75, 253);
   text-decoration: underline;
@@ -191,8 +253,12 @@ body {
 .App {
   text-align: center;
   overflow-x: hidden;
+  min-height: 100vh;
   /* min-width: 800px; */
 }
+/* .wall .row {
+  min-height: 100vh;
+} */
 .controlPanelBar {
   margin-left: 20px;
 }

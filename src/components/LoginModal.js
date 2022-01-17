@@ -92,6 +92,7 @@ export default class LoginModal extends Component {
                     name="category"
                     type="email"
                     name="email"
+                    placeholder={this.state.email}
                   ></Form.Control>
                 </Form.Group>,
                 <Button

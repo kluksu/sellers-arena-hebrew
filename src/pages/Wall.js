@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import { Col, Row } from "react-bootstrap";
 import FullPageLoader from "../components/FullPageLoader";
+import PostComponent from "../components/PostComponent";
 import WallMessages from "../components/WallMessages";
 
 export default class Wall extends Component {
@@ -25,7 +27,17 @@ export default class Wall extends Component {
     });
 
     {
-      return <div className="wallMessages">{allMessages}</div>;
+      return (
+        <div className="wall">
+          {/* <Row> */}{" "}
+          <PostComponent
+            activeAccount={this.props.activeAccount}
+            accessToken={this.props.accessToken}
+          ></PostComponent>
+          <div className="wallMessages">{allMessages}</div>
+          {/* </Row> */}
+        </div>
+      );
     }
   }
 }
