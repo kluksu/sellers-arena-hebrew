@@ -31,6 +31,8 @@ export default class Wall extends Component {
         <div className="wall">
           {/* <Row> */}{" "}
           <PostComponent
+            closeGenericModal={this.props.closeGenericModal}
+            openGenericModal={this.props.openGenericModal}
             activeAccount={this.props.activeAccount}
             accessToken={this.props.accessToken}
           ></PostComponent>

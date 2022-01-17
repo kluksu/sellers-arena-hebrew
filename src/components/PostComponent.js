@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Container, Form, Nav, Navbar } from "react-bootstrap";
 import { FcPicture } from "react-icons/fc";
 import { BiWinkSmile } from "react-icons/bi";
 
@@ -15,10 +15,56 @@ export default class PostComponent extends Component {
       text: "",
       pickerDisplay: "none",
       myItems: [],
-      selectedItem: "",
-      selectedVariation: "",
+      selectedItemID: "",
+      selectedItem: {},
+      selectedVariationID: "",
+      selectedVariation: {},
+      picturesArr: [],
     };
   }
+  removePicture = (i) => {
+    let picturesArr = this.state.picturesArr;
+    picturesArr.splice(i, 1);
+    this.setState({ picturesArr: picturesArr });
+  };
+  post = () => {
+    const authorization = !this.props.accessToken
+      ? null
+      : `Bearer ${this.props.accessToken}`;
+    const config = {
+      headers: { "Content-Type": "application/json", authorization },
+    };
+    axios
+      .post(
+        `${domain}/my-accounts/${this.props.activeAccount.id}/add_post/`,
+        {
+          text: this.state.text + ` pictures//${this.state.picturesArr}`,
+        },
+        config
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        this.props.openGernericModal(error);
+      });
+  };
+  addPictureToPost = (itemOrvariation) => {
+    if (itemOrvariation === "item") {
+      this.setState({
+        picturesArr: this.state.picturesArr.concat(
+          this.state.selectedItem.image
+        ),
+      });
+    } else if (itemOrvariation === "variation") {
+      this.setState({
+        picturesArr: this.state.picturesArr.concat(
+          this.state.selectedVariation.image
+        ),
+      });
+    }
+    console.log(this.state.picturesArr);
+  };
   getItems = () => {
     const authorization = !this.props.accessToken
       ? null
@@ -45,6 +91,20 @@ export default class PostComponent extends Component {
     if (this.props.activeAccount !== prevProps.activeAccount) {
       this.onMount();
     }
+    if (this.state.selectedItemID !== prevState.selectedItemID) {
+      this.state.myItems.forEach((item) => {
+        if (this.state.selectedItemID == item.id) {
+          this.setState({ selectedItem: item });
+        }
+      });
+    }
+    if (this.state.selectedVariationID !== prevState.selectedVariationID) {
+      this.state.selectedItem.item_variations.forEach((variation) => {
+        if (this.state.selectedVariationID == variation.id) {
+          this.setState({ selectedVariation: variation });
+        }
+      });
+    }
   }
   onEmojiClick = (e, emojiObject) => {
     this.setState({ chosenEmoji: emojiObject });
@@ -60,21 +120,43 @@ export default class PostComponent extends Component {
     });
   };
   render() {
+    let variations = [];
     let allitems = this.state.myItems.map((item) => {
+      if (this.state.selectedItemID == item.id) {
+        item.item_variations.forEach((variation, i) => {
+          variations.push(<option value={variation.id}>{variation.id}</option>);
+        });
+      }
+
       return <option value={item.id}>{`${item.id}, ${item.name}`}</option>;
     });
-    console.log(this.state.selectedItem);
+
     // this.setState((prevState) => {
     //   let jasper = Object.assign({}, prevState.jasper); // creating copy of state variable jasper
     //   jasper.name = "someothername"; // update the name property, assign a new value
     //   return { jasper }; // return new object jasper object
     // });
-    let obj = this.state.selectedItem;
-    console.log(obj);
+
     return (
       <div className="postComponent">
         <Form.Group controlId="exampleForm.ControlSelect1">
           <Form.Label>פרסום</Form.Label>
+          <div className="postPictures">
+            {" "}
+            {this.state.picturesArr.map((link, i) => {
+              return (
+                <div key={i}>
+                  <img src={link}></img>
+                  <Button
+                    onClick={() => this.removePicture(i)}
+                    variant="danger"
+                  >
+                    x
+                  </Button>
+                </div>
+              );
+            })}
+          </div>
           <Form.Control
             onChange={this.handleChange}
             type="text"
@@ -83,57 +165,72 @@ export default class PostComponent extends Component {
             value={this.state.text}
             placeholder={"ספר לקונים מה שבא לך.."}
           ></Form.Control>
+          {/* <div className="formBar"> */}
+          <Navbar className="formBar" bg="dark" variant="dark" expand="xl">
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="mr-auto">
+                {" "}
+                {/* <Form.Group> */}
+                <div>
+                  <Form.Control
+                    onChange={this.handleChange}
+                    // type="text"
+                    name="selectedItemID"
+                    as="select"
 
-          <div className="formBar">
-            <Form.Group>
-              <Form.Control
-                onChange={this.handleChange}
-                // type="text"
-                name="selectedItem"
-                as="select"
+                    // value={this.state.text}
+                    // placeholder={"ספר לקונים מה שבא לך.."}
+                  >
+                    <option value={""}>בחר מוצר</option>
+                    {allitems}
+                  </Form.Control>
+                  <Button onClick={() => this.addPictureToPost("item")}>
+                    הוסף תמונת מוצר לפוסט
+                  </Button>
+                </div>
+                <div>
+                  <Form.Control
+                    onChange={this.handleChange}
+                    // type="text"
+                    name="selectedVariationID"
+                    as="select"
 
-                // value={this.state.text}
-                // placeholder={"ספר לקונים מה שבא לך.."}
-              >
-                <option value={""}>בחר מוצר</option>
-                {allitems}
-              </Form.Control>
-              <Button>הוסף תמונת מוצר לפוסט</Button>
-
-              <Form.Control
-                onChange={this.handleChange}
-                // type="text"
-                name="selectedVariation"
-                as="select"
-
-                // value={this.state.text}
-                // placeholder={"ספר לקונים מה שבא לך.."}
-              >
-                <option>בחר וריאציה</option>
-              </Form.Control>
-            </Form.Group>
-            <Button>הוסף תמונת וריאציה לפוסט</Button>
-
-            <div
-              style={{
-                maxWidth: "100%",
-                display: "flex",
-                justifyContent: "left",
-              }}
-            >
-              <BiWinkSmile
-                style={{
-                  background: "yellow",
-                  fontWeight: "100",
-                  borderRadius: "50%",
-                }}
-                onClick={(e) => this.togglePicker(e)}
-              ></BiWinkSmile>
-              {/* <FcPicture></FcPicture> */}
-            </div>
-
-            <Button>פרסם</Button>
-          </div>
+                    // value={this.state.text}
+                    // placeholder={"ספר לקונים מה שבא לך.."}
+                  >
+                    <option>בחר וריאציה</option>
+                    {variations}
+                  </Form.Control>
+                  {/* </Form.Group> */}
+                  <Button onClick={() => this.addPictureToPost("variation")}>
+                    הוסף תמונת וריאציה לפוסט
+                  </Button>
+                </div>
+                {/* <div
+                  style={{
+                    maxWidth: "100%",
+                    display: "flex",
+                    justifyContent: "left",
+                  }}
+                  > */}
+                <Button variant="warning" onClick={(e) => this.togglePicker(e)}>
+                  <BiWinkSmile
+                    style={{
+                      // background: "yellow",
+                      fontWeight: "100",
+                      borderRadius: "50%",
+                      color: "black",
+                    }}
+                  ></BiWinkSmile>
+                  {/* <FcPicture></FcPicture> */}
+                  {/* </div> */}
+                </Button>
+              </Nav>
+            </Navbar.Collapse>
+            <Button onClick={this.post}>פרסם</Button>
+          </Navbar>{" "}
+          {/* </div> */}
           <Picker
             disableSearchBar={true}
             disableSkinTonePicker={true}
