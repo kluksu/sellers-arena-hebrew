@@ -149,7 +149,24 @@ class ProductPage extends React.Component {
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
-
+  getItem = () => {
+    const authorization = !this.props.accessToken
+      ? null
+      : `Bearer ${this.props.accessToken}`;
+    const config = {
+      headers: { "Content-Type": "application/json", authorization },
+    };
+    axios
+      .get(
+        `${domain}/public-items/${this.props.match.params.productId}/`,
+        config
+      )
+      .then((res) => {
+        console.log(res);
+        this.setState({ itemData: res.data });
+        this.setState({ variations: res.data.item_variations });
+      });
+  };
   componentDidMount() {
     if (
       this.props.activeAccount &&
@@ -166,24 +183,13 @@ class ProductPage extends React.Component {
           this.setState({ activeCart: cart });
         }
       });
+      this.getItem();
     }
-
-    const authorization = !this.props.accessToken
-      ? null
-      : `Bearer ${this.props.accessToken}`;
-    const config = {
-      headers: { "Content-Type": "application/json", authorization },
-    };
-
-    getData(
-      `${domain}/public-items/${this.props.match.params.productId}`,
-      config
-    ).then((res) => {
-      this.setState({ itemData: res });
-      this.setState({ variations: res.item_variations });
-    });
   }
   componentDidUpdate(prevProps, prevState) {
+    if (this.props.accessToken !== prevProps.accessToken) {
+      this.getItem();
+    }
     if (this.props.activeCart.id !== prevProps.activeCart.id) {
       {
         this.setState({ activeCart: this.props.activeCart });

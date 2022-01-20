@@ -36,7 +36,7 @@ export default class ProductPageVariationInfo extends Component {
       //     );
       //   }
       // }
-
+      console.log(this.props.variation);
       return (
         <div
           className="productVariationInfo"
@@ -55,7 +55,7 @@ export default class ProductPageVariationInfo extends Component {
               </Row>
 
               <Row>
-                <div>תיאור: {this.props.variation.name}</div>
+                <div>תיאור: {this.props.variation.description}</div>
               </Row>
               {varVariationArr}
             </Col>

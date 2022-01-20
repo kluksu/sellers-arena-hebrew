@@ -61,7 +61,90 @@ body {
   /* scrollbar-width: none; */
   /*hide scroll bar Firefox */
 }
+.wallProductCardContainer {
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  /* width: 50%; */
+  /* max-width: 250px; */
+  /* align-items: center; */
+  justify-content: center;
+}
 
+.wallProductCardContainer img,
+.wallProductCardVariationsGallery {
+  width: 100%;
+}
+.readMore {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+  /* position: sticky; */
+  /* bottom: 0; */
+  /* padding: 20px; */
+  /* background-color: white; */
+  /* width: 100%; */
+}
+.wallProductCardContainer > div:nth-of-type(1) {
+  /* overflow-y: scroll; */
+  /* max-height: 450px; */
+}
+.PostDescriptionRow {
+  overflow-y: hidden;
+  max-height: 70px;
+}
+.wallProductCardVariationsGallery {
+  display: flex;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  position: relative;
+}
+.wallProductCardVariationsGallery .scrollButtons {
+  font-size: 24px;
+}
+div.wallProductCardVariationsGallery {
+  padding-left: 0px;
+}
+.wallProductCardVariationsGallery .rightScroll,
+.wallProductCardVariationsGallery .leftScroll {
+  margin: 12px;
+}
+.newItemPostContainer {
+  text-align: right;
+  border-top: 10px solid;
+  border-color: rgb(212, 212, 212);
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.notActiveMessage .btn {
+  margin: 10px;
+}
+.newItemPostContainer span > img {
+  height: 34px;
+}
+.newItemPostContainer > span:nth-of-type(2) {
+  font-size: 10px;
+  font-weight: 300;
+  white-space: nowrap;
+}
+.newItemPostContainer > span:nth-of-type(1) {
+  font-size: 20px;
+  white-space: nowrap;
+}
+.wallProductCardInfo {
+  padding-right: 25px !important;
+  /* margin-right: 10px !important; */
+}
+.wallProductCardVariationsGallery img {
+  height: 100px;
+  transition: transform 0.2s;
+}
+.wallProductCardVariationsGallery img:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+}
 .productCardsRow::-webkit-scrollbar {
   /* display: none; */
   /* //hide scroll bar chrome */
@@ -211,7 +294,39 @@ aside.emoji-picker-react:hover {
 .productCardsRow .scrollButtons {
   display: none;
 }
+
+.postNavBar {
+  background: #26acff;
+  font-size: 30px;
+  color: white;
+  position: sticky;
+  top: 0;
+  margin-right: -17px;
+  padding: 4px;
+  display: flex;
+  justify-content: space-around;
+  border-radius: 5px;
+}
+.postNavBar svg {
+  transition: transform 0.2s;
+  z-index: 1000000;
+}
+.postNavBar svg:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+}
 @media only screen and (max-width: 600px) {
+  .wallProductCardContainer div:nth-of-type(2) {
+    max-height: 150px;
+    overflow: hidden;
+  }
+  /* .newItemPostContainer > span:nth-of-type(2) {
+    font-size: 10px;
+    font-weight: 300;
+  } */
+  .newItemPostContainer > span:nth-of-type(1) {
+    font-size: 12px;
+  }
   .subcategoryButtonsDiv .scrollButtons {
     display: none;
   }

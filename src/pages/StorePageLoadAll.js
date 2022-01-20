@@ -13,6 +13,7 @@ import {
   getData,
   getPublicAccountID,
   postData,
+  takeMeHome,
 } from "../components/utils";
 
 import NewMessageModal from "../components/NewMessageModal";
@@ -144,6 +145,7 @@ class StorePageLoadAll extends React.Component {
     this.setState({ cartItems: cart });
   };
   getItems = (token) => {
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     if (this.state.next !== null) {
       const path =
         this.props.activeAccount &&
@@ -223,25 +225,25 @@ class StorePageLoadAll extends React.Component {
     }
   };
   loadStoreComponent = async () => {
-    // if (this.props.accessToken) {
-    await this.setState({
-      next: undefined,
-      showList: [],
-      loadShowList: false,
-      // wasNextNull: false,
-    });
+    if (this.props.accessToken) {
+      await this.setState({
+        next: undefined,
+        showList: [],
+        loadShowList: false,
+        // wasNextNull: false,
+      });
 
-    if (
-      this.state.selectedContactID === "" &&
-      this.props.activeAccount &&
-      this.props.activeAccount.account_type == 3
-    ) {
-      // this.getItems();
-    } else {
-      //if account type 3 prevent first items load
-      this.getItems();
+      if (
+        this.state.selectedContactID === "" &&
+        this.props.activeAccount &&
+        this.props.activeAccount.account_type == 3
+      ) {
+        // this.getItems();
+      } else {
+        //if account type 3 prevent first items load
+        this.getItems();
+      }
     }
-    // }
     let userID =
       this.props.activeAccount && this.props.activeAccount.account_type == 2
         ? this.props.match.params.id
@@ -464,6 +466,9 @@ class StorePageLoadAll extends React.Component {
   //   });
   // };
   componentDidUpdate(prevProps, prevState) {
+    if (this.props.match.params.id !== prevProps.match.params.id) {
+      this.loadStoreComponent();
+    }
     if (this.state.next !== prevState.next && this.state.next === null) {
     }
     // if (this.state.scrollLeft !== prevState.scrollLeft) {
@@ -666,11 +671,24 @@ class StorePageLoadAll extends React.Component {
   render() {
     if (this.state.wasNextNull !== true) {
       if (
-        !this.props.activeAccount ||
-        this.props.activeAccount.account_type == 2 ||
+        (this.props.activeAccount &&
+          this.props.activeAccount.account_type == 2) ||
         this.state.selectedContactID !== ""
       ) {
         return <FullPageLoader></FullPageLoader>;
+      } else if (!this.props.activeAccount) {
+        return (
+          <div className="notActiveMessage">
+            רק משתמשים רשומים יכולים להיכנס לחניות, מה ברצונך לעשות?
+            <div>
+              {" "}
+              <Button onClick={() => window.location.assign("/#/register")}>
+                הירשם
+              </Button>
+              <Button onClick={() => takeMeHome()}> חזור לעמוד הבית</Button>
+            </div>{" "}
+          </div>
+        );
       }
     }
     let unregisterDisable =
@@ -786,9 +804,9 @@ class StorePageLoadAll extends React.Component {
                   {" "}
                   <Button
                     disabled={unregisterDisable}
-                    onclick={() =>
-                      window.open(`tel:${this.state.currentStore.phone_number}`)
-                    }
+                    // onClick={() =>
+                    //   window.open(`tel:${this.state.currentStore.phone_number}`)
+                    // }
                     className="w-50"
                     variant="success"
                   >

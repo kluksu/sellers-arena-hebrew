@@ -325,8 +325,12 @@ class App extends React.Component {
         },
         config
       )
-      .then(this.openGenericModal("רשימת אנשי הקשר עודכנה בהצלחה"))
-      .catch((error) => {});
+      .then((res) => this.openGenericModal("רשימת אנשי הקשר עודכנה בהצלחה"))
+      .catch((error) => {
+        this.openGenericModal(error.response.data.detail);
+        console.log(error.response);
+        // this.openGenericModal(error.response);
+      });
   };
   getContacts = () => {
     const authorization = !this.state.accessToken
@@ -344,13 +348,19 @@ class App extends React.Component {
   postAndGetContacts = (contactID) => {
     this.setState({ LoaderVisibilty: "" });
     this.addToContacts(contactID).then((res) => {
-      this.sendMessage(res.data.account_contact.id);
+      if (res && res.data) {
+        this.sendMessage(res.data.account_contact.id);
+      }
 
-      this.getContacts().then((res) => {
-        this.setState({ myContacts: res.data });
+      this.getContacts()
+        .then((res) => {
+          this.setState({ myContacts: res.data });
 
-        this.setState({ LoaderVisibilty: "none" });
-      });
+          this.setState({ LoaderVisibilty: "none" });
+        })
+        .catch((error) => {
+          this.props.openGenericModal(`${error}`);
+        });
     });
   };
   //tomorrow create a list of all the contacts for the mycontacts state
@@ -1005,6 +1015,7 @@ class App extends React.Component {
           </Route>
           <Route exact path="/wall">
             <Wall
+              addToContacts={this.addToContacts}
               closeGenericModal={this.closeGenericModal}
               openGenericModal={this.openGenericModal}
               allMessages={this.state.allMessages}

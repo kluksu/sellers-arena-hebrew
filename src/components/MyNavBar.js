@@ -217,7 +217,7 @@ class MyNavBar extends React.Component {
           ""
         );
     }
-    if (this.props.MyShoppingCarts) {
+    if (this.props.MyShoppingCarts && this.props.activeAccount) {
       this.props.MyShoppingCarts.forEach((cart) => {
         console.log(cart);
         this.props

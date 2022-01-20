@@ -2,6 +2,7 @@ import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 import emailjs from "emailjs-com";
 import { el } from "date-fns/locale";
+import { element } from "prop-types";
 
 // Example POST method implementation:
 //https://supplierzz.herokuapp.com
@@ -48,7 +49,19 @@ export async function getData(URL = "", data = {}, token) {
   });
   return response.json(); // parses JSON response into native JavaScript objects
 }
-
+export const isOverflown = (elementID, XYBoth) => {
+  let element = document.getElementById(elementID);
+  if (XYBoth === "x") {
+    return element.scrollWidth > element.clientWidth;
+  } else if (XYBoth === "y") {
+    return element.scrollHeight > element.clientHeight;
+  } else if (XYBoth === "both") {
+    return (
+      element.scrollHeight > element.clientHeight ||
+      element.scrollWidth > element.clientWidth
+    );
+  }
+};
 export const handleChange = (event) => {
   this.setState({ [event.target.name]: event.target.value });
 };
