@@ -18,12 +18,18 @@ export default class Post extends Component {
     return (
       <div className="post">
         <div className="newItemPostContainer">
-          <span>
-            {postHeadline}{" "}
-            <img src="https://cdn.pixabay.com/photo/2016/06/15/15/02/info-1459077_960_720.png"></img>
-            &nbsp;
-          </span>
-          <span> {Date(`${this.props.post.created_at}`)} </span>
+          <div>
+            <div className="postDate">
+              {" "}
+              {Date(`${this.props.post.created_at}`)}{" "}
+            </div>
+
+            <div>
+              {postHeadline}{" "}
+              <img src="https://cdn.pixabay.com/photo/2016/06/15/15/02/info-1459077_960_720.png"></img>
+              &nbsp;
+            </div>
+          </div>
           <PostInfo
             allThreads={this.props.allThreads}
             handleOpenMessage={this.props.handleOpenMessage}

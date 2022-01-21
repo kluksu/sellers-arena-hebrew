@@ -13,20 +13,22 @@ export default class PostGallery extends Component {
   componentDidUpdate() {
     if (
       this.state.scrollWidth !==
-      document.getElementById("postGallery").scrollWidth
+      document.getElementById(`postGallery` + this.props.post.id).scrollWidth
     ) {
       this.setState({
-        scrollWidth: document.getElementById("postGallery").scrollWidth,
+        scrollWidth: document.getElementById(`postGallery` + this.props.post.id)
+          .scrollWidth,
       });
 
-      if (isOverflown("postGallery", "x") === true) {
+      if (isOverflown(`postGallery` + this.props.post.id, "x") === true) {
         this.setState({ isOverflown: true });
       }
     }
   }
   componentDidMount() {
     this.setState({
-      elemntWidth: document.getElementById("postGallery").scrollWidth,
+      elemntWidth: document.getElementById(`postGallery` + this.props.post.id)
+        .scrollWidth,
     });
 
     // if (isOverflown("postGallery", "x") === true) {
@@ -35,21 +37,31 @@ export default class PostGallery extends Component {
   }
 
   render() {
-    return (
+    return this.props.pictures.length > 0 ? (
       <div className="postGallery">
-        <div id={"postGallery"} className="postGallery">
+        <div id={`postGallery` + this.props.post.id} className="postGallery">
+          {this.props.pictures}
+          {this.props.pictures}
+          {this.props.pictures}
+          {this.props.pictures}
           {this.props.pictures}
         </div>
         {this.state.isOverflown === true ? (
           <ScrollButtons
-            elementID={"postGallery"}
-            scrollLeft={document.getElementById("postGallery").scrollWidth}
-            scrollRight={document.getElementById("postGallery").scrollWidth}
+            elementID={`postGallery` + this.props.post.id}
+            scrollLeft={
+              document.getElementById(`postGallery` + this.props.post.id)
+                .offsetWidth
+            }
+            scrollRight={
+              document.getElementById("postGallery" + this.props.post.id)
+                .offsetWidth
+            }
           >
             {" "}
           </ScrollButtons>
         ) : null}
       </div>
-    );
+    ) : null;
   }
 }

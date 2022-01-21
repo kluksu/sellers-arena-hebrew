@@ -14,15 +14,20 @@ export default class PostInfo extends Component {
 
     console.log(picturesStr);
     let imagesArr = picturesStr.map((picture) => {
-      console.log(picture);
-      return <img src={picture}></img>;
+      if (picture !== "") {
+        console.log(picture);
+        return <img src={picture}></img>;
+      }
     });
     text = text.split("pictures//")[0];
     return (
       <>
         <div className="postInfo">
-          <div>{text}</div>
-          <PostGallery pictures={imagesArr}></PostGallery>
+          <div className="postText">{text}</div>
+          <PostGallery
+            post={this.props.post}
+            pictures={imagesArr}
+          ></PostGallery>
         </div>{" "}
       </>
     );

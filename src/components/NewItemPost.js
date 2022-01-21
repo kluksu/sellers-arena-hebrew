@@ -21,12 +21,16 @@ export default class NewItemPost extends Component {
     console.log(date);
     return (
       <div className="newItemPostContainer">
-        <span>
+        <div className="postDate">
+          {" "}
+          {Date(`${this.props.post.created_at}`)}{" "}
+        </div>
+
+        <div>
           {postHeadline}{" "}
           <img src="https://cdn.pixabay.com/photo/2012/04/24/16/22/check-40319_960_720.png"></img>
           &nbsp;
-        </span>
-        <span> {Date(`${this.props.post.created_at}`)} </span>
+        </div>
         {/* item={fullItem.item}
               onclickFunc={this.additMyItems}
               pictures={fullItem.item.image}

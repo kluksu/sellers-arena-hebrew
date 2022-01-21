@@ -93,16 +93,28 @@ body {
 .postGallery .scrollButtons {
   font-size: 40px;
   top: 40%;
+  /* overflow: scroll; */
+}
+.postDate {
+  font-size: 10px;
+  font-weight: 200;
+  /* margin: auto; */
 }
 .postGallery {
   position: relative;
   display: flex;
+  /* max-width: 50%; */
   /* justify-content: center; */
   /* flex-wrap: wrap; */
   background-color: rgb(207, 216, 226);
-  justify-content: space-between;
+  justify-content: right;
   border-radius: 10px;
+  /* overflow: scroll; */
   overflow: scroll;
+  max-width: fit-content;
+}
+.postGallery > .postGallery {
+  /* width: 100%; */
 }
 .postGallery img {
   height: 200px;
@@ -138,28 +150,39 @@ div.wallProductCardVariationsGallery {
   text-align: right;
   border-top: 10px solid;
   border-color: rgb(212, 212, 212);
-  padding: 20px;
+  padding: 4px;
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
-  justify-content: center;
+  /* justify-content: center; */
+}
+.postText {
+  font-weight: 400;
+  margin-bottom: 10px;
 }
 .post .newItemPostContainer {
-  justify-content: right;
+  display: block;
+  /* justify-content: right; */
+
+  /* width: 50%;
+   */
+  /* flex-direction: row; */
+  /* overflow: scroll; */
 }
 .notActiveMessage .btn {
   margin: 10px;
 }
-.newItemPostContainer span > img {
+.newItemPostContainer div:nth-of-type(2) > img {
   height: 34px;
 }
-.newItemPostContainer > span:nth-of-type(2) {
+/* .newItemPostContainer > div:nth-of-type(1) {
   font-size: 10px;
   font-weight: 300;
   white-space: nowrap;
-}
+} */
 .newItemPostContainer > span:nth-of-type(1) {
-  font-size: 20px;
-  white-space: nowrap;
+  /* font-size: 20px;
+  white-space: nowrap; */
 }
 .wallProductCardInfo {
   padding-right: 25px !important;

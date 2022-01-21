@@ -14,13 +14,13 @@ export default class PostPhotos extends Component {
         ></img>
         <div className="wallProductCardVariationsGallery">
           <div
-            id="wallProductCardVariationsGallery"
+            id={`wallProductCardVariationsGallery` + this.props.post.id}
             className="wallProductCardVariationsGallery"
           >
             {this.props.variationsPictures}
           </div>
           <ScrollButtons
-            elementID={"wallProductCardVariationsGallery"}
+            elementID={`wallProductCardVariationsGallery` + this.props.post.id}
             scrollLeft={100}
             scrollRight={100}
           ></ScrollButtons>

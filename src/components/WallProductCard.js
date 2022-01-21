@@ -3,15 +3,9 @@ import React, { Component } from "react";
 import { Col, Row } from "react-bootstrap";
 import ScrollButtons from "./ScrollButtons";
 import { domain, isOverflown } from "./utils";
-import { BiStore } from "react-icons/bi";
-import { AiOutlineSetting } from "react-icons/ai";
-import { RiUserAddLine } from "react-icons/ri";
-import { AiOutlinePhone } from "react-icons/ai";
-import { ImWhatsapp } from "react-icons/im";
-import { AiOutlineEye } from "react-icons/ai";
-import { AiOutlineMessage } from "react-icons/ai";
-import postPhotos from "./PostPhotos";
+
 import PostPhotos from "./PostPhotos";
+import PostNavBar from "./PostNavBar";
 
 export default class WallProductCard extends Component {
   constructor(props) {
@@ -65,7 +59,7 @@ export default class WallProductCard extends Component {
   };
   componentDidMount = () => {
     this.getThreadID(this.props.post.account_id);
-    if (isOverflown("PostDescriptionRow", "y") === false) {
+    if (isOverflown("PostDescriptionRow" + this.props.post.id, "y") === false) {
       this.setState({ readMore: true });
     }
     this.getPostInfo(this.props.itemID, this.props.post.account_id);
@@ -93,6 +87,7 @@ export default class WallProductCard extends Component {
               mainPicture={this.state.mainPicture}
               variationsPictures={variationsPictures}
               item={item}
+              post={this.props.post}
             ></PostPhotos>
           </Col>
           <Col
@@ -103,7 +98,16 @@ export default class WallProductCard extends Component {
             sm={12}
             xs={12}
           >
-            <div className="postNavBar">
+            {this.props.activeAccount &&
+            this.props.activeAccount.account_type == 2 ? (
+              <PostNavBar
+                post={this.props.post}
+                threadID={this.state.threadID}
+                addToContacts={this.props.addToContacts}
+                handleOpenMessage={this.props.handleOpenMessage}
+              ></PostNavBar>
+            ) : null}
+            {/* <div className="postNavBar">
               <BiStore
                 onClick={() =>
                   window.location.assign(
@@ -139,7 +143,7 @@ export default class WallProductCard extends Component {
                   )
                 }
               ></AiOutlineMessage>
-            </div>
+            </div> */}
             <Row>{item.name}</Row>
             <Row>
               {" "}
@@ -162,9 +166,8 @@ export default class WallProductCard extends Component {
               style={{
                 height: this.state.readMore === true ? "fit-content" : "70px",
               }}
-              id="PostDescriptionRow"
-
-              // className="PostDescriptionRow"
+              id={"PostDescriptionRow" + this.props.post.id}
+              // className="PostDescriptionRow" + this.props.post.id
             >
               {" "}
               {item.description !== null ? `תיאור : ${item.description}` : null}
