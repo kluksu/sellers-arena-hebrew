@@ -6,6 +6,7 @@ import PostComponent from "../components/PostComponent";
 import { domain } from "../components/utils";
 import WallMessages from "../components/WallMessages";
 import NewItemPost from "../components/NewItemPost";
+import Post from "../components/Post";
 
 export default class Wall extends Component {
   constructor(props) {
@@ -63,11 +64,26 @@ export default class Wall extends Component {
       if (post.event_type === "item_created") {
         return (
           <NewItemPost
+            allThreads={this.props.allThreads}
+            handleOpenMessage={this.props.handleOpenMessage}
+            handleClose={this.props.handleClose}
             addToContacts={this.props.addToContacts}
             activeAccount={this.props.activeAccount}
             accessToken={this.props.accessToken}
             post={post}
           ></NewItemPost>
+        );
+      } else if (post.event_type === "account_post") {
+        return (
+          <Post
+            allThreads={this.props.allThreads}
+            handleOpenMessage={this.props.handleOpenMessage}
+            handleClose={this.props.handleClose}
+            addToContacts={this.props.addToContacts}
+            activeAccount={this.props.activeAccount}
+            accessToken={this.props.accessToken}
+            post={post}
+          ></Post>
         );
       }
     });

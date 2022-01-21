@@ -10,6 +10,8 @@ import { AiOutlinePhone } from "react-icons/ai";
 import { ImWhatsapp } from "react-icons/im";
 import { AiOutlineEye } from "react-icons/ai";
 import { AiOutlineMessage } from "react-icons/ai";
+import postPhotos from "./PostPhotos";
+import PostPhotos from "./PostPhotos";
 
 export default class WallProductCard extends Component {
   constructor(props) {
@@ -19,7 +21,24 @@ export default class WallProductCard extends Component {
       selectedAccount: {},
       mainPicture: "",
       readMore: false,
+      threadID: "",
     };
+  }
+  getThreadID = (userID) => {
+    this.props.allThreads.forEach((thread) => {
+      if (
+        thread.participants[0].id == userID ||
+        thread.participants[1].id == userID
+      ) {
+        this.setState({ threadID: thread.id });
+        return;
+      }
+    });
+  };
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.allThreads !== prevProps.allThreads) {
+      this.getThreadID(this.props.post.account_id);
+    }
   }
   readMore = () => {
     this.setState({ readMore: true });
@@ -45,6 +64,7 @@ export default class WallProductCard extends Component {
     });
   };
   componentDidMount = () => {
+    this.getThreadID(this.props.post.account_id);
     if (isOverflown("PostDescriptionRow", "y") === false) {
       this.setState({ readMore: true });
     }
@@ -69,26 +89,11 @@ export default class WallProductCard extends Component {
       <>
         <Row className="wallProductCardContainer">
           <Col st xl={6} lg={6} md={12} sm={12} xs={12}>
-            <div>
-              <img
-                src={
-                  this.state.mainPicture ? this.state.mainPicture : item.image
-                }
-              ></img>
-              <div className="wallProductCardVariationsGallery">
-                <div
-                  id="wallProductCardVariationsGallery"
-                  className="wallProductCardVariationsGallery"
-                >
-                  {variationsPictures}
-                </div>
-                <ScrollButtons
-                  elementID={"wallProductCardVariationsGallery"}
-                  scrollLeft={100}
-                  scrollRight={100}
-                ></ScrollButtons>
-              </div>
-            </div>
+            <PostPhotos
+              mainPicture={this.state.mainPicture}
+              variationsPictures={variationsPictures}
+              item={item}
+            ></PostPhotos>
           </Col>
           <Col
             className="wallProductCardInfo"
@@ -126,7 +131,14 @@ export default class WallProductCard extends Component {
                   )
                 }
               ></AiOutlineEye>
-              <AiOutlineMessage></AiOutlineMessage>
+              <AiOutlineMessage
+                onClick={() =>
+                  this.props.handleOpenMessage(
+                    this.props.post.account_id,
+                    this.state.threadID
+                  )
+                }
+              ></AiOutlineMessage>
             </div>
             <Row>{item.name}</Row>
             <Row>

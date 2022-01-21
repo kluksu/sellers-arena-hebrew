@@ -37,6 +37,9 @@ export default class NewItemPost extends Component {
               fullItem={fullItem}
               linkAllAround={`/#/edit_item/${fullItem.item.id}`} */}
         <WallProductCard
+          allThreads={this.props.allThreads}
+          handleOpenMessage={this.props.handleOpenMessage}
+          handleClose={this.handleClose}
           addToContacts={this.props.addToContacts}
           post={this.props.post}
           activeAccount={this.props.activeAccount}

@@ -300,10 +300,25 @@ class App extends React.Component {
     const config = {
       headers: { "Content-Type": "application/json", authorization },
     };
-    return axios.delete(
-      `${domain}/my-accounts/${this.state.activeAccount.id}/contacts/${contactID}/`,
-      config
-    );
+    axios
+      .get(
+        `${domain}/my-accounts/${this.state.activeAccount.id}/contacts/?account_contact_id=${contactID}`,
+        config
+      )
+      .then((res) => {
+        console.log(res);
+        axios
+          .delete(
+            `${domain}/my-accounts/${this.state.activeAccount.id}/contacts/${res.data.results[0].id}/`,
+            config
+          )
+          .then((res) => {
+            this.openGenericModal("החשבון נמחק מרשימת אנשי הקשר שלך");
+          })
+          .catch((error) => {
+            this.openGenericModal("ישנה שגיאה", "אנא נסו שנית מאוחר יותר");
+          });
+      });
   };
   addToContacts = (contactID) => {
     this.setState({
@@ -1015,6 +1030,9 @@ class App extends React.Component {
           </Route>
           <Route exact path="/wall">
             <Wall
+              allThreads={this.state.allThreads}
+              handleOpenMessage={this.handleOpenMessage}
+              handleClose={this.handleClose}
               addToContacts={this.addToContacts}
               closeGenericModal={this.closeGenericModal}
               openGenericModal={this.openGenericModal}
@@ -1250,8 +1268,8 @@ class App extends React.Component {
             threadTextRespons={this.state.threadTextRespons}
             currentStore={this.state.currentStore}
             handleOpenMessage={this.handleOpenMessage}
-            sendMessage={this.sendMessage}
             handleClose={this.handleClose}
+            sendMessage={this.sendMessage}
             getMessageText={this.getMessageText}
             isOpen={this.state.isMessageModalOpen}
             activeAccount={this.state.activeAccount}
