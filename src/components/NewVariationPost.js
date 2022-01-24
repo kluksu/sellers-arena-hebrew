@@ -1,0 +1,19 @@
+import React, { Component } from "react";
+import NewItemPost from "./NewItemPost";
+
+export default class NewVariationPost extends Component {
+  render() {
+    return (
+      <NewItemPost
+        allThreads={this.props.allThreads}
+        handleOpenMessage={this.props.handleOpenMessage}
+        handleClose={this.props.handleClose}
+        addToContacts={this.props.addToContacts}
+        activeAccount={this.props.activeAccount}
+        accessToken={this.props.accessToken}
+        post={this.props.post}
+        isVariation={true}
+      ></NewItemPost>
+    );
+  }
+}

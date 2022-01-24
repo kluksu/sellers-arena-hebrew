@@ -12,10 +12,14 @@ export default class NewItemPost extends Component {
 
     postHeadline = postHeadline.replace("Account", "");
     postHeadline = postHeadline.replace(
-      "has added a new item",
+      `${
+        this.props.isVariation === true
+          ? "has added a new variation to item "
+          : "has added a new item"
+      }`,
       " העלה מוצר חדש פה"
     );
-
+    console.log(this.props.post);
     postHeadline = postHeadline.split("פה")[0];
     let date = new Date("2015-03-25T12:00:00Z");
     console.log(date);
@@ -48,7 +52,13 @@ export default class NewItemPost extends Component {
           post={this.props.post}
           activeAccount={this.props.activeAccount}
           accessToken={this.props.accessToken}
-          itemID={this.props.post.related_id}
+          itemID={
+            this.props.isVariation === true ? null : this.props.post.related_id
+          }
+          variationID={
+            this.props.isVariation === true ? this.props.post.related_id : null
+          }
+          isVariation={this.props.isVariation}
         ></WallProductCard>
       </div>
     );

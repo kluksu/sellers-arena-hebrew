@@ -77,9 +77,14 @@ class MyNavBar extends React.Component {
       this.props.activeAccount && this.props.activeAccount.account_type == 2
         ? "my-order"
         : "supplier-order";
-    let wall = this.props.activeAccount ? (
-      <Nav.Link href="/#/wall"> בית</Nav.Link>
-    ) : null;
+    let wall =
+      this.props.activeAccount && this.props.activeAccount.account_type == 3 ? (
+        <Nav.Link href="/#/wall"> העדכונים שלי</Nav.Link>
+      ) : null;
+    let feed =
+      this.props.activeAccount && this.props.activeAccount.account_type == 2 ? (
+        <Nav.Link href="/#/feed">עדכוני ספקים </Nav.Link>
+      ) : null;
     let vibretOrders =
       this.props.MySupplierOrders.length > 0
         ? "animate__animated animate__headShake animate__repeat-3		"
@@ -337,7 +342,7 @@ class MyNavBar extends React.Component {
               {productUpload}
               {user_account}
               {wall}
-
+              {feed}
               {register}
               {login_logout}
             </Nav>

@@ -49,6 +49,7 @@ import AllOrders from "./pages/AllOrders";
 import BulkEditing from "./pages/BulkEditing";
 import BulkItemsEdit from "./pages/BulkItemsEdit";
 import StorePageLoadAll from "./pages/StorePageLoadAll";
+import Feed from "./pages/Feed";
 //${domain}/
 class App extends React.Component {
   constructor(props) {
@@ -1042,6 +1043,21 @@ class App extends React.Component {
               activeAccount={this.state.activeAccount}
               accessToken={this.state.accessToken}
             ></Wall>
+          </Route>{" "}
+          <Route exact path="/Feed">
+            <Feed
+              allThreads={this.state.allThreads}
+              handleOpenMessage={this.handleOpenMessage}
+              handleClose={this.handleClose}
+              addToContacts={this.addToContacts}
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
+              allMessages={this.state.allMessages}
+              getContactsMesssageBoard={this.getContactsMesssageBoard}
+              myContacts={this.state.myContacts}
+              activeAccount={this.state.activeAccount}
+              accessToken={this.state.accessToken}
+            ></Feed>
           </Route>
           <Route exact path="/ProductVaritionPage/:id">
             <ProductVaritionPage

@@ -1,11 +1,20 @@
 import React, { Component } from "react";
-import { Button, Container, Form, Nav, Navbar } from "react-bootstrap";
+import {
+  Button,
+  Container,
+  Form,
+  Nav,
+  Navbar,
+  NavDropdown,
+} from "react-bootstrap";
 import { FcPicture } from "react-icons/fc";
 import { BiWinkSmile } from "react-icons/bi";
 
 import Picker from "emoji-picker-react";
 import axios from "axios";
 import { domain } from "./utils";
+import DropDownSearch from "./DropDownSearch";
+import InfoBox from "./InfoBox";
 
 export default class PostComponent extends Component {
   constructor(props) {
@@ -16,12 +25,18 @@ export default class PostComponent extends Component {
       pickerDisplay: "none",
       myItems: [],
       selectedItemID: "",
-      selectedItem: {},
+      selectedItem: "",
       selectedVariationID: "",
-      selectedVariation: {},
+      selectedVariation: "",
       picturesArr: [],
+      itemSearchText: "",
+      variationSearchText: "",
     };
   }
+
+  handleDropDownPick = (state, value) => {
+    this.setState({ [state]: value });
+  };
   removePicture = (i) => {
     let picturesArr = this.state.picturesArr;
     picturesArr.splice(i, 1);
@@ -124,11 +139,49 @@ export default class PostComponent extends Component {
     let allitems = this.state.myItems.map((item) => {
       if (this.state.selectedItemID == item.id) {
         item.item_variations.forEach((variation, i) => {
-          variations.push(<option value={variation.id}>{variation.id}</option>);
+          if (`${variation.id}`.includes(this.state.variationSearchText)) {
+            variations.push(
+              <NavDropdown.Item
+                onClick={() =>
+                  this.handleDropDownPick("selectedVariationID", variation.id)
+                }
+              >
+                {variation.id}{" "}
+                <img className="dropDownImg" src={variation.image}></img>{" "}
+                <div onto className="cardInfo">
+                  i
+                </div>
+                <InfoBox
+                  className="infoBox"
+                  variation={variation}
+                  item={item}
+                ></InfoBox>{" "}
+              </NavDropdown.Item>
+            );
+          }
         });
       }
-
-      return <option value={item.id}>{`${item.id}, ${item.name}`}</option>;
+      if (
+        `${item.id}`.includes(this.state.itemSearchText) ||
+        `${item.name}`.includes(this.state.itemSearchText)
+      ) {
+        return (
+          <>
+            {" "}
+            <NavDropdown.Item
+              onClick={() => this.handleDropDownPick("selectedItemID", item.id)}
+            >
+              {/* <div value={item.id}> */}
+              {`${item.id}, ${item.name}`}{" "}
+              <img className="dropDownImg" src={item.image}></img>
+              {/* </div>{" "} */}
+            </NavDropdown.Item>
+            {/* <option value={item.id}>
+            {`${item.id}, ${item.name} `} 
+          </option>{" "} */}
+          </>
+        );
+      }
     });
 
     // this.setState((prevState) => {
@@ -136,7 +189,7 @@ export default class PostComponent extends Component {
     //   jasper.name = "someothername"; // update the name property, assign a new value
     //   return { jasper }; // return new object jasper object
     // });
-
+    console.log(this.state.itemSearchText);
     return (
       <div className="postComponent">
         <Form.Group controlId="exampleForm.ControlSelect1">
@@ -173,7 +226,22 @@ export default class PostComponent extends Component {
                 {" "}
                 {/* <Form.Group> */}
                 <div>
-                  <Form.Control
+                  <NavDropdown
+                    title={`${
+                      this.state.selectedItem
+                        ? this.state.selectedItem.name
+                        : "בחר מוצר"
+                    }`}
+                    id="basic-nav-dropdown"
+                  >
+                    {" "}
+                    <DropDownSearch
+                      handleChange={this.handleChange}
+                      state={"itemSearchText"}
+                    ></DropDownSearch>
+                    {allitems}
+                  </NavDropdown>
+                  {/* <Form.Control
                     onChange={this.handleChange}
                     // type="text"
                     name="selectedItemID"
@@ -184,13 +252,28 @@ export default class PostComponent extends Component {
                   >
                     <option value={""}>בחר מוצר</option>
                     {allitems}
-                  </Form.Control>
+                  </Form.Control> */}
                   <Button onClick={() => this.addPictureToPost("item")}>
                     הוסף תמונת מוצר לפוסט
                   </Button>
                 </div>
                 <div>
-                  <Form.Control
+                  <NavDropdown
+                    title={`${
+                      this.state.selectedVariation
+                        ? this.state.selectedVariation.id
+                        : "בחר וריאציה"
+                    }`}
+                    id="basic-nav-dropdown"
+                  >
+                    {" "}
+                    <DropDownSearch
+                      handleChange={this.handleChange}
+                      state={"variationSearchText"}
+                    ></DropDownSearch>
+                    {variations}
+                  </NavDropdown>
+                  {/* <Form.Control
                     onChange={this.handleChange}
                     // type="text"
                     name="selectedVariationID"
@@ -201,7 +284,7 @@ export default class PostComponent extends Component {
                   >
                     <option>בחר וריאציה</option>
                     {variations}
-                  </Form.Control>
+                  </Form.Control> */}
                   {/* </Form.Group> */}
                   <Button onClick={() => this.addPictureToPost("variation")}>
                     הוסף תמונת וריאציה לפוסט

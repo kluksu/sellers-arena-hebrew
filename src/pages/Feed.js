@@ -11,7 +11,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Loader from "react-loader-spinner";
 import NewVariationPost from "../components/NewVariationPost";
 
-export default class Wall extends Component {
+export default class Feed extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,9 +32,9 @@ export default class Wall extends Component {
       let next =
         this.state.next !== ""
           ? this.state.next
-          : `${domain}/wall-events/?account_id=${
+          : `${domain}/wall-events-contacts/?account_id=${
               this.props.activeAccount ? this.props.activeAccount.id : ""
-            }&limit=1`;
+            }&limit=20`;
       console.log(this.state.next);
       axios
         .get(
@@ -101,20 +101,22 @@ export default class Wall extends Component {
             post={post}
           ></Post>
         );
-      } else if (post.event_type === "variation_created") {
-        return (
-          <NewVariationPost
-            allThreads={this.props.allThreads}
-            handleOpenMessage={this.props.handleOpenMessage}
-            handleClose={this.props.handleClose}
-            addToContacts={this.props.addToContacts}
-            activeAccount={this.props.activeAccount}
-            accessToken={this.props.accessToken}
-            post={post}
-          ></NewVariationPost>
-        );
       }
+      //    else if (post.event_type === "variation_created") {
+      //     return (
+      //       <NewVariationPost
+      //         allThreads={this.props.allThreads}
+      //         handleOpenMessage={this.props.handleOpenMessage}
+      //         handleClose={this.props.handleClose}
+      //         addToContacts={this.props.addToContacts}
+      //         activeAccount={this.props.activeAccount}
+      //         accessToken={this.props.accessToken}
+      //         post={post}
+      //       ></NewVariationPost>
+      //     );
+      //   }
     });
+
     let allMessages = [];
     this.props.allMessages.forEach((message) => {
       allMessages.push(<WallMessages userInfo={message}></WallMessages>);
@@ -123,16 +125,8 @@ export default class Wall extends Component {
     {
       return (
         <div className="wall">
-          {/* <Row> */}{" "}
-          <PostComponent
-            closeGenericModal={this.props.closeGenericModal}
-            openGenericModal={this.props.openGenericModal}
-            activeAccount={this.props.activeAccount}
-            accessToken={this.props.accessToken}
-          ></PostComponent>
-          <div className="wallMessages">{allMessages}</div>
+          {/* <Row> */} <div className="wallMessages">{allMessages}</div>
           <InfiniteScroll
-            // style={{ overFlowX: "visible" }}
             // className="wall"
             dataLength={posts.length}
             next={() => this.getWallEvents()}
@@ -140,7 +134,7 @@ export default class Wall extends Component {
             loader={Loader}
           >
             {posts}
-          </InfiniteScroll>{" "}
+          </InfiniteScroll>
           {/* </Row> */}
         </div>
       );

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PostGallery from "./PostGallery";
+import PostNavBar from "./PostNavBar";
 
 export default class PostInfo extends Component {
   render() {
@@ -24,10 +25,17 @@ export default class PostInfo extends Component {
       <>
         <div className="postInfo">
           <div className="postText">{text}</div>
+
           <PostGallery
             post={this.props.post}
             pictures={imagesArr}
           ></PostGallery>
+          <PostNavBar
+            post={this.props.post}
+            threadID={this.props.threadID}
+            addToContacts={this.props.addToContacts}
+            handleOpenMessage={this.props.handleOpenMessage}
+          ></PostNavBar>
         </div>{" "}
       </>
     );

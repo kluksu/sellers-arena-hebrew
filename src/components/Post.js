@@ -2,10 +2,33 @@ import React, { Component } from "react";
 import PostInfo from "./PostInfo";
 
 export default class Post extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      threadID: "",
+    };
+  }
+  getThreadID = (userID) => {
+    this.props.allThreads.forEach((thread) => {
+      if (
+        thread.participants[0].id == userID ||
+        thread.participants[1].id == userID
+      ) {
+        this.setState({ threadID: thread.id });
+        return;
+      }
+    });
+  };
   componentDidMount() {
+    this.getThreadID(this.props.post.account_id);
+
     console.log(this.props.post);
   }
-
+  componentDidUpdate = (prevProps, prevState) => {
+    if (this.props.allThreads !== prevProps.allThreads) {
+      this.getThreadID(this.props.post.account_id);
+    }
+  };
   render() {
     let postHeadline = this.props.post.text.split("post")[0];
 
@@ -31,6 +54,7 @@ export default class Post extends Component {
             </div>
           </div>
           <PostInfo
+            threadID={this.state.threadID}
             allThreads={this.props.allThreads}
             handleOpenMessage={this.props.handleOpenMessage}
             handleClose={this.props.handleClose}

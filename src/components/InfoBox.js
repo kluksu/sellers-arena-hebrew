@@ -42,7 +42,14 @@ export default class InfoBox extends Component {
       }
 
       return (
-        <Table striped bordered hover size="sm" variant="light hidden ">
+        <Table
+          className="infoBox"
+          striped
+          bordered
+          hover
+          size="sm"
+          variant="light hidden "
+        >
           <tbody>
             <tr>
               <td>זמין במלאי </td>

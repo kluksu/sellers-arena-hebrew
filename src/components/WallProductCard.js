@@ -6,6 +6,7 @@ import { domain, isOverflown } from "./utils";
 
 import PostPhotos from "./PostPhotos";
 import PostNavBar from "./PostNavBar";
+import CardDiscounts from "./CardDiscounts";
 
 export default class WallProductCard extends Component {
   constructor(props) {
@@ -47,38 +48,67 @@ export default class WallProductCard extends Component {
     const config = {
       headers: { "Content-Type": "application/json", authorization },
     };
-    axios.get(`${domain}/public-items/${itemID}/`, config).then((res) => {
-      this.setState({ selectedItem: res.data });
-      axios
-        .get(`${domain}/public-accounts/${accountID}/`, config)
-        .then((data) => {
-          this.setState({ selectedAccount: data.data });
-          console.log(data.data);
-        });
-    });
+    axios
+      .get(
+        `${domain}/${
+          this.props.isVariation === true ? "item-variations" : "public-items"
+        }/${itemID}/`,
+        config
+      ) ///wait for public variations
+      .then((res) => {
+        this.setState({ selectedItem: res.data });
+        axios
+          .get(`${domain}/public-accounts/${accountID}/`, config)
+          .then((data) => {
+            this.setState({ selectedAccount: data.data });
+            console.log(data.data);
+          });
+      });
   };
   componentDidMount = () => {
     this.getThreadID(this.props.post.account_id);
-    if (isOverflown("PostDescriptionRow" + this.props.post.id, "y") === false) {
+    if (isOverflown(`PostDescriptionRow${this.props.post.id}`, "y") === false) {
       this.setState({ readMore: true });
     }
-    this.getPostInfo(this.props.itemID, this.props.post.account_id);
+    this.getPostInfo(
+      this.props.isVariation === true
+        ? this.props.variationID
+        : this.props.itemID,
+      this.props.post.account_id
+    );
   };
   render() {
     let item = this.state.selectedItem;
     let variationsPictures =
-      item && item.item_variations
-        ? item.item_variations.map((variation) => {
-            return (
-              <img
-                onClick={() => this.makeMainPic(variation.image)}
-                src={variation.image}
-              ></img>
-            );
-          })
-        : null;
+      item && item.item_variations ? (
+        item.item_variations.map((variation) => {
+          return (
+            <img
+              onClick={() => this.makeMainPic(variation.image)}
+              src={variation.image}
+            ></img>
+          );
+        })
+      ) : (
+        <img
+          // onClick={() => this.makeMainPic(variation.image)}
+          src={item.image}
+        ></img>
+      );
+    let miniVarsArr = [];
 
-    console.log(this.state.selectedItem);
+    if (item.variation !== undefined) {
+      Object.entries(item.variation).forEach((variation) => {
+        console.log(variation);
+        miniVarsArr.push(<Row>{`${variation[0]} : ${variation[1]}`}</Row>);
+      });
+    }
+
+    // }
+    // console.log(this.state.selectedItem);
+    // if (this.props.isVariation === true && item.variation) {
+    //   console.log(miniVarsArr);
+
     return (
       <>
         <Row className="wallProductCardContainer">
@@ -160,18 +190,37 @@ export default class WallProductCard extends Component {
                 </>
               ) : null}
             </Row>{" "}
-            <Row> {`קטגוריה : ${item.category}`}</Row>{" "}
-            <Row> {`תת קטגוריה : ${item.subcategory}`}</Row>{" "}
+            <Row>
+              {" "}
+              {item.category ? `קטגוריה : ${item.category}` : null}
+            </Row>{" "}
+            <Row>
+              {" "}
+              {item.subcategory ? `תת קטגוריה : ${item.subcategory}` : null}
+            </Row>{" "}
             <Row
               style={{
                 height: this.state.readMore === true ? "fit-content" : "70px",
               }}
-              id={"PostDescriptionRow" + this.props.post.id}
+              id={`PostDescriptionRow${this.props.post.id}`}
               // className="PostDescriptionRow" + this.props.post.id
             >
               {" "}
-              {item.description !== null ? `תיאור : ${item.description}` : null}
+              {item.description !== "No Description"
+                ? `תיאור : ${item.description}`
+                : null}
+              {item.cost_per_item ? (
+                <CardDiscounts
+                  variation={item}
+                  price={item.cost_per_item}
+                ></CardDiscounts>
+              ) : null}
             </Row>{" "}
+            <Row>{item.batch_size ? `מנה : ${item.batch_size}` : null}</Row>
+            {/* <Row> */}
+            {/* {item.cost_per_item ? ` מחיר בש"ח: ${item.cost_per_item}` : null} */}
+            {/* </Row> */}
+            {miniVarsArr}
             <Row
               style={{ display: this.state.readMore === true ? "none" : "" }}
               className="readMore"

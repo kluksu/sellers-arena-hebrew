@@ -100,9 +100,16 @@ body {
   font-weight: 200;
   /* margin: auto; */
 }
+.infinite-scroll-component {
+  overflow: visible !important;
+  /* overflow-x: auto !important; */
+}
 .postGallery {
   position: relative;
   display: flex;
+  margin: auto;
+  min-width: 100%;
+
   /* max-width: 50%; */
   /* justify-content: center; */
   /* flex-wrap: wrap; */
@@ -160,6 +167,19 @@ div.wallProductCardVariationsGallery {
   font-weight: 400;
   margin-bottom: 10px;
 }
+.dropDownImg {
+  height: 60px;
+  transition: transform 0.2s;
+  margin: 20px;
+}
+.dropdown-item {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+}
+.dropDownImg:hover {
+  transform: scale(3);
+}
 .post .newItemPostContainer {
   display: block;
   /* justify-content: right; */
@@ -191,6 +211,7 @@ div.wallProductCardVariationsGallery {
 .wallProductCardVariationsGallery img {
   height: 100px;
   transition: transform 0.2s;
+  width: auto;
 }
 .wallProductCardVariationsGallery img:hover {
   cursor: pointer;
@@ -366,9 +387,17 @@ aside.emoji-picker-react:hover {
   transform: scale(1.2);
   cursor: pointer;
 }
+/* @media only screen and (max-width: 1000px) {
+  .postNavBar {
+    margin: 0px;
+  }
+} */
 @media only screen and (max-width: 600px) {
+  .postNavBar {
+    padding-right: 20px;
+  }
   .wallProductCardContainer div:nth-of-type(2) {
-    max-height: 150px;
+    max-height: 170px;
     overflow: hidden;
   }
   /* .newItemPostContainer > span:nth-of-type(2) {
@@ -898,6 +927,20 @@ label.form-label {
 }
 .dropdown-menu {
   text-align: center !important;
+  max-height: 400px;
+  overflow-x: scroll;
+}
+.postComponent .cardInfo:hover ~ .infoBox {
+  position: relative;
+  top: 0px;
+}
+.infoBox:hover {
+  position: relative;
+  top: 0px;
+}
+.postComponent .navbar-dark .navbar-nav .nav-link {
+  background-color: white !important;
+  color: black !important;
 }
 .rdrDays {
   direction: ltr !important;
