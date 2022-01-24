@@ -63,7 +63,8 @@ export default class WallProductCard extends Component {
             this.setState({ selectedAccount: data.data });
             console.log(data.data);
           });
-      });
+      })
+      .catch((error) => {});
   };
   componentDidMount = () => {
     this.getThreadID(this.props.post.account_id);
@@ -118,6 +119,7 @@ export default class WallProductCard extends Component {
               variationsPictures={variationsPictures}
               item={item}
               post={this.props.post}
+              isVariation={this.props.isVariation}
             ></PostPhotos>
           </Col>
           <Col

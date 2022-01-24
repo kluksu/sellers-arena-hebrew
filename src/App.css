@@ -66,7 +66,7 @@ body {
   display: flex;
   flex-direction: row;
   /* width: 50%; */
-  /* max-width: 250px; */
+  /* min-width: 300px; */
   /* align-items: center; */
   justify-content: center;
 }
@@ -107,7 +107,7 @@ body {
 .postGallery {
   position: relative;
   display: flex;
-  margin: auto;
+  /* margin: auto; */
   min-width: 100%;
 
   /* max-width: 50%; */
@@ -211,7 +211,7 @@ div.wallProductCardVariationsGallery {
 .wallProductCardVariationsGallery img {
   height: 100px;
   transition: transform 0.2s;
-  width: auto;
+  /* width: auto; */
 }
 .wallProductCardVariationsGallery img:hover {
   cursor: pointer;
@@ -934,7 +934,7 @@ label.form-label {
   position: relative;
   top: 0px;
 }
-.infoBox:hover {
+.postComponent .infoBox:hover {
   position: relative;
   top: 0px;
 }
@@ -1005,6 +1005,7 @@ label.form-label {
   overflow: scroll;
   max-width: 184px;
 }
+
 .CardUnitsFormContainer {
   width: 100%;
   height: auto;
@@ -1091,7 +1092,7 @@ table.hidden:hover {
   bottom: 70px;
   z-index: 100;
   left: 0px;
-  width: auto;
+  width: 100%;
   bottom: 0px;
 }
 .messagesBoardText {

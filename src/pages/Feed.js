@@ -125,7 +125,8 @@ export default class Feed extends Component {
     {
       return (
         <div className="wall">
-          {/* <Row> */} <div className="wallMessages">{allMessages}</div>
+          {/* <Row> */}
+          {/* <div className="wallMessages">{allMessages}</div> */}
           <InfiniteScroll
             // className="wall"
             dataLength={posts.length}

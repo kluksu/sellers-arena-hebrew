@@ -45,6 +45,20 @@ export default class PostGallery extends Component {
           {this.props.pictures}
           {this.props.pictures}
           {this.props.pictures}
+          {this.props.pictures}
+          {this.props.pictures}
+          {this.props.pictures}
+          {this.props.pictures}
+          {this.props.pictures}
+          {this.props.pictures}
+          {this.props.pictures}
+          {this.props.pictures}
+          {this.props.pictures}
+          {this.props.pictures}
+          {this.props.pictures}
+          {this.props.pictures}
+          {this.props.pictures}
+          {this.props.pictures}
         </div>
         {this.state.isOverflown === true ? (
           <ScrollButtons
