@@ -21,8 +21,6 @@ export default class Post extends Component {
   };
   componentDidMount() {
     this.getThreadID(this.props.post.account_id);
-
-    console.log(this.props.post);
   }
   componentDidUpdate = (prevProps, prevState) => {
     if (this.props.allThreads !== prevProps.allThreads) {
@@ -37,7 +35,7 @@ export default class Post extends Component {
 
     postHeadline = postHeadline.split("פה")[0];
     let date = new Date("2015-03-25T12:00:00Z");
-    console.log(date);
+
     return (
       <div className="post">
         <div className="newItemPostContainer">

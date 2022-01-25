@@ -13,10 +13,8 @@ export default class PostInfo extends Component {
 
     picturesStr = picturesStr.split(`,`);
 
-    console.log(picturesStr);
     let imagesArr = picturesStr.map((picture) => {
       if (picture !== "") {
-        console.log(picture);
         return <img src={picture}></img>;
       }
     });
@@ -25,11 +23,15 @@ export default class PostInfo extends Component {
       <>
         <div className="postInfo">
           <div className="postText">{text}</div>
+          {imagesArr.length > 1 ? (
+            <PostGallery
+              post={this.props.post}
+              pictures={imagesArr}
+            ></PostGallery>
+          ) : (
+            ""
+          )}
 
-          <PostGallery
-            post={this.props.post}
-            pictures={imagesArr}
-          ></PostGallery>
           <PostNavBar
             post={this.props.post}
             threadID={this.props.threadID}

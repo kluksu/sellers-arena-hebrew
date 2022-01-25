@@ -19,10 +19,10 @@ export default class NewItemPost extends Component {
       }`,
       " העלה מוצר חדש פה"
     );
-    console.log(this.props.post);
+
     postHeadline = postHeadline.split("פה")[0];
     let date = new Date("2015-03-25T12:00:00Z");
-    console.log(date);
+
     return (
       <div className="newItemPostContainer">
         <div className="postDate">

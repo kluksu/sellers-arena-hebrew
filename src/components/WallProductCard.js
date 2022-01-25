@@ -130,15 +130,6 @@ export default class WallProductCard extends Component {
             sm={12}
             xs={12}
           >
-            {this.props.activeAccount &&
-            this.props.activeAccount.account_type == 2 ? (
-              <PostNavBar
-                post={this.props.post}
-                threadID={this.state.threadID}
-                addToContacts={this.props.addToContacts}
-                handleOpenMessage={this.props.handleOpenMessage}
-              ></PostNavBar>
-            ) : null}
             {/* <div className="postNavBar">
               <BiStore
                 onClick={() =>
@@ -176,6 +167,15 @@ export default class WallProductCard extends Component {
                 }
               ></AiOutlineMessage>
             </div> */}
+            {this.props.activeAccount &&
+            this.props.activeAccount.account_type == 2 ? (
+              <PostNavBar
+                post={this.props.post}
+                threadID={this.state.threadID}
+                addToContacts={this.props.addToContacts}
+                handleOpenMessage={this.props.handleOpenMessage}
+              ></PostNavBar>
+            ) : null}
             <Row>{item.name}</Row>
             <Row>
               {" "}

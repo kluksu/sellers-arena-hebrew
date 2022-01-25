@@ -45,7 +45,7 @@ export default class BulkItemsRow extends Component {
       });
     }
     let visibility = this.props.item.visibility;
-    console.log(visibility.item, visibility.price);
+
     if (visibility.price === 1 && visibility.item === 1) {
       this.setState({ visibility: "כולם" });
     } else if (visibility.price == 5 && visibility.item == 1) {

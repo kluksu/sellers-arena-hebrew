@@ -67,7 +67,6 @@ class OrderInfo extends React.Component {
         this.setState({
           itemsQuantityArr: obj,
         });
-        console.log(this.state.itemsQuantityArr);
       });
     });
   };

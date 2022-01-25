@@ -154,10 +154,8 @@ class EditItemPage2 extends React.Component {
         }
       })
       .catch((error) => {
-        console.log(error.response.data);
         let errorsArr = [];
         Object.entries(error.response.data).forEach((error) => {
-          console.log(error);
           errorsArr.push(
             <>
               {`${error[0]} - ${error[1][0]} `}

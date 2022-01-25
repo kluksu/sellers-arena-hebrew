@@ -267,7 +267,6 @@ class StorePage extends React.Component {
       res.data.results.forEach((dual) => {
         subCategoies = this.state.storeSubCategories;
         subCategoies.push(dual.subcategory);
-        console.log(subCategoies);
 
         this.setState({
           storeSubCategories: subCategoies,
@@ -460,8 +459,7 @@ class StorePage extends React.Component {
       if (this.state.activeSubCategory === "כל החנות") {
         this.setState({ activeSubCategory: "" });
       }
-      console.log(this.state.activeSubCategory);
-      console.log(this.state.next);
+
       this.searchItems();
     }
     if (this.props.match.params.id !== prevProps.match.params.id) {

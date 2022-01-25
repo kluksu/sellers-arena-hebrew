@@ -31,7 +31,7 @@ export default class BulkEditing extends Component {
     let rowsArr = [];
     this.state.myItems.forEach((item) => {
       let dataArr = [];
-      console.log(item);
+
       Object.values(item.item_variations).forEach((variation) => {
         let propsArr = Object.values(variation.variation);
         let isPropsIncluds = false;
@@ -43,7 +43,6 @@ export default class BulkEditing extends Component {
           }
         });
 
-        console.log(isPropsIncluds);
         if (
           `${variation.id}`.includes(this.state.serachText) ||
           isPropsIncluds === true ||
@@ -62,7 +61,6 @@ export default class BulkEditing extends Component {
             .toUpperCase()
             .includes(this.state.serachText.toUpperCase())
         ) {
-          console.log(variation);
           rowsArr.push(
             <BulkEditRow
               screenWidth={this.props.screenWidth}

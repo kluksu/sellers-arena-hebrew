@@ -38,26 +38,13 @@ export default class PostGallery extends Component {
 
   render() {
     return this.props.pictures.length > 0 ? (
-      <div className="postGallery">
+      <div
+        className="postGallery"
+        style={{
+          overflow: this.state.isOverflown === true ? "scroll" : "hidden",
+        }}
+      >
         <div id={`postGallery` + this.props.post.id} className="postGallery">
-          {this.props.pictures}
-          {this.props.pictures}
-          {this.props.pictures}
-          {this.props.pictures}
-          {this.props.pictures}
-          {this.props.pictures}
-          {this.props.pictures}
-          {this.props.pictures}
-          {this.props.pictures}
-          {this.props.pictures}
-          {this.props.pictures}
-          {this.props.pictures}
-          {this.props.pictures}
-          {this.props.pictures}
-          {this.props.pictures}
-          {this.props.pictures}
-          {this.props.pictures}
-          {this.props.pictures}
           {this.props.pictures}
         </div>
         {this.state.isOverflown === true ? (

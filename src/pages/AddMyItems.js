@@ -34,7 +34,6 @@ class AddMyItems extends React.Component {
           this.setState({
             subcategories: this.state.subcategories.concat(pair.subcategory),
           });
-          console.log(this.state.subcategories);
         });
       });
   };
@@ -121,7 +120,7 @@ class AddMyItems extends React.Component {
     }
     for (let j = 0; j < this.state.fullItemsList.length; j++) {
       const fullItem = this.state.fullItemsList[j];
-      console.log(fullItem);
+
       if (
         fullItem.item.name
           .toUpperCase()

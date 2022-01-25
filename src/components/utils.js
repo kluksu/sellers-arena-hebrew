@@ -51,7 +51,8 @@ export async function getData(URL = "", data = {}, token) {
 }
 export const isOverflown = (elementID, XYBoth) => {
   let element = document.getElementById(elementID);
-  if (XYBoth === "x") {
+
+  if (XYBoth === "x" && element) {
     return element.scrollWidth > element.clientWidth;
   } else if (XYBoth === "y") {
     return element.scrollHeight > element.clientHeight;
@@ -68,8 +69,6 @@ export const handleChange = (event) => {
 export function scrolled(e, element, func1, func2) {
   element = document.getElementById(`${element}`);
   if (element.offsetWidth - element.scrollLeft + 10 >= element.scrollLeft) {
-    console.log(element.offsetWidth, element.scrollLeft, element.scrollWidth);
-
     func1();
   } else if (element.scrollLeft == 0) {
     func2();
@@ -101,9 +100,7 @@ export const scrollToHeighest = (IDarr) => {
         highest = elementHeight > highest ? elementHeight : highest;
       }
     });
-    console.log(highest);
 
-    console.log(highestName);
     if (highestName !== "") {
       highestName.scrollIntoView({ block: "center" });
     }

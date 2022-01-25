@@ -70,9 +70,9 @@ export default class CardDiscounts extends Component {
         );
       }
     }
-    console.log(discountsArr);
+
     let anyNumbers = new RegExp(/\d/);
-    console.log(anyNumbers.test(this.props.price));
+
     return (
       <>
         <div

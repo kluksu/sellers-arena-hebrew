@@ -57,9 +57,7 @@ export default class PostComponent extends Component {
         },
         config
       )
-      .then((res) => {
-        console.log(res);
-      })
+      .then((res) => {})
       .catch((error) => {
         this.props.openGernericModal(error);
       });
@@ -78,7 +76,6 @@ export default class PostComponent extends Component {
         ),
       });
     }
-    console.log(this.state.picturesArr);
   };
   getItems = () => {
     const authorization = !this.props.accessToken
@@ -93,11 +90,8 @@ export default class PostComponent extends Component {
     this.getItems()
       .then((res) => {
         this.setState({ myItems: res.data.results });
-        console.log(res);
       })
-      .catch((error) => {
-        console.log(error.response);
-      });
+      .catch((error) => {});
   };
   componentDidMount = () => {
     this.onMount();
@@ -189,7 +183,7 @@ export default class PostComponent extends Component {
     //   jasper.name = "someothername"; // update the name property, assign a new value
     //   return { jasper }; // return new object jasper object
     // });
-    console.log(this.state.itemSearchText);
+
     return (
       <div className="postComponent">
         <Form.Group controlId="exampleForm.ControlSelect1">

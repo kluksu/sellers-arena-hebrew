@@ -162,7 +162,6 @@ class ProductPage extends React.Component {
         config
       )
       .then((res) => {
-        console.log(res);
         this.setState({ itemData: res.data });
         this.setState({ variations: res.data.item_variations });
       });

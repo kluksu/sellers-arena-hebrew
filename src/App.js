@@ -307,7 +307,6 @@ class App extends React.Component {
         config
       )
       .then((res) => {
-        console.log(res);
         axios
           .delete(
             `${domain}/my-accounts/${this.state.activeAccount.id}/contacts/${res.data.results[0].id}/`,
@@ -344,7 +343,7 @@ class App extends React.Component {
       .then((res) => this.openGenericModal("רשימת אנשי הקשר עודכנה בהצלחה"))
       .catch((error) => {
         this.openGenericModal(error.response.data.detail);
-        console.log(error.response);
+
         // this.openGenericModal(error.response);
       });
   };
@@ -834,7 +833,6 @@ class App extends React.Component {
         }
       })
       .catch((error) => {
-        console.log(error);
         this.openGenericModal(
           "אופס",
           `ישנה שגיאה, אנא ודא כי האימייל שהזנת הוא אכן האימייל שאיתו השתמשת לפתיחת החשבון`

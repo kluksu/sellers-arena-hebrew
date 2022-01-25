@@ -97,7 +97,6 @@ class Uploadpage extends React.Component {
     axios
       .post(`${domain}/items/`, productPost, config)
       .then((response) => {
-        console.log(response);
         if (response.statusText === "Created") {
           this.setState({ newProductID: response.data.id });
           this.props.getCurrentUploadItemId(response.data.id);
@@ -105,10 +104,8 @@ class Uploadpage extends React.Component {
         }
       })
       .catch((error) => {
-        console.log(error.response.data);
         let errorsArr = [];
         Object.entries(error.response.data).forEach((error) => {
-          console.log(error);
           errorsArr.push(
             <>
               {`${error[0]} - ${error[1][0]} `}

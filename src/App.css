@@ -115,7 +115,7 @@ body {
   /* flex-wrap: wrap; */
   background-color: rgb(207, 216, 226);
   justify-content: right;
-  border-radius: 10px;
+  border-radius: 10px 10px 0px 0px;
   /* overflow: scroll; */
   overflow: scroll;
   max-width: fit-content;
@@ -208,10 +208,18 @@ div.wallProductCardVariationsGallery {
   padding-right: 25px !important;
   /* margin-right: 10px !important; */
 }
+.wallProductCardContainer.row {
+  max-width: 100%;
+}
 .wallProductCardVariationsGallery img {
   height: 100px;
   transition: transform 0.2s;
-  /* width: auto; */
+  width: auto;
+  padding: 2px;
+  background-color: lightgray;
+  border-radius: 10px;
+
+  /* max-width: "auto"; */
 }
 .wallProductCardVariationsGallery img:hover {
   cursor: pointer;
@@ -450,6 +458,7 @@ aside.emoji-picker-react:hover {
     width: 100vmax;
     height: auto;
   }
+
   /*
   .subcategoryButtonsDiv {
     display: flex;
@@ -925,7 +934,7 @@ label.form-label {
   flex-wrap: nowrap;
   overflow-x: hidden;
 }
-.dropdown-menu {
+.postComponent .dropdown-menu {
   text-align: center !important;
   max-height: 400px;
   overflow-x: scroll;
@@ -949,13 +958,20 @@ label.form-label {
   padding: 0px;
 }
 .type2cardImage {
+  display: flex;
+  justify-content: center;
+  /* flex-direction: row; */
+  align-items: center;
   position: relative;
   text-align: center;
   color: white;
+  height: 183px;
 }
 .type2cardImage img {
   height: auto;
-  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
   /* margin-top: 20px; */
   border-radius: 10px 10px 0px 0px;
   /* margin-bottom: 10px; */

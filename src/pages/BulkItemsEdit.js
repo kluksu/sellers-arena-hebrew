@@ -53,7 +53,6 @@ export default class BulkItemsEdit extends Component {
           let obj = Object.assign({}, prevState.selectedItems); // creating copy of state variable jasper
           obj[item.id] = false; // update the name property, assign a new value
           this.setState({ selectedItems: obj });
-          console.log(obj);
         });
       });
     });
@@ -63,29 +62,23 @@ export default class BulkItemsEdit extends Component {
   }
   componentDidUpdate(prevProps, prevState) {
     if (this.state.subcategory !== (prevState.subcategory && "")) {
-      console.log(this.state.subcategory);
     }
     if (this.state.category !== (prevState.category && "")) {
-      console.log(this.state.category);
     }
     if (this.state.visibility !== (prevState.visibility && {})) {
-      console.log(this.state.visibility);
     }
     if (this.props.activeAccount !== prevProps.activeAccount) {
       this.onStart();
     }
     if (this.state.selectedItems !== prevState.selectedItems) {
-      console.log(this.state.selectedItems);
     }
     if (this.state.allSelected !== prevState.allSelected) {
-      console.log(this.state.allSelected);
       Object.keys(this.state.selectedItems).forEach((item) => {
-        console.log(item);
         this.setState((prevState) => {
           let obj = Object.assign({}, prevState.selectedItems);
-          console.log(obj[item]); // creating copy of state variable jasper
+
           obj[item] = this.state.allSelected;
-          console.log(obj[item]); // creating copy of state variable jasper
+
           // update the name property, assign a new value
           this.setState({ selectedItems: obj });
         });
@@ -145,11 +138,8 @@ export default class BulkItemsEdit extends Component {
                 `הייתה בעיה, אם הבעיה נמשכת נסה לרענן את העמוד ונסה שנית, `
               );
             }
-            console.log(res);
           },
-          (error) => {
-            console.log(error);
-          }
+          (error) => {}
         );
       }
     });
@@ -170,7 +160,7 @@ export default class BulkItemsEdit extends Component {
         ) {
           return (isVarInfoIncluds = true);
         }
-        console.log(item);
+
         let propsArr = Object.values(variation.variation);
         propsArr.forEach((prop) => {
           if (
@@ -323,7 +313,6 @@ export default class BulkItemsEdit extends Component {
           </Row>
           <Row>
             {Object.entries(this.state.selectedItems).map((item) => {
-              console.log(item);
               if (item[1] === true) {
                 return <div>{item[0]}, </div>;
               }

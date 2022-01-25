@@ -145,7 +145,6 @@ class StorePageLoadAll extends React.Component {
     this.setState({ cartItems: cart });
   };
   getItems = (token) => {
-    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     if (this.state.next !== null) {
       const path =
         this.props.activeAccount &&
@@ -477,15 +476,15 @@ class StorePageLoadAll extends React.Component {
     //   } else {
     //     this.setState({ scrollDiraction: "left" });
     //   }
-    //   console.log(this.state.scrollDiraction);
+    //
     // }
     // if (this.state.scrollDiraction !== prevState.scrollDiraction) {
     //   if (this.state.scrollDiraction === "left") {
     //     let showList = this.state.showList;
-    //     console.log(showList);
+    //
 
     //     showList.push(showList[0]);
-    //     console.log(showList);
+    //
     //     this.setState({ showList: showList });
     //   }
     // }
@@ -649,7 +648,7 @@ class StorePageLoadAll extends React.Component {
       // await this.setState({ scrollBehavior: "auto" });
       // element.scrollTo({ top: 0, left: 0, behavior: "auto" });
       // this.setState({ scrollBehavior: "smooth" });
-      // console.log("!!!!!!!!!!!!");
+      //
     } else if (
       element.scrollLeft === 0
       //  &&
@@ -1106,7 +1105,7 @@ class StorePageLoadAll extends React.Component {
                 this.handleScroll(
                   e,
                   document.getElementById("productCardsRow")
-                  // console.log(e);
+                  //
                 )
               }
             >

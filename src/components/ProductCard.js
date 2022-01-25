@@ -156,6 +156,7 @@ class ProductCard extends React.Component {
                 ? "מלאי חסר"
                 : null}
             </div>
+
             <img
               // onClick={window.location.assign(this.props.linkAllAround)}
               style={{

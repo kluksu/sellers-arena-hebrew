@@ -21,7 +21,6 @@ export default class Feed extends Component {
     };
   }
   getWallEvents = () => {
-    console.log("!!!!!!!!!!!");
     if (this.props.activeAccount) {
       const authorization = !this.props.accessToken
         ? null
@@ -35,7 +34,7 @@ export default class Feed extends Component {
           : `${domain}/wall-events-contacts/?account_id=${
               this.props.activeAccount ? this.props.activeAccount.id : ""
             }&limit=20`;
-      console.log(this.state.next);
+
       axios
         .get(
           next,
@@ -45,14 +44,10 @@ export default class Feed extends Component {
           config
         )
         .then((res) => {
-          console.log(res.data.next);
           this.setState({ next: res.data.next });
           this.setState({ posts: this.state.posts.concat(res.data.results) });
-          console.log(res.data.results);
         })
-        .catch((error) => {
-          console.log(error);
-        });
+        .catch((error) => {});
     }
   };
   onMount = () => {
