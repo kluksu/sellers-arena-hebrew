@@ -219,6 +219,9 @@ export const categoriesAndSubCategories = [
       "מטוסים, מכוניות ותנועה",
     ],
   },
+  {
+    "נוי ועיצוב": ["צמחיה מלכותית", "עציצים וסלסלאות"],
+  },
 ];
 export const subcategoriesAndPics = {
   "לגו ומשחקי הרכבה":

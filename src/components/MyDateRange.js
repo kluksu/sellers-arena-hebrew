@@ -14,6 +14,9 @@ export default class MyDateRange extends Component {
           className="no-print"
           ranges={[selectionRange]}
           onChange={this.props.handleSelect}
+          editableDateInputs={true}
+          // moveRangeOnFirstSelection={true}
+          // retainEndDateOnFirstSelection={true}
         />
       </div>
     );

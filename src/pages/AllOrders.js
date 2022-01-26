@@ -57,18 +57,25 @@ class AllOrders extends Component {
       this.props.activeAccount.account_type == 3
         ? `&buyer_account=${this.state.selectedAccountID}`
         : `&seller_account=${this.state.selectedAccountID}`;
-    let newEndDate = new Date();
-    newEndDate.setDate(endDate.getDate() + 1);
-    let newStartDate = new Date();
-    newStartDate.setDate(startDate.getDate() + 1);
+    // let newEndDate = new Date();
+    // let newEndDate= endDate.setDate(endDate.getDate() + 1);
+    // let newStartDate = new Date();
+    // newStartDate.setDate(startDate.getDate() + 1);
+    // console.log(newStartDate);
+    // console.log(newEndDate);
+    Date.prototype.addDays = function (days) {
+      let date = new Date(this.valueOf());
+      date.setDate(date.getDate() + days);
+      return date;
+    };
 
-    endDate = `${JSON.stringify(newEndDate).substring(1, 11)}`;
+    endDate = `${JSON.stringify(endDate.addDays(1)).substring(1, 11)}`;
     startDate = `${JSON.stringify(startDate).substring(1, 11)}`;
     this.setState({ fromTodate: `${startDate} - ${endDate}` });
-
+    console.log(startDate, endDate);
     axios
       .get(
-        `${domain}/${path}/?&submitted_at__gte=${startDate}T23%3a59%3a59&submitted_at__lte=${endDate}T00%3a00%3a00&order_status=${status}${buyerOrSeller}&payment_status=${this.state.paymentStatus}`,
+        `${domain}/${path}/?&submitted_at__gte=${startDate}T23%3a59%3a59&submitted_at__lte=${endDate}T23%3a59%3a59&order_status=${status}${buyerOrSeller}&payment_status=${this.state.paymentStatus}`,
         config
       )
       .then((data) => {

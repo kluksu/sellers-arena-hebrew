@@ -80,7 +80,7 @@ class ProductCard extends React.Component {
     const picture =
       this.props.pictures !== null
         ? this.props.pictures
-        : "https://cdn.pixabay.com/photo/2015/05/11/23/10/picture-frame-763299_960_720.png";
+        : this.props.item.image;
     const storeLInksAcive = this.props.linkAllAround;
     const batchSize = this.props.variation ? (
       <div>כמות מנה {this.props.variation.batch_size}</div>

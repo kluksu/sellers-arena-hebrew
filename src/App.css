@@ -871,6 +871,9 @@ label.form-label {
 .rdrStaticRangeLabel {
   text-align: center !important;
 }
+.rdrStaticRanges button:nth-of-type(6) {
+  /* display: none; */
+}
 @media only screen and (max-width: 1200px) {
   .profileIcon {
     display: none;
