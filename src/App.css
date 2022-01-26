@@ -969,6 +969,7 @@ label.form-label {
   text-align: center;
   color: white;
   height: 183px;
+  padding: 5px;
 }
 .type2cardImage img {
   height: auto;
@@ -976,7 +977,7 @@ label.form-label {
   max-height: 100%;
   width: auto;
   /* margin-top: 20px; */
-  border-radius: 10px 10px 0px 0px;
+  border-radius: 5px;
   /* margin-bottom: 10px; */
 }
 .type2card:hover {

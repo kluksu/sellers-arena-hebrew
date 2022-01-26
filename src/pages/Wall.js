@@ -133,6 +133,7 @@ export default class Wall extends Component {
             next={() => this.getWallEvents()}
             hasMore={this.state.next !== null ? true : false}
             loader={Loader}
+            endMessage={"אין עוד תוצאות"}
           >
             {posts}
           </InfiniteScroll>{" "}

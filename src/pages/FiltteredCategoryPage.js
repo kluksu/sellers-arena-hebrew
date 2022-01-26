@@ -314,6 +314,7 @@ class FiltteredCategoryPage extends React.Component {
               next={() => this.getItems()}
               hasMore={this.state.hasMore}
               loader={<h4>Loading...</h4>}
+              endMessage={"אין עוד תוצאות"}
             >
               <Row className="homePage">{cards}</Row>
             </InfiniteScroll>

@@ -170,7 +170,7 @@ class HomePage extends React.Component {
         element.item.name.length > 11
           ? element.item.name.slice(12, element.item.name.length)
           : element.item.name;
-      // cards.push(<ProductCard productName={`${shortName}.....`} price="register to see prices"
+      // cards.push(<ProductCard productName={`${element.item.name}.....`} price="register to see prices"
       // pictures={element.image}>  </ProductCard>)
       /*search if*/
       //  if (
@@ -191,7 +191,7 @@ class HomePage extends React.Component {
               productInfoLink={`/#/StorePage/${element.item.account}/product_page/${element.item.id}`}
               linkAllAround={`/#/StorePage/${element.item.account}`}
               currency={""}
-              productName={`${shortName}.....`}
+              productName={`${element.item.name}`}
               price="הרשם על מנת לראות את המחיר"
               pictures={element.image}
             >
@@ -207,7 +207,7 @@ class HomePage extends React.Component {
               variation={element.variation}
               productInfoLink={`/#/StorePage/${element.item.account}/product_page/${element.item.id}`}
               linkAllAround={`/#/StorePage/${element.item.account}`}
-              productName={`${shortName}.....`}
+              productName={`${element.item.name}`}
               price={element.variation.cost_per_item}
               pictures={element.image}
               currency={element.item.currency}
@@ -231,7 +231,7 @@ class HomePage extends React.Component {
             variation={element.variation}
             productInfoLink={`/#/StorePage/${element.item.account}/product_page/${element.item.id}`}
             linkAllAround={`/#/StorePage/${element.item.account}`}
-            productName={`${shortName}.....`}
+            productName={`${element.item.name}`}
             currency={element.item.currency}
             price={element.variation.cost_per_item}
             pictures={element.image}
@@ -255,7 +255,7 @@ class HomePage extends React.Component {
               variation={element.variation}
               productInfoLink={`/#/StorePage/${element.item.account}/product_page/${element.item.id}`}
               linkAllAround={`/#/StorePage/${element.item.account}`}
-              productName={`${shortName}.....`}
+              productName={`${element.item.name}`}
               price="על מנת לראות את המחיר עליך להיות ברשימת אנשי הקשר של ספק זה"
               currency={""}
               pictures={element.image}
@@ -318,6 +318,7 @@ class HomePage extends React.Component {
               dataLength={cards.length}
               next={() => this.getItems()}
               hasMore={true}
+              endMessage={"אין עוד תוצאות"}
               loader={
                 <Loader
                   className="m-auto"

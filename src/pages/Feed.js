@@ -128,6 +128,7 @@ export default class Feed extends Component {
             next={() => this.getWallEvents()}
             hasMore={this.state.next !== null ? true : false}
             loader={Loader}
+            endMessage={"אין עוד תוצאות"}
           >
             {posts}
           </InfiniteScroll>

@@ -990,6 +990,7 @@ class StorePage extends React.Component {
                   : false
               }
               loader={loader}
+              endMessage={"אין עוד תוצאות"}
             >
               <Row className="productCardsRow">
                 {" "}
