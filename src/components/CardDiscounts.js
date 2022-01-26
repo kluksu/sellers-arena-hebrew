@@ -76,6 +76,9 @@ export default class CardDiscounts extends Component {
     return (
       <>
         <div
+          onClick={this.getPositionAndShow}
+          onMouseEnter={this.getPositionAndShow}
+          onMouseLeave={() => this.setState({ isHIdden: "none" })}
           style={{ display: this.state.isHIdden, [this.state.isLeft]: "0%" }}
           className={"discountClassCenterHidden productCardDiscounts"}
         >
@@ -88,6 +91,7 @@ export default class CardDiscounts extends Component {
                 ? "flex-end"
                 : "center",
           }}
+          onClick={this.getPositionAndShow}
           onMouseEnter={this.getPositionAndShow}
           onMouseLeave={() => this.setState({ isHIdden: "none" })}
           className={discountClass}

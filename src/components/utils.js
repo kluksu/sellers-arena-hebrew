@@ -220,7 +220,7 @@ export const categoriesAndSubCategories = [
     ],
   },
   {
-    "נוי ועיצוב": ["צמחיה מלכותית", "עציצים וסלסלאות"],
+    "עיצוב ונוי": ["צמחיה מלכותית", "עציצים וסלסלאות"],
   },
 ];
 export const subcategoriesAndPics = {

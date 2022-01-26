@@ -816,10 +816,9 @@ label.form-label {
   /* justify-content: space-evenly; */
 }
 .productCardDiscounts:hover {
-  overflow: overlay;
-  transform: scale(1.05);
+  /* overflow: overlay; */
+  /* transform: scale(1.05); */
 }
-
 .discountClassCenterHidden {
   font-size: 12px;
   padding: 5px;
@@ -827,11 +826,12 @@ label.form-label {
   width: fit-content;
   background-color: #f7aa8c;
   font-weight: 600;
-  border: 0.1px outset black;
+  /* border-bottom: 0.1px outset black; */
   border-radius: 5px;
   margin: 3px;
   display: flex;
   justify-content: center;
+  /* flex-direction: column; */
   /* justify-content: space-between; */
   position: absolute;
   top: 30%;
@@ -883,8 +883,26 @@ label.form-label {
 }
 
 @media only screen and (max-width: 600px) {
+  .discountClassCenterHidden {
+    font-size: 12px;
+    padding: 5px;
+    color: black;
+    width: fit-content;
+    background-color: #f7aa8c;
+    font-weight: 600;
+    /* border-bottom: 0.1px outset black; */
+    border-radius: 5px;
+    margin: 3px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    position: absolute;
+    top: 30%;
+    /* right: 50%; */
+  }
   .productCardDiscounts {
-    overflow: scroll;
+    /* overflow: scroll; */
   }
   .stickyNav .fixed-bottom {
     padding-bottom: 40px;
