@@ -182,6 +182,8 @@ class FiltteredCategoryPage extends React.Component {
         let card =
           element.variation.cost_per_item === null ? (
             <ProductCard
+              closeGenericModal={this.props.closeGenericModal}
+              openGenericModal={this.props.openGenericModal}
               userDevice={this.props.userDevice}
               screenWidth={this.props.screenWidth}
               item={element.item}
@@ -197,6 +199,8 @@ class FiltteredCategoryPage extends React.Component {
             </ProductCard>
           ) : (
             <ProductCard
+              closeGenericModal={this.props.closeGenericModal}
+              openGenericModal={this.props.openGenericModal}
               userDevice={this.props.userDevice}
               screenWidth={this.props.screenWidth}
               item={element.item}
@@ -218,6 +222,8 @@ class FiltteredCategoryPage extends React.Component {
       ) {
         cards.push(
           <ProductCard
+            closeGenericModal={this.props.closeGenericModal}
+            openGenericModal={this.props.openGenericModal}
             userDevice={this.props.userDevice}
             screenWidth={this.props.screenWidth}
             item={element.item}
@@ -240,6 +246,8 @@ class FiltteredCategoryPage extends React.Component {
           <>
             {" "}
             <ProductCard
+              closeGenericModal={this.props.closeGenericModal}
+              openGenericModal={this.props.openGenericModal}
               userDevice={this.props.userDevice}
               screenWidth={this.props.screenWidth}
               item={element.item}

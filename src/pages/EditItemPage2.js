@@ -193,9 +193,17 @@ class EditItemPage2 extends React.Component {
   render() {
     let card =
       this.props.screenWidth > 580 ? (
-        <ProductCard pictures={this.state.pictures}></ProductCard>
+        <ProductCard
+          closeGenericModal={this.props.closeGenericModal}
+          openGenericModal={this.props.openGenericModal}
+          pictures={this.state.pictures}
+        ></ProductCard>
       ) : (
-        <ProductCard pictures={this.state.pictures}></ProductCard>
+        <ProductCard
+          closeGenericModal={this.props.closeGenericModal}
+          openGenericModal={this.props.openGenericModal}
+          pictures={this.state.pictures}
+        ></ProductCard>
       );
     let showSubCategories = [];
     let showCategories = [];

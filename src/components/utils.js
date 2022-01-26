@@ -113,6 +113,10 @@ export function handleKeyDown(event, refreshCallback) {
     refreshCallback();
   }
 }
+export function topFunction() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
 export async function postFormData(URL = "", data = {}, token) {
   // Default options are marked with *
   const response = await fetch(URL, {

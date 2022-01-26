@@ -356,7 +356,11 @@ class EditVariationPage extends React.Component {
                 ></Crop>
               </Col>
               <Col xl={6}>
-                <ProductCard pictures={picture}></ProductCard>
+                <ProductCard
+                  closeGenericModal={this.props.closeGenericModal}
+                  openGenericModal={this.props.openGenericModal}
+                  pictures={picture}
+                ></ProductCard>
                 <p className="FormRejects"> {this.state.responsData.image}</p>
               </Col>
             </Row>

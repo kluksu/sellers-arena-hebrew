@@ -489,7 +489,9 @@ aside.emoji-picker-react:hover {
   background-color: rgba(0, 0, 0, 0.664);
   z-index: 1000000000000000;
 }
-.modal {
+.modal img {
+  max-width: 100%;
+
   /* direction: rtl; */
 }
 /* .modal-dialog {
@@ -718,10 +720,15 @@ label.form-label {
   padding: 70px 10% 20px 10%;
   /* margin-top: 86px; */
 }
+.type2cardImage:hover {
+  cursor: -moz-zoom-in;
+  cursor: -webkit-zoom-in;
+  cursor: zoom-in;
+}
 .productCardContainer > div > img {
-  max-height: 100%;
+  max-height: 70%;
   margin: auto;
-  max-width: 100%;
+  max-width: 70%;
   border-radius: 10px 10px 0px 0px;
 }
 .productCardContainer:hover {
@@ -959,6 +966,9 @@ label.form-label {
   text-align: center !important;
   max-height: 400px;
   overflow-x: scroll;
+}
+.dropdown-menu {
+  text-align: right;
 }
 .postComponent .cardInfo:hover ~ .infoBox {
   position: relative;
@@ -1679,11 +1689,20 @@ input {
   border: outset rgb(231, 229, 229) 1px;
   border-radius: 50%;
 }
+.productPagePictureContainer {
+  align-items: center;
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  display: flex;
+  flex-direction: column;
+}
 .productPageContainer {
   margin-top: 40px;
   padding: 40px;
   min-height: 600px;
-  min-width: 375px;
+  min-width: 320px;
 }
 .productVariationInfo {
   border: rgb(204, 197, 197) outset 1px;

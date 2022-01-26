@@ -863,6 +863,8 @@ class StorePage extends React.Component {
           let card =
             variation.cost_per_item === null ? (
               <ProductCard
+                closeGenericModal={this.props.closeGenericModal}
+                openGenericModal={this.props.openGenericModal}
                 userDevice={this.props.userDevice}
                 screenWidth={this.props.screenWidth}
                 activeAccount={this.props.activeAccount}
@@ -879,6 +881,8 @@ class StorePage extends React.Component {
               </ProductCard>
             ) : (
               <ProductCard
+                closeGenericModal={this.props.closeGenericModal}
+                openGenericModal={this.props.openGenericModal}
                 screenWidth={this.props.screenWidth}
                 userDevice={this.props.userDevice}
                 activeAccount={this.props.activeAccount}
@@ -899,6 +903,8 @@ class StorePage extends React.Component {
         } else if (this.props.accessToken && variation.cost_per_item !== null) {
           cards.push(
             <ProductCard
+              closeGenericModal={this.props.closeGenericModal}
+              openGenericModal={this.props.openGenericModal}
               screenWidth={this.props.screenWidth}
               userDevice={this.props.userDevice}
               activeAccount={this.props.activeAccount}
@@ -916,6 +922,8 @@ class StorePage extends React.Component {
         } else if (this.props.accessToken && variation.cost_per_item == null)
           cards.push(
             <ProductCard
+              closeGenericModal={this.props.closeGenericModal}
+              openGenericModal={this.props.openGenericModal}
               screenWidth={this.props.screenWidth}
               userDevice={this.props.userDevice}
               activeAccount={this.props.activeAccount}

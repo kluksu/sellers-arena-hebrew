@@ -132,6 +132,8 @@ class AddMyItems extends React.Component {
         ) {
           showItems.push(
             <ProductCard
+              closeGenericModal={this.props.closeGenericModal}
+              openGenericModal={this.props.openGenericModal}
               item={fullItem.item}
               onclickFunc={this.additMyItems}
               pictures={fullItem.item.image}

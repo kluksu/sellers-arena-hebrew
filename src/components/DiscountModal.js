@@ -7,15 +7,24 @@ export default class DiscountModal extends Component {
       <div>
         <>
           <Modal
-            backdrop={this.props.preventModalDefult === true ? "static" : null}
+            backdrop={
+              this.props.preventModalDefult === true ? "static" : "fade-out"
+            }
+            dataKeyboard={false}
             show={this.props.isDiscountModalOpen}
             onHide={
+              // this.props.closeModal
               this.props.preventModalDefult !== true
                 ? this.props.closeModal
                 : null
             }
           >
             <Modal.Header
+              style={
+                this.props.top && !this.props.text && !this.props.bottom
+                  ? { justifyContent: "center" }
+                  : { justifyContent: "" }
+              }
               closeButton={
                 this.props.preventModalDefult === true ? "disabled" : null
               }

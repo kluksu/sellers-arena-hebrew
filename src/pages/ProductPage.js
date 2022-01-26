@@ -289,6 +289,7 @@ class ProductPage extends React.Component {
               ? this.state.selectedVariation
               : {}
           }
+          item={this.state.itemData}
         ></ProductPageVariationInfo>
       ) : null;
 
@@ -298,7 +299,14 @@ class ProductPage extends React.Component {
       this.state.variations !== undefined ? this.state.variations : [];
     variations.forEach((variation) => {
       variationOptionsArr.push(
-        <option value={variation.id} data-img_src={`${variation.image}`}>
+        <option
+          value={variation.id}
+          data-img_src={`${
+            variation.image !== null
+              ? variation.image
+              : this.state.itemData.image
+          }`}
+        >
           {variation.id}{" "}
         </option>
       );
@@ -306,6 +314,7 @@ class ProductPage extends React.Component {
         <ProductPageVariationInfo
           pickVariation={this.pickVariation}
           variation={variation}
+          item={this.state.itemData}
         ></ProductPageVariationInfo>
       );
     });
@@ -356,6 +365,7 @@ class ProductPage extends React.Component {
           <Col xl={6} xs={12}>
             <div>
               <MyCarousl
+                item={this.state.itemData}
                 selectedVariationID={this.state.selectedVariationID}
                 variations={variations}
               ></MyCarousl>

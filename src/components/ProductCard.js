@@ -145,7 +145,7 @@ class ProductCard extends React.Component {
           <div
             onClick={(e) => {
               if (this.props.linkAllAround) {
-                window.location.assign(this.props.linkAllAround);
+                this.props.openGenericModal(<img src={picture}></img>);
               }
             }}
             className="type2cardImage"

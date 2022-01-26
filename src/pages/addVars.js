@@ -14,7 +14,20 @@ export default class AddVars extends Component {
       warning: "",
     };
   }
-
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.varsInfo !== prevProps.varsInfo) {
+      this.setState({
+        value: this.props.varsInfo[this.state.key],
+      });
+      if (this.props.varsInfo[this.state.key] == "") {
+        this.setState({
+          buttonText: "הוסף וריאציה",
+          isDisabled: false,
+          variant: "primary",
+        });
+      }
+    }
+  }
   lockAndSend = () => {
     this.setState({ warning: "" });
 

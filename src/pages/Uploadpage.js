@@ -231,6 +231,8 @@ class Uploadpage extends React.Component {
               </Col>
               <Col xl={6}>
                 <ProductCard
+                  closeGenericModal={this.props.closeGenericModal}
+                  openGenericModal={this.props.openGenericModal}
                   productName={this.state.productName}
                   currency={this.state.currency}
                   pictures={this.state.pictures}

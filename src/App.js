@@ -198,10 +198,10 @@ class App extends React.Component {
     this.setState({ isGenericModalOpen: false });
   };
   openGenericModal = (top, text, bottom, prevent) => {
-    prevent =
-      prevent === "prevent"
-        ? this.setState({ preventModalDefult: true })
-        : this.setState({ preventModalDefult: false });
+    // prevent =
+    prevent === "prevent"
+      ? this.setState({ preventModalDefult: true })
+      : this.setState({ preventModalDefult: false });
     this.setState({ modalText: text });
     this.setState({ modalTop: top });
     this.setState({ modalBottom: bottom });
@@ -787,6 +787,8 @@ class App extends React.Component {
     }, 8600000);
   };
   componentDidUpdate(prevProps, prevState) {
+    console.log(this.state.preventModalDefult);
+
     if (this.state.accessToken !== prevState.accessToken) {
       this.keepLoggedIn();
     }
@@ -972,6 +974,8 @@ class App extends React.Component {
           {messagesButton}
           <Route exact path="/">
             <HomePage
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
               userDevice={this.state.userDevice}
               screenWidth={this.state.screenWidth}
               filterCategory={this.filterCategory}
@@ -981,6 +985,8 @@ class App extends React.Component {
           </Route>
           <Route exact path="/category/:name">
             <FiltteredCategoryPage
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
               userDevice={this.state.userDevice}
               screenWidth={this.state.screenWidth}
               filterCategory={this.filterCategory}
@@ -995,6 +1001,8 @@ class App extends React.Component {
           </Route>
           <Route exact path="/openAccount">
             <OpenAccount
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
               captchaResponse={this.state.captchaResponse}
               isRealUser={this.state.isRealUser}
               verifyCallback={this.verifyCallback}
@@ -1071,6 +1079,8 @@ class App extends React.Component {
           </Route>
           <Route exact path="/add_items">
             <AddMyItems
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
               screenWidth={this.state.screenWidth}
               activeAccount={this.state.activeAccount}
               accessToken={this.state.accessToken}
@@ -1174,6 +1184,8 @@ class App extends React.Component {
       payedOrders: [], */}
           <Route exact path="/supplier-order/:id">
             <SupplierOrder
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
               openGenericModalOrderSummery={this.openGenericModalOrderSummery}
               getCarts={this.getCarts}
               screenWidth={this.state.screenWidth}
@@ -1185,6 +1197,8 @@ class App extends React.Component {
           </Route>
           <Route exact path="/control_panel/">
             <ControlPanel
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
               myUsers={this.state.myUsers}
               myContacts={this.state.myContacts}
               screenWidth={this.state.screenWidth}
@@ -1264,6 +1278,8 @@ class App extends React.Component {
           </Route>
           <Route exact path="/all-orders">
             <AllOrders
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
               myUsers={this.state.myUsers}
               getAccount={this.getAccount}
               myContacts={this.state.myContacts}
@@ -1277,6 +1293,8 @@ class App extends React.Component {
             ></AllOrders>
           </Route>
           <NewMessageModal
+            closeGenericModal={this.closeGenericModal}
+            openGenericModal={this.openGenericModal}
             removeContact={this.removeContact}
             postAndGetContacts={this.postAndGetContacts}
             threadTextRespons={this.state.threadTextRespons}

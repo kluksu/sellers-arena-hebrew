@@ -11,7 +11,7 @@ export default class MyCarousl extends Component {
           {" "}
           <img
             className="d-block w-100"
-            src={variation.image}
+            src={variation.image ? variation.image : this.props.item.image}
             alt={`variation ${variation.id} image`}
           />{" "}
           <Carousel.Caption>

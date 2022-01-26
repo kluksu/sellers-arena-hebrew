@@ -6,7 +6,7 @@ import Crop from "../components/Crop";
 import AddVars from "./addVars";
 import QuantityDiscount from "../components/QuantityDiscount";
 import { withRouter } from "react-router-dom";
-import { domain, handleKeyDown } from "../components/utils";
+import { domain, handleKeyDown, topFunction } from "../components/utils";
 
 class ProductVaritionPage extends React.Component {
   constructor(props) {
@@ -48,9 +48,37 @@ class ProductVaritionPage extends React.Component {
   getCropedSizes = (width, height) => {
     this.setState({ width: width, height: height });
   };
-  resetPage = () => {
+  resetPage = (e) => {
+    this.setState((prevState) => {
+      let discounts = Object.assign({}, prevState.discounts); // creating copy of state variable jasper
+      // update the name property, assign a new value
+      console.log(discounts);
+      for (const [key, value] of Object.entries(discounts)) {
+        discounts[key] = 0;
+        console.log(discounts);
+
+        this.setState({ discounts: discounts });
+      }
+    });
+    this.setState((prevState) => {
+      let varsInfo = Object.assign({}, prevState.varsInfo); // creating copy of state variable jasper
+      // update the name property, assign a new value
+      console.log(varsInfo);
+      for (const [key, value] of Object.entries(varsInfo)) {
+        varsInfo[key] = "";
+        console.log(varsInfo);
+
+        this.setState({ varsInfo: varsInfo });
+      }
+    });
     this.props.closeGenericModal();
-    window.location.reload();
+    setTimeout(
+      () => (document.body.scrollTop = document.documentElement.scrollTop = 0),
+      200
+    );
+
+    // Boolean parameter
+
     // this.setState({
     //   image: "",
     //   varCounter: 1,
@@ -121,6 +149,8 @@ class ProductVaritionPage extends React.Component {
     });
   };
   uploadVar = (event) => {
+    // document.body.scrollTop = document.documentElement.scrollTop = 0;
+
     let discounts = JSON.stringify(this.state.discounts);
     let string = JSON.stringify(this.state.varsInfo);
 
@@ -276,15 +306,24 @@ class ProductVaritionPage extends React.Component {
   render() {
     let card =
       this.props.screenWidth > 580 ? (
-        <ProductCard pictures={this.state.pictures}></ProductCard>
+        <ProductCard
+          closeGenericModal={this.props.closeGenericModal}
+          openGenericModal={this.props.openGenericModal}
+          pictures={this.state.pictures}
+        ></ProductCard>
       ) : (
-        <ProductCard pictures={this.state.pictures}></ProductCard>
+        <ProductCard
+          closeGenericModal={this.props.closeGenericModal}
+          openGenericModal={this.props.openGenericModal}
+          pictures={this.state.pictures}
+        ></ProductCard>
       );
     let varform = [];
     let discounts = [];
     for (let i = 0; i < this.state.varCounter; i++) {
       varform.push(
         <AddVars
+          varsInfo={this.state.varsInfo}
           removeVars={this.removeVars}
           varCounter={this.state.varCounter}
           addVar={this.addVar}
@@ -296,6 +335,7 @@ class ProductVaritionPage extends React.Component {
     for (let i = 0; i < this.state.discountCounter; i++) {
       discounts.push(
         <QuantityDiscount
+          discounts={this.state.discounts}
           removeDiscount={this.removeDiscount}
           updateDiscounts={this.updateDiscounts}
           discountCounter={this.state.discountCounter}
@@ -304,7 +344,7 @@ class ProductVaritionPage extends React.Component {
       );
     }
     return (
-      <div className="Uploadpage">
+      <div className="Uploadpage" id="uploadPage">
         <Container
           onKeyDown={(event) => handleKeyDown(event, this.uploadVar)}
           className="productUploadContainer"

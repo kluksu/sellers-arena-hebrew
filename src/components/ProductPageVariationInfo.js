@@ -59,9 +59,13 @@ export default class ProductPageVariationInfo extends Component {
               </Row>
               {varVariationArr}
             </Col>
-            <Col>
+            <Col className="productPagePictureContainer">
               <img
-                src={this.props.variation.image}
+                src={
+                  this.props.variation.image
+                    ? this.props.variation.image
+                    : this.props.item.image
+                }
                 fluid
                 alt="variation picture"
               ></img>
