@@ -7,6 +7,7 @@ import AddVars from "./addVars";
 import QuantityDiscount from "../components/QuantityDiscount";
 import { withRouter } from "react-router-dom";
 import { domain, handleKeyDown, topFunction } from "../components/utils";
+import { de } from "date-fns/locale";
 
 class ProductVaritionPage extends React.Component {
   constructor(props) {
@@ -49,12 +50,24 @@ class ProductVaritionPage extends React.Component {
     this.setState({ width: width, height: height });
   };
   resetPage = (e) => {
+    this.setState({
+      varCounter:
+        Object.keys(this.state.varsInfo).length <= 1
+          ? 1
+          : Object.keys(this.state.varsInfo).length,
+    });
+    this.setState({
+      discountCounter:
+        Object.keys(this.state.discounts).length <= 1
+          ? 1
+          : Object.keys(this.state.discounts).length,
+    });
     this.setState((prevState) => {
       let discounts = Object.assign({}, prevState.discounts); // creating copy of state variable jasper
       // update the name property, assign a new value
       console.log(discounts);
       for (const [key, value] of Object.entries(discounts)) {
-        discounts[key] = 0;
+        discounts[key] = "0";
         console.log(discounts);
 
         this.setState({ discounts: discounts });
@@ -115,6 +128,7 @@ class ProductVaritionPage extends React.Component {
       ),
     });
   };
+
   addVar = (key, value) => {
     this.setState({ varCounter: this.state.varCounter + 1 });
     // this.setState({ IsVarButtonDisabled: true });
@@ -150,9 +164,21 @@ class ProductVaritionPage extends React.Component {
   };
   uploadVar = (event) => {
     // document.body.scrollTop = document.documentElement.scrollTop = 0;
+    let DiscountObj = this.state.discounts;
+    for (const [key, value] of Object.entries(DiscountObj)) {
+      if (value == 0) {
+        delete DiscountObj[key];
+      }
+    }
+    let VarObj = this.state.varsInfo;
+    for (const [key, value] of Object.entries(VarObj)) {
+      if (value === "") {
+        delete VarObj[key];
+      }
+    }
 
-    let discounts = JSON.stringify(this.state.discounts);
-    let string = JSON.stringify(this.state.varsInfo);
+    let discounts = JSON.stringify(DiscountObj);
+    let string = JSON.stringify(VarObj);
 
     let productPost = new FormData();
     productPost.append("cost_per_item", this.state.cost_per_item);
@@ -447,16 +473,16 @@ class ProductVaritionPage extends React.Component {
             </Row>
 
             <Row>
-              <Col xl={10}>
+              <Col xl={12}>
                 <Button type="button" onClick={this.uploadVar}>
                   שלח
                 </Button>
               </Col>
-              <Col xl={2}>
+              {/* <Col xl={2}>
                 <Button type="button" variant="danger" onClick={this.resetPage}>
                   מחק את הטופס
                 </Button>
-              </Col>
+              </Col> */}
             </Row>
           </Form>
         </Container>

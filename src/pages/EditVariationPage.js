@@ -124,10 +124,10 @@ class EditVariationPage extends React.Component {
     //   "item": 0
     // }
   }
-  resetPage = () => {
+  resetPage = (e) => {
     this.setState({
-      varCounter: 0,
-      discountCounter: 0,
+      varCounter: 1,
+      discountCounter: 1,
       cost_per_item: "",
       amount_in_stock: "",
       batch_size: "",
@@ -139,6 +139,12 @@ class EditVariationPage extends React.Component {
       isDiscountButtonActive: false,
       isVarButtonActive: false,
     });
+
+    this.props.closeGenericModal();
+    setTimeout(
+      () => (document.body.scrollTop = document.documentElement.scrollTop = 0),
+      200
+    );
   };
 
   addVar = (key, value) => {
@@ -208,7 +214,31 @@ class EditVariationPage extends React.Component {
       .then(
         (response) => {
           if (response.status == 200) {
-            window.location.replace("/#/");
+            this.props.openGenericModal(
+              "המוצר עודכן בהצלחה",
+              "מה ברצונך לעשות כעת",
+              <>
+                <Button
+                  onClick={() => {
+                    window.location.assign("/#/");
+                    this.props.closeGenericModal();
+                  }}
+                >
+                  חזור לעמוד הבית
+                </Button>
+                <Button
+                  onClick={() => {
+                    window.location.assign(
+                      `/#/edit_variation/${this.state.item.id}`
+                    );
+                    this.props.closeGenericModal();
+                  }}
+                >
+                  ערוך וריאציה נוספת
+                </Button>
+              </>,
+              "prevent"
+            );
           }
         },
         (error) => {}
@@ -296,11 +326,6 @@ class EditVariationPage extends React.Component {
       for (let [key, value] of Object.entries(this.state.newVariations)) {
         DeletePagevariationsARR.push(
           <>
-            <tr>
-              {" "}
-              <td>{key}</td>
-              <td>{value}</td>
-            </tr>
             <Button
               onClick={() => this.deleteInnerVariation(key)}
               variant="danger"
@@ -319,11 +344,6 @@ class EditVariationPage extends React.Component {
       for (let [key, value] of Object.entries(this.state.newDIscount)) {
         DeletePageDiscountsARR.push(
           <>
-            <tr>
-              {" "}
-              <td> או יותר {key}</td>
-              <td>{value * 100}%</td>
-            </tr>
             <Button
               onClick={() => this.deletDiscount(key)}
               variant="danger"
@@ -360,6 +380,7 @@ class EditVariationPage extends React.Component {
                   closeGenericModal={this.props.closeGenericModal}
                   openGenericModal={this.props.openGenericModal}
                   pictures={picture}
+                  item={this.state.item}
                 ></ProductCard>
                 <p className="FormRejects"> {this.state.responsData.image}</p>
               </Col>
@@ -413,19 +434,11 @@ class EditVariationPage extends React.Component {
             <Row>
               <Col xl={6}>
                 <Table striped bordered hover size="sm">
-                  <thead>
-                    <td> (לדוגמה משקל)שם וריאציה</td>
-                    <td> (לדוגמה 4 קילו)ערך וריאציה</td>
-                  </thead>
                   <tbody>{DeletePagevariationsARR}</tbody>
                 </Table>
               </Col>
               <Col xl={6}>
                 <Table striped bordered hover size="sm">
-                  <thead>
-                    <td>הנחת כמות</td>
-                    <td>גובה ההנחה</td>
-                  </thead>
                   <tbody>{DeletePageDiscountsARR}</tbody>
                 </Table>
               </Col>
@@ -439,10 +452,7 @@ class EditVariationPage extends React.Component {
               </Button> */}
 
               <Row></Row>
-              <Row>
-                {" "}
-                <Col xl={12}>{varform}</Col>
-              </Row>
+
               {/* <Button
                 disabled={this.state.isDiscountButtonActive}
                 onClick={this.addDiscount}
@@ -453,11 +463,20 @@ class EditVariationPage extends React.Component {
               </Button> */}
             </Row>
             <Row>
+              {" "}
+              <Col xl={12}>{varform}</Col>
+            </Row>
+            <Row>
               <Col xl={12}>{discounts}</Col>
             </Row>
 
             <Row>
-              <Col xl={7}>
+              <Col xl={9}>
+                <Button type="button" onClick={this.uploadVar}>
+                  שלח
+                </Button>
+              </Col>
+              <Col xl={3}>
                 <Button
                   type="button"
                   variant="danger"
@@ -466,16 +485,12 @@ class EditVariationPage extends React.Component {
                   מחק וריאציה
                 </Button>
               </Col>
-              <Col xl={3}>
-                <Button type="button" onClick={this.uploadVar}>
-                  שלח
-                </Button>
-              </Col>
-              <Col xl={2}>
+
+              {/* <Col xl={2}>
                 <Button type="button" variant="danger" onClick={this.resetPage}>
                   מחק את הטופס
                 </Button>
-              </Col>
+              </Col> */}
             </Row>
           </Form>
         </Container>

@@ -19,7 +19,7 @@ export default class AddVars extends Component {
       this.setState({
         value: this.props.varsInfo[this.state.key],
       });
-      if (this.props.varsInfo[this.state.key] == "") {
+      if (this.props.varsInfo[this.state.key] === "") {
         this.setState({
           buttonText: "הוסף וריאציה",
           isDisabled: false,

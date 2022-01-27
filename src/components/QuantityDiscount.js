@@ -20,7 +20,7 @@ export default class QuantityDiscount extends Component {
       this.setState({
         value: this.props.discounts[this.state.key],
       });
-      if (this.props.discounts[this.state.key] == 0) {
+      if (this.props.discounts[this.state.key] == "0") {
         this.setState({
           buttonText: "הוסף הנחה",
           isDisabled: false,

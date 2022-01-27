@@ -197,12 +197,14 @@ class EditItemPage2 extends React.Component {
           closeGenericModal={this.props.closeGenericModal}
           openGenericModal={this.props.openGenericModal}
           pictures={this.state.pictures}
+          item={this.state.selectedItemDits}
         ></ProductCard>
       ) : (
         <ProductCard
           closeGenericModal={this.props.closeGenericModal}
           openGenericModal={this.props.openGenericModal}
           pictures={this.state.pictures}
+          item={this.state.selectedItemDits}
         ></ProductCard>
       );
     let showSubCategories = [];
