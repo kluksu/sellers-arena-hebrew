@@ -480,7 +480,27 @@ class EditVariationPage extends React.Component {
                 <Button
                   type="button"
                   variant="danger"
-                  onClick={this.deleteVariation}
+                  onClick={() => {
+                    this.props.openGenericModal(
+                      "האם ברצונך למחוק את דגם זה של המוצר ?",
+                      "",
+                      <>
+                        <Button onClick={this.props.closeGenericModal}>
+                          חזור
+                        </Button>
+                        <Button
+                          variant="danger"
+                          onClick={() => {
+                            this.deleteVariation();
+                            this.props.closeGenericModal();
+                          }}
+                        >
+                          {" "}
+                          מחק
+                        </Button>
+                      </>
+                    );
+                  }}
                 >
                   מחק וריאציה
                 </Button>
