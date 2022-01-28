@@ -156,18 +156,28 @@ class ProductCard extends React.Component {
                 ? "מלאי חסר"
                 : null}
             </div>
+            {this.props.variation.is_in_stock !== false ? (
+              <div className="centered45" style={{ fontSize: "20px" }}>
+                {!picture ? "אין תמונה" : null}
+              </div>
+            ) : null}
 
             <img
               // onClick={window.location.assign(this.props.linkAllAround)}
               style={{
                 opacity:
-                  this.props.variation &&
-                  this.props.variation.is_in_stock === false
+                  (this.props.variation &&
+                    this.props.variation.is_in_stock === false) ||
+                  !picture
                     ? 0.5
                     : null,
               }}
               className="zoomCardImg"
-              src={picture}
+              src={
+                picture
+                  ? picture
+                  : "https://cdn.pixabay.com/photo/2016/11/29/08/42/frame-1868498_960_720.jpg"
+              }
               alt="no picture"
             />
           </div>
