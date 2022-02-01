@@ -76,7 +76,7 @@ class HomePage extends React.Component {
     const nextfetch =
       this.state.next !== undefined
         ? this.state.next
-        : `${domain}/public-items/?limit=3&search=${searchTerm}`;
+        : `${domain}/public-items/?limit=20&search=${searchTerm}`;
 
     const authorization = !this.props.accessToken
       ? null
