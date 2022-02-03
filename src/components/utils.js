@@ -49,6 +49,17 @@ export async function getData(URL = "", data = {}, token) {
   });
   return response.json(); // parses JSON response into native JavaScript objects
 }
+export function isInViewport(elementid) {
+  let element = document.getElementById(elementid);
+  const rect = element.getBoundingClientRect();
+  return (
+    rect.top >= 0 &&
+    rect.left >= 0 &&
+    rect.bottom <=
+      (window.innerHeight || document.documentElement.clientHeight) &&
+    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+  );
+}
 export const isOverflown = (elementID, XYBoth) => {
   let element = document.getElementById(elementID);
 

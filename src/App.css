@@ -1,8 +1,11 @@
 * {
   box-sizing: border-box;
-  font-family: "Montserrat", sans-serif;
+  /* font-family: "Montserrat", sans-serif; */
+
   font-weight: 700;
   direction: rtl;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   /* scrollbar-width: thin; */
   scroll-behavior: smooth;
 
@@ -401,6 +404,19 @@ aside.emoji-picker-react:hover {
   }
 } */
 @media only screen and (max-width: 600px) {
+  .featuresPageUpper .squre {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.363);
+    border-radius: 10px;
+    min-width: 320px;
+    align-items: center;
+    margin: auto;
+    font-size: 24px;
+  }
+  .featuresPageLower .squre p > ul {
+    padding: 0px;
+    font-size: 16px;
+  }
   .postNavBar {
     padding-right: 20px;
   }
@@ -882,8 +898,33 @@ label.form-label {
   /* display: none; */
 }
 @media only screen and (max-width: 1200px) {
+  .featuresPageUpper {
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
   .profileIcon {
     display: none;
+  }
+  .featuresPageLower {
+    background-color: lightseagreen;
+    min-height: 100vh;
+    max-height: fit-content;
+    text-align: center;
+    padding-top: 92px;
+    padding-bottom: 150px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+
+    /* display: flex; */
+    /* justify-content: center; */
+    /* flex-wrap: wrap; */
+    /* justify-content: space-around; */
+    background-image: url("https://cdn.pixabay.com/photo/2016/11/18/13/56/milky-way-1834713_960_720.jpg") !important;
+    /* padding: 50px; */
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    font-size: 24px;
   }
 }
 @media only screen and (min-width: 601px) {
@@ -958,6 +999,151 @@ label.form-label {
 .homePageCol {
   overflow-x: hidden;
 }
+.featuresPageContainer {
+  padding-top: 100px;
+}
+.featuresPageContainer .btn {
+  height: 100px;
+  font-size: 36px;
+}
+.featuresPageUpper {
+  font-size: 36px;
+  /* background-color: rgb(34, 61, 61); */
+  min-height: 100vh;
+  color: white;
+  /* background-image: url("https://cdn.pixabay.com/photo/2017/10/20/01/06/north-star-2869817__340.jpg"); */
+  background-size: cover;
+  /* padding: 20px; */
+  background-position: center;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: white;
+  /* box-shadow: -12px 36px 90px 55px rgb(238, 229, 229) inset; */
+}
+.featuresPageUpper .squre {
+  width: auto;
+  /* max-width: ; */
+  background-color: rgba(0, 0, 0, 0.363);
+  border-radius: 10px;
+  min-width: 320px;
+  align-items: center;
+  margin: auto;
+  padding: 40px;
+}
+.featuresPageUpper p {
+  margin-bottom: 0px;
+}
+.featuresPageLower {
+  background-color: rgb(25, 53, 51);
+  min-height: 100vh;
+  max-height: fit-content;
+  text-align: center;
+  /* padding-top: 92px; */
+  padding-bottom: 150px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+
+  /* display: flex; */
+  /* justify-content: center; */
+  /* flex-wrap: wrap; */
+  /* justify-content: space-around; */
+  background-image: url("https://cdn.pixabay.com/photo/2015/11/26/07/47/hands-1063442_960_720.jpg");
+  /* padding: 50px; */
+  background-size: cover;
+
+  font-size: 24px;
+  box-shadow: 0 46px 165px 42px rgb(12, 8, 8) inset;
+}
+.featuresPageLower .row:nth-of-type(1) h1 {
+  margin: auto;
+  font-size: 84px;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+.featuresPageLower > .row > img {
+  width: auto;
+  height: auto;
+  height: 250px;
+}
+.featuresPageLower > .row:nth-of-type(2) {
+  /* align-items: center; */
+  justify-content: center;
+}
+.featuresPageLower .squre h1 {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 700;
+  text-decoration: underline;
+}
+.featuresPageLower .squre {
+  /* border-width: 25px; */
+  /* border-width: 25px; */
+  /* background: #e6dfbc; */
+  margin: 20px;
+  border-color: black;
+  /* border-style: solid; */
+  border-radius: 10px;
+  background: #00000094;
+  /* background: lightyellow; */
+  /* margin: 0px 10px; */
+  color: white;
+}
+.featuresPageLower .squre ul {
+  list-style-type: none;
+}
+.featuresPageLower .squre p > ul {
+  padding: 0px;
+}
+.featuresPageLower .squre p > ul > li:before {
+  content: "";
+
+  display: inline-block;
+
+  height: 24px;
+
+  width: 30px;
+
+  background-size: 24px;
+  background-image: url("https://cdn.pixabay.com/photo/2015/06/09/16/12/icon-803718_960_720.png");
+
+  background-repeat: no-repeat;
+
+  margin-left: 10px;
+  /* background-color: rgba(255, 255, 255, 0.767);
+  border-radius: 50%;
+  padding: 10px;
+  border-style: outset; */
+}
+.featuresPageLower .squre p > ul > li > ul > li:before {
+  content: "";
+
+  display: inline-block;
+
+  height: 24px;
+
+  width: 30px;
+
+  background-size: 24px;
+
+  background-image: url("https://cdn.pixabay.com/photo/2016/03/31/14/37/check-mark-1292787_960_720.png");
+
+  background-repeat: no-repeat;
+
+  /* margin-left: 10px;
+  background-color: rgba(255, 255, 255, 0.87);
+  border-radius: 10px; */
+}
+.featuresPageLower .squre p {
+  text-align: right;
+  padding: 0px 30px 0px 30px;
+}
+
+/* .squre li {
+  list-style-type: "circle";
+  list-style-image: url("https://cdn.pixabay.com/photo/2012/04/24/16/22/check-40319_960_720.png");
+} */
 .categoryPageRow.row {
   flex-wrap: nowrap;
   overflow-x: hidden;

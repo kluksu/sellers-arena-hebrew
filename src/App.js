@@ -50,6 +50,7 @@ import BulkEditing from "./pages/BulkEditing";
 import BulkItemsEdit from "./pages/BulkItemsEdit";
 import StorePageLoadAll from "./pages/StorePageLoadAll";
 import Feed from "./pages/Feed";
+import Features from "./pages/Features";
 //${domain}/
 class App extends React.Component {
   constructor(props) {
@@ -100,6 +101,23 @@ class App extends React.Component {
       myUsers: [],
     };
   }
+
+  createPermDiscount = (discountAccount, discountRate) => {
+    const authorization = !this.state.accessToken
+      ? null
+      : `Bearer ${this.state.accessToken}`;
+    const config = {
+      headers: { "Content-Type": "application/json", authorization },
+    };
+    return axios.post(
+      `${domain} /my-accounts/${this.state.activeAccount.id}/account-discounts/`,
+      {
+        buyer_account_id: discountAccount,
+        discount_rate: discountRate,
+      },
+      config
+    );
+  };
 
   patchVariation = (varID, inStock, price, batch) => {
     const authorization = !this.state.accessToken
@@ -971,7 +989,7 @@ class App extends React.Component {
             activeAccount={this.state.activeAccount}
             loginPostData={this.loginPostData}
           ></MyNavBar>
-          {messagesButton}
+          {this.state.activeAccount ? messagesButton : null}
           <Route exact path="/">
             <HomePage
               closeGenericModal={this.closeGenericModal}
@@ -1114,9 +1132,16 @@ class App extends React.Component {
               activeAccount={this.state.activeAccount}
               accessToken={this.state.accessToken}
             ></MyOrder>
+          </Route>{" "}
+          <Route exact path="/features">
+            <Features
+              openGenericModal={this.openGenericModal}
+              closeGenericModal={this.closeGenericModal}
+            ></Features>
           </Route>
           <Route exact path={"/StorePage/:id"}>
             <StorePageLoadAll
+              createPermDiscount={this.createPermDiscount}
               openGenericModal={this.openGenericModal}
               closeGenericModal={this.closeGenericModal}
               getAllOrders={this.getAllOrders}

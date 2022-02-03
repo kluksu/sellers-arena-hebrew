@@ -4,14 +4,22 @@ export default class Squre extends Component {
   render() {
     return (
       <div
-        className="squre"
+        id={this.props.id}
+        className={`squre ` + this.props.className}
         style={{
           height: this.props.height,
           width: this.props.width,
           background: this.props.background,
-          margin: "0px 10px 0px 10px",
+          margin: this.props.margin,
+          color: this.props.color,
         }}
-      ></div>
+      >
+        {this.props.img}
+
+        <h1>{this.props.headLine}</h1>
+
+        <p>{this.props.text}</p>
+      </div>
     );
   }
 }
