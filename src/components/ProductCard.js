@@ -17,6 +17,7 @@ class ProductCard extends React.Component {
     this.setState({ notice: notice });
   };
   render() {
+    console.log(this.props.variation);
     //not sure
     let cardZoom = this.props.screenWidth > 1000 ? "" : "scale(1)";
     //not sure
@@ -150,16 +151,23 @@ class ProductCard extends React.Component {
             }}
             className="type2cardImage"
           >
-            <div className="centered45">
-              {this.props.variation &&
-              this.props.variation.is_in_stock === false
-                ? "מלאי חסר"
-                : null}
-            </div>
-            {this.props.variation.is_in_stock !== false ? (
-              <div className="centered45" style={{ fontSize: "20px" }}>
-                {!picture ? "אין תמונה" : null}
-              </div>
+            {this.props.variation ? (
+              <>
+                <div className="centered45">
+                  {this.props.variation.is_in_stock === false ||
+                  (this.props.activeAccount &&
+                    this.props.variation.amount_in_stock < 1)
+                    ? "מלאי חסר"
+                    : null}
+                </div>
+                {this.props.variation.is_in_stock !== false ||
+                (this.props.activeAccount &&
+                  this.props.variation.amount_in_stock) >= 1 ? (
+                  <div className="centered45" style={{ fontSize: "20px" }}>
+                    {!picture ? "אין תמונה" : null}
+                  </div>
+                ) : null}
+              </>
             ) : null}
 
             <img
@@ -168,6 +176,8 @@ class ProductCard extends React.Component {
                 opacity:
                   (this.props.variation &&
                     this.props.variation.is_in_stock === false) ||
+                  (this.props.activeAccount &&
+                    this.props.variation.amount_in_stock < 1) ||
                   !picture
                     ? 0.5
                     : null,

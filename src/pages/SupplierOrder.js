@@ -446,7 +446,7 @@ class SupplierOrder extends React.Component {
       buyeraddress = this.state.buyer.store_address;
       buyeraddress = buyeraddress.replaceAll(" ", "20%");
     }
-    if (this.state.activeCart !== "") {
+    if (this.state.activeCart !== "" && this.props.activeAccount) {
       return (
         <div className="OrderSummeryPage">
           <h1 className="printOnly">{this.state.copyOriginal}</h1>

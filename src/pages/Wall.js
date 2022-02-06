@@ -33,7 +33,7 @@ export default class Wall extends Component {
           ? this.state.next
           : `${domain}/wall-events/?account_id=${
               this.props.activeAccount ? this.props.activeAccount.id : ""
-            }&limit=1`;
+            }&limit=20`;
 
       axios
         .get(
@@ -70,21 +70,38 @@ export default class Wall extends Component {
       this.onMount();
     }
   }
+  getItem = (itemID) => {
+    const authorization = !this.props.accessToken
+      ? null
+      : `Bearer ${this.props.accessToken}`;
+    const config = {
+      headers: { "Content-Type": "application/json", authorization },
+    };
+    return axios.get(`${domain}/public-items/${itemID}/`, config);
+  };
   render() {
     let posts = this.state.posts.map((post) => {
       if (post.event_type === "item_created") {
-        return (
-          <NewItemPost
-            allThreads={this.props.allThreads}
-            handleOpenMessage={this.props.handleOpenMessage}
-            handleClose={this.props.handleClose}
-            addToContacts={this.props.addToContacts}
-            activeAccount={this.props.activeAccount}
-            accessToken={this.props.accessToken}
-            post={post}
-          ></NewItemPost>
-        );
+        this.getItem(post.related_id)
+          .then((res) => {
+            return (
+              <NewItemPost
+                allThreads={this.props.allThreads}
+                handleOpenMessage={this.props.handleOpenMessage}
+                handleClose={this.props.handleClose}
+                addToContacts={this.props.addToContacts}
+                activeAccount={this.props.activeAccount}
+                accessToken={this.props.accessToken}
+                post={post}
+              ></NewItemPost>
+            );
+          })
+          .catch((error) => {
+            return;
+          });
       } else if (post.event_type === "account_post") {
+        console.log(post);
+
         return (
           <Post
             allThreads={this.props.allThreads}
@@ -97,6 +114,8 @@ export default class Wall extends Component {
           ></Post>
         );
       } else if (post.event_type === "variation_created") {
+        console.log(post);
+
         return (
           <NewVariationPost
             allThreads={this.props.allThreads}

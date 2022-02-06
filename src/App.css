@@ -54,6 +54,7 @@ body {
 
 .subcategoryButtonsDiv {
   display: flex;
+  position: relative;
   overflow-x: scroll;
   overflow-y: hidden;
   /* justify-content: center; */
@@ -242,9 +243,10 @@ div.wallProductCardVariationsGallery {
 .storeCategoriesCarousel {
   display: none;
 }
-.editItemsPage .scrollButtons {
-  top: 58%;
-}
+/* .editItemsPage .scrollButtons {
+  top: 45%;
+} */
+
 .profilePage {
   margin-top: 100px;
 }
@@ -733,7 +735,7 @@ label.form-label {
     rgb(217, 233, 230) 46%,
     rgb(160, 247, 238) 70%
   );
-  padding: 70px 10% 20px 10%;
+  padding: 70px 0 20px 0;
   /* margin-top: 86px; */
 }
 .type2cardImage:hover {
@@ -1015,9 +1017,9 @@ label.form-label {
   background-size: cover;
   /* padding: 20px; */
   background-position: center;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
+  /* display: flex; */
+  /* align-items: center; */
+  /* flex-wrap: wrap; */
   background-color: white;
   /* box-shadow: -12px 36px 90px 55px rgb(238, 229, 229) inset; */
 }
@@ -1028,7 +1030,17 @@ label.form-label {
   border-radius: 10px;
   min-width: 320px;
   align-items: center;
-  margin: auto;
+  /* margin: auto; */
+  padding: 40px;
+}
+.featuresPageUpper .squre {
+  width: auto;
+  /* max-width: ; */
+  background-color: rgba(0, 0, 0, 0.363);
+  border-radius: 10px;
+  min-width: 320px;
+  align-items: center;
+  /* margin: auto; */
   padding: 40px;
 }
 .featuresPageUpper p {
@@ -1057,7 +1069,7 @@ label.form-label {
 }
 .featuresPageLower .row:nth-of-type(1) h1 {
   margin: auto;
-  font-size: 84px;
+  font-size: 54px;
   color: white;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
@@ -1695,8 +1707,8 @@ input {
   margin-top: 50px;
   /* opacity: 0.9; */
   /* background-image: url("https://images.pexels.com/photos/7354627/pexels-photo-7354627.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"); */
-  border-radius: 10px;
-  border: outset;
+  /* border-radius: 10px; */
+  /* border: outset; */
   background-color: white;
   /* min-width: 1140px; */
   /* width: 2480px; */

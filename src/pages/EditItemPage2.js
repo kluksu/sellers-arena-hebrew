@@ -329,7 +329,7 @@ class EditItemPage2 extends React.Component {
                     value={this.state.category}
                     name="category"
                   >
-                    <option value={""}>----------</option>
+                    {/* <option value={""}>----------</option> */}
                     {showCategories}
                   </Form.Control>
                 </Form.Group>
@@ -351,7 +351,7 @@ class EditItemPage2 extends React.Component {
                     value={this.state.subcategory}
                     name="subcategory"
                   >
-                    <option value={""}>-----------</option>
+                    {/* <option value={""}>-----------</option> */}
                     {showSubCategories}
                   </Form.Control>
                 </Form.Group>

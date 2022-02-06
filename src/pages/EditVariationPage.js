@@ -100,7 +100,7 @@ class EditVariationPage extends React.Component {
       this.setState({
         newVariations: this.state.selectedVariationDits.variation,
       });
-
+      console.log(this.state.selectedVariationDits);
       let res = this.state.selectedVariationDits;
       this.setState({
         item: res.item,
@@ -228,9 +228,7 @@ class EditVariationPage extends React.Component {
                 </Button>
                 <Button
                   onClick={() => {
-                    window.location.assign(
-                      `/#/edit_variation/${this.state.item.id}`
-                    );
+                    window.location.assign(`/#/edit_item/${this.state.item}`);
                     this.props.closeGenericModal();
                   }}
                 >

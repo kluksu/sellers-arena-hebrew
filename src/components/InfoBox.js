@@ -19,7 +19,9 @@ export default class InfoBox extends Component {
       let is_in_stock = this.props.variation.is_in_stock
         ? variation.is_in_stock
         : null;
-
+      let amount_in_stock = this.props.variation.amount_in_stock
+        ? variation.amount_in_stock
+        : null;
       if (this.props.variation && this.props.variation.variation !== {}) {
         for (const [key, value] of Object.entries(variation.variation)) {
           info.push(
@@ -51,10 +53,18 @@ export default class InfoBox extends Component {
           variant="light hidden "
         >
           <tbody>
-            <tr>
-              <td>זמין במלאי </td>
-              <td>{is_in_stock === true ? "כן" : "לא"}</td>
-            </tr>
+            {amount_in_stock ? (
+              <tr>
+                <td>כמות במלאי </td>
+                <td>{amount_in_stock}</td>
+              </tr>
+            ) : (
+              <tr>
+                <td>זמין במלאי </td>
+                <td>{is_in_stock === true ? "כן" : "לא"}</td>
+              </tr>
+            )}
+
             <tr>
               <td>שם מוצר</td>
               <td>{item.name}</td>

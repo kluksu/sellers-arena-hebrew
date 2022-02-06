@@ -106,10 +106,10 @@ export default class Features extends Component {
             </h1>
           </Row>
           <Row>
-            <img
+            {/* <img
               className={" animate__animated animate__fadeInRight "}
               src="https://cdn.pixabay.com/photo/2016/03/31/19/50/checklist-1295319_960_720.png"
-            ></img>
+            ></img> */}
             <Squre
               className={
                 " animate__animated animate__fadeInUp animate__delay-1s "
@@ -142,7 +142,7 @@ export default class Features extends Component {
               className={
                 this.state.show1 === false
                   ? "hidden"
-                  : " animate__animated animate__zoomInUp"
+                  : " animate__animated animate__fadeInUp animate__slower"
               }
               //   background="lightYellow"
               width=""
@@ -158,7 +158,7 @@ export default class Features extends Component {
               className={
                 this.state.show1 === false
                   ? "hidden"
-                  : " animate__animated animate__zoomInDown animate__delay-2s"
+                  : " animate__animated animate__fadeInDown   animate__slower"
               }
               //   background="lightYellow"
               width=""
