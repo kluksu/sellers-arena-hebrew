@@ -58,7 +58,7 @@ export default class ProductModal extends Component {
     }
 
     if (this.state.variations !== prevState.variations) {
-      this.setState({ selectedVariation: this.state.variations[0] });
+      this.setState({ selectedVariation: this.props.selectedVariation });
     }
   };
   //   getItem = () => {
@@ -86,7 +86,7 @@ export default class ProductModal extends Component {
     // this.getItem();
     //
     this.setState({ variations: this.props.item.item_variations });
-    this.setState({ selectedVariation: this.props.item.item_variations[0] });
+    // this.setState({ selectedVariation: this.props.item.item_variations[0] });
   }
   render() {
     //
@@ -113,7 +113,7 @@ export default class ProductModal extends Component {
         <img
           style={{
             border:
-              this.state.selectedVariation.image == variation.image
+              this.state.selectedVariation.image === variation.image
                 ? "5px solid rebeccapurple"
                 : "",
           }}

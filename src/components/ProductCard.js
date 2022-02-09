@@ -19,6 +19,7 @@ class ProductCard extends React.Component {
     this.props.openGenericModal(
       "",
       <ProductModal
+        selectedVariation={this.props.variation}
         cartItems={this.props.cartItems}
         accessToken={this.props.accessToken}
         activeCart={this.props.activeCart}
