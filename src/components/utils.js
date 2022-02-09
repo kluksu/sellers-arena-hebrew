@@ -6,8 +6,8 @@ import { element } from "prop-types";
 
 // Example POST method implementation:
 //https://supplierzz.herokuapp.com
-export let domain = "https://supplierzz.westeurope.cloudapp.azure.com";
-// export let domain = "https://supplierzz.herokuapp.com";
+// export let domain = "https://supplierzz.westeurope.cloudapp.azure.com";
+export let domain = "https://supplierzz.herokuapp.com";
 export async function postData(URL = "", data = {}, token) {
   // Default options are marked with *
   const response = await fetch(URL, {
@@ -117,6 +117,26 @@ export const scrollToHeighest = (IDarr) => {
     }
   }
 };
+export function deepEqualUtils(x, y) {
+  if (x === y) {
+    return true;
+  } else if (
+    typeof x == "object" &&
+    x != null &&
+    typeof y == "object" &&
+    y != null
+  ) {
+    if (Object.keys(x).length != Object.keys(y).length) return false;
+
+    for (var prop in x) {
+      if (y.hasOwnProperty(prop)) {
+        if (!deepEqualUtils(x[prop], y[prop])) return false;
+      } else return false;
+    }
+
+    return true;
+  } else return false;
+}
 export function handleKeyDown(event, refreshCallback) {
   if (event.key === "Enter") {
     event.preventDefault();

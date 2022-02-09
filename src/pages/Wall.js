@@ -100,8 +100,6 @@ export default class Wall extends Component {
             return;
           });
       } else if (post.event_type === "account_post") {
-        console.log(post);
-
         return (
           <Post
             allThreads={this.props.allThreads}
@@ -114,8 +112,6 @@ export default class Wall extends Component {
           ></Post>
         );
       } else if (post.event_type === "variation_created") {
-        console.log(post);
-
         return (
           <NewVariationPost
             allThreads={this.props.allThreads}

@@ -5,13 +5,17 @@ export default class PostPhotos extends Component {
   render() {
     return (
       <div>
-        <img
-          src={
-            this.props.mainPicture
-              ? this.props.mainPicture
-              : this.props.item.image
-          }
-        ></img>
+        <div className="postPhotosUpperImageContainer">
+          {" "}
+          <img
+            src={
+              this.props.mainPicture
+                ? this.props.mainPicture
+                : this.props.item.image
+            }
+          ></img>
+        </div>
+
         <div className="wallProductCardVariationsGallery">
           {this.props.isVariation !== true ? (
             <>

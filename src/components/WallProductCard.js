@@ -61,7 +61,6 @@ export default class WallProductCard extends Component {
           .get(`${domain}/public-accounts/${accountID}/`, config)
           .then((data) => {
             this.setState({ selectedAccount: data.data });
-            console.log(data.data);
           });
       })
       .catch((error) => {});
@@ -100,15 +99,14 @@ export default class WallProductCard extends Component {
 
     if (item.variation !== undefined) {
       Object.entries(item.variation).forEach((variation) => {
-        console.log(variation);
         miniVarsArr.push(<Row>{`${variation[0]} : ${variation[1]}`}</Row>);
       });
     }
 
     // }
-    // console.log(this.state.selectedItem);
+    //
     // if (this.props.isVariation === true && item.variation) {
-    //   console.log(miniVarsArr);
+    //
 
     return (
       <>

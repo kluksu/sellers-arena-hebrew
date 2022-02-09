@@ -95,6 +95,7 @@ class App extends React.Component {
       modalText: "",
       modalTop: "",
       modalBottom: "",
+      modalClass: "",
       isRealUser: false,
       preventModalDefult: false,
       allMessages: [],
@@ -212,10 +213,11 @@ class App extends React.Component {
   closeGenericModal = () => {
     this.setState({ modalText: "" });
     this.setState({ modalTop: "" });
-    this.setState({ modalBottom: "" });
+    this.setState({ modalBottom: "", modalClass: "" });
+
     this.setState({ isGenericModalOpen: false });
   };
-  openGenericModal = (top, text, bottom, prevent) => {
+  openGenericModal = (top, text, bottom, prevent, calssName) => {
     // prevent =
     prevent === "prevent"
       ? this.setState({ preventModalDefult: true })
@@ -223,6 +225,7 @@ class App extends React.Component {
     this.setState({ modalText: text });
     this.setState({ modalTop: top });
     this.setState({ modalBottom: bottom });
+    this.setState({ modalClass: calssName });
 
     this.setState({ isGenericModalOpen: true });
   };
@@ -805,8 +808,6 @@ class App extends React.Component {
     }, 8600000);
   };
   componentDidUpdate(prevProps, prevState) {
-    console.log(this.state.preventModalDefult);
-
     if (this.state.accessToken !== prevState.accessToken) {
       this.keepLoggedIn();
     }
@@ -1336,6 +1337,7 @@ class App extends React.Component {
             preventModalDefult={this.state.preventModalDefult}
             bottom={this.state.modalBottom}
             top={this.state.modalTop}
+            className={this.state.modalClass}
             text={this.state.modalText}
             closeModal={this.closeGenericModal}
             isDiscountModalOpen={this.state.isGenericModalOpen}

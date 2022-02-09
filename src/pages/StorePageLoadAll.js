@@ -262,16 +262,29 @@ class StorePageLoadAll extends React.Component {
       this.props.MyShoppingCarts.forEach((cart) => {
         if (
           (cart.seller_account == parseInt(this.props.match.params.id) &&
+            this.props.activeAccount &&
             this.props.activeAccount.account_type == 2) ||
           !this.props.activeAccount
         ) {
           this.setState({ activeCart: cart });
+          cart.all_item_variations.forEach((variation) => {
+            this.getCartProducts(
+              variation.item_variation.id,
+              variation.quantity
+            );
+          });
         } else if (
           (cart.buyer_account == parseInt(this.state.selectedContactID) &&
             this.props.activeAccount.account_type == 3) ||
           !this.props.activeAccount
         ) {
           this.setState({ activeCart: cart });
+          cart.all_item_variations.forEach((variation) => {
+            this.getCartProducts(
+              variation.item_variation.id,
+              variation.quantity
+            );
+          });
         } else if (
           typeof this.state.selectedContactID.unregisteredAccountID ===
             "number" &&
@@ -279,6 +292,12 @@ class StorePageLoadAll extends React.Component {
             this.state.selectedContactID.unregisteredAccountID
         ) {
           this.setState({ activeCart: cart });
+          cart.all_item_variations.forEach((variation) => {
+            this.getCartProducts(
+              variation.item_variation.id,
+              variation.quantity
+            );
+          });
         }
       });
     }
@@ -492,8 +511,30 @@ class StorePageLoadAll extends React.Component {
     if (this.props.match.params.id !== prevProps.match.params.id) {
       this.getContactsList();
     }
-    if (this.state.activeCart !== prevState.activeCart) {
+    if (
+      this.state.activeCart &&
+      prevState.activeCart &&
+      this.state.activeCart.id !== prevState.activeCart.id &&
+      prevState.activeCart.buyer_account !== 0
+    ) {
+      console.log(prevState.activeCart);
       this.setState({ cartItems: {} });
+
+      // this.state.activeCart.all_item_variations.forEach((variation) => {
+      //   this.getCartProducts(variation.item_variation.id, variation.quantity);
+      // });
+      if (
+        (this.state.activeCart && !prevState.activeCart) ||
+        (this.state.activeCart &&
+          prevState.activeCart &&
+          this.state.activeCart.id !== prevState.activeCart.id) ||
+        this.state.activeCart !== prevState.activeCart
+      ) {
+        this.state.activeCart.all_item_variations.forEach((variation) => {
+          this.getCartProducts(variation.item_variation.id, variation.quantity);
+        });
+      }
+
       // this.setState({ wasNextNull: false });
       this.props.getActiveCart(this.state.activeCart);
       // this.loadStoreComponent();
@@ -566,6 +607,7 @@ class StorePageLoadAll extends React.Component {
           this.openModal("הצלחה!", "השינויים נוספו להזמנה"),
           this.setState({ changedQuantities: {} }),
           this.setState({ activeCart: data }),
+
           getData(
             `${domain}/cart/${this.state.activeCart.id}/`,
             "",
@@ -952,6 +994,7 @@ class StorePageLoadAll extends React.Component {
                 let card =
                   variation.cost_per_item === null ? (
                     <ProductCard
+                      cartItems={this.state.cartItems}
                       closeGenericModal={this.props.closeGenericModal}
                       openGenericModal={this.props.openGenericModal}
                       addCartItems={this.addCartItems}
@@ -971,6 +1014,7 @@ class StorePageLoadAll extends React.Component {
                     </ProductCard>
                   ) : (
                     <ProductCard
+                      cartItems={this.state.cartItems}
                       closeGenericModal={this.props.closeGenericModal}
                       openGenericModal={this.props.openGenericModal}
                       addCartItems={this.addCartItems}
@@ -997,13 +1041,18 @@ class StorePageLoadAll extends React.Component {
               ) {
                 cards.push(
                   <ProductCard
+                    cartItems={this.state.cartItems}
                     closeGenericModal={this.props.closeGenericModal}
                     openGenericModal={this.props.openGenericModal}
                     addCartItems={this.addCartItems}
                     screenWidth={this.props.screenWidth}
                     userDevice={this.props.userDevice}
                     activeAccount={this.props.activeAccount}
-                    value={value}
+                    value={
+                      this.state.cartItems[variation.id]
+                        ? this.state.cartItems[variation.id]
+                        : 0
+                    }
                     getCartProducts={this.getCartProducts}
                     variation={variation}
                     item={item}
@@ -1020,13 +1069,18 @@ class StorePageLoadAll extends React.Component {
               )
                 cards.push(
                   <ProductCard
+                    cartItems={this.state.cartItems}
                     closeGenericModal={this.props.closeGenericModal}
                     openGenericModal={this.props.openGenericModal}
                     addCartItems={this.addCartItems}
                     screenWidth={this.props.screenWidth}
                     userDevice={this.props.userDevice}
                     activeAccount={this.props.activeAccount}
-                    value={value}
+                    value={
+                      this.state.cartItems[variation.id]
+                        ? this.state.cartItems[variation.id]
+                        : 0
+                    }
                     getCartProducts={this.getCartProducts}
                     variation={variation}
                     item={item}

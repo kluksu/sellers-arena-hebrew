@@ -30,12 +30,11 @@ export default class Features extends Component {
     }
   }
   handleScroll = (event) => {
-    console.log(isInViewport("viewPort1"));
     this.setState({ isInViewport1: isInViewport("viewPort1") });
     this.setState({ isRegisterInView: isInViewport("RegisterButton") });
 
     //   this.setState({})
-    // console.log(
+    //
     //   window.innerHeight,
     //   window.pageYOffset,
     //   document.body.offsetHeight,

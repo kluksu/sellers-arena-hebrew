@@ -56,6 +56,9 @@ export default class QuantitySelector extends Component {
     }
     if (this.state.units !== prevState.units && this.props.getCartProducts) {
       this.props.getCartProducts(this.props.variation.id, this.state.units);
+      if (this.props.getStateValue) {
+        this.props.getStateValue("quantity", this.state.units);
+      }
     }
     // if (this.state.notice !== prevState.notice) {
     //   this.props.getNotice(this.state.notice);

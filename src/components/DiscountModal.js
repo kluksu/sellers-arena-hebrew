@@ -7,6 +7,7 @@ export default class DiscountModal extends Component {
       <div>
         <>
           <Modal
+            dialogClassName={this.props.className}
             backdrop={
               this.props.preventModalDefult === true ? "static" : "fade-out"
             }

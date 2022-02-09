@@ -61,8 +61,8 @@ class AllOrders extends Component {
     // let newEndDate= endDate.setDate(endDate.getDate() + 1);
     // let newStartDate = new Date();
     // newStartDate.setDate(startDate.getDate() + 1);
-    // console.log(newStartDate);
-    // console.log(newEndDate);
+    //
+    //
     Date.prototype.addDays = function (days) {
       let date = new Date(this.valueOf());
       date.setDate(date.getDate() + days);
@@ -72,7 +72,7 @@ class AllOrders extends Component {
     endDate = `${JSON.stringify(endDate.addDays(1)).substring(1, 11)}`;
     startDate = `${JSON.stringify(startDate).substring(1, 11)}`;
     this.setState({ fromTodate: `${startDate} - ${endDate}` });
-    console.log(startDate, endDate);
+
     axios
       .get(
         `${domain}/${path}/?&submitted_at__gte=${startDate}T23%3a59%3a59&submitted_at__lte=${endDate}T23%3a59%3a59&order_status=${status}${buyerOrSeller}&payment_status=${this.state.paymentStatus}`,

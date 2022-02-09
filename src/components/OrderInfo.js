@@ -180,7 +180,7 @@ class OrderInfo extends React.Component {
               // getNotice={this.getNotice}
               accessToken={this.props.accessToken}
               getCartProducts={this.props.getCartProducts}
-              value={variation.quantity}
+              value={variation.quantity ? variation.quantity : 0}
               variation={variation.item_variation}
               price={variation.item_variation.cost_per_item}
             ></QuantitySelector>

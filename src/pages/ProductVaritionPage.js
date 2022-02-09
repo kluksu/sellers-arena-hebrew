@@ -65,10 +65,9 @@ class ProductVaritionPage extends React.Component {
     this.setState((prevState) => {
       let discounts = Object.assign({}, prevState.discounts); // creating copy of state variable jasper
       // update the name property, assign a new value
-      console.log(discounts);
+
       for (const [key, value] of Object.entries(discounts)) {
         discounts[key] = "0";
-        console.log(discounts);
 
         this.setState({ discounts: discounts });
       }
@@ -76,10 +75,9 @@ class ProductVaritionPage extends React.Component {
     this.setState((prevState) => {
       let varsInfo = Object.assign({}, prevState.varsInfo); // creating copy of state variable jasper
       // update the name property, assign a new value
-      console.log(varsInfo);
+
       for (const [key, value] of Object.entries(varsInfo)) {
         varsInfo[key] = "";
-        console.log(varsInfo);
 
         this.setState({ varsInfo: varsInfo });
       }

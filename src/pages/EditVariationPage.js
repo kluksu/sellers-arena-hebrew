@@ -100,7 +100,7 @@ class EditVariationPage extends React.Component {
       this.setState({
         newVariations: this.state.selectedVariationDits.variation,
       });
-      console.log(this.state.selectedVariationDits);
+
       let res = this.state.selectedVariationDits;
       this.setState({
         item: res.item,

@@ -4,6 +4,7 @@ import { HashRouter, Route, Router, withRouter } from "react-router-dom";
 import { NIL } from "uuid";
 import InfoBox from "../components/InfoBox";
 import CardDiscounts from "./CardDiscounts";
+import ProductModal from "./ProductModal";
 import QuantitySelector from "./QuantitySelector";
 
 class ProductCard extends React.Component {
@@ -17,57 +18,58 @@ class ProductCard extends React.Component {
     this.setState({ notice: notice });
   };
   render() {
-    console.log(this.props.variation);
+    //
     //not sure
     let cardZoom = this.props.screenWidth > 1000 ? "" : "scale(1)";
     //not sure
-    let discountsArr = [];
-    let prev = 0;
-    let price = 0;
-    let lastKey = 0;
-    let lastPrice = 0;
-    let discountClass = "productCardDiscounts";
+    // let discountsArr = [];
+    // let prev = 0;
+    // let price = 0;
+    // let lastKey = 0;
+    // let lastPrice = 0;
+    // let discountClass = "productCardDiscounts";
 
-    if (this.props.variation) {
-      let discounts = this.props.variation.discounts;
-      discounts["0"] = 0;
-      if (Object.keys(discounts).length > 1) {
-        for (const [key, value] of Object.entries(discounts)) {
-          discountClass = "productCardDiscounts";
-          if (key == 0) {
-            price = this.props.price * (1 - value);
-            continue;
-          }
-          discountsArr.push(
-            <span className="borderRight">
-              <div>
-                {prev}-{key} יחידות{" "}
-              </div>{" "}
-              <div>{price}₪</div>{" "}
-            </span>
-          );
-          price = this.props.price * (1 - value);
-          lastKey = key;
-          lastPrice = price;
-          if (key > prev) {
-            prev = key;
-          }
-        }
+    // if (this.props.variation) {
+    //   let discounts = this.props.variation.discounts;
+    //   discounts["0"] = 0;
+    //   if (Object.keys(discounts).length > 1) {
+    //     for (const [key, value] of Object.entries(discounts)) {
+    //       discountClass = "productCardDiscounts";
+    //       if (key == 0) {
+    //         price = this.props.price * (1 - value);
+    //         continue;
+    //       }
+    //       discountsArr.push(
+    //         <span className="borderRight">
+    //           <div>
+    //             {prev}-{key} יחידות{" "}
+    //           </div>{" "}
+    //           <div>{price}₪</div>{" "}
+    //         </span>
+    //       );
+    //       price = this.props.price * (1 - value);
+    //       lastKey = key;
+    //       lastPrice = price;
+    //       if (key > prev) {
+    //         prev = key;
+    //       }
+    //     }
 
-        discountsArr.push(
-          <span>
-            <div>{`>=${lastKey} יחידות`}</div>
-            <div>{`${lastPrice}₪`}</div>
-          </span>
-        );
-      } else {
-        discountsArr.push(<div>{`${this.props.price}₪ ליחידה`} </div>);
-      }
-    }
+    //     discountsArr.push(
+    //       <span>
+    //         <div>{`>=${lastKey} יחידות`}</div>
+    //         <div>{`${lastPrice}₪`}</div>
+    //       </span>
+    //     );
+    //   } else {
+    //     discountsArr.push(<div>{`${this.props.price}₪ ליחידה`} </div>);
+    //   }
+    // }
     let buttons =
       !this.props.linkAllAround && this.props.activeAccount ? (
         <>
           <QuantitySelector
+            cartItems={this.props.cartItems}
             activeAccount={this.props.activeAccount}
             getCartProducts={this.props.getCartProducts}
             variation={this.props.variation}
@@ -239,7 +241,36 @@ class ProductCard extends React.Component {
                               </>
                             )
                         : () =>
-                            window.location.assign(this.props.productInfoLink)
+                            this.props.openGenericModal(
+                              "",
+                              <ProductModal
+                                cartItems={this.props.cartItems}
+                                accessToken={this.props.accessToken}
+                                activeCart={this.props.activeCart}
+                                getCartProducts={this.props.getCartProducts}
+                                item={this.props.item}
+                                activeAccount={this.props.activeAccount}
+                                accessToken={this.props.accessToken}
+                                buttons={
+                                  <span className="CardUnitsFormContainer">
+                                    {buttons}
+                                  </span>
+                                }
+                              ></ProductModal>,
+                              <>
+                                {" "}
+                                <Button
+                                  onClick={this.props.addCartItems}
+                                  variant="success"
+                                >
+                                  הוסף לעגלה
+                                </Button>
+                              </>,
+                              "",
+                              "modal90W"
+                            )
+
+                      // window.location.assign(this.props.productInfoLink)
                     }
                     // onClick={async (e) => {
                     //   await this.props.addCartItems();
