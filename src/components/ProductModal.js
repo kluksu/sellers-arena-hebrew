@@ -163,7 +163,7 @@ export default class ProductModal extends Component {
           <div>{allItemsImages}</div>*/}
         </Col>
 
-        <Col xl={6} lg={6} md={6} sm={12} xs={12} className="Info">
+        <Col xl={6} lg={6} md={12} sm={12} xs={12} className="Info">
           <div className="productPageUpperInfo">
             <div>
               <Row className="prodauctPageUpperInfo">
@@ -197,9 +197,7 @@ export default class ProductModal extends Component {
               </Row>{" "}
               {itemVariations}
             </div>
-            <div>
-              <Row> {buttons}</Row>
-            </div>
+            <div>{buttons}</div>
           </div>
         </Col>
       </Row>

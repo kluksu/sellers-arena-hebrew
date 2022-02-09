@@ -166,6 +166,7 @@ div.wallProductCardVariationsGallery {
   flex-direction: column;
   flex-wrap: wrap;
   /* justify-content: center; */
+  align-items: center;
 }
 .postText {
   font-weight: 400;
@@ -213,7 +214,11 @@ div.wallProductCardVariationsGallery {
   /* margin-right: 10px !important; */
 }
 .wallProductCardContainer.row {
+  margin: none;
   max-width: 100%;
+}
+.wallProductCardContainer.row img {
+  max-height: 100%;
 }
 .wallProductCardVariationsGallery img {
   height: 100px;
@@ -499,13 +504,18 @@ aside.emoji-picker-react:hover {
   margin-left: 20px;
 }
 .modal-dialog {
-  margin-top: 6.75rem !important;
+  /* margin-top: 6.75rem !important; */
   min-width: 300px;
   /* max-width: 80%; */
 }
 .modal-open .modal {
   background-color: rgba(0, 0, 0, 0.664);
   z-index: 1000000000000000;
+  padding-left: 0px !important;
+  overflow-y: scroll !important;
+  overflow-x: hidden;
+
+  /* overflow: hidden; */
 }
 .modal img {
   max-width: 100%;
@@ -637,9 +647,14 @@ aside.emoji-picker-react:hover {
   justify-content: center;
   align-items: center;
 }
+.dropdown-menu .dropdown-menu {
+  right: 0px;
+  overflow: scroll;
+  z-index: 10000000000000000000000000000;
+}
 .navbar.navbar-expand-xl.navbar-light.bg-light {
   background-color: white;
-  white-space: nowrap;
+  /* white-space: nowrap; */
   z-index: 10000000000000000000;
 }
 .postPictures {
@@ -667,6 +682,7 @@ aside.emoji-picker-react:hover {
 .myOrderPage .hidden:hover {
   display: contents;
 }
+
 .navbar.navbar-expand-xl.navbar-light.bg-light a.nav-link {
   color: black !important;
 }
@@ -932,6 +948,7 @@ label.form-label {
 @media (min-width: 576px) {
   .modal-dialog.modal90W {
     max-width: 90% !important;
+    padding-right: 8px;
   }
 }
 
@@ -946,7 +963,7 @@ label.form-label {
 .productModalPic {
   display: flex;
   flex-direction: column;
-  max-width: 50%;
+  /* max-width: 50%; */
 }
 .productModalPic .postPhotosUpperImageContainer {
   height: 320px;
@@ -1195,6 +1212,9 @@ label.form-label {
   flex-wrap: nowrap;
   overflow-x: hidden;
 }
+.navbar.navbar-expand-xl.navbar-light.bg-light a.nav-link {
+  padding: 5px 10px 5px 10px;
+}
 .postComponent .dropdown-menu {
   text-align: center !important;
   max-height: 400px;
@@ -1202,6 +1222,9 @@ label.form-label {
 }
 .dropdown-menu {
   text-align: right;
+  background-clip: content-box;
+  max-height: 70vh;
+  max-width: 300px;
 }
 .postComponent .cardInfo:hover ~ .infoBox {
   position: relative;
@@ -1210,6 +1233,11 @@ label.form-label {
 .postComponent .infoBox:hover {
   position: relative;
   top: 0px;
+}
+.dropdown-menu .nav-link {
+  text-align: start;
+  min-width: 280px;
+  /* padding: 10px; */
 }
 .postComponent .navbar-dark .navbar-nav .nav-link {
   background-color: white !important;
@@ -1998,9 +2026,11 @@ input {
 .productPageUpperInfo {
   height: 100%;
   margin-left: 13px;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding: 19px;
 }
 
 .productVariationInfo:hover {
