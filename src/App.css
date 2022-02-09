@@ -966,7 +966,7 @@ label.form-label {
   /* max-width: 50%; */
 }
 .productModalPic .postPhotosUpperImageContainer {
-  height: 320px;
+  /* height: 320px; */
   width: auto;
   border-radius: 5px;
 
