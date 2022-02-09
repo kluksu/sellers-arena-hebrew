@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Col, NavLink, Row, Button, Form } from "react-bootstrap";
+import { ImEyePlus } from "react-icons/im";
 import { HashRouter, Route, Router, withRouter } from "react-router-dom";
 import { NIL } from "uuid";
 import InfoBox from "../components/InfoBox";
@@ -14,6 +15,32 @@ class ProductCard extends React.Component {
       notice: "",
     };
   }
+  openProductModal = (buttons) => {
+    this.props.openGenericModal(
+      "",
+      <ProductModal
+        cartItems={this.props.cartItems}
+        accessToken={this.props.accessToken}
+        activeCart={this.props.activeCart}
+        getCartProducts={this.props.getCartProducts}
+        item={this.props.item}
+        activeAccount={this.props.activeAccount}
+        accessToken={this.props.accessToken}
+        buttons={buttons}
+      ></ProductModal>,
+      <>
+        {" "}
+        {window.location.href.includes("StorePage")
+          ? // <Button onClick={this.props.addCartItems} variant="success">
+            //   הוסף לעגלה
+            // </Button>
+            ""
+          : ""}
+      </>,
+      "",
+      "modal90W"
+    );
+  };
   getNotice = (notice) => {
     this.setState({ notice: notice });
   };
@@ -205,87 +232,95 @@ class ProductCard extends React.Component {
           <div className="lowerProductCard">
             <div className="infoAndButtons">
               <span> {this.props.productName}</span>{" "}
-              <span className="cardInfo">i</span>{" "}
+              <span className="cardInfo">i </span>
               <InfoBox
                 link={
-                  <div
-                    style={{ fontSize: "20px" }}
-                    onClick={
-                      window.location.href.includes("storePage")
-                        ? () =>
-                            this.props.openGenericModal(
-                              "שים לב!",
-                              "לא שמרת את הפריטים בעגלה, אם תעבור עמוד המידע שלא נשמר ימחק",
-                              <>
-                                <Button
-                                  type="button"
-                                  onClick={() => {
-                                    this.props.closeGenericModal();
-                                    this.props.addCartItems();
-                                  }}
-                                >
-                                  שמור את המוצרים
-                                </Button>
-                                <Button
-                                  type="button"
-                                  variant="warning"
-                                  onClick={() => {
-                                    this.props.closeGenericModal();
-                                    window.location.assign(
-                                      this.props.productInfoLink
-                                    );
-                                  }}
-                                >
-                                  המשך ללא שמירה
-                                </Button>
-                              </>
-                            )
-                        : () =>
-                            this.props.openGenericModal(
-                              "",
-                              <ProductModal
-                                cartItems={this.props.cartItems}
-                                accessToken={this.props.accessToken}
-                                activeCart={this.props.activeCart}
-                                getCartProducts={this.props.getCartProducts}
-                                item={this.props.item}
-                                activeAccount={this.props.activeAccount}
-                                accessToken={this.props.accessToken}
-                                buttons={
-                                  <span className="CardUnitsFormContainer">
-                                    {buttons}
-                                  </span>
-                                }
-                              ></ProductModal>,
-                              <>
-                                {" "}
-                                <Button
-                                  onClick={this.props.addCartItems}
-                                  variant="success"
-                                >
-                                  הוסף לעגלה
-                                </Button>
-                              </>,
-                              "",
-                              "modal90W"
-                            )
+                  // <div
+                  //   style={{ fontSize: "20px" }}
+                  //   onClick={
+                  //     window.location.href.includes("storePage")
+                  //       ? () =>
+                  //           this.props.openGenericModal(
+                  //             "שים לב!",
+                  //             "לא שמרת את הפריטים בעגלה, אם תעבור עמוד המידע שלא נשמר ימחק",
+                  //             <>
+                  //               <Button
+                  //                 type="button"
+                  //                 onClick={() => {
+                  //                   this.props.closeGenericModal();
+                  //                   this.props.addCartItems();
+                  //                 }}
+                  //               >
+                  //                 שמור את המוצרים
+                  //               </Button>
+                  //               <Button
+                  //                 type="button"
+                  //                 variant="warning"
+                  //                 onClick={() => {
+                  //                   this.props.closeGenericModal();
+                  //                   window.location.assign(
+                  //                     this.props.productInfoLink
+                  //                   );
+                  //                 }}
+                  //               >
+                  //                 המשך ללא שמירה
+                  //               </Button>
+                  //             </>
+                  //           )
+                  //       : () =>
+                  //           this.props.openGenericModal(
+                  //             "",
+                  //             <ProductModal
+                  //               cartItems={this.props.cartItems}
+                  //               accessToken={this.props.accessToken}
+                  //               activeCart={this.props.activeCart}
+                  //               getCartProducts={this.props.getCartProducts}
+                  //               item={this.props.item}
+                  //               activeAccount={this.props.activeAccount}
+                  //               accessToken={this.props.accessToken}
+                  //               buttons={
+                  //                 <span className="CardUnitsFormContainer">
+                  //                   {buttons}
+                  //                 </span>
+                  //               }
+                  //             ></ProductModal>,
+                  //             <>
+                  //               {" "}
+                  //               <Button
+                  //                 onClick={this.props.addCartItems}
+                  //                 variant="success"
+                  //               >
+                  //                 הוסף לעגלה
+                  //               </Button>
+                  //             </>,
+                  //             "",
+                  //             "modal90W"
+                  //           )
 
-                      // window.location.assign(this.props.productInfoLink)
-                    }
-                    // onClick={async (e) => {
-                    //   await this.props.addCartItems();
-                    //   window.location.assign(this.props.productInfoLink);
-                    // }}
-                  >
-                    למוצר
-                  </div>
+                  //     // window.location.assign(this.props.productInfoLink)
+                  //   }
+                  //   // onClick={async (e) => {
+                  //   //   await this.props.addCartItems();
+                  //   //   window.location.assign(this.props.productInfoLink);
+                  //   // }}
+                  // >
+                  //   למוצר
+                  // </div>
+                  ""
                 }
                 variation={this.props.variation}
                 item={this.props.item}
               ></InfoBox>
             </div>
             {/* <div>{`${this.props.price} ${this.props.currency}`}</div> */}
-            {batchSize}
+            <div className="cardBatchSize">
+              {batchSize}
+              <span>
+                <ImEyePlus
+                  onClick={() => this.openProductModal(buttons)}
+                ></ImEyePlus>
+              </span>
+            </div>
           </div>
           <span className="CardUnitsFormContainer">{buttons}</span>
 

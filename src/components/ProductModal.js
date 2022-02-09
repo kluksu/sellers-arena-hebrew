@@ -111,13 +111,21 @@ export default class ProductModal extends Component {
     let allItemsImages = this.state.variations.map((variation) => {
       return (
         <img
+          style={{
+            border:
+              this.state.selectedVariation.image == variation.image
+                ? "5px solid rebeccapurple"
+                : "",
+          }}
           onClick={() => this.setState({ selectedVariation: variation })}
           src={variation.image ? variation.image : this.props.item.image}
         ></img>
       );
     });
     let buttons =
-      !this.props.linkAllAround && this.props.activeAccount ? (
+      !this.props.linkAllAround &&
+      this.props.activeAccount &&
+      window.location.href.includes("StorePage") ? (
         <>
           <QuantitySelector
             cartItems={this.props.cartItems}
@@ -137,6 +145,7 @@ export default class ProductModal extends Component {
       <Row className="productModal">
         <Col xl={6} lg={6} md={12} sm={12} xs={12} className="productModalPic">
           <PostPhotos
+            selectedVariation={this.state.selectedVariation}
             mainPicture={mainImage}
             variationsPictures={allItemsImages}
             item={this.props.item}
