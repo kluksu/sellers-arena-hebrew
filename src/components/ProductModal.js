@@ -145,6 +145,7 @@ export default class ProductModal extends Component {
       <Row className="productModal">
         <Col xl={6} lg={6} md={12} sm={12} xs={12} className="productModalPic">
           <PostPhotos
+            openGenericModal={this.props.openGenericModal}
             selectedVariation={this.state.selectedVariation}
             mainPicture={mainImage}
             variationsPictures={allItemsImages}
@@ -199,8 +200,10 @@ export default class ProductModal extends Component {
               <Row>
                 <div>
                   מלאי:{" "}
-                  {this.state.selectedVariation.is_in_stock
-                    ? this.state.selectedVariation.is_in_stock
+                  {!this.state.selectedVariation.amount_in_stock
+                    ? this.state.selectedVariation.is_in_stock === true
+                      ? "במלאי"
+                      : "חסר במלאי"
                     : this.state.selectedVariation.amount_in_stock}
                 </div>
               </Row>{" "}

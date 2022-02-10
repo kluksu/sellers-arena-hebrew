@@ -255,7 +255,7 @@ export const categoriesAndSubCategories = [
     ],
   },
   {
-    "עיצוב ונוי": ["צמחיה מלכותית", "עציצים וסלסלאות"],
+    "עיצוב ונוי": ["צמחים מלאכותיים", "עציצים וסלסלאות"],
   },
 ];
 export const subcategoriesAndPics = {
@@ -275,6 +275,8 @@ export const subcategoriesAndPics = {
     "https://images.pexels.com/photos/9397849/pexels-photo-9397849.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
   "כל החנות":
     "https://images.pexels.com/photos/1727684/pexels-photo-1727684.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+  "צמחים מלאכותיים":
+    "https://cdn.pixabay.com/photo/2021/07/13/15/42/flowers-6463878_960_720.jpg",
 };
 
 export const englishCategoriesAndSubCategories = [

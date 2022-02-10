@@ -222,7 +222,9 @@ div.wallProductCardVariationsGallery {
 }
 .wallProductCardVariationsGallery img {
   height: 100px;
-  transition: transform 0.2s;
+  /* transition: transform 0.2s; */
+  transition: border 0.1s ease 0.1s;
+
   width: auto;
   padding: 2px;
   background-color: lightgray;
@@ -972,6 +974,20 @@ label.form-label {
 
   background-color: rgb(233, 233, 233);
 }
+.cardEyeIcon > span {
+  background: #ffffffd1;
+  overflow: hidden;
+  vertical-align: middle;
+  /* z-index: 10000000000000000000; */
+  position: absolute;
+  color: black;
+  width: 32px;
+  top: 12px;
+  right: 15px;
+  font-size: 20px;
+  border-radius: 50%;
+  transition: transform 0.1s;
+}
 .productModalPic .postPhotosUpperImageContainer img {
   /* width: 100%;
   height: 100%; */
@@ -1016,6 +1032,8 @@ label.form-label {
   .type2card .table {
     max-width: 100%;
     overflow: scroll;
+    top: 0px;
+    height: 370px;
   }
   .dateRangeDiv {
     overflow: hidden;
@@ -1231,12 +1249,8 @@ label.form-label {
   width: 100%;
   justify-content: space-between;
 }
-.cardBatchSize svg {
-  margin-left: 23px;
-  font-size: 24px;
-  transition: transform 0.1s;
-}
-.cardBatchSize svg:hover {
+
+.type2card svg:hover {
   cursor: pointer;
   transform: scale(1.2);
   color: rgb(40, 40, 143);
@@ -1248,7 +1262,14 @@ label.form-label {
 .infoBox td:hover {
   background-color: rgb(226, 226, 226);
   font-size: 16px;
+  top: 0px;
   cursor: default !important;
+}
+.type2card .table {
+  max-width: 100%;
+  overflow: scroll;
+  top: 0px;
+  height: 370px;
 }
 .postComponent .cardInfo:hover ~ .infoBox {
   position: relative;
@@ -1370,6 +1391,9 @@ label.form-label {
   font-size: 14px;
   font-weight: 900;
 }
+svg {
+  transition: transform 0.1s;
+}
 .lowerProductCard .cardInfo {
   color: black !important;
   width: 30px;
@@ -1408,6 +1432,10 @@ label.form-label {
 .hidden {
   position: absolute;
   display: none;
+}
+.infoAndButtons svg {
+  font-size: 16px;
+  margin-left: 10px;
 }
 
 .cardInfo:hover + .hidden {

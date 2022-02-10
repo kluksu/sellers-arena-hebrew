@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import { Col, NavLink, Row, Button, Form } from "react-bootstrap";
 import { ImEyePlus } from "react-icons/im";
+import { IoStorefrontOutline } from "react-icons/io5";
+
 import { HashRouter, Route, Router, withRouter } from "react-router-dom";
 import { NIL } from "uuid";
 import InfoBox from "../components/InfoBox";
+import StorePage from "../pages/StorePage";
 import CardDiscounts from "./CardDiscounts";
 import ProductModal from "./ProductModal";
 import QuantitySelector from "./QuantitySelector";
@@ -181,58 +184,12 @@ class ProductCard extends React.Component {
             }}
             className="type2cardImage"
           >
-            {this.props.variation ? (
-              <>
-                <div className="centered45">
-                  {this.props.variation.is_in_stock === false ||
-                  (this.props.activeAccount &&
-                    this.props.variation.amount_in_stock < 1)
-                    ? "מלאי חסר"
-                    : null}
-                </div>
-                {this.props.variation.is_in_stock !== false ||
-                (this.props.activeAccount &&
-                  this.props.variation.amount_in_stock) >= 1 ? (
-                  <div className="centered45" style={{ fontSize: "20px" }}>
-                    {!picture ? "אין תמונה" : null}
-                  </div>
-                ) : null}
-              </>
-            ) : null}
-
-            <img
-              // onClick={window.location.assign(this.props.linkAllAround)}
-              style={{
-                opacity:
-                  (this.props.variation &&
-                    this.props.variation.is_in_stock === false) ||
-                  (this.props.activeAccount &&
-                    this.props.variation.amount_in_stock < 1) ||
-                  !picture
-                    ? 0.5
-                    : null,
+            <div
+              onClick={(e) => {
+                e.stopPropagation(e);
               }}
-              className="zoomCardImg"
-              src={
-                picture
-                  ? picture
-                  : "https://cdn.pixabay.com/photo/2016/11/29/08/42/frame-1868498_960_720.jpg"
-              }
-              alt="no picture"
-            />
-          </div>
-          <CardDiscounts
-            onClick={(e) => {
-              if (this.props.linkAllAround) {
-                window.location.assign(this.props.linkAllAround);
-              }
-            }}
-            variation={this.props.variation}
-            price={this.props.price}
-          ></CardDiscounts>
-          <div className="lowerProductCard">
-            <div className="infoAndButtons">
-              <span> {this.props.productName}</span>{" "}
+              className="cardEyeIcon"
+            >
               <span className="cardInfo">i </span>
               <InfoBox
                 link={
@@ -312,14 +269,93 @@ class ProductCard extends React.Component {
                 variation={this.props.variation}
                 item={this.props.item}
               ></InfoBox>
+              {/* <ImEyePlus
+                onClick={(e) => {
+                  e.stopPropagation(e);
+                  this.openProductModal(buttons);
+                }}
+              ></ImEyePlus> */}
+            </div>
+            {this.props.variation ? (
+              <>
+                <div className="centered45">
+                  {this.props.variation.is_in_stock === false ||
+                  (this.props.activeAccount &&
+                    this.props.variation.amount_in_stock < 1)
+                    ? "מלאי חסר"
+                    : null}
+                </div>
+                {this.props.variation.is_in_stock !== false ||
+                (this.props.activeAccount &&
+                  this.props.variation.amount_in_stock) >= 1 ? (
+                  <div className="centered45" style={{ fontSize: "20px" }}>
+                    {!picture ? "אין תמונה" : null}
+                  </div>
+                ) : null}
+              </>
+            ) : null}
+
+            <img
+              // onClick={window.location.assign(this.props.linkAllAround)}
+              style={{
+                opacity:
+                  (this.props.variation &&
+                    this.props.variation.is_in_stock === false) ||
+                  (this.props.activeAccount &&
+                    this.props.variation.amount_in_stock < 1) ||
+                  !picture
+                    ? 0.5
+                    : null,
+              }}
+              className="zoomCardImg"
+              src={
+                picture
+                  ? picture
+                  : "https://cdn.pixabay.com/photo/2016/11/29/08/42/frame-1868498_960_720.jpg"
+              }
+              alt="no picture"
+            />
+          </div>
+          <CardDiscounts
+            onClick={(e) => {
+              if (this.props.linkAllAround) {
+                window.location.assign(this.props.linkAllAround);
+              }
+            }}
+            variation={this.props.variation}
+            price={this.props.price}
+          ></CardDiscounts>
+          <div className="lowerProductCard">
+            <div className="infoAndButtons">
+              <span> {this.props.productName}</span>{" "}
+              <span>
+                {" "}
+                <IoStorefrontOutline
+                  style={{ marginLeft: "10px" }}
+                  onClick={(e) => {
+                    if (
+                      this.props.linkAllAround &&
+                      !window.location.href.includes("StorePage")
+                    ) {
+                      window.location.assign(this.props.linkAllAround);
+                    }
+                  }}
+                ></IoStorefrontOutline>
+                <ImEyePlus
+                  onClick={(e) => {
+                    e.stopPropagation(e);
+                    this.openProductModal(buttons);
+                  }}
+                ></ImEyePlus>
+              </span>
             </div>
             {/* <div>{`${this.props.price} ${this.props.currency}`}</div> */}
             <div className="cardBatchSize">
               {batchSize}
               <span>
-                <ImEyePlus
+                {/* <ImEyePlus
                   onClick={() => this.openProductModal(buttons)}
-                ></ImEyePlus>
+                ></ImEyePlus> */}
               </span>
             </div>
           </div>
