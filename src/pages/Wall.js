@@ -11,6 +11,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Loader from "react-loader-spinner";
 import NewVariationPost from "../components/NewVariationPost";
 import DiscountPost from "../components/DiscountPost";
+import PriceDropPost from "../components/PriceDropPost";
 
 export default class Wall extends Component {
   constructor(props) {
@@ -184,6 +185,24 @@ export default class Wall extends Component {
             accessToken={this.props.accessToken}
             post={post}
           ></DiscountPost>
+        );
+      } else if (post.event_type === "variation_price_drop") {
+        return (
+          <PriceDropPost
+            closeGenericModal={this.props.closeGenericModal}
+            openGenericModal={this.props.openGenericModal}
+            hidePost={this.hidePost}
+            deletePost={this.deletePost}
+            closeGenericModal={this.props.closeGenericModal}
+            openGenericModal={this.props.openGenericModal}
+            allThreads={this.props.allThreads}
+            handleOpenMessage={this.props.handleOpenMessage}
+            handleClose={this.props.handleClose}
+            addToContacts={this.props.addToContacts}
+            activeAccount={this.props.activeAccount}
+            accessToken={this.props.accessToken}
+            post={post}
+          ></PriceDropPost>
         );
       }
     });
