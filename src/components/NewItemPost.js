@@ -63,7 +63,7 @@ export default class NewItemPost extends Component {
             </ThreeDots>
           </div>
 
-          <div>
+          <div className="postHeadline">
             {postHeadline}{" "}
             <img src="https://cdn.pixabay.com/photo/2012/04/24/16/22/check-40319_960_720.png"></img>
             &nbsp;

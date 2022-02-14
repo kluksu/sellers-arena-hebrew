@@ -72,7 +72,7 @@ export default class Post extends Component {
               </ThreeDots>
             </div>
 
-            <div>
+            <div className="postHeadline">
               {postHeadline}{" "}
               <img src="https://cdn.pixabay.com/photo/2016/06/15/15/02/info-1459077_960_720.png"></img>
               &nbsp;

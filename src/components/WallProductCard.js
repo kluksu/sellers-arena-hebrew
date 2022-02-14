@@ -61,6 +61,7 @@ export default class WallProductCard extends Component {
         config
       ) ///wait for public variations
       .then((res) => {
+        console.log(res.data);
         this.setState({ selectedItem: res.data });
         axios
           .get(`${domain}/public-accounts/${accountID}/`, config)
