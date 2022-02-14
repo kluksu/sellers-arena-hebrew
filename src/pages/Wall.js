@@ -18,8 +18,36 @@ export default class Wall extends Component {
       allMessages: [],
       posts: [],
       next: "",
+      myItems: [],
     };
   }
+  hidePost = (postID) => {
+    let posts = this.state.posts;
+    posts.forEach((post, i) => {
+      if (post.id == postID) {
+        posts.splice(i, 1);
+        this.setState({ posts: posts });
+      }
+    });
+  };
+  deletePost = (postID) => {
+    const authorization = !this.props.accessToken
+      ? null
+      : `Bearer ${this.props.accessToken}`;
+    const config = {
+      headers: { "Content-Type": "application/json", authorization },
+    };
+    return axios.post(
+      `${domain}/my-accounts/${this.props.activeAccount.id}/delete_event/`,
+      {
+        event_id: postID,
+      },
+      config
+    );
+  };
+  getStateInfo = (state, value) => {
+    this.setState({ [state]: value });
+  };
   getWallEvents = () => {
     if (this.props.activeAccount) {
       const authorization = !this.props.accessToken
@@ -86,6 +114,10 @@ export default class Wall extends Component {
           .then((res) => {
             return (
               <NewItemPost
+                hidePost={this.hidePost}
+                deletePost={this.deletePost}
+                closeGenericModal={this.props.closeGenericModal}
+                openGenericModal={this.props.openGenericModal}
                 allThreads={this.props.allThreads}
                 handleOpenMessage={this.props.handleOpenMessage}
                 handleClose={this.props.handleClose}
@@ -102,6 +134,11 @@ export default class Wall extends Component {
       } else if (post.event_type === "account_post") {
         return (
           <Post
+            hidePost={this.hidePost}
+            deletePost={this.deletePost}
+            myItems={this.state.myItems}
+            closeGenericModal={this.props.closeGenericModal}
+            openGenericModal={this.props.openGenericModal}
             allThreads={this.props.allThreads}
             handleOpenMessage={this.props.handleOpenMessage}
             handleClose={this.props.handleClose}
@@ -114,6 +151,12 @@ export default class Wall extends Component {
       } else if (post.event_type === "variation_created") {
         return (
           <NewVariationPost
+            closeGenericModal={this.props.closeGenericModal}
+            openGenericModal={this.props.openGenericModal}
+            hidePost={this.hidePost}
+            deletePost={this.deletePost}
+            closeGenericModal={this.props.closeGenericModal}
+            openGenericModal={this.props.openGenericModal}
             allThreads={this.props.allThreads}
             handleOpenMessage={this.props.handleOpenMessage}
             handleClose={this.props.handleClose}
@@ -135,6 +178,7 @@ export default class Wall extends Component {
         <div className="wall">
           {/* <Row> */}{" "}
           <PostComponent
+            getStateInfo={this.getStateInfo}
             closeGenericModal={this.props.closeGenericModal}
             openGenericModal={this.props.openGenericModal}
             activeAccount={this.props.activeAccount}

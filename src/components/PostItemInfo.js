@@ -20,7 +20,34 @@ export default class PostItemInfo extends Component {
               {" "}
               {` מספר וריאציות : ${item.item_variations.length} `}{" "}
               <a
-                href={`/#/StorePage/${this.props.post.account_id}/product_page/${this.props.post.related_id}`}
+                href={window.location.href}
+                onClick={() =>
+                  this.props.openGenericModal(
+                    "",
+                    <ProductModal
+                      selectedVariation={item.item_variations[0]}
+                      // cartItems={this.props.cartItems}
+                      // accessToken={this.props.accessToken}
+                      // activeCart={this.props.activeCart}
+                      // getCartProducts={this.props.getCartProducts}
+                      item={item}
+                      activeAccount={this.props.activeAccount}
+                      accessToken={this.props.accessToken}
+                      buttons={buttons}
+                    ></ProductModal>,
+                    <>
+                      {" "}
+                      {window.location.href.includes("StorePage")
+                        ? // <Button onClick={this.props.addCartItems} variant="success">
+                          //   הוסף לעגלה
+                          // </Button>
+                          ""
+                        : ""}
+                    </>,
+                    "",
+                    "modal90W"
+                  )
+                }
               >
                 {" "}
                 &nbsp; לכל הוריאציות &nbsp;

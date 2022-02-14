@@ -1,13 +1,21 @@
 import React, { Component } from "react";
 import PostInfo from "./PostInfo";
+import PostManu from "./PostManu";
+import ThreeDots from "./ThreeDots";
 
 export default class Post extends Component {
   constructor(props) {
     super(props);
     this.state = {
       threadID: "",
+      isPostManuOpen: false,
     };
   }
+  openPostManu = () => {
+    this.setState({
+      isPostManuOpen: this.state.isPostManuOpen === true ? false : true,
+    });
+  };
   getThreadID = (userID) => {
     this.props.allThreads.forEach((thread) => {
       if (
@@ -42,7 +50,26 @@ export default class Post extends Component {
           <div>
             <div className="postDate">
               {" "}
-              {Date(`${this.props.post.created_at}`)}{" "}
+              <span> {Date(`${this.props.post.created_at}`)}</span>{" "}
+              <ThreeDots
+                hidePost={this.props.hidePost}
+                deletePost={this.props.deletePost}
+                myItems={this.props.myItems}
+                closeGenericModal={this.props.closeGenericModal}
+                openGenericModal={this.props.openGenericModal}
+                threadID={this.state.threadID}
+                allThreads={this.props.allThreads}
+                handleOpenMessage={this.props.handleOpenMessage}
+                handleClose={this.props.handleClose}
+                addToContacts={this.props.addToContacts}
+                activeAccount={this.props.activeAccount}
+                accessToken={this.props.accessToken}
+                post={this.props.post}
+                openPostManu={this.openPostManu}
+                isPostManuOpen={this.state.isPostManuOpen}
+              >
+                {" "}
+              </ThreeDots>
             </div>
 
             <div>
@@ -52,6 +79,8 @@ export default class Post extends Component {
             </div>
           </div>
           <PostInfo
+            closeGenericModal={this.props.closeGenericModal}
+            openGenericModal={this.props.openGenericModal}
             threadID={this.state.threadID}
             allThreads={this.props.allThreads}
             handleOpenMessage={this.props.handleOpenMessage}

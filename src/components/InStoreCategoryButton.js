@@ -5,7 +5,9 @@ export default class InStoreCategoryButton extends Component {
   render() {
     return (
       <div
-        onClick={() => this.props.getStoreSubCategory(this.props.funcCatogory)}
+        onClick={(e) =>
+          this.props.getStoreSubCategory(e, this.props.funcCatogory)
+        }
         className="inStoreCategoryButton"
       >
         <img

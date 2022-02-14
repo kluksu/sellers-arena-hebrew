@@ -87,8 +87,9 @@ export default class Search extends Component {
           <Carousel.Item>
             {" "}
             <img
-              onClick={() => this.props.getStoreSubCategory(funcCatogory)}
-              // className="d-block w-100"
+              onClick={(e) => {
+                this.props.getStoreSubCategory(e, funcCatogory);
+              }} // className="d-block w-100"
               src={subcategoriesAndPics[subCategory]}
               alt={subCategory}
             />{" "}
@@ -101,7 +102,9 @@ export default class Search extends Component {
         categoriesArr.push(
           <div
             className="instoreCategoryNames"
-            onClick={(e) => this.props.getStoreSubCategory(e, funcCatogory)}
+            onClick={(e) => {
+              this.props.getStoreSubCategory(e, funcCatogory);
+            }}
           >
             {" "}
             <>
@@ -129,8 +132,11 @@ export default class Search extends Component {
         <Carousel fade className="storeCategoriesCarousel">
           {carouselItems}
         </Carousel>
-        <div className="subcategoryButtonsDiv" id="subcategoryButtonsDiv">
-          {storeCategoriesButtons}
+        <div>
+          <div className="subcategoryButtonsDiv" id="subcategoryButtonsDiv">
+            {storeCategoriesButtons}
+          </div>
+
           {this.props.storeSubCategories ? (
             <ScrollButtons
               elementID={"subcategoryButtonsDiv"}

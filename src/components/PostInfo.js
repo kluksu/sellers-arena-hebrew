@@ -33,6 +33,8 @@ export default class PostInfo extends Component {
           )}
 
           <PostNavBar
+            closeGenericModal={this.props.closeGenericModal}
+            openGenericModal={this.props.openGenericModal}
             post={this.props.post}
             threadID={this.props.threadID}
             addToContacts={this.props.addToContacts}

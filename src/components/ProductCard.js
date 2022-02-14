@@ -330,17 +330,18 @@ class ProductCard extends React.Component {
               <span> {this.props.productName}</span>{" "}
               <span>
                 {" "}
-                <IoStorefrontOutline
-                  style={{ marginLeft: "10px" }}
-                  onClick={(e) => {
-                    if (
-                      this.props.linkAllAround &&
-                      !window.location.href.includes("StorePage")
-                    ) {
-                      window.location.assign(this.props.linkAllAround);
-                    }
-                  }}
-                ></IoStorefrontOutline>
+                {!window.location.href.includes("StorePage") ? (
+                  <IoStorefrontOutline
+                    style={{ marginLeft: "10px" }}
+                    onClick={(e) => {
+                      if (this.props.linkAllAround) {
+                        window.location.assign(this.props.linkAllAround);
+                      }
+                    }}
+                  ></IoStorefrontOutline>
+                ) : (
+                  ""
+                )}
                 <ImEyePlus
                   onClick={(e) => {
                     e.stopPropagation(e);

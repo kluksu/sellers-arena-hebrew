@@ -75,6 +75,8 @@ export default class Feed extends Component {
       if (post.event_type === "item_created") {
         return (
           <NewItemPost
+            closeGenericModal={this.props.closeGenericModal}
+            openGenericModal={this.props.openGenericModal}
             allThreads={this.props.allThreads}
             handleOpenMessage={this.props.handleOpenMessage}
             handleClose={this.props.handleClose}
@@ -87,6 +89,8 @@ export default class Feed extends Component {
       } else if (post.event_type === "account_post") {
         return (
           <Post
+            closeGenericModal={this.props.closeGenericModal}
+            openGenericModal={this.props.openGenericModal}
             allThreads={this.props.allThreads}
             handleOpenMessage={this.props.handleOpenMessage}
             handleClose={this.props.handleClose}
@@ -96,20 +100,19 @@ export default class Feed extends Component {
             post={post}
           ></Post>
         );
+      } else if (post.event_type === "variation_created") {
+        return (
+          <NewVariationPost
+            allThreads={this.props.allThreads}
+            handleOpenMessage={this.props.handleOpenMessage}
+            handleClose={this.props.handleClose}
+            addToContacts={this.props.addToContacts}
+            activeAccount={this.props.activeAccount}
+            accessToken={this.props.accessToken}
+            post={post}
+          ></NewVariationPost>
+        );
       }
-      //    else if (post.event_type === "variation_created") {
-      //     return (
-      //       <NewVariationPost
-      //         allThreads={this.props.allThreads}
-      //         handleOpenMessage={this.props.handleOpenMessage}
-      //         handleClose={this.props.handleClose}
-      //         addToContacts={this.props.addToContacts}
-      //         activeAccount={this.props.activeAccount}
-      //         accessToken={this.props.accessToken}
-      //         post={post}
-      //       ></NewVariationPost>
-      //     );
-      //   }
     });
 
     let allMessages = [];

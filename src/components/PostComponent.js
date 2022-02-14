@@ -57,9 +57,21 @@ export default class PostComponent extends Component {
         },
         config
       )
-      .then((res) => {})
+      .then((res) => {
+        this.props.openGenericModal(
+          this.props.deletePost ? "הפוסט נערך בהצלחה" : "הפוסט עלה בהצלחה"
+        );
+        if (this.props.deletePost) {
+          this.props.deletePost(this.props.post.id).then((res) => {
+            this.props.hidePost(this.props.post.id);
+          });
+        }
+        console.log(res.response);
+      })
       .catch((error) => {
-        this.props.openGernericModal(error);
+        this.props.openGenericModal(
+          "אופס, משהו השתבש, אנא נסה שנית מאוחר יותר"
+        );
       });
   };
   addPictureToPost = (itemOrvariation) => {
@@ -87,16 +99,33 @@ export default class PostComponent extends Component {
     return axios.get(`${domain}/items/`, config);
   };
   onMount = () => {
-    this.getItems()
-      .then((res) => {
-        this.setState({ myItems: res.data.results });
-      })
-      .catch((error) => {});
+    if (!this.props.myItems) {
+      this.getItems()
+        .then((res) => {
+          this.setState({ myItems: res.data.results });
+        })
+        .catch((error) => {});
+    } else {
+      this.setState({ myItems: this.props.myItems });
+    }
   };
   componentDidMount = () => {
+    if (this.props.post) {
+      let text = this.props.post.text;
+      let textArr = text.split("pictures//");
+      let newText = textArr[0].split(`:`);
+      this.setState({ text: newText[1] });
+      let picturesArr = textArr[1].split(",");
+      this.setState({ picturesArr: picturesArr });
+
+      // this.setState({ picturesArr: textArr[1] });
+    }
     this.onMount();
   };
   componentDidUpdate(prevProps, prevState) {
+    if (this.state.myItems !== prevState.myItems && this.props.getStateInfo) {
+      this.props.getStateInfo("myItems", this.state.myItems);
+    }
     if (this.props.activeAccount !== prevProps.activeAccount) {
       this.onMount();
     }
@@ -210,6 +239,7 @@ export default class PostComponent extends Component {
             name="text"
             as="textarea"
             value={this.state.text}
+            maxLength={500}
             placeholder={"ספר לקונים מה שבא לך.."}
           ></Form.Control>
           {/* <div className="formBar"> */}
