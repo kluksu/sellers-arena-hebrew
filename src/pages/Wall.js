@@ -12,6 +12,7 @@ import Loader from "react-loader-spinner";
 import NewVariationPost from "../components/NewVariationPost";
 import DiscountPost from "../components/DiscountPost";
 import PriceDropPost from "../components/PriceDropPost";
+import NewStockPost from "../components/NewStockPost";
 
 export default class Wall extends Component {
   constructor(props) {
@@ -203,6 +204,24 @@ export default class Wall extends Component {
             accessToken={this.props.accessToken}
             post={post}
           ></PriceDropPost>
+        );
+      } else if (post.event_type === "variation_stock_increase") {
+        return (
+          <NewStockPost
+            closeGenericModal={this.props.closeGenericModal}
+            openGenericModal={this.props.openGenericModal}
+            hidePost={this.hidePost}
+            deletePost={this.deletePost}
+            closeGenericModal={this.props.closeGenericModal}
+            openGenericModal={this.props.openGenericModal}
+            allThreads={this.props.allThreads}
+            handleOpenMessage={this.props.handleOpenMessage}
+            handleClose={this.props.handleClose}
+            addToContacts={this.props.addToContacts}
+            activeAccount={this.props.activeAccount}
+            accessToken={this.props.accessToken}
+            post={post}
+          ></NewStockPost>
         );
       }
     });
