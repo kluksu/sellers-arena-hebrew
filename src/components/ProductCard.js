@@ -374,9 +374,10 @@ class ProductCard extends React.Component {
           {/* <p className="FormRejects absoluteCardNotice">
               {this.state.notice}
             </p> */}
-          {console.log(this.props.variation)}
-          {Object.keys(this.props.variation.discounts).length > 1 ||
-          Object.keys(this.props.variation.discounts)[0] != 0 ? (
+          {this.props.variation &&
+          this.props.activeAccount.account_type == 2 &&
+          (Object.keys(this.props.variation.discounts).length > 1 ||
+            Object.keys(this.props.variation.discounts)[0] != 0) ? (
             <SpacielOffer></SpacielOffer>
           ) : (
             ""
