@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import PrecentOff from "./PrecentOff";
 import ScrollButtons from "./ScrollButtons";
+import SpacielOffer from "./SpacielOffer";
 
 export default class PostPhotos extends Component {
   render() {
@@ -14,6 +16,11 @@ export default class PostPhotos extends Component {
                 : this.props.item.image
             }
           ></img>
+          {this.props.discountPrecentage ? (
+            <PrecentOff precent={this.props.discountPrecentage}></PrecentOff>
+          ) : (
+            ""
+          )}
         </div>
 
         <div className="wallProductCardVariationsGallery">

@@ -39,7 +39,7 @@ export default class CardDiscounts extends Component {
             continue;
           }
           discountsArr.push(
-            <span className="borderRight">
+            <span className="discountBox">
               <div>
                 {parseInt(prev) + 1}-{Items} יחידות{" "}
               </div>{" "}
@@ -55,7 +55,7 @@ export default class CardDiscounts extends Component {
         }
 
         discountsArr.push(
-          <span>
+          <span className="discountBox">
             <div>{`>=${parseInt(lastItems) + 1} יחידות`}</div>
             <div>{`${lastPrice.toFixed(2)}₪ ליחידה`}</div>
           </span>

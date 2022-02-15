@@ -68,16 +68,8 @@ export default class extends Component {
           <div className="postHeadline">
             {postHeadline}{" "}
             <img
-              className="spinning"
-              src="https://cdn.pixabay.com/photo/2015/02/13/09/47/finance-634901_960_720.png"
-            ></img>
-            <img
-              className="spinning"
-              src="https://cdn.pixabay.com/photo/2015/02/13/09/47/finance-634901_960_720.png"
-            ></img>
-            <img
-              className="spinning"
-              src="https://cdn.pixabay.com/photo/2015/02/13/09/47/finance-634901_960_720.png"
+              // className="spinning"
+              src="https://cdn.pixabay.com/photo/2017/02/21/12/14/the-sale-2085766_960_720.png"
             ></img>
             &nbsp;
           </div>

@@ -12,6 +12,12 @@ class PriceDropPost extends Component {
   render() {
     let postHeadline = this.props.post.text.split("post")[0];
     postHeadline = postHeadline.split(" ");
+    let discountPrecentage = postHeadline[postHeadline.length - 1];
+    discountPrecentage = discountPrecentage.substring(
+      0,
+      discountPrecentage.length - 1
+    );
+
     postHeadline = `${postHeadline[1]}   הוריד מחיר למוצר`;
     return (
       <div className="post">
@@ -53,6 +59,7 @@ class PriceDropPost extends Component {
           </div>
 
           <WallProductCard
+            discountPrecentage={discountPrecentage}
             closeGenericModal={this.props.closeGenericModal}
             openGenericModal={this.props.openGenericModal}
             allThreads={this.props.allThreads}

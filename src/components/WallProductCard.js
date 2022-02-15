@@ -18,6 +18,7 @@ export default class WallProductCard extends Component {
       mainPicture: "",
       readMore: false,
       threadID: "",
+      fullItem: {},
     };
   }
   getThreadID = (userID) => {
@@ -32,6 +33,25 @@ export default class WallProductCard extends Component {
     });
   };
   componentDidUpdate(prevProps, prevState) {
+    if (
+      this.state.selectedItem !== prevState.selectedItem &&
+      this.props.isVariation === true
+    ) {
+      const authorization = !this.props.accessToken
+        ? null
+        : `Bearer ${this.props.accessToken}`;
+      const config = {
+        headers: { "Content-Type": "application/json", authorization },
+      };
+      axios
+        .get(
+          `${domain}/${"public-items"}/${this.state.selectedItem.item}/`,
+          config
+        )
+        .then((res) => {
+          this.setState({ fullItem: res.data });
+        });
+    }
     if (this.props.allThreads !== prevProps.allThreads) {
       this.getThreadID(this.props.post.account_id);
     }
@@ -61,7 +81,6 @@ export default class WallProductCard extends Component {
         config
       ) ///wait for public variations
       .then((res) => {
-        console.log(res.data);
         this.setState({ selectedItem: res.data });
         axios
           .get(`${domain}/public-accounts/${accountID}/`, config)
@@ -84,7 +103,12 @@ export default class WallProductCard extends Component {
     );
   };
   render() {
-    let item = this.state.selectedItem;
+    let item =
+      this.props.isVariation === true
+        ? this.state.fullItem
+        : this.state.selectedItem; //can be a variation or an item
+    let variation =
+      this.props.isVariation === true ? this.state.selectedItem : null; //can be only an ite
     let variationsPictures =
       item && item.item_variations ? (
         item.item_variations.map((variation) => {
@@ -113,12 +137,30 @@ export default class WallProductCard extends Component {
     //
     // if (this.props.isVariation === true && item.variation) {
     //
+    let discountNumOnly = this.props.discountPrecentage
+      ? this.props.discountPrecentage.slice(
+          0,
+          this.props.discountPrecentage.length - 1
+        )
+      : "";
 
+    let oldPrice = this.props.discountPrecentage
+      ? (variation.cost_per_item * 100) / (100 - discountNumOnly)
+      : "";
+    console.log(item);
     return (
       <>
         <Row className="wallProductCardContainer">
           <Col st xl={6} lg={6} md={12} sm={12} xs={12}>
             <PostPhotos
+              // discounts={
+              //   variation && variation.discounts ? variation.discounts : ""
+              // }
+              discountPrecentage={
+                this.props.discountPrecentage
+                  ? this.props.discountPrecentage
+                  : ""
+              }
               mainPicture={this.state.mainPicture}
               variationsPictures={variationsPictures}
               item={item}
@@ -171,17 +213,6 @@ export default class WallProductCard extends Component {
                 }
               ></AiOutlineMessage>
             </div> */}
-            {this.props.activeAccount &&
-            this.props.activeAccount.account_type == 2 ? (
-              <PostNavBar
-                closeGenericModal={this.props.closeGenericModal}
-                openGenericModal={this.props.openGenericModal}
-                post={this.props.post}
-                threadID={this.state.threadID}
-                addToContacts={this.props.addToContacts}
-                handleOpenMessage={this.props.handleOpenMessage}
-              ></PostNavBar>
-            ) : null}
             <Row>{item.name}</Row>
             <Row>
               {" "}
@@ -225,17 +256,24 @@ export default class WallProductCard extends Component {
                 </>
               ) : null}
             </Row>{" "}
-            <Row>
-              {" "}
-              {item.category ? `קטגוריה : ${item.category}` : null}
-            </Row>{" "}
+            <Row> {item.category ? `קטגוריה : ${item.category}` : ""}</Row>{" "}
             <Row>
               {" "}
               {item.subcategory ? `תת קטגוריה : ${item.subcategory}` : null}
             </Row>{" "}
+            {oldPrice ? (
+              <Row>
+                <span>מחיר לפני הוזלה: </span>
+
+                <span className="oldPrice"> {oldPrice} </span>
+              </Row>
+            ) : (
+              ""
+            )}
             <Row
               style={{
-                height: this.state.readMore === true ? "fit-content" : "70px",
+                height:
+                  this.state.readMore === true ? "fit-content" : "fit-content",
               }}
               id={`PostDescriptionRow${this.props.post.id}`}
               // className="PostDescriptionRow" + this.props.post.id
@@ -244,14 +282,21 @@ export default class WallProductCard extends Component {
               {item.description !== "No Description"
                 ? `תיאור : ${item.description}`
                 : null}
-              {item.cost_per_item ? (
+            </Row>{" "}
+            <Row>
+              מחיר:
+              {variation && variation.cost_per_item ? (
                 <CardDiscounts
-                  variation={item}
-                  price={item.cost_per_item}
+                  variation={variation}
+                  price={variation.cost_per_item}
                 ></CardDiscounts>
               ) : null}
-            </Row>{" "}
-            <Row>{item.batch_size ? `מנה : ${item.batch_size}` : null}</Row>
+            </Row>
+            <Row>
+              {variation && variation.batch_size
+                ? `מנה : ${variation.batch_size}`
+                : null}
+            </Row>
             {/* <Row> */}
             {/* {item.cost_per_item ? ` מחיר בש"ח: ${item.cost_per_item}` : null} */}
             {/* </Row> */}
@@ -264,6 +309,17 @@ export default class WallProductCard extends Component {
               קרא עוד...
             </Row>
           </Col>
+          {this.props.activeAccount &&
+          this.props.activeAccount.account_type == 2 ? (
+            <PostNavBar
+              closeGenericModal={this.props.closeGenericModal}
+              openGenericModal={this.props.openGenericModal}
+              post={this.props.post}
+              threadID={this.state.threadID}
+              addToContacts={this.props.addToContacts}
+              handleOpenMessage={this.props.handleOpenMessage}
+            ></PostNavBar>
+          ) : null}
         </Row>
       </>
     );

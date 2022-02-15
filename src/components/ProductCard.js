@@ -10,6 +10,7 @@ import StorePage from "../pages/StorePage";
 import CardDiscounts from "./CardDiscounts";
 import ProductModal from "./ProductModal";
 import QuantitySelector from "./QuantitySelector";
+import SpacielOffer from "./SpacielOffer";
 
 class ProductCard extends React.Component {
   constructor(props) {
@@ -317,11 +318,11 @@ class ProductCard extends React.Component {
             />
           </div>
           <CardDiscounts
-            onClick={(e) => {
-              if (this.props.linkAllAround) {
-                window.location.assign(this.props.linkAllAround);
-              }
-            }}
+            // onClick={(e) => {
+            //   if (this.props.linkAllAround) {
+            //     window.location.assign(this.props.linkAllAround);
+            //   }
+            // }}
             variation={this.props.variation}
             price={this.props.price}
           ></CardDiscounts>
@@ -373,6 +374,13 @@ class ProductCard extends React.Component {
           {/* <p className="FormRejects absoluteCardNotice">
               {this.state.notice}
             </p> */}
+          {console.log(this.props.variation)}
+          {Object.keys(this.props.variation.discounts).length > 1 ||
+          Object.keys(this.props.variation.discounts)[0] != 0 ? (
+            <SpacielOffer></SpacielOffer>
+          ) : (
+            ""
+          )}
         </div>
         // </div>
       );
