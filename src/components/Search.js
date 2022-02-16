@@ -132,7 +132,7 @@ export default class Search extends Component {
         <Carousel fade className="storeCategoriesCarousel">
           {carouselItems}
         </Carousel>
-        <div>
+        <div className="subcategoryButtonsDiv">
           <div className="subcategoryButtonsDiv" id="subcategoryButtonsDiv">
             {storeCategoriesButtons}
           </div>

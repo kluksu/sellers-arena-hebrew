@@ -158,10 +158,10 @@ class AddMyItems extends React.Component {
           getSearchText={this.getSearchText}
         ></Search>
 
-        <div className="homePage ">
-          <Row className="upperProductEdit">{showCategories}</Row>
-          <Row>{showItems}</Row>
-        </div>
+        {/* <div className="homePage "> */}
+        <Row className="upperProductEdit">{showCategories}</Row>
+        <Row className="productCardsRow">{showItems}</Row>
+        {/* </div> */}
       </div>
     );
   }

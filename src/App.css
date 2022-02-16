@@ -80,7 +80,7 @@ body {
 .oldPrice {
   text-decoration: line-through;
   text-decoration-color: rgb(255, 54, 54);
-  color: rgb(126, 125, 125);
+  /* color: rgb(126, 125, 125); */
 }
 .precentOff {
   background-color: red;
@@ -2204,6 +2204,7 @@ input {
 }
 .post .productCardDiscounts {
   margin-top: 4px;
+  font-size: 20px;
   flex-wrap: wrap;
   justify-content: center !important;
 }
@@ -2425,7 +2426,7 @@ input {
   padding: 0px !important;
 }
 .avatarDiv .btn {
-  min-width: 243px;
+  min-width: 196px;
   margin-left: 60px;
   margin-right: 60px;
   margin-bottom: 10px;

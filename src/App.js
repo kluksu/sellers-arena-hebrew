@@ -1166,6 +1166,7 @@ class App extends React.Component {
               MyShoppingCarts={this.state.MyShoppingCarts}
               accessToken={this.state.accessToken}
               activeAccount={this.state.activeAccount}
+              screenWidth={this.state.screenWidth}
             ></StorePageLoadAll>
           </Route>
           {/* <Route exact path="/StorePage/:id">
