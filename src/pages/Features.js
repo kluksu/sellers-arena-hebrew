@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import Squre from "../components/Squre";
-import { isInViewport } from "../components/utils";
+import { isInViewport, logo } from "../components/utils";
 
 export default class Features extends Component {
   constructor(props) {
@@ -100,9 +100,15 @@ export default class Features extends Component {
       <div className="featuresPageContainer">
         <div className={"featuresPageLower"}>
           <Row>
-            <h1 className={" animate__animated animate__fadeInRight "}>
+            <div
+              //  className="centered"
+              style={{ margin: "auto", maxWidth: "90%" }}
+            >
+              {logo}
+            </div>
+            {/* <h1 className={" animate__animated animate__fadeInRight "}>
               מה אנחנו מציעים?
-            </h1>
+            </h1> */}
           </Row>
           <Row>
             {/* <img
@@ -121,7 +127,7 @@ export default class Features extends Component {
             ></Squre>
             <Squre
               className={
-                " animate__animated animate__fadeInDown animate__delay-2s"
+                " animate__animated animate__fadeInDown animate__delay-1s"
               }
               //   background="lightPink"
               //   width="320px"
