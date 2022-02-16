@@ -32,10 +32,12 @@ export default class CardDiscounts extends Component {
       let discounts = this.props.variation.discounts;
       discounts["0"] = 0;
       if (Object.keys(discounts).length > 1) {
-        for (const [Items, value] of Object.entries(discounts)) {
+        for (let [Items, value] of Object.entries(discounts)) {
+          Items = parseFloat(Items);
+          value = parseFloat(value);
           discountClass = "productCardDiscounts";
           if (Items == 0) {
-            price = this.props.price * (1 - value).toFixed(2);
+            price = parseInt(this.props.price) * (1 - value).toFixed(2);
             continue;
           }
           discountsArr.push(
@@ -63,9 +65,11 @@ export default class CardDiscounts extends Component {
       } else {
         discountsArr.push(
           <div>
-            {` ${this.props.price} ${
-              onlyNumbers.test(this.props.price) ? "₪ ליחידה" : ""
-            }`}{" "}
+            {` ${this.props.price} 
+            ${
+              "" // onlyNumbers.test(this.props.price) ? "₪ ליחידה" : ""
+            }
+              ₪`}{" "}
           </div>
         );
       }

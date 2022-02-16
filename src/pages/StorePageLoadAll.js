@@ -808,6 +808,7 @@ class StorePageLoadAll extends React.Component {
     if (
       isCartIncludes === true &&
       !this.state.activeCart &&
+      this.props.activeAccount &&
       this.props.activeAccount.account_type == 2
     ) {
       return <FullPageLoader></FullPageLoader>;

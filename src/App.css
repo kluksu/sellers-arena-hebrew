@@ -150,18 +150,25 @@ body {
 }
 .post {
   height: fit-content;
+  background-color: white;
+}
+.postDiscount .discountBox {
+  font-size: 16px;
+  border-color: white;
 }
 .postDiscount {
   justify-content: center;
   display: flex;
   width: 100%;
   flex-wrap: wrap;
+  border-radius: 10px 10px 0px 0px;
 
   /* height: 100px; */
   align-items: center;
   /* background-color: red; */
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
   min-height: 77px;
+  /* font-size: 24px; */
 
   /* border: 10px solid black; */
   /* border-radius: 10px; */
@@ -169,24 +176,24 @@ body {
   animation: animateBg 5s linear infinite;
   background-image: linear-gradient(
     120deg,
-    #fcd9d9,
-    #fcd9d9,
-    #fcd9d9,
-    #fcd9d9,
-    #fcd9d9,
-    #fcd9d9,
-    #fcd9d9,
-    #fcd9d9,
-    #fcd9d9,
-    #fcd9d9,
-    rgb(250, 237, 237),
-    #fcd9d9,
-    #fcd9d9,
-    #fcd9d9,
-    #fcd9d9,
-    #fcd9d9,
-    #fcd9d9,
-    #fcd9d9
+    #26acff,
+    #26acff,
+    #26acff,
+    #26acff,
+    #26acff,
+    #26acff,
+    #26acff,
+    #26acff,
+    #26acff,
+    #26acff,
+    rgb(190, 206, 250),
+    #26acff,
+    #26acff,
+    #26acff,
+    #26acff,
+    #26acff,
+    #26acff,
+    #26acff
   );
   background-size: 600% 100%;
 }
@@ -560,11 +567,13 @@ aside.emoji-picker-react:hover {
   color: white;
   position: sticky;
   top: 0;
+  border-radius: 0px 0px 10px 10px;
+
   /* margin-right: -17px; */
   padding: 4px;
   display: flex;
   justify-content: space-around;
-  border-radius: 5px;
+  /* border-radius: 5px; */
 }
 .postNavBar svg {
   transition: transform 0.2s;
@@ -809,6 +818,8 @@ aside.emoji-picker-react:hover {
   font-family: "Montserrat", sans-serif;
   font-size: 18px;
   font-weight: 600;
+  padding-top: 25px;
+
   /* overflow: hidden; */
 }
 .mikra {
@@ -2120,8 +2131,9 @@ input {
   padding: 5px; */
 }
 .myNavBar img {
-  height: 80px;
+  height: 37px;
 }
+
 .searchPage img {
   height: 100px;
 }
@@ -2421,6 +2433,10 @@ input {
   left: 14px;
   margin-top: -2px;
   border-radius: 10px;
+}
+.postGalleryPic:hover {
+  cursor: zoom-in;
+  opacity: 0.8;
 }
 .searchPageContainer {
   padding: 0px !important;

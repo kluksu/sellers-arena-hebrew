@@ -226,7 +226,7 @@ export default class WallProductCard extends Component {
                       this.props.openGenericModal(
                         "",
                         <ProductModal
-                          selectedVariation={item.item_variations[0]}
+                          selectedVariation={variation}
                           // cartItems={this.props.cartItems}
                           // accessToken={this.props.accessToken}
                           // activeCart={this.props.activeCart}
@@ -265,7 +265,10 @@ export default class WallProductCard extends Component {
               <Row>
                 <span>מחיר לפני הוזלה: </span>
 
-                <span className="oldPrice"> {oldPrice} </span>
+                <span className="oldPrice">
+                  {" "}
+                  {Math.round(oldPrice * 10) / 10} ש"ח
+                </span>
               </Row>
             ) : (
               ""

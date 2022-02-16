@@ -78,6 +78,7 @@ export default class QuantityDiscount extends Component {
                   as="select"
                   type="number"
                   // placeholder="0%"
+                  min={0}
                   name="value"
                   value={this.state.value}
                 >

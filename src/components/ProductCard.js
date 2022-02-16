@@ -375,10 +375,9 @@ class ProductCard extends React.Component {
               {this.state.notice}
             </p> */}
           {this.props.variation &&
-          this.props.activeAccount &&
-          this.props.activeAccount.account_type == 2 &&
-          (Object.keys(this.props.variation.discounts).length > 1 ||
-            Object.keys(this.props.variation.discounts)[0] != 0) ? (
+          // this.props.activeAccount &&
+          // this.props.activeAccount.account_type == 2 &&
+          Object.keys(this.props.variation.discounts).length > 1 ? (
             <SpacielOffer></SpacielOffer>
           ) : (
             ""
