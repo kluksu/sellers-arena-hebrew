@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Container, Form, Button } from "react-bootstrap";
+import ReadAllBox from "../components/ReadAllBox";
 import {
   domain,
   getInfo,
@@ -27,8 +28,22 @@ export default class Register extends Component {
       emailErrorMessege: "",
       phone_numberErrorMessege: "",
       registerData: "",
+      isTermsCheckboxDisabled: true,
+      IsTermsChecked: false,
+      termsValidate: true, /////MIGHT CAUSE A BUG
     };
   }
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.type === "checkbox" ? target.checked : target.value;
+    const name = target.name;
+    this.setState({
+      [name]: value,
+    });
+  }
+  activetTermsCheckbox = () => {
+    this.setState({ isTermsCheckboxDisabled: false });
+  };
   componentDidUpdate(prvProps, prevState) {
     if (
       (this.state.repetPasswordValidate !== prevState.repetPasswordValidate ||
@@ -39,7 +54,8 @@ export default class Register extends Component {
       this.state.password.length > 0 &&
       this.state.passwordValidate === true &&
       this.state.phoneValidate === true &&
-      this.state.emailValidate === true
+      this.state.emailValidate === true &&
+      this.state.termsValidate === true
     ) {
       this.setState({ allValidationStates: true });
     }
@@ -55,7 +71,9 @@ export default class Register extends Component {
         if (data.id) {
           this.props.openGenericModal(
             "הצלחה",
-            " 'הודעת אימות נשלחה למייל שלך, נא אשר את הרשמתך ולאחר מכן התחבר לאתר דרך לחצן 'התחבר' בצד שמאל למעלה. במידה ואינך רואה את הודעת האימות חפש בתקיית דואר הזבל. אם ישנן בעיות נוספות צור איתנו קשר דרך עמוד 'צור קשר"
+            " 'הודעת אימות נשלחה למייל שלך, נא אשר את הרשמתך ולאחר מכן התחבר לאתר דרך לחצן 'התחבר' בצד שמאל למעלה. במידה ואינך רואה את הודעת האימות חפש בתקיית דואר הזבל. אם ישנן בעיות נוספות צור איתנו קשר דרך עמוד 'צור קשר",
+            <Button onClick={this.props.closeGenericModal}> סגור</Button>,
+            "prevent"
           );
         }
         this.setState({ registerData: data });
@@ -70,10 +88,12 @@ export default class Register extends Component {
           email: "",
           repetPassword: "",
           phone: "",
+          IsTermsChecked: "",
           repetPasswordValidate: true, /////MIGHT CAUSE A BUG
           passwordValidate: true, /////MIGHT CAUSE A BUG
           phoneValidate: true, /////MIGHT CAUSE A BUG
           emailValidate: true, /////MIGHT CAUSE A BUG
+          termsValidate: true, /////MIGHT CAUSE A BUG
         });
       });
     }
@@ -114,12 +134,17 @@ export default class Register extends Component {
     } else {
       await this.setState({ phoneValidate: false });
     }
+    if (this.state.IsTermsChecked === false) {
+      this.setState({ termsValidate: false });
+    }
+
     if (
       this.state.repetPasswordValidate === true &&
       this.state.password.length > 0 &&
       this.state.passwordValidate === true &&
       this.state.phoneValidate === true &&
-      this.state.emailValidate === true
+      this.state.emailValidate === true &&
+      this.state.IsTermsChecked === true
     ) {
       await this.setState({ allValidationStates: true });
     }
@@ -170,6 +195,15 @@ export default class Register extends Component {
         ""
       ) : (
         <p className="FormRejects">10 ספרות</p>
+      );
+    const termsNote =
+      this.state.termsValidate === true ? (
+        ""
+      ) : (
+        <p className="FormRejects">
+          חובה לאשר את תנאי השימוש (ניתן לסמן את התיבה רק לאחר גלילת התנאים עד
+          הסוף)
+        </p>
       );
     const success = this.state.registerData.id ? (
       <p onClick={takeMeHome()}>
@@ -247,6 +281,35 @@ export default class Register extends Component {
           </div>
         </Form>
         <p className="FormRejects">{this.state.errorMessege}</p>
+        <div>
+          נא אשר את{" "}
+          <a
+            onClick={() =>
+              this.props.openGenericModal(
+                "עליך לקרוא את כל התנאים ורק אז לאשר או לדחות ",
+                <ReadAllBox
+                  runFunction={this.activetTermsCheckbox}
+                ></ReadAllBox>
+              )
+            }
+            href={window.location.href}
+          >
+            תנאי השימוש{" "}
+          </a>
+          <div>
+            <input
+              onChange={(e) => this.handleInputChange(e)}
+              disabled={this.state.isTermsCheckboxDisabled}
+              // checked={false}
+              type="checkbox"
+              // value="approved"
+              id="horns"
+              name="IsTermsChecked"
+            ></input>
+            <label for="IsTermsChecked">אני מאשר את תנאי השימוש של האתר</label>
+            {termsNote}
+          </div>
+        </div>
         <Button onClick={this.authinticateForm} type="button">
           {" "}
           שלח

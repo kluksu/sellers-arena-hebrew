@@ -507,7 +507,9 @@ class StorePageLoadAll extends React.Component {
     //     this.setState({ showList: showList });
     //   }
     // }
-
+    if (this.props.activeAccount !== prevProps.activeAccount) {
+      this.getContactsList();
+    }
     if (this.props.match.params.id !== prevProps.match.params.id) {
       this.getContactsList();
     }
@@ -517,7 +519,6 @@ class StorePageLoadAll extends React.Component {
       this.state.activeCart.id !== prevState.activeCart.id &&
       prevState.activeCart.buyer_account !== 0
     ) {
-      console.log(prevState.activeCart);
       this.setState({ cartItems: {} });
 
       // this.state.activeCart.all_item_variations.forEach((variation) => {

@@ -27,7 +27,6 @@ export default class extends Component {
   };
   componentDidMount() {
     this.getVariation().then((res) => {
-      console.log(res.data);
       this.setState({ variation: res.data });
     });
   }

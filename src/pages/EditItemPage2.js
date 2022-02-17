@@ -456,7 +456,8 @@ class EditItemPage2 extends React.Component {
               <Modal.Title>אזהרה!</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              אתה עומד למחוק את מוצר זה, <br></br>
+              אתה עומד למחוק את מוצר זה (ואת כל הדגמים של המוצר), פעולה זו לא
+              ניתנת לביטול <br></br>
               <br></br>
               מה תרצה לעשות?
             </Modal.Body>

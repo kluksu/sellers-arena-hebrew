@@ -17,7 +17,7 @@ export default class LoginModal extends Component {
   };
   render() {
     const generalError = this.props.loginData.detail ? (
-      <p className="FormRejects">{`אנא וודא ששם המשתמש והסיסמא נכונים`}</p>
+      <p className="FormRejects">{`אנא וודא ששם המשתמש והסיסמא נכונים, במידה והמשתמש הוא משתמש חדש יש לוודא שלינק אישור החשבון שנשלח מהכתובת usasupplierz@gmail.com נלחץ, אם אינך מוצא את המייל חפש בתקיית דואר הזבל`}</p>
     ) : (
       ""
     );

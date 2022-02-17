@@ -65,7 +65,7 @@ export default class NewItemPost extends Component {
 
           <div className="postHeadline">
             {postHeadline}{" "}
-            <img src="https://cdn.pixabay.com/photo/2012/04/24/16/22/check-40319_960_720.png"></img>
+            <img src="https://cdn.pixabay.com/photo/2016/07/05/01/07/new-icon-1497910_960_720.png"></img>
             &nbsp;
           </div>
           {/* item={fullItem.item}

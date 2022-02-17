@@ -66,7 +66,6 @@ export default class PostComponent extends Component {
             this.props.hidePost(this.props.post.id);
           });
         }
-        console.log(res.response);
       })
       .catch((error) => {
         this.props.openGenericModal(

@@ -13,6 +13,7 @@ import NewVariationPost from "../components/NewVariationPost";
 import DiscountPost from "../components/DiscountPost";
 import PriceDropPost from "../components/PriceDropPost";
 import NewStockPost from "../components/NewStockPost";
+import ContactCard from "../components/ContactCard";
 
 export default class Wall extends Component {
   constructor(props) {
@@ -22,8 +23,27 @@ export default class Wall extends Component {
       posts: [],
       next: "",
       myItems: [],
+      contactsObj: {},
     };
   }
+  createContactsObj = () => {
+    if (this.props.activeAccount) {
+      // this.props.getContactsMesssageBoard();
+      if (this.props.myContacts) {
+        console.log("!!!!!!!!!!!!");
+        this.setState((prevState) => {
+          let contactsObj = Object.assign({}, prevState.contactsObj);
+          this.props.myContacts.forEach((contact) => {
+            console.log(contact);
+
+            // creating copy of state variable jasper
+            contactsObj[contact.account_contact.id] = contact; // update the name property, assign a new value
+            this.setState({ contactsObj: contactsObj });
+          });
+        });
+      }
+    }
+  };
   hidePost = (postID) => {
     let posts = this.state.posts;
     posts.forEach((post, i) => {
@@ -87,12 +107,15 @@ export default class Wall extends Component {
     }
     this.setState({ allMessages: this.props.allMessages });
     this.getWallEvents();
+    this.createContactsObj();
   };
   componentDidMount() {
     this.onMount();
   }
   componentDidUpdate(prevProps, prevState) {
     if (this.props.myContacts !== prevProps.myContacts) {
+      this.createContactsObj();
+
       if (this.props.activeAccount) {
         // this.props.getContactsMesssageBoard();
       }
@@ -111,6 +134,17 @@ export default class Wall extends Component {
     return axios.get(`${domain}/public-items/${itemID}/`, config);
   };
   render() {
+    let youMayLikeCards = this.props.accountsYouMayLike.map((account) => {
+      console.log(this.state.contactsObj[account.id]);
+      if (this.state.contactsObj[account.id] === undefined) {
+        return (
+          <ContactCard
+            postAndGetContacts={this.props.postAndGetContacts}
+            account={account}
+          ></ContactCard>
+        );
+      }
+    });
     let posts = this.state.posts.map((post) => {
       if (post.event_type === "item_created") {
         this.getItem(post.related_id)
@@ -232,29 +266,44 @@ export default class Wall extends Component {
 
     {
       return (
-        <div className="wall">
-          {/* <Row> */}{" "}
-          <PostComponent
-            getStateInfo={this.getStateInfo}
-            closeGenericModal={this.props.closeGenericModal}
-            openGenericModal={this.props.openGenericModal}
-            activeAccount={this.props.activeAccount}
-            accessToken={this.props.accessToken}
-          ></PostComponent>
-          <div className="wallMessages">{allMessages}</div>
-          <InfiniteScroll
-            // style={{ overFlowX: "visible" }}
-            // className="wall"
-            dataLength={posts.length}
-            next={() => this.getWallEvents()}
-            hasMore={this.state.next !== null ? true : false}
-            loader={Loader}
-            endMessage={"אין עוד תוצאות"}
-          >
-            {posts}
-          </InfiniteScroll>{" "}
-          {/* </Row> */}
-        </div>
+        <Row>
+          <Col xl={3} className="contactsCardsCol">
+            <div className="contactsCardsRow">
+              <div
+                style={{ height: "60px", padding: "30px", fontSize: "20px" }}
+              >
+                ספקים בשבילך
+              </div>{" "}
+              {youMayLikeCards}
+            </div>
+          </Col>
+          <Col xl={6}>
+            <div className="wall">
+              {/* <Row> */}{" "}
+              <PostComponent
+                getStateInfo={this.getStateInfo}
+                closeGenericModal={this.props.closeGenericModal}
+                openGenericModal={this.props.openGenericModal}
+                activeAccount={this.props.activeAccount}
+                accessToken={this.props.accessToken}
+              ></PostComponent>
+              <div className="wallMessages">{allMessages}</div>
+              <InfiniteScroll
+                // style={{ overFlowX: "visible" }}
+                // className="wall"
+                dataLength={posts.length}
+                next={() => this.getWallEvents()}
+                hasMore={this.state.next !== null ? true : false}
+                loader={Loader}
+                endMessage={"אין עוד תוצאות"}
+              >
+                {posts}
+              </InfiniteScroll>{" "}
+              {/* </Row> */}
+            </div>
+          </Col>
+          <Col xl={3}></Col>
+        </Row>
       );
     }
   }

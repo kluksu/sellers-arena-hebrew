@@ -87,6 +87,7 @@ class App extends React.Component {
       threadTextRespons: "",
       LoaderVisibilty: "",
       myContacts: [],
+      conatctsObj: {},
       messagesWasReadObj: {},
       activeCart: {},
       screenWidth: "",
@@ -100,9 +101,30 @@ class App extends React.Component {
       preventModalDefult: false,
       allMessages: [],
       myUsers: [],
+      accountsYouMayLike: [],
     };
   }
-
+  getMatchingAccounts = () => {
+    const authorization = !this.state.accessToken
+      ? null
+      : `Bearer ${this.state.accessToken}`;
+    const config = {
+      headers: { "Content-Type": "application/json", authorization },
+    };
+    let accountType =
+      this.state.activeAccount && this.state.activeAccount.account_type == 3
+        ? 2
+        : this.state.activeAccount.account_type == 2
+        ? 3
+        : null;
+    if (accountType !== null) {
+      return axios
+        .get(`${domain}/public-accounts/?account_type=${accountType}`, config)
+        .then((res) => {
+          this.setState({ accountsYouMayLike: res.data.results });
+        });
+    }
+  };
   createPermDiscount = (discountAccount, discountRate) => {
     const authorization = !this.state.accessToken
       ? null
@@ -163,7 +185,7 @@ class App extends React.Component {
   };
   getContactsMesssageBoard = () => {
     let allMessages = [];
-    this.state.myContacts.results.forEach((contact) => {
+    this.state.myContacts.forEach((contact) => {
       this.getCurrentstore(contact.account_contact.id).then((res) => {
         allMessages.push(res.data);
       });
@@ -390,7 +412,7 @@ class App extends React.Component {
 
       this.getContacts()
         .then((res) => {
-          this.setState({ myContacts: res.data });
+          this.setState({ myContacts: res.data.results });
 
           this.setState({ LoaderVisibilty: "none" });
         })
@@ -808,6 +830,9 @@ class App extends React.Component {
     }, 8600000);
   };
   componentDidUpdate(prevProps, prevState) {
+    if (this.state.myContacts !== prevState.myContacts) {
+      console.log(this.state.myContacts);
+    }
     if (this.state.accessToken !== prevState.accessToken) {
       this.keepLoggedIn();
     }
@@ -825,10 +850,11 @@ class App extends React.Component {
     if (this.state.activeAccount) {
       if (this.state.activeAccount !== prevState.activeAccount) {
         this.getMe();
-
+        this.getMatchingAccounts();
         this.getThreadsAndMarkUnRead();
         this.getContacts().then((res) => {
-          this.setState({ myContacts: res.data });
+          console.log("!!!!!!!!");
+          this.setState({ myContacts: res.data.results });
         });
         this.getAllOrders();
         this.getMyUsers();
@@ -1036,6 +1062,7 @@ class App extends React.Component {
             <Register
               closeGenericModal={this.closeGenericModal}
               openGenericModal={this.openGenericModal}
+              isGenericModalOpen={this.state.isGenericModalOpen}
             ></Register>
           </Route>
           {/* <Route exact path="/login">
@@ -1056,10 +1083,13 @@ class App extends React.Component {
           </Route>
           <Route exact path="/wall">
             <Wall
+              myContacts={this.state.myContacts}
+              accountsYouMayLike={this.state.accountsYouMayLike}
               allThreads={this.state.allThreads}
               handleOpenMessage={this.handleOpenMessage}
               handleClose={this.handleClose}
               addToContacts={this.addToContacts}
+              postAndGetContacts={this.postAndGetContacts}
               closeGenericModal={this.closeGenericModal}
               openGenericModal={this.openGenericModal}
               allMessages={this.state.allMessages}
@@ -1071,10 +1101,13 @@ class App extends React.Component {
           </Route>{" "}
           <Route exact path="/Feed">
             <Feed
+              myContacts={this.state.myContacts}
+              accountsYouMayLike={this.state.accountsYouMayLike}
               allThreads={this.state.allThreads}
               handleOpenMessage={this.handleOpenMessage}
               handleClose={this.handleClose}
               addToContacts={this.addToContacts}
+              postAndGetContacts={this.postAndGetContacts}
               closeGenericModal={this.closeGenericModal}
               openGenericModal={this.openGenericModal}
               allMessages={this.state.allMessages}

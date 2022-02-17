@@ -134,8 +134,8 @@ class AllOrders extends Component {
     let totalSumBefore = 0;
     let totalSumAfter = 0;
     let contactsArr = [];
-    if (this.props.myContacts && this.props.myContacts.results) {
-      this.props.myContacts.results.forEach((contact) => {
+    if (this.props.myContacts) {
+      this.props.myContacts.forEach((contact) => {
         contactsArr.push(
           <option value={contact.account_contact.id}>
             {contact.account_contact.name}

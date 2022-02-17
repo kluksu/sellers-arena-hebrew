@@ -147,7 +147,7 @@ export default class WallProductCard extends Component {
     let oldPrice = this.props.discountPrecentage
       ? (variation.cost_per_item * 100) / (100 - discountNumOnly)
       : "";
-    console.log(item);
+
     return (
       <>
         <Row className="wallProductCardContainer">

@@ -19,7 +19,7 @@ export default class PostInfo extends Component {
           <img
             className="postGalleryPic"
             onClick={() =>
-              this.props.openGenericModal("", <img src={picture}></img>)
+              this.props.openGenericModal(<img src={picture}></img>)
             }
             src={picture}
           ></img>
@@ -41,15 +41,19 @@ export default class PostInfo extends Component {
           ) : (
             ""
           )}
-
-          <PostNavBar
-            closeGenericModal={this.props.closeGenericModal}
-            openGenericModal={this.props.openGenericModal}
-            post={this.props.post}
-            threadID={this.props.threadID}
-            addToContacts={this.props.addToContacts}
-            handleOpenMessage={this.props.handleOpenMessage}
-          ></PostNavBar>
+          {this.props.activeAccount &&
+          this.props.activeAccount.account_type == 2 ? (
+            <PostNavBar
+              closeGenericModal={this.props.closeGenericModal}
+              openGenericModal={this.props.openGenericModal}
+              post={this.props.post}
+              threadID={this.props.threadID}
+              addToContacts={this.props.addToContacts}
+              handleOpenMessage={this.props.handleOpenMessage}
+            ></PostNavBar>
+          ) : (
+            ""
+          )}
         </div>{" "}
       </>
     );
