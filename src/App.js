@@ -1083,6 +1083,7 @@ class App extends React.Component {
           </Route>
           <Route exact path="/wall">
             <Wall
+              screenWidth={this.state.screenWidth}
               myContacts={this.state.myContacts}
               accountsYouMayLike={this.state.accountsYouMayLike}
               allThreads={this.state.allThreads}
@@ -1101,6 +1102,7 @@ class App extends React.Component {
           </Route>{" "}
           <Route exact path="/Feed">
             <Feed
+              screenWidth={this.state.screenWidth}
               myContacts={this.state.myContacts}
               accountsYouMayLike={this.state.accountsYouMayLike}
               allThreads={this.state.allThreads}

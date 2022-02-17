@@ -221,7 +221,7 @@ export default class Feed extends Component {
               >
                 ספקים בשבילך
               </div>{" "}
-              {youMayLikeCards}
+              {this.props.screenWidth > 1200 ? youMayLikeCards : ""}
             </div>
           </Col>
           <Col xl={6}>
