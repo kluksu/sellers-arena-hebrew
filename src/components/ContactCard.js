@@ -46,21 +46,22 @@ export default class ContactCard extends Component {
           ) : (
             logo
           )}
-          <div> {this.props.account.name}</div>
-
-          <div>קטגוריה: {this.props.account.category}</div>
-          <div>{this.props.account.about}</div>
-          <Button
-            disabled={this.state.isButtonDisabled}
-            onClick={(e) => {
-              e.stopPropagation(e);
-              this.props.postAndGetContacts(this.props.account.id);
-              this.setState({ isButtonDisabled: true });
-            }}
-          >
-            הוסף לאנשי קשר
-          </Button>
         </div>
+
+        <div> {this.props.account.name}</div>
+
+        <div>קטגוריה: {this.props.account.category}</div>
+        <div>{this.props.account.about}</div>
+        <Button
+          disabled={this.state.isButtonDisabled}
+          onClick={(e) => {
+            e.stopPropagation(e);
+            this.props.postAndGetContacts(this.props.account.id);
+            this.setState({ isButtonDisabled: true });
+          }}
+        >
+          הוסף לאנשי קשר
+        </Button>
       </div>
     );
   }

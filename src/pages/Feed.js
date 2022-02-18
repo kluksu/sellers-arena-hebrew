@@ -14,6 +14,7 @@ import DiscountPost from "../components/DiscountPost";
 import PriceDropPost from "../components/PriceDropPost";
 import NewStockPost from "../components/NewStockPost";
 import ContactCard from "../components/ContactCard";
+import HorizontalScrollBox from "../components/HorizontalScrollBox";
 
 export default class Feed extends Component {
   constructor(props) {
@@ -108,100 +109,125 @@ export default class Feed extends Component {
       }
     });
 
-    let posts = this.state.posts.map((post) => {
+    let posts = this.state.posts.map((post, i) => {
+      let horizontalScrollBox =
+        i % 5 == 0 && this.props.screenWidth < 768 ? (
+          <HorizontalScrollBox content={youMayLikeCards}></HorizontalScrollBox>
+        ) : (
+          ""
+        );
+
       if (post.event_type === "item_created") {
         return (
-          <NewItemPost
-            closeGenericModal={this.props.closeGenericModal}
-            openGenericModal={this.props.openGenericModal}
-            allThreads={this.props.allThreads}
-            handleOpenMessage={this.props.handleOpenMessage}
-            handleClose={this.props.handleClose}
-            addToContacts={this.props.addToContacts}
-            activeAccount={this.props.activeAccount}
-            accessToken={this.props.accessToken}
-            post={post}
-          ></NewItemPost>
+          <>
+            <NewItemPost
+              closeGenericModal={this.props.closeGenericModal}
+              openGenericModal={this.props.openGenericModal}
+              allThreads={this.props.allThreads}
+              handleOpenMessage={this.props.handleOpenMessage}
+              handleClose={this.props.handleClose}
+              addToContacts={this.props.addToContacts}
+              activeAccount={this.props.activeAccount}
+              accessToken={this.props.accessToken}
+              post={post}
+            ></NewItemPost>
+            {horizontalScrollBox}
+          </>
         );
       } else if (post.event_type === "account_post") {
         return (
-          <Post
-            closeGenericModal={this.props.closeGenericModal}
-            openGenericModal={this.props.openGenericModal}
-            allThreads={this.props.allThreads}
-            handleOpenMessage={this.props.handleOpenMessage}
-            handleClose={this.props.handleClose}
-            addToContacts={this.props.addToContacts}
-            activeAccount={this.props.activeAccount}
-            accessToken={this.props.accessToken}
-            post={post}
-          ></Post>
+          <>
+            <Post
+              closeGenericModal={this.props.closeGenericModal}
+              openGenericModal={this.props.openGenericModal}
+              allThreads={this.props.allThreads}
+              handleOpenMessage={this.props.handleOpenMessage}
+              handleClose={this.props.handleClose}
+              addToContacts={this.props.addToContacts}
+              activeAccount={this.props.activeAccount}
+              accessToken={this.props.accessToken}
+              post={post}
+            ></Post>
+            {horizontalScrollBox}
+          </>
         );
       } else if (post.event_type === "variation_created") {
         return (
-          <NewVariationPost
-            allThreads={this.props.allThreads}
-            handleOpenMessage={this.props.handleOpenMessage}
-            handleClose={this.props.handleClose}
-            addToContacts={this.props.addToContacts}
-            activeAccount={this.props.activeAccount}
-            accessToken={this.props.accessToken}
-            post={post}
-          ></NewVariationPost>
+          <>
+            <NewVariationPost
+              allThreads={this.props.allThreads}
+              handleOpenMessage={this.props.handleOpenMessage}
+              handleClose={this.props.handleClose}
+              addToContacts={this.props.addToContacts}
+              activeAccount={this.props.activeAccount}
+              accessToken={this.props.accessToken}
+              post={post}
+            ></NewVariationPost>
+            {horizontalScrollBox}
+          </>
         );
       } else if (post.event_type === "variation_public_discount_changed") {
         return (
-          <DiscountPost
-            closeGenericModal={this.props.closeGenericModal}
-            openGenericModal={this.props.openGenericModal}
-            hidePost={this.hidePost}
-            deletePost={this.deletePost}
-            closeGenericModal={this.props.closeGenericModal}
-            openGenericModal={this.props.openGenericModal}
-            allThreads={this.props.allThreads}
-            handleOpenMessage={this.props.handleOpenMessage}
-            handleClose={this.props.handleClose}
-            addToContacts={this.props.addToContacts}
-            activeAccount={this.props.activeAccount}
-            accessToken={this.props.accessToken}
-            post={post}
-          ></DiscountPost>
+          <>
+            <DiscountPost
+              closeGenericModal={this.props.closeGenericModal}
+              openGenericModal={this.props.openGenericModal}
+              hidePost={this.hidePost}
+              deletePost={this.deletePost}
+              closeGenericModal={this.props.closeGenericModal}
+              openGenericModal={this.props.openGenericModal}
+              allThreads={this.props.allThreads}
+              handleOpenMessage={this.props.handleOpenMessage}
+              handleClose={this.props.handleClose}
+              addToContacts={this.props.addToContacts}
+              activeAccount={this.props.activeAccount}
+              accessToken={this.props.accessToken}
+              post={post}
+            ></DiscountPost>
+            {horizontalScrollBox}
+          </>
         );
       } else if (post.event_type === "variation_price_drop") {
         return (
-          <PriceDropPost
-            closeGenericModal={this.props.closeGenericModal}
-            openGenericModal={this.props.openGenericModal}
-            hidePost={this.hidePost}
-            deletePost={this.deletePost}
-            closeGenericModal={this.props.closeGenericModal}
-            openGenericModal={this.props.openGenericModal}
-            allThreads={this.props.allThreads}
-            handleOpenMessage={this.props.handleOpenMessage}
-            handleClose={this.props.handleClose}
-            addToContacts={this.props.addToContacts}
-            activeAccount={this.props.activeAccount}
-            accessToken={this.props.accessToken}
-            post={post}
-          ></PriceDropPost>
+          <>
+            <PriceDropPost
+              closeGenericModal={this.props.closeGenericModal}
+              openGenericModal={this.props.openGenericModal}
+              hidePost={this.hidePost}
+              deletePost={this.deletePost}
+              closeGenericModal={this.props.closeGenericModal}
+              openGenericModal={this.props.openGenericModal}
+              allThreads={this.props.allThreads}
+              handleOpenMessage={this.props.handleOpenMessage}
+              handleClose={this.props.handleClose}
+              addToContacts={this.props.addToContacts}
+              activeAccount={this.props.activeAccount}
+              accessToken={this.props.accessToken}
+              post={post}
+            ></PriceDropPost>
+            {horizontalScrollBox}
+          </>
         );
       } else if (post.event_type === "variation_stock_increase") {
         return (
-          <NewStockPost
-            closeGenericModal={this.props.closeGenericModal}
-            openGenericModal={this.props.openGenericModal}
-            hidePost={this.hidePost}
-            deletePost={this.deletePost}
-            closeGenericModal={this.props.closeGenericModal}
-            openGenericModal={this.props.openGenericModal}
-            allThreads={this.props.allThreads}
-            handleOpenMessage={this.props.handleOpenMessage}
-            handleClose={this.props.handleClose}
-            addToContacts={this.props.addToContacts}
-            activeAccount={this.props.activeAccount}
-            accessToken={this.props.accessToken}
-            post={post}
-          ></NewStockPost>
+          <>
+            <NewStockPost
+              closeGenericModal={this.props.closeGenericModal}
+              openGenericModal={this.props.openGenericModal}
+              hidePost={this.hidePost}
+              deletePost={this.deletePost}
+              closeGenericModal={this.props.closeGenericModal}
+              openGenericModal={this.props.openGenericModal}
+              allThreads={this.props.allThreads}
+              handleOpenMessage={this.props.handleOpenMessage}
+              handleClose={this.props.handleClose}
+              addToContacts={this.props.addToContacts}
+              activeAccount={this.props.activeAccount}
+              accessToken={this.props.accessToken}
+              post={post}
+            ></NewStockPost>
+            {horizontalScrollBox}
+          </>
         );
       }
     });
@@ -214,17 +240,21 @@ export default class Feed extends Component {
     {
       return (
         <Row>
-          <Col xl={3} className="contactsCardsCol">
-            <div className="contactsCardsRow">
-              <div
-                style={{ height: "60px", padding: "30px", fontSize: "20px" }}
-              >
-                ספקים בשבילך
-              </div>{" "}
-              {this.props.screenWidth > 1200 ? youMayLikeCards : ""}
-            </div>
+          <Col xl={3} lg={3} md={3} sm={0} xs={0} className="contactsCardsCol">
+            {this.props.screenWidth > 767 ? (
+              <div className="contactsCardsRow">
+                <div
+                  style={{ height: "60px", padding: "30px", fontSize: "20px" }}
+                >
+                  ספקים בשבילך
+                </div>{" "}
+                {youMayLikeCards}
+              </div>
+            ) : (
+              ""
+            )}
           </Col>
-          <Col xl={6}>
+          <Col xl={6} lg={6} md={6} sm={12} xs={12}>
             <div className="wall">
               {/* <Row> */}
               {/* <div className="wallMessages">{allMessages}</div> */}
@@ -241,7 +271,7 @@ export default class Feed extends Component {
               {/* </Row> */}
             </div>
           </Col>
-          <Col xl={3}></Col>
+          <Col xl={3} lg={3} md={3} sm={0} xs={0}></Col>
         </Row>
       );
     }
