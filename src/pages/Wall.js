@@ -139,6 +139,7 @@ export default class Wall extends Component {
       if (this.state.contactsObj[account.id] === undefined) {
         return (
           <ContactCard
+            activeAccount={this.props.activeAccount}
             postAndGetContacts={this.props.postAndGetContacts}
             account={account}
           ></ContactCard>

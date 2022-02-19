@@ -15,6 +15,7 @@ import {
   domain,
   getData,
   postData,
+  shuffle,
   takeMeHome,
 } from "./components/utils";
 import NewMessageModal from "./components/NewMessageModal";
@@ -121,7 +122,7 @@ class App extends React.Component {
       return axios
         .get(`${domain}/public-accounts/?account_type=${accountType}`, config)
         .then((res) => {
-          this.setState({ accountsYouMayLike: res.data.results });
+          this.setState({ accountsYouMayLike: shuffle(res.data.results) });
         });
     }
   };

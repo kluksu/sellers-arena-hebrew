@@ -19,32 +19,25 @@ export default class ContactCard extends Component {
   //     });
   //   }
   render() {
-    let mockup = {
-      id: 17,
-      name: "ניסוי",
-      image:
-        "https://cdn.pixabay.com/photo/2016/01/21/21/23/rose-1154830_960_720.png",
-      store_address: "דגהגדעהגדהעגד 2332",
-      phone_number: "3456357574",
-      account_type: 3,
-      category: "צעצועים ומשחקים",
-      messages: "",
-      about: "",
-      country: "usa",
-      language: "hebrew",
-      tax_id: "45654375747",
-    };
+    let random100 = Math.floor(Math.random() * 100) + 1;
+    let random300 = Math.floor(Math.random() * 500) + 1;
 
     return (
       <div
         className="contactCard"
-        onClick={() => window.location.assign(`/#/StorePage/${mockup.id}/`)}
+        onClick={() =>
+          this.props.activeAccount.account_type == 2
+            ? window.location.assign(`/#/StorePage/${this.props.account.id}/`)
+            : ""
+        }
       >
         <div className="contactImageConatianer">
           {this.props.account.image ? (
             <img src={this.props.account.image}></img>
           ) : (
-            logo
+            <img
+              src={`https://picsum.photos/id/${random100}/${random300}/${random300}`}
+            ></img> //logo
           )}
         </div>
 

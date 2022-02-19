@@ -104,6 +104,7 @@ export default class Feed extends Component {
           <ContactCard
             postAndGetContacts={this.props.postAndGetContacts}
             account={account}
+            activeAccount={this.props.activeAccount}
           ></ContactCard>
         );
       }
@@ -112,7 +113,10 @@ export default class Feed extends Component {
     let posts = this.state.posts.map((post, i) => {
       let horizontalScrollBox =
         i % 5 == 0 && this.props.screenWidth < 768 ? (
-          <HorizontalScrollBox content={youMayLikeCards}></HorizontalScrollBox>
+          <HorizontalScrollBox
+            id={i}
+            content={youMayLikeCards}
+          ></HorizontalScrollBox>
         ) : (
           ""
         );

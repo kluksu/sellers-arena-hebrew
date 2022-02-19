@@ -137,12 +137,23 @@ body {
   border-right: #000000 solid 1px;
   border-left: rgb(0, 0, 0) solid 1px;
 }
+.contactImageConatianer {
+  height: 150px;
+  display: flex;
+  overflow: hidden !important;
+  align-items: center;
+  justify-content: center;
+}
 .contactCard {
   border: 1px outset black;
   margin: 20px auto 20px auto;
   width: 200px;
-
+  height: 250px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
   border-radius: 5px;
+  font-size: 16px;
 }
 .contactsCardsCol {
   position: relative;
@@ -152,13 +163,32 @@ body {
   text-align: center;
 }
 .HorizontalScrollBoxContainer {
-  height: 200px;
+  height: -webkit-fill-available;
   width: 100%;
-  overflow: scroll;
+  overflow-x: scroll;
+  overflow-y: hidden;
   display: flex;
+  flex-direction: column;
+  position: relative;
   justify-content: space-between;
+  border-top: 10px solid #d4d4d4;
+}
+.HorizontalScrollBoxContainer:nth-of-type(1) {
+  flex-direction: row;
+  border-top: none;
 }
 
+.HorizontalScrollBoxContainer .leftScroll {
+  font-size: 32px;
+  margin-left: 10px;
+}
+.HorizontalScrollBoxContainer .rightScroll {
+  font-size: 32px;
+  margin-right: 10px;
+}
+.HorizontalScrollBoxContainer .scrollButtons {
+  top: 43%;
+}
 .HorizontalScrollBoxContainer .contactCard {
   border: 1px outset black;
   margin: 20px 20px 20px 20px;
@@ -172,7 +202,8 @@ body {
   white-space: nowrap;
 }
 .contactCard div {
-  overflow: scroll;
+  overflow-x: scroll;
+  overflow-y: hidden;
 }
 .contactsCardsRow {
   justify-content: center;
@@ -187,9 +218,11 @@ body {
 }
 .contactCard img {
   max-height: -webkit-fill-available;
-  max-height: 100px;
+  max-height: 100%;
+  max-width: 100%;
   width: auto;
   height: auto;
+  border-radius: 5px;
 }
 .contactCard .btn {
   width: 100%;
@@ -493,7 +526,7 @@ div.wallProductCardVariationsGallery {
 }
 .wall {
   padding-top: 90px;
-  max-width: 50vw;
+  max-width: 80vw;
   min-width: 320px;
   margin: auto;
 }
