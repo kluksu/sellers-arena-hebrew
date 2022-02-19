@@ -5,9 +5,9 @@ import { el } from "date-fns/locale";
 import { element } from "prop-types";
 
 // Example POST method implementation:
-//https://supplierzz.herokuapp.com
-export let domain = "https://supplierzz.westeurope.cloudapp.azure.com";
-// export let domain = "https://supplierzz.herokuapp.com";
+// https://supplierzz.herokuapp.com
+// export let domain = "https://supplierzz.westeurope.cloudapp.azure.com";
+export let domain = "https://supplierzz.herokuapp.com";
 export async function postData(URL = "", data = {}, token) {
   // Default options are marked with *
   const response = await fetch(URL, {
