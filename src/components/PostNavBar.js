@@ -16,23 +16,23 @@ export default class PostNavBar extends Component {
             window.location.assign(`/#/StorePage/${this.props.post.account_id}`)
           }
         ></BiStore>
-        <AiOutlineSetting></AiOutlineSetting>
-        <RiUserAddLine
+        {/* <AiOutlineSetting></AiOutlineSetting> */}
+        {/* <RiUserAddLine
           onClick={() => {
             this.props.addToContacts(this.props.post.account_id);
           }}
-        ></RiUserAddLine>
-        <a style={{ color: "white", marginTop: "-9px" }} href={`tel:${""}`}>
+        ></RiUserAddLine> */}
+        {/* <a style={{ color: "white", marginTop: "-9px" }} href={`tel:${""}`}>
           <AiOutlinePhone></AiOutlinePhone>
-        </a>
-        <ImWhatsapp></ImWhatsapp>
-        <AiOutlineEye
+        </a> */}
+        {/* <ImWhatsapp></ImWhatsapp> */}
+        {/* <AiOutlineEye
           onClick={() =>
             window.location.assign(
               `/#/StorePage/${this.props.post.account_id}/product_page/${this.props.post.related_id}`
             )
           }
-        ></AiOutlineEye>
+        ></AiOutlineEye> */}
         <AiOutlineMessage
           onClick={() =>
             this.props.handleOpenMessage(

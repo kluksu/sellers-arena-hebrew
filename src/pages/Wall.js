@@ -14,6 +14,7 @@ import DiscountPost from "../components/DiscountPost";
 import PriceDropPost from "../components/PriceDropPost";
 import NewStockPost from "../components/NewStockPost";
 import ContactCard from "../components/ContactCard";
+import HorizontalScrollBox from "../components/HorizontalScrollBox";
 
 export default class Wall extends Component {
   constructor(props) {
@@ -146,7 +147,17 @@ export default class Wall extends Component {
         );
       }
     });
-    let posts = this.state.posts.map((post) => {
+
+    let posts = this.state.posts.map((post, i) => {
+      let horizontalScrollBox =
+        i % 5 == 0 && this.props.screenWidth < 768 ? (
+          <HorizontalScrollBox
+            id={i}
+            content={youMayLikeCards}
+          ></HorizontalScrollBox>
+        ) : (
+          ""
+        );
       if (post.event_type === "item_created") {
         this.getItem(post.related_id)
           .then((res) => {
@@ -165,6 +176,7 @@ export default class Wall extends Component {
                   accessToken={this.props.accessToken}
                   post={post}
                 ></NewItemPost>
+                {horizontalScrollBox}
               </>
             );
           })
@@ -188,6 +200,7 @@ export default class Wall extends Component {
               accessToken={this.props.accessToken}
               post={post}
             ></Post>
+            {horizontalScrollBox}
           </>
         );
       } else if (post.event_type === "variation_created") {
@@ -208,6 +221,7 @@ export default class Wall extends Component {
               accessToken={this.props.accessToken}
               post={post}
             ></NewVariationPost>
+            {horizontalScrollBox}
           </>
         );
       } else if (post.event_type === "variation_public_discount_changed") {
@@ -228,6 +242,7 @@ export default class Wall extends Component {
               accessToken={this.props.accessToken}
               post={post}
             ></DiscountPost>
+            {horizontalScrollBox}
           </>
         );
       } else if (post.event_type === "variation_price_drop") {
@@ -248,6 +263,7 @@ export default class Wall extends Component {
               accessToken={this.props.accessToken}
               post={post}
             ></PriceDropPost>
+            {horizontalScrollBox}
           </>
         );
       } else if (post.event_type === "variation_stock_increase") {
@@ -268,6 +284,7 @@ export default class Wall extends Component {
               accessToken={this.props.accessToken}
               post={post}
             ></NewStockPost>
+            {horizontalScrollBox}
           </>
         );
       }

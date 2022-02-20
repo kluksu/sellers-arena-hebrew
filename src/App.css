@@ -201,6 +201,37 @@ body {
   border-radius: 5px;
   white-space: nowrap;
 }
+.priceFrom {
+  color: white;
+  background-color: red;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 10px;
+}
+.prefrencesCheckBoxes {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+  /* width: fit-content; */
+}
+.prefrencesContainer {
+  width: fit-content;
+  padding: 20px;
+}
+
+.postDiscountsDropDown {
+  border-radius: 5px;
+  padding: 0 10px 0 0;
+}
+.priceFrom:hover {
+  cursor: pointer;
+}
+.postDiscountsDropDown div {
+  margin-bottom: 5px;
+}
+.priceFrom svg {
+  font-size: 24px;
+}
 .contactCard div {
   overflow-x: scroll;
   overflow-y: hidden;

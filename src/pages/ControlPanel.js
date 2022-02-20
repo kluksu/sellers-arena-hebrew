@@ -17,6 +17,7 @@ import { domain, getData } from "../components/utils";
 import FullPageLoader from "../components/FullPageLoader";
 import AddUnregisterdAccount from "../components/AddUnregisterdAccount";
 import AllOrders from "./AllOrders";
+import AccountPrefrences from "../components/AccountPrefrences";
 
 class ControlPanel extends React.Component {
   constructor(props) {
@@ -47,6 +48,9 @@ class ControlPanel extends React.Component {
               <NavLink href="/#/control_panel/manage_clients">לקוחות </NavLink>
               <NavLink href="/#/control_panel/manage_orders">הזמנות </NavLink>
               <NavLink href="/#/control_panel/manage_discounts">הנחות </NavLink>
+              <NavLink href="/#/control_panel/account_prefrences">
+                העדפות{" "}
+              </NavLink>
             </Nav>
           </Container>
         </Navbar>
@@ -126,6 +130,15 @@ class ControlPanel extends React.Component {
             accessToken={this.props.accessToken}
             activeAccount={this.props.activeAccount}
           ></AddUnregisterdAccount>
+          {/* <ManageOrders></ManageOrders> */}
+        </Route>
+        <Route exact path="/control_panel/account_prefrences/">
+          <AccountPrefrences
+            closeGenericModal={this.props.closeGenericModal}
+            openGenericModal={this.props.openGenericModal}
+            accessToken={this.props.accessToken}
+            activeAccount={this.props.activeAccount}
+          ></AccountPrefrences>
           {/* <ManageOrders></ManageOrders> */}
         </Route>
       </div>

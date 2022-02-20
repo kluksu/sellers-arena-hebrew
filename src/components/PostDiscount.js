@@ -1,6 +1,18 @@
 import React, { Component } from "react";
+import { IoIosArrowDown } from "react-icons/io";
 
 export default class extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showDiscounts: "none",
+    };
+  }
+  showDiscounts = () => {
+    this.setState({
+      showDiscounts: this.state.showDiscounts === "none" ? "block" : "none",
+    });
+  };
   render() {
     let onlyNumbers = new RegExp("^[0-9]*$");
     let discountsArr = [];
@@ -21,15 +33,14 @@ export default class extends Component {
             continue;
           }
           discountsArr.push(
-            <span
-              className="discountBox"
+            <div
+              onClick={() => this.showDiscounts()}
+              // className="priceFrom"
+
               // className="borderRight"
             >
-              <div>
-                {parseInt(prev) + 1}-{Items} יחידות{" "}
-              </div>{" "}
-              <div>{price.toFixed(2)}₪ ליחידה </div>{" "}
-            </span>
+              {parseInt(prev) + 1}-{Items} יחידות - {price.toFixed(2)}₪ ליחידה{" "}
+            </div>
           );
           price = this.props.price * (1 - value);
           lastItems = Items;
@@ -40,22 +51,48 @@ export default class extends Component {
         }
 
         discountsArr.push(
-          <span className="discountBox">
-            <div>{`>=${parseInt(lastItems) + 1} יחידות`}</div>
-            <div>{`${lastPrice.toFixed(2)}₪ ליחידה`}</div>
-          </span>
+          <div
+            onClick={() => this.showDiscounts()}
+            // className="priceFrom"
+          >
+            {`>=${parseInt(lastItems) + 1} יחידות`}-{" "}
+            {`${lastPrice.toFixed(2)}₪ ליחידה`}
+          </div>
         );
       } else {
         discountsArr.push(
-          <span className="discountBox">
+          <div>
             {` ${this.props.price} ${
               onlyNumbers.test(this.props.price) ? "₪ ליחידה" : ""
             }`}{" "}
-          </span>
+          </div>
         );
       }
     }
 
-    return <div className="postDiscount">{discountsArr}</div>;
+    return (
+      <div>
+        <div onClick={() => this.showDiscounts()} className="priceFrom">
+          {" "}
+          <div> החל מ-{lastPrice.toFixed(2)} ש"ח ליחידה</div>
+          <div>
+            <IoIosArrowDown></IoIosArrowDown>
+          </div>
+        </div>
+        <div
+          className="postDiscountsDropDown"
+          style={{
+            display: this.state.showDiscounts,
+            background: "#007bff",
+            color: "white",
+            height: this.state.showDiscounts === "none" ? "0px" : "auto",
+          }}
+        >
+          {" "}
+          {discountsArr}
+        </div>
+      </div>
+    );
+    //  <div className="postDiscount">{discountsArr}</div>;
   }
 }
