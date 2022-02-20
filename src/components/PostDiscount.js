@@ -10,7 +10,7 @@ export default class extends Component {
   }
   showDiscounts = () => {
     this.setState({
-      showDiscounts: this.state.showDiscounts === "none" ? "block" : "none",
+      showDiscounts: this.state.showDiscounts === "none" ? "flex" : "none",
     });
   };
   render() {
@@ -39,7 +39,7 @@ export default class extends Component {
 
               // className="borderRight"
             >
-              {parseInt(prev) + 1}-{Items} יחידות - {price.toFixed(2)}₪ ליחידה{" "}
+              {parseInt(prev) + 1}-{Items} יחידות {price.toFixed(2)}₪ ליחידה{" "}
             </div>
           );
           price = this.props.price * (1 - value);
@@ -55,7 +55,7 @@ export default class extends Component {
             onClick={() => this.showDiscounts()}
             // className="priceFrom"
           >
-            {`>=${parseInt(lastItems) + 1} יחידות`}-{" "}
+            {`>=${parseInt(lastItems) + 1} יחידות`}{" "}
             {`${lastPrice.toFixed(2)}₪ ליחידה`}
           </div>
         );
@@ -83,9 +83,9 @@ export default class extends Component {
           className="postDiscountsDropDown"
           style={{
             display: this.state.showDiscounts,
-            background: "#007bff",
-            color: "white",
-            height: this.state.showDiscounts === "none" ? "0px" : "auto",
+            // background: "#007bff",
+            // color: "white",
+            // height: this.state.showDiscounts === "none" ? "0px" : "auto",
           }}
         >
           {" "}

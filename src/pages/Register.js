@@ -30,7 +30,12 @@ export default class Register extends Component {
       registerData: "",
       isTermsCheckboxDisabled: true,
       IsTermsChecked: false,
-      termsValidate: true, /////MIGHT CAUSE A BUG
+      termsValidate: true,
+      family: "",
+      familyValidate: true,
+      first: "",
+      firstValidate: true,
+      /////MIGHT CAUSE A BUG
     };
   }
   handleInputChange(event) {
@@ -55,7 +60,9 @@ export default class Register extends Component {
       this.state.passwordValidate === true &&
       this.state.phoneValidate === true &&
       this.state.emailValidate === true &&
-      this.state.termsValidate === true
+      this.state.termsValidate === true &&
+      this.state.familyValidate === true &&
+      this.state.firstValidate === true
     ) {
       this.setState({ allValidationStates: true });
     }
@@ -67,6 +74,10 @@ export default class Register extends Component {
         email: this.state.email,
         password: this.state.password,
         phone_number: this.state.phone,
+        terms_agreed: this.state.IsTermsChecked,
+        terms_revision: "1.0.0",
+        first_name: this.state.first_name,
+        last_name: this.state.last_name,
       }).then((data) => {
         if (data.id) {
           this.props.openGenericModal(
@@ -89,11 +100,15 @@ export default class Register extends Component {
           repetPassword: "",
           phone: "",
           IsTermsChecked: "",
+          family: "",
+          first: "",
           repetPasswordValidate: true, /////MIGHT CAUSE A BUG
           passwordValidate: true, /////MIGHT CAUSE A BUG
           phoneValidate: true, /////MIGHT CAUSE A BUG
           emailValidate: true, /////MIGHT CAUSE A BUG
-          termsValidate: true, /////MIGHT CAUSE A BUG
+          termsValidate: true,
+          familyValidate: true,
+          firstValidate: true, /////MIGHT CAUSE A BUG
         });
       });
     }
@@ -136,6 +151,18 @@ export default class Register extends Component {
     }
     if (this.state.IsTermsChecked === false) {
       this.setState({ termsValidate: false });
+    } else {
+      this.setState({ termsValidate: true });
+    }
+    if (this.state.first === "") {
+      this.setState({ firstValidate: false });
+    } else {
+      this.setState({ firstValidate: true });
+    }
+    if (this.state.family === "") {
+      this.setState({ familyValidate: false });
+    } else {
+      this.setState({ familyValidate: true });
     }
 
     if (
@@ -144,7 +171,9 @@ export default class Register extends Component {
       this.state.passwordValidate === true &&
       this.state.phoneValidate === true &&
       this.state.emailValidate === true &&
-      this.state.IsTermsChecked === true
+      this.state.IsTermsChecked === true &&
+      this.state.firstValidate === true &&
+      this.state.familyValidate === true
     ) {
       await this.setState({ allValidationStates: true });
     }
@@ -205,6 +234,18 @@ export default class Register extends Component {
           הסוף)
         </p>
       );
+    const familyNote =
+      this.state.familyValidate === true ? (
+        ""
+      ) : (
+        <p className="FormRejects">נא וודא שמלאת את השדה בצורה תקינה</p>
+      );
+    const firstNote =
+      this.state.firstValidate === true ? (
+        ""
+      ) : (
+        <p className="FormRejects">נא וודא שמלאת את השדה בצורה תקינה</p>
+      );
     const success = this.state.registerData.id ? (
       <p onClick={takeMeHome()}>
         הודעת אימות נשלחה למייל שלך, נא אשר את הרשמתך ולאחר מכן התחבר לאתר דרך
@@ -235,11 +276,36 @@ export default class Register extends Component {
               placeholder="john@mail.com"
             />
           </Form.Group>
+
           <div id="registerEmailError">
             {" "}
             {emailNote}
             <p className="FormRejects">{this.state.emailErrorMessege}</p>
           </div>
+          <Form.Group>
+            <Form.Label>שם משפחה</Form.Label>
+            <Form.Control
+              className="formValid"
+              onChange={this.handleChange}
+              type="text"
+              value={this.state.family}
+              name="family"
+              required
+            />
+            {familyNote}{" "}
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>שם פרטי</Form.Label>
+            <Form.Control
+              className="formValid"
+              onChange={this.handleChange}
+              type="text"
+              value={this.state.first}
+              name="first"
+              required
+            />
+            {firstNote}{" "}
+          </Form.Group>
           <Form.Group controlId="formGroupPassword">
             <Form.Label>סיסמא</Form.Label>
             <Form.Control
@@ -294,8 +360,9 @@ export default class Register extends Component {
             }
             href={window.location.href}
           >
-            תנאי השימוש{" "}
+            תנאי השימוש <br></br>
           </a>
+          (ניתן לאשר את תנאי השימוש רק לאחר קריאתם)
           <div>
             <input
               onChange={(e) => this.handleInputChange(e)}
@@ -306,7 +373,10 @@ export default class Register extends Component {
               id="horns"
               name="IsTermsChecked"
             ></input>
-            <label for="IsTermsChecked">אני מאשר את תנאי השימוש של האתר</label>
+            <label for="IsTermsChecked">
+              {" "}
+              קראתי ואני מאשר את תנאי השימוש של האתר{" "}
+            </label>
             {termsNote}
           </div>
         </div>

@@ -35,9 +35,10 @@ export default class ContactCard extends Component {
           {this.props.account.image ? (
             <img src={this.props.account.image}></img>
           ) : (
-            <img
-              src={`https://picsum.photos/id/${random100}/${random300}/${random300}`}
-            ></img> //logo
+            // <img
+            //   src={`https://picsum.photos/id/${random100}/${random300}/${random300}`}
+            // ></img>
+            logo
           )}
         </div>
 
