@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&display=swap");
 * {
   box-sizing: border-box;
   /* font-family: "Montserrat", sans-serif; */
@@ -138,7 +139,7 @@ body {
   border-left: rgb(0, 0, 0) solid 1px;
 }
 .contactImageConatianer {
-  height: 150px;
+  max-height: 150px;
   display: flex;
   overflow: hidden !important;
   align-items: center;
@@ -149,11 +150,15 @@ body {
   margin: 20px auto 20px auto;
   width: 200px;
   height: 250px;
+  min-width: 200px;
   display: flex;
+  background-color: white;
   justify-content: space-between;
   flex-direction: column;
+  color: black;
   border-radius: 5px;
   font-size: 16px;
+  transition: transform 0.2s;
 }
 .contactsCardsCol {
   position: relative;
@@ -193,6 +198,7 @@ body {
   border: 1px outset black;
   margin: 20px 20px 20px 20px;
   width: 200px;
+  max-width: 200px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -243,6 +249,13 @@ body {
 .contactCard div {
   overflow-x: scroll;
   overflow-y: hidden;
+  white-space: nowrap;
+  font-size: 16px;
+  font-weight: 400;
+}
+.contactCard:hover {
+  cursor: pointer;
+  /* transform: scale(1.2); */
 }
 .contactsCardsRow {
   justify-content: center;
@@ -2496,33 +2509,43 @@ input {
   background-color: rgba(231, 216, 231, 0.849);
   padding: 10px;
 }
+.suppliersPage ul {
+  padding: 0px;
+}
 .suppliersPage {
-  display: flex;
+  /* display: flex; */
+  justify-content: center;
   flex-wrap: wrap;
   list-style: none;
-  background-color: teal;
+  background-color: rgb(255, 255, 255);
   margin-top: 82px;
   min-height: 100vh;
   max-height: fit-content;
+  font-family: "Josefin Sans", sans-serif;
+  padding: 0px;
 }
 .suppliersPage > li.suppliersPageCategory {
-  margin: 30px;
-  font-size: 18px;
+  /* margin: 30px; */
+  font-size: 36px;
   font-weight: 600;
-  color: rgb(255, 255, 255);
+  color: #000000;
+  padding: 0px;
 }
 .suppliersPage > li.suppliersPageCategory > ul > li.suppliersPageAccount {
   list-style: none;
   font-size: 18px;
   font-weight: 400;
-  color: white;
+  padding: 0px;
+  /* color: white; */
 }
 .suppliersPage ul:first-of-type {
   list-style: none;
   text-decoration: underline;
+  padding: 0px;
 }
 .suppliersPage li a {
-  color: rgb(239, 255, 225);
+  color: rgb(0, 0, 0);
+  padding: 0px;
 }
 .suppliersPage li a:hover {
   color: rgb(85, 85, 214);

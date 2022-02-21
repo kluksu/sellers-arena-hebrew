@@ -52,6 +52,7 @@ import BulkItemsEdit from "./pages/BulkItemsEdit";
 import StorePageLoadAll from "./pages/StorePageLoadAll";
 import Feed from "./pages/Feed";
 import Features from "./pages/Features";
+import RegisterNew from "./pages/RegisterNew";
 //${domain}/
 class App extends React.Component {
   constructor(props) {
@@ -98,7 +99,7 @@ class App extends React.Component {
       modalTop: "",
       modalBottom: "",
       modalClass: "",
-      isRealUser: false,
+      isRealUser: true,
       preventModalDefult: false,
       allMessages: [],
       myUsers: [],
@@ -1060,11 +1061,11 @@ class App extends React.Component {
             ></OpenAccount>
           </Route>
           <Route exact path="/register">
-            <Register
+            <RegisterNew
               closeGenericModal={this.closeGenericModal}
               openGenericModal={this.openGenericModal}
               isGenericModalOpen={this.state.isGenericModalOpen}
-            ></Register>
+            ></RegisterNew>
           </Route>
           {/* <Route exact path="/login">
             <Login
@@ -1316,7 +1317,12 @@ class App extends React.Component {
             ></ProductPage>
           </Route>
           <Route exact path="/suppliers">
-            <Suppliers accessToken={this.state.accessToken}></Suppliers>
+            <Suppliers
+              openGenericModal={this.openGenericModal}
+              closeGenericModal={this.closeGenericModal}
+              activeAccount={this.state.activeAccount}
+              accessToken={this.state.accessToken}
+            ></Suppliers>
           </Route>
           <Route exact path="/me">
             <Profile

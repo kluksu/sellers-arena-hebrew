@@ -152,6 +152,7 @@ export default class Wall extends Component {
       let horizontalScrollBox =
         i % 5 == 0 && this.props.screenWidth < 768 ? (
           <HorizontalScrollBox
+            headline={"עשוי לעניין אותך"}
             id={i}
             content={youMayLikeCards}
           ></HorizontalScrollBox>

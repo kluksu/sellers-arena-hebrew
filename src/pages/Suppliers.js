@@ -6,6 +6,8 @@ import {
   domain,
 } from "../components/utils";
 import { Link } from "react-router-dom";
+import ContactCard from "../components/ContactCard";
+import HorizontalScrollBox from "../components/HorizontalScrollBox";
 
 export default class Suppliers extends Component {
   constructor(props) {
@@ -29,18 +31,79 @@ export default class Suppliers extends Component {
     let showCategories = [];
     //  let showSubCategories=[]
 
-    categoriesAndSubCategories.forEach((category) => {
+    categoriesAndSubCategories.forEach((category, i) => {
       let showAccounts = [];
 
-      this.state.allAccounts.forEach((account) => {
+      this.state.allAccounts.forEach((account, i) => {
         if (
           account.category === Object.keys(category)[0] &&
           account.account_type == 3
         ) {
           showAccounts.push(
-            <li className="suppliersPageAccount">
-              <Link to={`/StorePage/${account.id}`}>{account.name}</Link>
-            </li>
+            // <li className="suppliersPageAccount">
+            <ContactCard
+              openGenericModal={this.props.openGenericModal}
+              closeGenericModal={this.props.closeGenericModal}
+              activeAccount={this.props.activeAccount}
+              account={account}
+            ></ContactCard>
+            // <Link to={`/StorePage/${account.id}`}>{account.name}</Link>
+            // </li>
+          );
+          showAccounts.push(
+            // <li className="suppliersPageAccount">
+            <ContactCard
+              openGenericModal={this.props.openGenericModal}
+              closeGenericModal={this.props.closeGenericModal}
+              activeAccount={this.props.activeAccount}
+              account={account}
+            ></ContactCard>
+            // <Link to={`/StorePage/${account.id}`}>{account.name}</Link>
+            // </li>
+          );
+          showAccounts.push(
+            // <li className="suppliersPageAccount">
+            <ContactCard
+              openGenericModal={this.props.openGenericModal}
+              closeGenericModal={this.props.closeGenericModal}
+              activeAccount={this.props.activeAccount}
+              account={account}
+            ></ContactCard>
+            // <Link to={`/StorePage/${account.id}`}>{account.name}</Link>
+            // </li>
+          );
+          showAccounts.push(
+            // <li className="suppliersPageAccount">
+            <ContactCard
+              openGenericModal={this.props.openGenericModal}
+              closeGenericModal={this.props.closeGenericModal}
+              activeAccount={this.props.activeAccount}
+              account={account}
+            ></ContactCard>
+            // <Link to={`/StorePage/${account.id}`}>{account.name}</Link>
+            // </li>
+          );
+          showAccounts.push(
+            // <li className="suppliersPageAccount">
+            <ContactCard
+              openGenericModal={this.props.openGenericModal}
+              closeGenericModal={this.props.closeGenericModal}
+              activeAccount={this.props.activeAccount}
+              account={account}
+            ></ContactCard>
+            // <Link to={`/StorePage/${account.id}`}>{account.name}</Link>
+            // </li>
+          );
+          showAccounts.push(
+            // <li className="suppliersPageAccount">
+            <ContactCard
+              openGenericModal={this.props.openGenericModal}
+              closeGenericModal={this.props.closeGenericModal}
+              activeAccount={this.props.activeAccount}
+              account={account}
+            ></ContactCard>
+            // <Link to={`/StorePage/${account.id}`}>{account.name}</Link>
+            // </li>
           );
         }
       });
@@ -49,7 +112,12 @@ export default class Suppliers extends Component {
           <ul>
             <li>{Object.keys(category)[0]}</li>
           </ul>
-          <ul>{showAccounts}</ul>
+          <ul>
+            <HorizontalScrollBox
+              id={i}
+              content={showAccounts}
+            ></HorizontalScrollBox>
+          </ul>
         </li>
       );
 

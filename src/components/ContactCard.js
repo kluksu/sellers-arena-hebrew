@@ -26,9 +26,21 @@ export default class ContactCard extends Component {
       <div
         className="contactCard"
         onClick={() =>
-          this.props.activeAccount.account_type == 2
+          this.props.activeAccount && this.props.activeAccount.account_type == 2
             ? window.location.assign(`/#/StorePage/${this.props.account.id}/`)
-            : ""
+            : this.props.openGenericModal(
+                `על מנת לראות מידע נוסף על הספק כמו מחירים מוצרים ולקבל עדכונים, עליך להיתחבר לחשבונך, במידע ואין לך חשבון הירשם `,
+                "",
+                <Button
+                  variant="success"
+                  onClick={() => {
+                    window.location.assign("/#/register");
+                    this.props.closeGenericModal();
+                  }}
+                >
+                  הירשם
+                </Button>
+              )
         }
       >
         <div className="contactImageConatianer">
@@ -44,18 +56,22 @@ export default class ContactCard extends Component {
 
         <div> {this.props.account.name}</div>
 
-        <div>קטגוריה: {this.props.account.category}</div>
+        <div> {this.props.account.category}</div>
         <div>{this.props.account.about}</div>
-        <Button
-          disabled={this.state.isButtonDisabled}
-          onClick={(e) => {
-            e.stopPropagation(e);
-            this.props.postAndGetContacts(this.props.account.id);
-            this.setState({ isButtonDisabled: true });
-          }}
-        >
-          הוסף לאנשי קשר
-        </Button>
+        {this.props.activeAccount ? (
+          <Button
+            disabled={this.state.isButtonDisabled}
+            onClick={(e) => {
+              e.stopPropagation(e);
+              this.props.postAndGetContacts(this.props.account.id);
+              this.setState({ isButtonDisabled: true });
+            }}
+          >
+            הוסף לאנשי קשר
+          </Button>
+        ) : (
+          ""
+        )}
       </div>
     );
   }
