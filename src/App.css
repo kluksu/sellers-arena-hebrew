@@ -206,6 +206,17 @@ body {
   font-size: 12px;
   border-radius: 5px;
   white-space: nowrap;
+  transition: transform 0.2s;
+}
+.list-group-item {
+  color: black;
+}
+.avatarDiv .list-group-item:hover {
+  cursor: pointer;
+  opacity: 0.9;
+}
+.HorizontalScrollBoxContainer .contactCard:hover {
+  transform: scale(1.1);
 }
 .priceFrom {
   color: white;
@@ -433,6 +444,26 @@ body {
   /* overflow: scroll; */
   overflow: scroll;
   max-width: fit-content;
+}
+.clientsList {
+  max-height: 300px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  /* border-radius: 5px; */
+  /* width: 50%; */
+  /* max-height: 50%; */
+  white-space: nowrap;
+  border-radius: 5px;
+  scrollbar-color: white;
+  margin: auto;
+}
+.clientsList li {
+  max-width: 100%;
+  /* overflow-y: hidden; */
+  overflow-x: scroll;
+}
+.clientsList .form-group {
+  margin-bottom: 0px;
 }
 .postGallery > .postGallery {
   /* width: 100%; */
@@ -2060,7 +2091,7 @@ input {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: none;
+  background: white;
 }
 
 /* Handle */
@@ -2531,6 +2562,9 @@ input {
   color: #000000;
   padding: 0px;
 }
+.suppliersPage .HorizontalScrollBoxContainer {
+  justify-content: unset;
+}
 .suppliersPage > li.suppliersPageCategory > ul > li.suppliersPageAccount {
   list-style: none;
   font-size: 18px;
@@ -2559,7 +2593,11 @@ input {
   margin-top: -36px;
 }
 .avatarDiv .m-auto.form-control {
-  max-width: 50%;
+  /* max-width: 50%; */
+  /* border-radius: 5px; */
+}
+.avatarDiv .list-group-flush {
+  border-radius: 5px !important;
 }
 .avatarDiv {
   margin-top: 86px;

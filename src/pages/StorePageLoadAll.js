@@ -6,7 +6,7 @@ import OrderInfo from "../components/OrderInfo";
 import StorePageDetailsNav from "../components/StorePageDetailsNav";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-import { Col, NavLink, Row, Button, Form } from "react-bootstrap";
+import { Col, NavLink, Row, Button, Form, ListGroup } from "react-bootstrap";
 import {
   domain,
   getContacts,
@@ -75,6 +75,8 @@ class StorePageLoadAll extends React.Component {
       // scrollLeft: "",
       arrowShown: "left",
       wasNextNull: false,
+      clientSearch: "",
+      clientsListVisibility: "none",
     };
   }
   closeModal = () => this.setState({ isDiscountModalOpen: false });
@@ -311,15 +313,24 @@ class StorePageLoadAll extends React.Component {
       this.props.getUnregistered().then((res) => {
         res.data.results.forEach((unregisteredAccount) => {
           contactsArr.push(
-            <option
-              value={JSON.stringify({
-                accountID: this.props.activeAccount.id,
-                unregisteredAccountID: unregisteredAccount.id,
-              })}
+            <ListGroup.Item
+              onClick={(e) => {
+                this.setState({
+                  selectedContactID: JSON.stringify({
+                    accountID: this.props.activeAccount.id,
+                    unregisteredAccountID: unregisteredAccount.id,
+                  }),
+                  clientsListVisibility: "none",
+                });
+              }}
+              // value={JSON.stringify({
+              //   accountID: this.props.activeAccount.id,
+              //   unregisteredAccountID: unregisteredAccount.id,
+              // })}
             >
               {unregisteredAccount.name} {unregisteredAccount.id}
               {" unregistered account"}
-            </option>
+            </ListGroup.Item>
           );
         });
       });
@@ -327,9 +338,17 @@ class StorePageLoadAll extends React.Component {
         (res) => {
           res.results.forEach((contact) => {
             contactsArr.push(
-              <option value={contact.account_contact.id}>
+              <ListGroup.Item
+                onClick={(e) => {
+                  this.setState({
+                    selectedContactID: contact.account_contact.id,
+                    clientsListVisibility: "none",
+                  });
+                }}
+                // value={contact.account_contact.id}
+              >
                 {contact.account_contact.name} {contact.account_contact.id}
-              </option>
+              </ListGroup.Item>
             );
           });
           this.setState({ contactsArr: contactsArr });
@@ -711,6 +730,21 @@ class StorePageLoadAll extends React.Component {
     }
   };
   render() {
+    let contacts = this.state.contactsArr.map((contact) => {
+      console.log(contact.props.children);
+      if (
+        contact.props.children.find((element) => {
+          if (
+            typeof element === "string" &&
+            element.includes(this.state.clientSearch)
+          ) {
+            return true;
+          }
+        })
+      ) {
+        return contact;
+      }
+    });
     if (this.state.wasNextNull !== true) {
       if (
         (this.props.activeAccount &&
@@ -784,6 +818,47 @@ class StorePageLoadAll extends React.Component {
       clientsDropDown =
         this.props.activeAccount.account_type == 3 ? (
           <Col>
+            {/* <Button> בחר לקוח</Button> */}
+            <ListGroup
+              style={{
+                overflow:
+                  this.state.clientsListVisibility === "none"
+                    ? "hidden"
+                    : "scroll",
+              }}
+              className="clientsList"
+              variant="flush"
+            >
+              <ListGroup.Item
+                onClick={(e) => {
+                  e.stopPropagation();
+                  this.setState({
+                    clientsListVisibility:
+                      this.state.clientsListVisibility === "none"
+                        ? "block"
+                        : "none",
+                  });
+                }}
+              >
+                <Form.Group controlId="exampleForm.ControlSelect1">
+                  {/* <Form.Label>בחר לקוח </Form.Label> */}
+                  <Form.Control
+                    onChange={this.handleChange}
+                    // as="select"
+                    type="text"
+                    placeholder="חפש לקוח"
+                    name="clientSearch"
+                    className=" m-auto"
+                  >
+                    {/* <option value={0}>------------</option> */}
+                  </Form.Control>
+                </Form.Group>
+              </ListGroup.Item>{" "}
+              <div style={{ display: this.state.clientsListVisibility }}>
+                {contacts}
+              </div>
+            </ListGroup>
+            {/* 
             <Form.Group controlId="exampleForm.ControlSelect1">
               <Form.Label>בחר לקוח </Form.Label>
               <Form.Control
@@ -795,7 +870,7 @@ class StorePageLoadAll extends React.Component {
                 <option value={0}>------------</option>
                 {this.state.contactsArr}
               </Form.Control>
-            </Form.Group>
+            </Form.Group> */}
           </Col>
         ) : null;
     }
@@ -914,14 +989,18 @@ class StorePageLoadAll extends React.Component {
       );
 
     let orderInfo = this.state.activeCart ? (
-      <OrderInfo
-        isPriceFiledDisabled={"disabled"}
-        createDelta={this.createDelta}
-        getCartProducts={this.getCartProducts}
-        activeAccount={this.props.activeAccount}
-        accessToken={this.props.accessToken}
-        activeCart={this.state.activeCart}
-      ></OrderInfo>
+      <>
+        {" "}
+        {/* <h1>הזמנה נוכחית</h1> */}
+        <OrderInfo
+          isPriceFiledDisabled={"disabled"}
+          createDelta={this.createDelta}
+          getCartProducts={this.getCartProducts}
+          activeAccount={this.props.activeAccount}
+          accessToken={this.props.accessToken}
+          activeCart={this.state.activeCart}
+        ></OrderInfo>
+      </>
     ) : null;
     ////posibble bug in dataLength
     /////////
@@ -1119,7 +1198,10 @@ class StorePageLoadAll extends React.Component {
         
                         </Container> */}
 
-        <Row className="storePageRow">
+        <Row
+          className="storePageRow"
+          onClick={() => this.setState({ clientsListVisibility: "none" })}
+        >
           {supplierCard}
           <Col className="searchPageContainer storePage" xl={12}>
             <Search

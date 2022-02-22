@@ -50,61 +50,6 @@ export default class Suppliers extends Component {
             // <Link to={`/StorePage/${account.id}`}>{account.name}</Link>
             // </li>
           );
-          showAccounts.push(
-            // <li className="suppliersPageAccount">
-            <ContactCard
-              openGenericModal={this.props.openGenericModal}
-              closeGenericModal={this.props.closeGenericModal}
-              activeAccount={this.props.activeAccount}
-              account={account}
-            ></ContactCard>
-            // <Link to={`/StorePage/${account.id}`}>{account.name}</Link>
-            // </li>
-          );
-          showAccounts.push(
-            // <li className="suppliersPageAccount">
-            <ContactCard
-              openGenericModal={this.props.openGenericModal}
-              closeGenericModal={this.props.closeGenericModal}
-              activeAccount={this.props.activeAccount}
-              account={account}
-            ></ContactCard>
-            // <Link to={`/StorePage/${account.id}`}>{account.name}</Link>
-            // </li>
-          );
-          showAccounts.push(
-            // <li className="suppliersPageAccount">
-            <ContactCard
-              openGenericModal={this.props.openGenericModal}
-              closeGenericModal={this.props.closeGenericModal}
-              activeAccount={this.props.activeAccount}
-              account={account}
-            ></ContactCard>
-            // <Link to={`/StorePage/${account.id}`}>{account.name}</Link>
-            // </li>
-          );
-          showAccounts.push(
-            // <li className="suppliersPageAccount">
-            <ContactCard
-              openGenericModal={this.props.openGenericModal}
-              closeGenericModal={this.props.closeGenericModal}
-              activeAccount={this.props.activeAccount}
-              account={account}
-            ></ContactCard>
-            // <Link to={`/StorePage/${account.id}`}>{account.name}</Link>
-            // </li>
-          );
-          showAccounts.push(
-            // <li className="suppliersPageAccount">
-            <ContactCard
-              openGenericModal={this.props.openGenericModal}
-              closeGenericModal={this.props.closeGenericModal}
-              activeAccount={this.props.activeAccount}
-              account={account}
-            ></ContactCard>
-            // <Link to={`/StorePage/${account.id}`}>{account.name}</Link>
-            // </li>
-          );
         }
       });
       showCategories.push(
