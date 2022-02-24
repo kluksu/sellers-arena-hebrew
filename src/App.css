@@ -235,7 +235,20 @@ body {
   width: fit-content;
   padding: 20px;
 }
-
+.App {
+  position: relative;
+}
+.floatingFeedButton {
+  position: fixed;
+  top: 40px;
+  right: 40px;
+  z-index: 100000000000000000000000000;
+  transition: transform 0.2s;
+}
+.floatingFeedButton:hover {
+  cursor: pointer;
+  transform: scale(1.5);
+}
 .postDiscountsDropDown {
   border-radius: 5px;
   /* padding: 0 10px 0 0; */
@@ -1220,8 +1233,12 @@ label.form-label {
   /* justify-content: space-evenly; */
 }
 .productCardDiscounts:hover {
-  /* overflow: overlay; */
+  overflow: overlay;
   /* transform: scale(1.05); */
+  z-index: 10000000;
+}
+.discountClassCenterHidden.productCardDiscounts {
+  z-index: 1000000000000000;
 }
 .discountClassCenterHidden {
   font-size: 12px;
@@ -1239,6 +1256,7 @@ label.form-label {
   /* justify-content: space-between; */
   position: absolute;
   top: 30%;
+
   /* right: 50%; */
 }
 /* .nav-link {
@@ -1334,6 +1352,23 @@ label.form-label {
   flex-direction: column;
   /* max-width: 50%; */
 }
+.hoverDescription {
+  display: none;
+}
+.cardFeedIcon:hover + .hoverDescription.extra,
+.cardStoreIcon:hover + .hoverDescription,
+.cardSeeMore:hover + .hoverDescription,
+.hoverDescription:hover {
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 0%;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 5px;
+}
+
 .productModalPic .postPhotosUpperImageContainer {
   /* height: 320px; */
   width: auto;
