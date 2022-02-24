@@ -37,6 +37,7 @@ class EditVariationPage extends React.Component {
       selectedVariationDits: "",
       newDIscount: "",
       newVariations: "",
+      serial_number: "",
     };
     this.onDrop = this.onDrop.bind(this);
   }
@@ -111,6 +112,7 @@ class EditVariationPage extends React.Component {
         description: res.description,
         varsInfo: res.variation,
         id: this.props.match.params.id,
+        serial_number: res.serial_number,
       });
     }
     // {
@@ -132,6 +134,7 @@ class EditVariationPage extends React.Component {
       amount_in_stock: "",
       batch_size: "",
       discounts: {},
+      serial_number: "",
       newBlob: "",
       variation: "",
       varsInfo: {},
@@ -192,6 +195,7 @@ class EditVariationPage extends React.Component {
     productPost.append("variation", string);
     productPost.append("description", this.state.description);
     productPost.append("discounts", discounts);
+    productPost.append("serial_number", this.state.serial_number);
     productPost.append("item", this.state.item); //this.props.CurrentUploadItemId
     if (this.state.newBlob) {
       productPost.append("image", this.state.newBlob, this.state.newBlob.name);
@@ -393,6 +397,17 @@ class EditVariationPage extends React.Component {
                 value={this.state.description}
                 placeholder="תיאור..."
                 name="description"
+              />
+            </Form.Group>
+
+            <Form.Group controlId="exampleForm.ControlTextarea1">
+              <Form.Label>מק"ט </Form.Label>
+              <Form.Control
+                onChange={this.handleChange}
+                type="text"
+                value={this.state.serial_number}
+                placeholder='מק"ט'
+                name="serial_number"
               />
             </Form.Group>
 

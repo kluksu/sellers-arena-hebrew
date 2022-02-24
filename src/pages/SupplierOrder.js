@@ -9,6 +9,7 @@ import DiscountModal from "../components/DiscountModal";
 import DetailsOnOrderSeller from "../components/DetailsOnOrderSeller";
 import detailsOnOrderBuyer from "../components/DetailsOnOrderBuyer";
 import DetailsOnOrderBuyer from "../components/DetailsOnOrderBuyer";
+import moment from "moment";
 
 class SupplierOrder extends React.Component {
   constructor(props) {
@@ -127,7 +128,10 @@ class SupplierOrder extends React.Component {
     }
   };
 
-  printOrder = async () => {
+  printOrder = async (minuts, hour) => {
+    this.setState({
+      timeCapture: `${minuts.length < 2 ? 0 + minuts : minuts}: ${hour}`,
+    });
     await this.setState({ copyOriginal: " תעודת משלוח - העתק" });
     window.print();
     await this.setState({ copyOriginal: "תעודת משלוח - מקור " });
@@ -281,6 +285,11 @@ class SupplierOrder extends React.Component {
   };
 
   render() {
+    const d = new Date();
+    let hour = d.getHours();
+    let seconds = d.getSeconds();
+    let minuts = d.getMinutes();
+
     let rejectbutton = (
       <Button
         className="no-print "
@@ -449,11 +458,11 @@ class SupplierOrder extends React.Component {
     if (this.state.activeCart !== "" && this.props.activeAccount) {
       return (
         <div className="OrderSummeryPage">
-          <h1 className="printOnly">{this.state.copyOriginal}</h1>
+          <h1 className="printOnly"> {this.state.copyOriginal}</h1>
           <Button
             style={{ display: this.props.screenWidth > 650 ? "" : "none" }}
             className="printButton no-print "
-            onClick={this.printOrder}
+            onClick={() => this.printOrder(minuts, hour)}
             type="button"
           >
             הדפס תעודת משלוח
@@ -465,6 +474,9 @@ class SupplierOrder extends React.Component {
               activeOrder={this.state.activeOrder}
               activeCartStatus={this.props.activeCartStatus}
             ></DetailsOnOrderSeller>
+            <div className="printOnly">
+              שעת הפקת התעודה: {this.state.timeCapture}
+            </div>
             <OrderInfo
               screenWidth={this.props.screenWidth}
               activateStageChangesButton={this.activateStageChangesButton}
@@ -487,6 +499,7 @@ class SupplierOrder extends React.Component {
               </Button>
             ) : null}
             <DetailsOnOrderBuyer buyer={this.state.buyer}></DetailsOnOrderBuyer>
+
             <div>מקבל הסחורה____________________ חתימה___________________</div>
             {/* <div className="sellerInfoContainer">
               <span style={{ fontSize: headlineSize }}>

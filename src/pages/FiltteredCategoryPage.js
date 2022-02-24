@@ -192,7 +192,7 @@ class FiltteredCategoryPage extends React.Component {
               linkAllAround={`/#/StorePage/${element.item.account}`}
               currency={""}
               productName={element.item.name}
-              price="הרשם  חינם על מנת לראות את המחיר"
+              price="הרשם  חינם לקבלת מידע נוסף"
               pictures={element.image}
             >
               {" "}

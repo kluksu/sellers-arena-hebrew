@@ -261,6 +261,7 @@ export default class Register extends Component {
           <p className="info-p-registerContainer">
             רק משתמשים רשומים יכולים:<br></br>
             -לראות את מרבית המחירים.<br></br>
+            -לקבל מידע על הספקים.<br></br>
             -ליצור הזמנות.<br></br>
             -לפתוח חנויות ולהעלות מוצרים.<br></br>
           </p>

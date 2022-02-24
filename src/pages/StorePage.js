@@ -874,7 +874,7 @@ class StorePage extends React.Component {
                 productInfoLink={`/#/storePage/${this.props.match.params.id}/product_page/${item.id}`}
                 currency={""}
                 productName={item.name}
-                price="הרשם על מנת לראות מחירים"
+                price="הרשם  חינם לקבלת מיזע נוסף"
                 pictures={variation.image}
               >
                 {" "}

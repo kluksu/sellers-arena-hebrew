@@ -1093,7 +1093,7 @@ class StorePageLoadAll extends React.Component {
                       productInfoLink={`/#/storePage/${this.props.match.params.id}/product_page/${item.id}`}
                       currency={""}
                       productName={item.name}
-                      price="הרשם  חינם על מנת לראות מחירים"
+                      price="הרשם  חינם לקבלת מידע נוסף"
                       pictures={variation.image}
                     >
                       {" "}

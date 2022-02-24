@@ -37,6 +37,7 @@ class ProductVaritionPage extends React.Component {
       varsInfo: "",
       discountCounter: 1,
       isOpen: false,
+      serial_number: "",
     };
     this.onDrop = this.onDrop.bind(this);
   }
@@ -51,6 +52,7 @@ class ProductVaritionPage extends React.Component {
   };
   resetPage = (e) => {
     this.setState({
+      serial_number: "",
       varCounter:
         Object.keys(this.state.varsInfo).length <= 1
           ? 1
@@ -185,6 +187,8 @@ class ProductVaritionPage extends React.Component {
     productPost.append("variation", string);
     productPost.append("discounts", discounts);
     productPost.append("description", this.state.description);
+    productPost.append("serial_number", this.state.serial_number);
+
     productPost.append("item", this.props.match.params.id); //this.props.CurrentUploadItemId
     if (this.state.newBlob) {
       productPost.append("image", this.state.newBlob, this.state.newBlob.name);
@@ -402,6 +406,17 @@ class ProductVaritionPage extends React.Component {
                 value={this.state.description}
                 placeholder="enter description here..."
                 name="description"
+              />
+            </Form.Group>
+            <Form.Group controlId="exampleForm.ControlTextarea1">
+              <Form.Label> מק"ט</Form.Label>
+              <Form.Control
+                onChange={this.handleChange}
+                type="text"
+                // rows={3}
+                value={this.state.serial_number}
+                placeholder='מק"ט'
+                name="serial_number"
               />
             </Form.Group>
 

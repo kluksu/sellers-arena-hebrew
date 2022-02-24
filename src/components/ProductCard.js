@@ -365,15 +365,20 @@ class ProductCard extends React.Component {
                 {!this.props.activeAccount || this.props.activeAccount ? (
                   <>
                     {" "}
-                    <ImFeed
-                      className="cardFeedIcon"
-                      onClick={(e) => {
-                        e.stopPropagation(e);
-                        window.location.assign(
-                          `/#/supplier-feed/${this.props.item.account}`
-                        );
-                      }}
-                    ></ImFeed>
+                    {!this.props.activeAccount ||
+                    this.props.activeAccount.account_type !== 3 ? (
+                      <ImFeed
+                        className="cardFeedIcon"
+                        onClick={(e) => {
+                          e.stopPropagation(e);
+                          window.location.assign(
+                            `/#/supplier-feed/${this.props.item.account}`
+                          );
+                        }}
+                      ></ImFeed>
+                    ) : (
+                      ""
+                    )}
                     <div className="hoverDescription extra"> עדכוני ספק</div>
                   </>
                 ) : (

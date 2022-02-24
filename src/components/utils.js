@@ -6,8 +6,8 @@ import { element } from "prop-types";
 
 // Example POST method implementation:
 // https://supplierzz.herokuapp.com
-// export let domain = "https://supplierzz.westeurope.cloudapp.azure.com";
-export let domain = "https://supplierzz.herokuapp.com";
+export let domain = "https://supplierzz.westeurope.cloudapp.azure.com";
+// export let domain = "https://supplierzz.herokuapp.com";
 export async function postData(URL = "", data = {}, token) {
   // Default options are marked with *
   const response = await fetch(URL, {
@@ -278,10 +278,62 @@ export const categoriesAndSubCategories = [
     ],
   },
   {
-    "עיצוב ונוי": ["צמחים מלאכותיים", "עציצים וסלסלאות"],
+    "עיצוב ונוי": [
+      ,
+      "מתלים ומדפים",
+      "שונות",
+      "צמחים מלאכותיים",
+      "עציצים וסלסלאות",
+    ],
   },
+  {
+    "לגינה ולבית": [
+      "סוקולנטים וקקטוסים",
+      "צמחי תבלין",
+      "ציוד",
+      "זרעים ופקעות",
+      "עצי פרי",
+      "צמחי בית",
+      "צמחי חוץ",
+    ],
+  },
+  // {
+  //   "לתינוק ולילד": [
+  //     "בגדי ילדים",
+  //     "בגדי תינוקות",
+  //     "ציוד לתינוקת",
+  //     "מוצרי היגיינה",
+  //     "מצעים",
+  //     "משחקי התפתחות",
+  //     "מוצרים לרכב",
+  //     "ריהוט"
+
+  //   ],
+  // },
 ];
 export const subcategoriesAndPics = {
+  "מתלים ומדפים":
+    "https://images.pexels.com/photos/1090638/pexels-photo-1090638.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+  שונות:
+    "https://images.pexels.com/photos/1099816/pexels-photo-1099816.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+  "עציצים וסלסלאות":
+    "https://images.pexels.com/photos/2949111/pexels-photo-2949111.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+  "צמחי חוץ":
+    "https://images.pexels.com/photos/462118/pexels-photo-462118.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+  "צמחי בית":
+    "https://images.pexels.com/photos/3076899/pexels-photo-3076899.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+  "עצי פרי":
+    "https://images.pexels.com/photos/129574/pexels-photo-129574.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+  "זרעים ופקעות":
+    "https://images.pexels.com/photos/938699/pexels-photo-938699.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+  ציוד: "https://images.pexels.com/photos/7782296/pexels-photo-7782296.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+  "צמחי תבלין":
+    "https://images.pexels.com/photos/4503273/pexels-photo-4503273.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+  "סוקולנטים וקקטוסים":
+    "https://images.pexels.com/photos/1284879/pexels-photo-1284879.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+  "לגינה ולבית":
+    "https://images.pexels.com/photos/413707/pexels-photo-413707.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+
   "לגו ומשחקי הרכבה":
     "https://images.pexels.com/photos/3852577/pexels-photo-3852577.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
   "משחקי קופסא":
