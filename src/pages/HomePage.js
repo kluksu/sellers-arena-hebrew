@@ -194,7 +194,7 @@ class HomePage extends React.Component {
               linkAllAround={`/#/StorePage/${element.item.account}`}
               currency={""}
               productName={`${element.item.name}`}
-              price="הרשם על מנת לראות את המחיר"
+              price="הרשם  חינם על מנת לראות את המחיר"
               pictures={element.image}
             >
               {" "}

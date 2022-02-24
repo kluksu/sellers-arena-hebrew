@@ -22,15 +22,17 @@ export default class WallProductCard extends Component {
     };
   }
   getThreadID = (userID) => {
-    this.props.allThreads.forEach((thread) => {
-      if (
-        thread.participants[0].id == userID ||
-        thread.participants[1].id == userID
-      ) {
-        this.setState({ threadID: thread.id });
-        return;
-      }
-    });
+    if (this.props.allThreads) {
+      this.props.allThreads.forEach((thread) => {
+        if (
+          thread.participants[0].id == userID ||
+          thread.participants[1].id == userID
+        ) {
+          this.setState({ threadID: thread.id });
+          return;
+        }
+      });
+    }
   };
   componentDidUpdate(prevProps, prevState) {
     if (
@@ -73,7 +75,8 @@ export default class WallProductCard extends Component {
       .get(
         `${domain}/${
           this.props.isVariation === true
-            ? this.props.activeAccount.account_type == 3
+            ? this.props.activeAccount &&
+              this.props.activeAccount.account_type == 3
               ? "item-variations"
               : "public-item-variations"
             : "public-items"

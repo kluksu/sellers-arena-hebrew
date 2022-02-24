@@ -316,10 +316,10 @@ class StorePageLoadAll extends React.Component {
             <ListGroup.Item
               onClick={(e) => {
                 this.setState({
-                  selectedContactID: JSON.stringify({
+                  selectedContactID: {
                     accountID: this.props.activeAccount.id,
                     unregisteredAccountID: unregisteredAccount.id,
-                  }),
+                  },
                   clientsListVisibility: "none",
                 });
               }}
@@ -585,6 +585,7 @@ class StorePageLoadAll extends React.Component {
       this.loadStoreComponent();
     }
     if (this.state.selectedContactID !== prevState.selectedContactID) {
+      console.log(this.state.selectedContactID);
       this.setState({
         wasNextNull: false,
         activeCart: {
@@ -759,7 +760,7 @@ class StorePageLoadAll extends React.Component {
             <div>
               {" "}
               <Button onClick={() => window.location.assign("/#/register")}>
-                הירשם
+                הירשם חינם!
               </Button>
               <Button onClick={() => takeMeHome()}> חזור לעמוד הבית</Button>
             </div>{" "}
@@ -907,7 +908,11 @@ class StorePageLoadAll extends React.Component {
           <Row>
             <Col xl={4}>
               {" "}
-              <ImProfile className="profileIcon" />
+              {this.state.currentStore.image ? (
+                <img src={this.state.currentStore.image}></img>
+              ) : (
+                <ImProfile className="profileIcon" />
+              )}
             </Col>
             <Col xl={4}>
               {clientsDropDown}
@@ -1088,7 +1093,7 @@ class StorePageLoadAll extends React.Component {
                       productInfoLink={`/#/storePage/${this.props.match.params.id}/product_page/${item.id}`}
                       currency={""}
                       productName={item.name}
-                      price="הרשם על מנת לראות מחירים"
+                      price="הרשם  חינם על מנת לראות מחירים"
                       pictures={variation.image}
                     >
                       {" "}
@@ -1264,7 +1269,7 @@ class StorePageLoadAll extends React.Component {
                 </h1>
               )}
               <ScrollButtons
-                arrowShown={this.state.arrowShown}
+                // arrowShown={this.state.arrowShown}
                 elementID={"productCardsRow"}
                 scrollLeft={this.props.screenWidth}
                 scrollRight={this.props.screenWidth}

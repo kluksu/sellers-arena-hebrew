@@ -192,6 +192,8 @@ export default class Profile extends Component {
               <div>{`מספר חשבון :  ${this.props.activeAccount.id}`}</div>
               <div>{`שפה : ${this.props.activeAccount.language}`}</div>
               <div>{`אימייל:${this.props.me.email}`}</div>
+              <div>{`שם:${this.props.me.first_name}`}</div>
+              <div>{`שם משפחה:${this.props.me.last_name}`}</div>
               <div>{`מספר משתמש:${this.props.me.id}`}</div>
               <div>{`טלפון משתמש :${this.props.me.phone_number}`}</div>
               <div>{``}</div>

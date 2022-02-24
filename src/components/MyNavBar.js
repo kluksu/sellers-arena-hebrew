@@ -22,6 +22,7 @@ import { MdRemoveShoppingCart } from "react-icons/md";
 import { CgMenuGridR } from "react-icons/cg";
 import { AiOutlineMail } from "react-icons/ai";
 import { domain, handleKeyDown, logo } from "./utils";
+import Loader from "react-loader-spinner";
 
 class MyNavBar extends React.Component {
   constructor(props) {
@@ -83,7 +84,9 @@ class MyNavBar extends React.Component {
       ) : null;
     let feed =
       this.props.activeAccount && this.props.activeAccount.account_type == 2 ? (
-        <Nav.Link href="/#/feed">עדכוני ספקים </Nav.Link>
+        <Nav.Link href="/#/feed">
+          עדכונים <Loader type="Grid" height={20} width={20}></Loader>{" "}
+        </Nav.Link>
       ) : null;
     let vibretOrders =
       this.props.MySupplierOrders.length > 0
@@ -187,7 +190,7 @@ class MyNavBar extends React.Component {
         }
         href="/#/register"
       >
-        הירשם
+        הירשם חינם!
       </Nav.Link>
     ) : null;
 

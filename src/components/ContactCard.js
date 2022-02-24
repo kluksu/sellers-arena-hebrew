@@ -29,7 +29,7 @@ export default class ContactCard extends Component {
           this.props.activeAccount && this.props.activeAccount.account_type == 2
             ? window.location.assign(`/#/StorePage/${this.props.account.id}/`)
             : this.props.openGenericModal(
-                `על מנת לראות מידע נוסף על הספק כמו מחירים מוצרים ולקבל עדכונים, עליך להיתחבר לחשבונך, במידע ואין לך חשבון הירשם `,
+                ` על מנת לראות מידע נוסף על הספק כמו מחירים מוצרים ולקבל עדכונים, עליך להיתחבר לחשבונך, במידע ואין לך חשבון אתה יכול להרשם חינם בלחיצה על הלחצן הירוק`,
                 "",
                 <Button
                   variant="success"
@@ -38,7 +38,7 @@ export default class ContactCard extends Component {
                     this.props.closeGenericModal();
                   }}
                 >
-                  הירשם
+                  הירשם חינם!
                 </Button>
               )
         }
@@ -58,7 +58,8 @@ export default class ContactCard extends Component {
 
         <div> {this.props.account.category}</div>
         <div>{this.props.account.about}</div>
-        {this.props.activeAccount ? (
+        {this.props.activeAccount &&
+        this.props.activeAccount.account_type == 2 ? (
           <Button
             disabled={this.state.isButtonDisabled}
             onClick={(e) => {

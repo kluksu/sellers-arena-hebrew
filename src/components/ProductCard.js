@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Col, NavLink, Row, Button, Form } from "react-bootstrap";
-import { ImEyePlus } from "react-icons/im";
+import { ImEyePlus, ImFeed } from "react-icons/im";
 import { IoStorefrontOutline } from "react-icons/io5";
 
 import { HashRouter, Route, Router, withRouter } from "react-router-dom";
@@ -332,23 +332,47 @@ class ProductCard extends React.Component {
               <span>
                 {" "}
                 {!window.location.href.includes("StorePage") ? (
-                  <IoStorefrontOutline
-                    style={{ marginLeft: "10px" }}
-                    onClick={(e) => {
-                      if (this.props.linkAllAround) {
-                        window.location.assign(this.props.linkAllAround);
-                      }
-                    }}
-                  ></IoStorefrontOutline>
+                  <>
+                    <IoStorefrontOutline
+                      className="cardStoreIcon"
+                      style={{ marginLeft: "10px" }}
+                      onClick={(e) => {
+                        if (this.props.linkAllAround) {
+                          window.location.assign(this.props.linkAllAround);
+                        }
+                      }}
+                    ></IoStorefrontOutline>
+                    <div className="hoverDescription"> כנס לחנות של הספק</div>
+                  </>
                 ) : (
                   ""
                 )}
                 <ImEyePlus
+                  className="cardSeeMore"
                   onClick={(e) => {
                     e.stopPropagation(e);
                     this.openProductModal(buttons);
                   }}
                 ></ImEyePlus>
+                <div className="hoverDescription">ראה פירוט</div>
+                {/* {console.log(this.props.item)} */}
+                {!this.props.activeAccount || this.props.activeAccount ? (
+                  <>
+                    {" "}
+                    <ImFeed
+                      className="cardFeedIcon"
+                      onClick={(e) => {
+                        e.stopPropagation(e);
+                        window.location.assign(
+                          `/#/supplier-feed/${this.props.item.account}`
+                        );
+                      }}
+                    ></ImFeed>
+                    <div className="hoverDescription extra"> עדכוני ספק</div>
+                  </>
+                ) : (
+                  ""
+                )}
               </span>
             </div>
             {/* <div>{`${this.props.price} ${this.props.currency}`}</div> */}

@@ -14,22 +14,48 @@ export default class NewItemPost extends Component {
   }
   componentDidMount() {}
   render() {
-    let postHeadline = this.props.post.text.split("post")[0];
-    if (this.props.isVariation !== true) {
-      postHeadline = postHeadline.replace("Account", "");
-      postHeadline = postHeadline.replace(
-        "has added a new item",
-        " העלה מוצר חדש פה"
-      );
-
-      postHeadline = postHeadline.split("פה")[0];
-    } else {
-      postHeadline = postHeadline.split(" ");
-
-      postHeadline = `${postHeadline[1]} העלה דגם חדש של המוצר ${
-        postHeadline[postHeadline.length - 1]
-      }`;
+    console.log(this.props.post);
+    let postHeadline = "";
+    let postHeadlineARR = this.props.post.text.split(" ");
+    let frontarr = [];
+    console.log(postHeadline);
+    for (let index = 1; index < postHeadlineARR.length; index++) {
+      const word = postHeadlineARR[index];
+      if (word === "has") {
+        break;
+      }
+      frontarr.push(word);
     }
+    let backArr = [];
+    for (let index = postHeadlineARR.length - 1; index > 0; index--) {
+      const word = postHeadlineARR[index];
+      if (word === "item") {
+        break;
+      }
+      backArr.push(word);
+    }
+    console.log(backArr);
+
+    postHeadline = `${frontarr}   העלה ${
+      this.props.isVariation !== true ? "" : "דגם"
+    } מוצר חדש - ${backArr.reverse()}`.replaceAll(",", " ");
+    // let postHeadline = this.props.post.text.split("post")[0];
+    // if (this.props.isVariation !== true) {
+    //   postHeadline = postHeadline.replace("Account", "");
+    //   postHeadline = postHeadline.replace("has", "");
+    //   postHeadline = postHeadline.replace(
+    //     "added a new item",
+    //     " העלה מוצר חדש פה"
+    //   );
+
+    //   postHeadline = postHeadline.split("פה")[0];
+    // } else {
+    //   postHeadline = postHeadline.split(" ");
+
+    //   postHeadline = `${postHeadline[1]} העלה דגם חדש של המוצר ${
+    //     postHeadline[postHeadline.length - 1]
+    //   }`;
+    // }
     let date = new Date("2015-03-25T12:00:00Z");
 
     return (

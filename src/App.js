@@ -53,6 +53,9 @@ import StorePageLoadAll from "./pages/StorePageLoadAll";
 import Feed from "./pages/Feed";
 import Features from "./pages/Features";
 import RegisterNew from "./pages/RegisterNew";
+import SupplierFeed from "./pages/SupplierFeed";
+import loader from "react-loader-spinner";
+import Loader from "react-loader-spinner";
 //${domain}/
 class App extends React.Component {
   constructor(props) {
@@ -969,6 +972,25 @@ class App extends React.Component {
     // }
     return (
       <div className="App">
+        {/* {this.state.activeAccount &&
+        !window.location.href.includes("feed") &&
+        !window.location.href.includes("wall") ? (
+          <div
+            onClick={() => {
+              window.location.assign(
+                this.state.activeAccount.account_type == 2
+                  ? "/#/feed/"
+                  : "/#/wall/"
+              );
+            }}
+            className="floatingFeedButton"
+          >
+            <Loader type={"Hearts"} height={80} width={80} color="green" />
+          </div>
+        ) : (
+          ""
+        )} */}
+
         <FullPageLoader
           LoaderVisibilty={this.state.LoaderVisibilty}
         ></FullPageLoader>
@@ -1344,6 +1366,12 @@ class App extends React.Component {
               closeGenericModal={this.closeGenericModal}
               openGenericModal={this.openGenericModal}
             ></Pricing>
+          </Route>
+          <Route exact path="/supplier-feed/:id">
+            <SupplierFeed
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
+            ></SupplierFeed>
           </Route>
           <Route exact path="/all-orders">
             <AllOrders

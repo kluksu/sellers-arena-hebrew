@@ -128,9 +128,9 @@ class SupplierOrder extends React.Component {
   };
 
   printOrder = async () => {
-    await this.setState({ copyOriginal: " תעודת משלוח - העתק" });
-    window.print();
-    await this.setState({ copyOriginal: "תעודת משלוח - מקור " });
+    // await this.setState({ copyOriginal: " תעודת משלוח - העתק" });
+    // window.print();
+    // await this.setState({ copyOriginal: "תעודת משלוח - מקור " });
 
     window.print();
   };
@@ -456,7 +456,7 @@ class SupplierOrder extends React.Component {
             onClick={this.printOrder}
             type="button"
           >
-            הדפס תעודת משלוח
+            הדפס
           </Button>
           <Container fluid className="orderSummeryContainer">
             <DetailsOnOrderSeller
