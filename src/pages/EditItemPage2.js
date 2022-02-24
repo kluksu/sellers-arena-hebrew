@@ -377,6 +377,8 @@ class EditItemPage2 extends React.Component {
                     <option value={priceForVerified}>
                       רק משתמשים רשומים (מומלץ){" "}
                     </option>
+                    <option value={sellerContacts}>אנשי הקשר שלי בלבד</option>
+
                     {/* <option>contacts only </option>
               <option>only me (and my staff)</option> */}
                   </Form.Control>

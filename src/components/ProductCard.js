@@ -11,6 +11,7 @@ import CardDiscounts from "./CardDiscounts";
 import ProductModal from "./ProductModal";
 import QuantitySelector from "./QuantitySelector";
 import SpacielOffer from "./SpacielOffer";
+import { domain, getRandomNumberBetween } from "./utils";
 
 class ProductCard extends React.Component {
   constructor(props) {
@@ -115,6 +116,11 @@ class ProductCard extends React.Component {
     const picture =
       this.props.pictures !== null
         ? this.props.pictures
+        : domain.includes("heroku")
+        ? `https://picsum.photos/300/300?random=${getRandomNumberBetween(
+            1,
+            20000
+          )}`
         : this.props.item.image;
     const storeLInksAcive = this.props.linkAllAround;
     const batchSize = this.props.variation ? (

@@ -201,7 +201,7 @@ class Uploadpage extends React.Component {
     const priceForVerified = '{"price":5,"item":1}';
     const sellerContacts = '{"price":3,"item":1}';
     const noBody = '{"price":4,"item":1}';
-    const itemForVerified = '{"price":2,"item":2}';
+    // const itemForVerified = '{"price":2,"item":2}';
     return (
       <div className="Uploadpage">
         <Container
@@ -320,6 +320,8 @@ class Uploadpage extends React.Component {
                     <option value={priceForVerified}>
                       רק משתמשים רשומים (מומלץ){" "}
                     </option>
+                    <option value={sellerContacts}>אנשי הקשר שלי בלבד</option>
+
                     <option value={priceForAll}>כולם</option>
 
                     {/* <option>contacts only </option>
