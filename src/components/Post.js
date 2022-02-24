@@ -17,15 +17,17 @@ export default class Post extends Component {
     });
   };
   getThreadID = (userID) => {
-    this.props.allThreads.forEach((thread) => {
-      if (
-        thread.participants[0].id == userID ||
-        thread.participants[1].id == userID
-      ) {
-        this.setState({ threadID: thread.id });
-        return;
-      }
-    });
+    if (this.props.allThreads) {
+      this.props.allThreads.forEach((thread) => {
+        if (
+          thread.participants[0].id == userID ||
+          thread.participants[1].id == userID
+        ) {
+          this.setState({ threadID: thread.id });
+          return;
+        }
+      });
+    }
   };
   componentDidMount() {
     this.getThreadID(this.props.post.account_id);
