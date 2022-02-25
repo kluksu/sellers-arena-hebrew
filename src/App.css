@@ -1671,6 +1671,7 @@ label.form-label {
   transform: scale(1.2);
   color: rgb(40, 40, 143);
 }
+
 .infoBox td {
   background-color: rgb(255, 255, 255);
   font-size: 16px;
@@ -2729,6 +2730,7 @@ input {
 }
 .btn {
   font-weight: 700 !important;
+  touch-action: manipulation;
 }
 .btn-primary {
   /* background-image: linear-gradient(
