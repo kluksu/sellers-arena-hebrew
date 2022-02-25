@@ -112,6 +112,10 @@ export default class QuantitySelector extends Component {
         <>
           <div className="CardUnitsForm">
             <Button
+              onTouchStart={(e) => {
+                e.stopPropagation(e);
+                e.preventDefault(e);
+              }}
               type="button"
               className="no-print"
               variant="primary"
@@ -132,6 +136,10 @@ export default class QuantitySelector extends Component {
               </Form.Group>
             </Form>
             <Button
+              onTouchStart={(e) => {
+                e.stopPropagation(e);
+                e.preventDefault(e);
+              }}
               className="no-print"
               type="button"
               variant="primary"
