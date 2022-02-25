@@ -1200,6 +1200,8 @@ label.form-label {
   margin-top: 30px;
 } */
 .type2card {
+  touch-action: manipulation;
+
   position: relative;
   /* overflow: hidden; */
   max-width: 240px;
@@ -2730,7 +2732,6 @@ input {
 }
 .btn {
   font-weight: 700 !important;
-  touch-action: manipulation;
 }
 .btn-primary {
   /* background-image: linear-gradient(
