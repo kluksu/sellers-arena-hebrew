@@ -10,6 +10,7 @@ export let domain = "https://supplierzz.westeurope.cloudapp.azure.com";
 // export let domain = "https://supplierzz.herokuapp.com";
 export async function postData(URL = "", data = {}, token) {
   // Default options are marked with *
+
   const response = await fetch(URL, {
     method: "POST", // *GET, POST, PUT, DELETE, etc.
     mode: "cors", // no-cors, *cors, same-origin
@@ -82,6 +83,40 @@ export function shuffle(array) {
   }
 
   return array;
+}
+const delay = 500;
+// Sequential touches must be in close vicinity
+const minZoomTouchDelta = 10;
+
+// Track state of the last touch
+let lastTapAt = 0;
+let lastClientX = 0;
+let lastClientY = 0;
+
+export default function preventDoubleTapZoom(event) {
+  // Exit early if this involves more than one finger (e.g. pinch to zoom)
+  if (event.touches.length > 1) {
+    return;
+  }
+
+  const tapAt = new Date().getTime();
+  const timeDiff = tapAt - lastTapAt;
+  const { clientX, clientY } = event.touches[0];
+  const xDiff = Math.abs(lastClientX - clientX);
+  const yDiff = Math.abs(lastClientY - clientY);
+  if (
+    xDiff < minZoomTouchDelta &&
+    yDiff < minZoomTouchDelta &&
+    event.touches.length === 1 &&
+    timeDiff < delay
+  ) {
+    event.preventDefault();
+    // Trigger a fake click for the tap we just prevented
+    event.target.click();
+  }
+  lastClientX = clientX;
+  lastClientY = clientY;
+  lastTapAt = tapAt;
 }
 export const isOverflown = (elementID, XYBoth) => {
   let element = document.getElementById(elementID);

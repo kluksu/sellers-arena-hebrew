@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Form, Button } from "react-bootstrap";
+import preventDoubleTapZoom from "./utils";
 
 export default class QuantitySelector extends Component {
   constructor(props) {
@@ -112,6 +113,7 @@ export default class QuantitySelector extends Component {
         <>
           <div className="CardUnitsForm">
             <Button
+              onTouchStart={preventDoubleTapZoom}
               type="button"
               className="no-print"
               variant="primary"
@@ -122,7 +124,7 @@ export default class QuantitySelector extends Component {
             <Form>
               <Form.Group controlId="exampleForm.ControlInput1">
                 <Form.Control
-                  onChange={this.keepBatch}
+                  // onChange={this.keepBatch}
                   type="text"
                   placeholder={this.state.units}
                   value={this.state.units}
@@ -132,6 +134,7 @@ export default class QuantitySelector extends Component {
               </Form.Group>
             </Form>
             <Button
+              onTouchStart={preventDoubleTapZoom}
               className="no-print"
               type="button"
               variant="primary"
