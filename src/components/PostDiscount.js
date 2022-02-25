@@ -74,10 +74,17 @@ export default class extends Component {
       <div>
         <div onClick={() => this.showDiscounts()} className="priceFrom">
           {" "}
-          <div> החל מ-{lastPrice.toFixed(2)} ש"ח ליחידה</div>
-          <div>
-            <IoIosArrowDown></IoIosArrowDown>
-          </div>
+          {lastPrice !== 0 ? (
+            <>
+              {" "}
+              <div> החל מ-{lastPrice.toFixed(2)} ש"ח ליחידה</div>
+              <div>
+                <IoIosArrowDown></IoIosArrowDown>
+              </div>
+            </>
+          ) : (
+            "יש להתחבר עם חשבון קונה על מנת לראות את המחירים"
+          )}
         </div>
         <div
           className="postDiscountsDropDown"
