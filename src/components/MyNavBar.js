@@ -332,7 +332,7 @@ class MyNavBar extends React.Component {
               ) : (
                 ""
               )}
-              {/* <Nav.Link href="/#/pricing">מחירון</Nav.Link> */}
+              <Nav.Link href="/#/pricing">צור קשר</Nav.Link>
               <Nav.Link href="/#/suppliers">ספקים</Nav.Link>
             </Nav>
             <Nav>

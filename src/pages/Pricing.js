@@ -18,6 +18,9 @@ export default class Pricing extends Component {
           closeGenericModal={this.props.closeGenericModal}
           openGenericModal={this.props.openGenericModal}
         ></EmailForm>
+        <div className="connectUsBox">
+          <div> תמיכה : support@sapakos.com</div>
+        </div>
       </div>
     );
   }
