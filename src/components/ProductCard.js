@@ -11,7 +11,7 @@ import CardDiscounts from "./CardDiscounts";
 import ProductModal from "./ProductModal";
 import QuantitySelector from "./QuantitySelector";
 import SpacielOffer from "./SpacielOffer";
-import preventDoubleTapZoom, { domain, getRandomNumberBetween } from "./utils";
+import { domain, getRandomNumberBetween } from "./utils";
 
 class ProductCard extends React.Component {
   constructor(props) {
@@ -175,7 +175,6 @@ class ProductCard extends React.Component {
     } else {
       return (
         <div
-          onTouchStart={preventDoubleTapZoom}
           className={`type2card   zoomCard ${cardZoom}`}
           style={{ transform: cardZoom }}
         >

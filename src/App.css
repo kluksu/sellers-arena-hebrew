@@ -2,6 +2,7 @@
 * {
   box-sizing: border-box;
   /* font-family: "Montserrat", sans-serif; */
+  touch-action: manipulation;
 
   font-weight: 700;
   direction: rtl;
