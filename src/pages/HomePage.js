@@ -183,6 +183,7 @@ class HomePage extends React.Component {
           element.variation.cost_per_item === null ? (
             <ProductCard
               // type={1}
+              key={element.variation.id}
               closeGenericModal={this.props.closeGenericModal}
               openGenericModal={this.props.openGenericModal}
               userDevice={this.props.userDevice}
@@ -202,6 +203,7 @@ class HomePage extends React.Component {
           ) : (
             <ProductCard
               // type={1}
+              key={element.variation.id}
               closeGenericModal={this.props.closeGenericModal}
               openGenericModal={this.props.openGenericModal}
               userDevice={this.props.userDevice}
@@ -228,6 +230,7 @@ class HomePage extends React.Component {
         cards.push(
           <ProductCard
             // type={1}
+            key={element.variation.id}
             closeGenericModal={this.props.closeGenericModal}
             openGenericModal={this.props.openGenericModal}
             userDevice={this.props.userDevice}
@@ -253,6 +256,7 @@ class HomePage extends React.Component {
           <>
             {" "}
             <ProductCard
+              key={element.variation.id}
               // type={1}
               closeGenericModal={this.props.closeGenericModal}
               openGenericModal={this.props.openGenericModal}

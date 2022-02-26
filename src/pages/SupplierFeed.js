@@ -151,34 +151,36 @@ class SupplierFeed extends Component {
       //       ""
       //     );
       if (post.event_type === "item_created") {
-        this.getItem(post.related_id)
-          .then((res) => {
-            return (
-              <>
-                <NewItemPost
-                  //   hidePost={this.hidePost}
-                  //   deletePost={this.deletePost}
-                  closeGenericModal={this.props.closeGenericModal}
-                  openGenericModal={this.props.openGenericModal}
-                  //   allThreads={this.props.allThreads}
-                  //   handleOpenMessage={this.props.handleOpenMessage}
-                  //   handleClose={this.props.handleClose}
-                  //   addToContacts={this.props.addToContacts}
-                  //   activeAccount={this.props.activeAccount}
-                  //   accessToken={this.props.accessToken}
-                  post={post}
-                ></NewItemPost>
-                {/* {horizontalScrollBox} */}
-              </>
-            );
-          })
-          .catch((error) => {
-            return;
-          });
+        // this.getItem(post.related_id)
+        //   .then((res) => {
+        return;
+        //  (
+        //   <>
+        //     <NewItemPost
+        //       //   hidePost={this.hidePost}
+        //       //   deletePost={this.deletePost}
+        //       closeGenericModal={this.props.closeGenericModal}
+        //       openGenericModal={this.props.openGenericModal}
+        //       //   allThreads={this.props.allThreads}
+        //       //   handleOpenMessage={this.props.handleOpenMessage}
+        //       //   handleClose={this.props.handleClose}
+        //       //   addToContacts={this.props.addToContacts}
+        //       //   activeAccount={this.props.activeAccount}
+        //       //   accessToken={this.props.accessToken}
+        //       post={post}
+        //     ></NewItemPost>
+        //     {/* {horizontalScrollBox} */}
+        //   </>
+        // );
+        // })
+        // .catch((error) => {
+        //   return;
+        // });
       } else if (post.event_type === "account_post") {
         return (
           <>
             <Post
+              key={post.id}
               //   hidePost={this.hidePost}
               //   deletePost={this.deletePost}
               //   myItems={this.state.myItems}
@@ -199,6 +201,7 @@ class SupplierFeed extends Component {
         return (
           <>
             <NewVariationPost
+              key={post.id}
               //   closeGenericModal={this.props.closeGenericModal}
               //   openGenericModal={this.props.openGenericModal}
               //   hidePost={this.hidePost}
@@ -220,6 +223,7 @@ class SupplierFeed extends Component {
         return (
           <>
             <DiscountPost
+              key={post.id}
               //   closeGenericModal={this.props.closeGenericModal}
               //   openGenericModal={this.props.openGenericModal}
               //   hidePost={this.hidePost}
@@ -241,6 +245,7 @@ class SupplierFeed extends Component {
         return (
           <>
             <PriceDropPost
+              key={post.id}
               //   closeGenericModal={this.props.closeGenericModal}
               //   openGenericModal={this.props.openGenericModal}
               //   hidePost={this.hidePost}
@@ -262,6 +267,7 @@ class SupplierFeed extends Component {
         return (
           <>
             <NewStockPost
+              key={post.id}
               //   closeGenericModal={this.props.closeGenericModal}
               //   openGenericModal={this.props.openGenericModal}
               //   hidePost={this.hidePost}

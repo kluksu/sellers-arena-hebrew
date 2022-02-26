@@ -863,6 +863,7 @@ class StorePage extends React.Component {
           let card =
             variation.cost_per_item === null ? (
               <ProductCard
+                key={variation.id}
                 closeGenericModal={this.props.closeGenericModal}
                 openGenericModal={this.props.openGenericModal}
                 userDevice={this.props.userDevice}
@@ -881,6 +882,7 @@ class StorePage extends React.Component {
               </ProductCard>
             ) : (
               <ProductCard
+                key={variation.id}
                 closeGenericModal={this.props.closeGenericModal}
                 openGenericModal={this.props.openGenericModal}
                 screenWidth={this.props.screenWidth}
@@ -903,6 +905,7 @@ class StorePage extends React.Component {
         } else if (this.props.accessToken && variation.cost_per_item !== null) {
           cards.push(
             <ProductCard
+              key={variation.id}
               closeGenericModal={this.props.closeGenericModal}
               openGenericModal={this.props.openGenericModal}
               screenWidth={this.props.screenWidth}
@@ -922,6 +925,7 @@ class StorePage extends React.Component {
         } else if (this.props.accessToken && variation.cost_per_item == null)
           cards.push(
             <ProductCard
+              key={variation.id}
               closeGenericModal={this.props.closeGenericModal}
               openGenericModal={this.props.openGenericModal}
               screenWidth={this.props.screenWidth}

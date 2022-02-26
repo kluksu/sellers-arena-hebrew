@@ -188,6 +188,7 @@ export default class Wall extends Component {
         return (
           <>
             <Post
+              key={post.id}
               hidePost={this.hidePost}
               deletePost={this.deletePost}
               myItems={this.state.myItems}
@@ -208,6 +209,7 @@ export default class Wall extends Component {
         return (
           <>
             <NewVariationPost
+              key={post.id}
               closeGenericModal={this.props.closeGenericModal}
               openGenericModal={this.props.openGenericModal}
               hidePost={this.hidePost}
@@ -229,6 +231,7 @@ export default class Wall extends Component {
         return (
           <>
             <DiscountPost
+              key={post.id}
               closeGenericModal={this.props.closeGenericModal}
               openGenericModal={this.props.openGenericModal}
               hidePost={this.hidePost}
@@ -250,6 +253,7 @@ export default class Wall extends Component {
         return (
           <>
             <PriceDropPost
+              key={post.id}
               closeGenericModal={this.props.closeGenericModal}
               openGenericModal={this.props.openGenericModal}
               hidePost={this.hidePost}
@@ -271,6 +275,7 @@ export default class Wall extends Component {
         return (
           <>
             <NewStockPost
+              key={post.id}
               closeGenericModal={this.props.closeGenericModal}
               openGenericModal={this.props.openGenericModal}
               hidePost={this.hidePost}

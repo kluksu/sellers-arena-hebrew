@@ -141,7 +141,7 @@ export default class Feed extends Component {
         // );
       } else if (post.event_type === "account_post") {
         return (
-          <>
+          <div key={post.id}>
             <Post
               closeGenericModal={this.props.closeGenericModal}
               openGenericModal={this.props.openGenericModal}
@@ -154,11 +154,11 @@ export default class Feed extends Component {
               post={post}
             ></Post>
             {horizontalScrollBox}
-          </>
+          </div>
         );
       } else if (post.event_type === "variation_created") {
         return (
-          <>
+          <div key={post.id}>
             <NewVariationPost
               closeGenericModal={this.props.closeGenericModal}
               openGenericModal={this.props.openGenericModal}
@@ -171,11 +171,11 @@ export default class Feed extends Component {
               post={post}
             ></NewVariationPost>
             {horizontalScrollBox}
-          </>
+          </div>
         );
       } else if (post.event_type === "variation_public_discount_changed") {
         return (
-          <>
+          <div key={post.id}>
             <DiscountPost
               closeGenericModal={this.props.closeGenericModal}
               openGenericModal={this.props.openGenericModal}
@@ -192,11 +192,11 @@ export default class Feed extends Component {
               post={post}
             ></DiscountPost>
             {horizontalScrollBox}
-          </>
+          </div>
         );
       } else if (post.event_type === "variation_price_drop") {
         return (
-          <>
+          <div key={post.id}>
             <PriceDropPost
               closeGenericModal={this.props.closeGenericModal}
               openGenericModal={this.props.openGenericModal}
@@ -213,11 +213,11 @@ export default class Feed extends Component {
               post={post}
             ></PriceDropPost>
             {horizontalScrollBox}
-          </>
+          </div>
         );
       } else if (post.event_type === "variation_stock_increase") {
         return (
-          <>
+          <div key={post.id}>
             <NewStockPost
               closeGenericModal={this.props.closeGenericModal}
               openGenericModal={this.props.openGenericModal}
@@ -234,7 +234,7 @@ export default class Feed extends Component {
               post={post}
             ></NewStockPost>
             {horizontalScrollBox}
-          </>
+          </div>
         );
       }
     });

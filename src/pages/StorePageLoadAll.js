@@ -1080,6 +1080,7 @@ class StorePageLoadAll extends React.Component {
                 let card =
                   variation.cost_per_item === null ? (
                     <ProductCard
+                      key={variation.id}
                       cartItems={this.state.cartItems}
                       closeGenericModal={this.props.closeGenericModal}
                       openGenericModal={this.props.openGenericModal}
@@ -1100,6 +1101,7 @@ class StorePageLoadAll extends React.Component {
                     </ProductCard>
                   ) : (
                     <ProductCard
+                      key={variation.id}
                       cartItems={this.state.cartItems}
                       closeGenericModal={this.props.closeGenericModal}
                       openGenericModal={this.props.openGenericModal}
@@ -1127,6 +1129,7 @@ class StorePageLoadAll extends React.Component {
               ) {
                 cards.push(
                   <ProductCard
+                    key={variation.id}
                     cartItems={this.state.cartItems}
                     closeGenericModal={this.props.closeGenericModal}
                     openGenericModal={this.props.openGenericModal}
@@ -1155,6 +1158,7 @@ class StorePageLoadAll extends React.Component {
               )
                 cards.push(
                   <ProductCard
+                    key={variation.id}
                     cartItems={this.state.cartItems}
                     closeGenericModal={this.props.closeGenericModal}
                     openGenericModal={this.props.openGenericModal}
