@@ -160,30 +160,30 @@ export default class Wall extends Component {
           ""
         );
       if (post.event_type === "item_created") {
-        this.getItem(post.related_id)
-          .then((res) => {
-            return (
-              <>
-                <NewItemPost
-                  hidePost={this.hidePost}
-                  deletePost={this.deletePost}
-                  closeGenericModal={this.props.closeGenericModal}
-                  openGenericModal={this.props.openGenericModal}
-                  allThreads={this.props.allThreads}
-                  handleOpenMessage={this.props.handleOpenMessage}
-                  handleClose={this.props.handleClose}
-                  addToContacts={this.props.addToContacts}
-                  activeAccount={this.props.activeAccount}
-                  accessToken={this.props.accessToken}
-                  post={post}
-                ></NewItemPost>
-                {horizontalScrollBox}
-              </>
-            );
-          })
-          .catch((error) => {
-            return;
-          });
+        // this.getItem(post.related_id)
+        //   .then((res) => {
+        return;
+        //   <>
+        //     <NewItemPost
+        //       hidePost={this.hidePost}
+        //       deletePost={this.deletePost}
+        //       closeGenericModal={this.props.closeGenericModal}
+        //       openGenericModal={this.props.openGenericModal}
+        //       allThreads={this.props.allThreads}
+        //       handleOpenMessage={this.props.handleOpenMessage}
+        //       handleClose={this.props.handleClose}
+        //       addToContacts={this.props.addToContacts}
+        //       activeAccount={this.props.activeAccount}
+        //       accessToken={this.props.accessToken}
+        //       post={post}
+        //     ></NewItemPost>
+        //     {horizontalScrollBox}
+        //   </>
+
+        // })
+        // .catch((error) => {
+        // return;
+        // });
       } else if (post.event_type === "account_post") {
         return (
           <>

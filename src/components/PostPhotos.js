@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Loader from "react-loader-spinner";
 import PrecentOff from "./PrecentOff";
 import ScrollButtons from "./ScrollButtons";
 import SpacielOffer from "./SpacielOffer";
@@ -9,13 +10,17 @@ export default class PostPhotos extends Component {
       <div>
         <div className="postPhotosUpperImageContainer">
           {" "}
-          <img
-            src={
-              this.props.mainPicture
-                ? this.props.mainPicture
-                : this.props.item.image
-            }
-          ></img>
+          {this.props.item.image || this.props.mainPicture ? (
+            <img
+              src={
+                this.props.mainPicture
+                  ? this.props.mainPicture
+                  : this.props.item.image
+              }
+            ></img>
+          ) : (
+            <Loader type="TailSpin" color="gray"></Loader>
+          )}
           {this.props.discountPrecentage ? (
             <PrecentOff precent={this.props.discountPrecentage}></PrecentOff>
           ) : (
