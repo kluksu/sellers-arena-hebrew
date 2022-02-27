@@ -3,12 +3,15 @@ import React, { Component } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import ReadAllBox from "../components/ReadAllBox";
 import { domain, handleKeyDown, postData } from "../components/utils";
+import PrivecyPolicy from "./PrivecyPolicy";
+import TermOfUse from "./TermOfUse";
 
 export default class extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isTermsCheckboxDisabled: true,
+      isPrivecyCheckboxDisabled: true,
     };
   }
   sendForm = () => {
@@ -18,6 +21,8 @@ export default class extends Component {
       phone_number: this.state.phone_number,
       terms_agreed: this.state.terms_agreed,
       terms_revision: "1.0.0",
+      privacy_policy_revision: "1.0.0",
+      privacy_policy_agreed: this.state.privacy_policy_agreed,
       first_name: this.state.first_name,
       last_name: this.state.last_name,
     })
@@ -41,8 +46,8 @@ export default class extends Component {
         console.log(error);
       });
   };
-  activetTermsCheckbox = () => {
-    this.setState({ isTermsCheckboxDisabled: false });
+  activetTermsCheckbox = (state) => {
+    this.setState({ [state]: false });
   };
   handleInputChange(event) {
     const target = event.target;
@@ -161,8 +166,14 @@ export default class extends Component {
               this.props.openGenericModal(
                 "עליך לקרוא את כל התנאים ורק אז לאשר או לדחות ",
                 <ReadAllBox
-                  runFunction={this.activetTermsCheckbox}
-                ></ReadAllBox>
+                  runFunction={() =>
+                    this.activetTermsCheckbox("isTermsCheckboxDisabled")
+                  }
+                  content={<TermOfUse></TermOfUse>}
+                ></ReadAllBox>,
+                "",
+                "",
+                "modal90W"
               )
             }
             href={window.location.href}
@@ -185,6 +196,47 @@ export default class extends Component {
               קראתי ואני מאשר את תנאי השימוש של האתר{" "}
             </label>
             <p className="FormRejects">{this.state.terms_agreed_error}</p>
+          </div>
+        </div>
+        <div>
+          נא אשר את{" "}
+          <a
+            onClick={() =>
+              this.props.openGenericModal(
+                "עליך לקרוא את כל התנאים ורק אז לאשר או לדחות ",
+                <ReadAllBox
+                  runFunction={() =>
+                    this.activetTermsCheckbox("isPrivecyCheckboxDisabled")
+                  }
+                  content={<PrivecyPolicy></PrivecyPolicy>}
+                ></ReadAllBox>,
+                "",
+                "",
+                "modal90W"
+              )
+            }
+            href={window.location.href}
+          >
+            מדיניות הפרטיות <br></br>
+          </a>
+          (ניתן לאשר את מדיניות הפרטיות רק לאחר קריאתה)
+          <div>
+            <input
+              onChange={(e) => this.handleInputChange(e)}
+              disabled={this.state.isPrivecyCheckboxDisabled}
+              // checked={false}
+              type="checkbox"
+              // value="approved"
+              id="horns"
+              name="privacy_policy_agreed"
+            ></input>
+            <label for="privacy_policy_agreed">
+              {" "}
+              קראתי ואני מאשר את מדיניות הפרטיות של האתר
+            </label>
+            <p className="FormRejects">
+              {this.state.privacy_policy_agreed_error}
+            </p>
           </div>
         </div>
         <Button onClick={this.sendForm} type="button">

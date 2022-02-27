@@ -168,7 +168,7 @@ class HomePage extends React.Component {
       //    showSubCategories.push(<option value={subcategory}>{subcategory}</option>)
       //  });}); }
     });
-    // let cards = [];
+    let cards = [];
     // for (let i = 0; i < this.state.showList.length; i++) {
     //   const element = this.state.showList[i];
 
@@ -180,7 +180,7 @@ class HomePage extends React.Component {
     //     .toUpperCase()
     //     .includes(this.state.searchText.toUpperCase())
     // ) {
-    let cards =
+    cards =
       this.state.showList.length != 0
         ? this.state.showList.map((item, i) => {
             return item.item_variations.map((variation) => {

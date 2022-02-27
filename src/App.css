@@ -14,6 +14,15 @@
   /* overflow-x: hidden; */
   /* text-align: right; */
 }
+.privacyPolicyPage {
+  padding: 70px;
+}
+.privacyPolicyPage td {
+  border: 1px SOLID BLACK;
+}
+.privacyPolicyPage table {
+  margin: auto;
+}
 .postHeadline {
   font-size: 14px;
 }

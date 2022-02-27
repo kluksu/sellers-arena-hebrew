@@ -56,6 +56,9 @@ import RegisterNew from "./pages/RegisterNew";
 import SupplierFeed from "./pages/SupplierFeed";
 import loader from "react-loader-spinner";
 import Loader from "react-loader-spinner";
+import PrivecyPolicy from "./pages/PrivecyPolicy";
+import BottomNav from "./components/BottomNav";
+import TermOfUse from "./pages/TermOfUse";
 //${domain}/
 class App extends React.Component {
   constructor(props) {
@@ -1356,7 +1359,7 @@ class App extends React.Component {
               accessToken={this.state.accessToken}
             ></Profile>
           </Route>
-          <Route exact path="/pricing">
+          <Route exact path="/connect-us">
             <Pricing
               captchaResponse={this.state.captchaResponse}
               isRealUser={this.state.isRealUser}
@@ -1372,6 +1375,12 @@ class App extends React.Component {
               closeGenericModal={this.closeGenericModal}
               openGenericModal={this.openGenericModal}
             ></SupplierFeed>
+          </Route>
+          <Route exact path="/privecy_policy_sapakos">
+            <PrivecyPolicy></PrivecyPolicy>
+          </Route>
+          <Route exact path="/terms_of_use_sapakos">
+            <TermOfUse></TermOfUse>
           </Route>
           <Route exact path="/all-orders">
             <AllOrders
@@ -1414,6 +1423,7 @@ class App extends React.Component {
             isDiscountModalOpen={this.state.isGenericModalOpen}
           ></DiscountModal>
         </HashRouter>
+        <BottomNav></BottomNav>
       </div>
     );
   }

@@ -32,76 +32,7 @@ export default class extends Component {
   render() {
     return (
       <div onScroll={this.handleScroll} className="readAllBox">
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasvadfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasvadfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasvadfgdfgdhadfgdfgdhawsfawfasvfasvasvadfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasvadfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasvadfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasvadfgdfgdhadfgdfgdhawsfawfasvfasvasvadfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasvadfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasvadfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasvadfgdfgdhadfgdfgdhawsfawfasvfasvasvadfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasvadfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasvadfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasvadfgdfgdhadfgdfgdhawsfawfasvfasvasvadfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasvadfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasvadfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasvadfgdfgdhadfgdfgdhawsfawfasvfasvasvadfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasvadfgdfgdhadfgdfgdhawsfawfasvfasvasva
-        dfgdfgdhadfgdfgdhawsfawfasvfasvasva dfgdfgdhadfgdfgdhawsfawfasvfasvasva{" "}
+        {this.props.content}
         <div id="lowerTerms"> </div>
       </div>
     );
