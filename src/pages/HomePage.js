@@ -25,6 +25,8 @@ import "react-pro-sidebar/dist/css/styles.css";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { CgArrowLeftO } from "react-icons/cg";
 import Loader from "react-loader-spinner";
+import { uniqueId } from "lodash";
+import { v4 as uuidv4 } from "uuid";
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -76,7 +78,7 @@ class HomePage extends React.Component {
     const nextfetch =
       this.state.next !== undefined
         ? this.state.next
-        : `${domain}/public-items/?limit=20&search=${searchTerm}`;
+        : `${domain}/public-items/?limit=20`;
 
     const authorization = !this.props.accessToken
       ? null
@@ -89,30 +91,33 @@ class HomePage extends React.Component {
       .get(nextfetch, config)
       .then(
         (response) => {
-          this.setState({ ipmortedItems: response.data.results });
+          // this.setState({ ipmortedItems: response.data.results });
           this.setState({ itemsCount: response.data.count });
           this.setState({ next: response.data.next });
-          for (let i = 0; i < this.state.ipmortedItems.length; i++) {
-            const item = this.state.ipmortedItems[i];
-            // axios
-            //   .get(`${domain}/accounts/${item.id}`, config)
-            //   .then((response) => {});
-            for (let j = 0; j < item.item_variations.length; j++) {
-              const variation = item.item_variations[j];
+          // for (let i = 0; i < response.data.results.length; i++) {
+          //   const item = response.data.results[i];
+          //   // axios
+          //   //   .get(`${domain}/accounts/${item.id}`, config)
+          //   //   .then((response) => {});
+          //   for (let j = 0; j < item.item_variations.length; j++) {
+          //     const variation = item.item_variations[j];
 
-              this.setState({
-                variations: this.state.variations.concat(variation),
-              });
+          //     // this.setState({
+          //     //   variations: this.state.variations.concat(variation),
+          //     // });
 
-              let fullItem = {
-                item: item,
-                variation: variation,
-                image: variation.image,
-              };
-              this.setState({ showList: this.state.showList.concat(fullItem) });
-            }
-          }
+          //     let fullItem = {
+          //       item: item,
+          //       variation: variation,
+          //       image: variation.image,
+          //     };
+          console.log(response.data.results);
+          this.setState({
+            showList: this.state.showList.concat(response.data.results),
+          });
         }
+        // }
+        // }
         // () => {
         //   this.getItems();
         // }
@@ -146,9 +151,9 @@ class HomePage extends React.Component {
     //  let showSubCategories=[]
     let showCategories = [];
 
-    categoriesAndSubCategories.forEach((category) => {
+    categoriesAndSubCategories.forEach((category, i) => {
       showCategories.push(
-        <MenuItem>
+        <MenuItem key={i}>
           <Link to={`/category/${Object.keys(category)}`} />
           {Object.keys(category)}
         </MenuItem>
@@ -163,121 +168,124 @@ class HomePage extends React.Component {
       //    showSubCategories.push(<option value={subcategory}>{subcategory}</option>)
       //  });}); }
     });
-    let cards = [];
-    for (let i = 0; i < this.state.showList.length; i++) {
-      const element = this.state.showList[i];
-      let shortName =
-        element.item.name.length > 11
-          ? element.item.name.slice(12, element.item.name.length)
-          : element.item.name;
-      // cards.push(<ProductCard productName={`${element.item.name}.....`} price="register to see prices"
-      // pictures={element.image}>  </ProductCard>)
-      /*search if*/
-      //  if (
-      //   element.item.name
-      //     .toUpperCase()
-      //     .includes(this.state.searchText.toUpperCase())
-      // ) {
-      if (!this.props.accessToken) {
-        let card =
-          element.variation.cost_per_item === null ? (
-            <ProductCard
-              // type={1}
-              key={element.variation.id}
-              closeGenericModal={this.props.closeGenericModal}
-              openGenericModal={this.props.openGenericModal}
-              userDevice={this.props.userDevice}
-              screenWidth={this.props.screenWidth}
-              activeAccount={this.props.activeAccount}
-              item={element.item}
-              variation={element.variation}
-              productInfoLink={`/#/StorePage/${element.item.account}/product_page/${element.item.id}`}
-              linkAllAround={`/#/StorePage/${element.item.account}`}
-              currency={""}
-              productName={`${element.item.name}`}
-              price="הרשם  חינם לקבלת מידע נוסף"
-              pictures={element.image}
-            >
-              {" "}
-            </ProductCard>
-          ) : (
-            <ProductCard
-              // type={1}
-              key={element.variation.id}
-              closeGenericModal={this.props.closeGenericModal}
-              openGenericModal={this.props.openGenericModal}
-              userDevice={this.props.userDevice}
-              screenWidth={this.props.screenWidth}
-              activeAccount={this.props.activeAccount}
-              item={element.item}
-              variation={element.variation}
-              productInfoLink={`/#/StorePage/${element.item.account}/product_page/${element.item.id}`}
-              linkAllAround={`/#/StorePage/${element.item.account}`}
-              productName={`${element.item.name}`}
-              price={element.variation.cost_per_item}
-              pictures={element.image}
-              currency={element.item.currency}
-            >
-              {" "}
-            </ProductCard>
-          );
+    // let cards = [];
+    // for (let i = 0; i < this.state.showList.length; i++) {
+    //   const element = this.state.showList[i];
 
-        cards.push(card);
-      } else if (
-        this.props.accessToken &&
-        element.variation.cost_per_item !== null
-      ) {
-        cards.push(
-          <ProductCard
-            // type={1}
-            key={element.variation.id}
-            closeGenericModal={this.props.closeGenericModal}
-            openGenericModal={this.props.openGenericModal}
-            userDevice={this.props.userDevice}
-            screenWidth={this.props.screenWidth}
-            activeAccount={this.props.activeAccount}
-            item={element.item}
-            variation={element.variation}
-            productInfoLink={`/#/StorePage/${element.item.account}/product_page/${element.item.id}`}
-            linkAllAround={`/#/StorePage/${element.item.account}`}
-            productName={`${element.item.name}`}
-            currency={element.item.currency}
-            price={element.variation.cost_per_item}
-            pictures={element.image}
-          >
-            {" "}
-          </ProductCard>
-        );
-      } else if (
-        this.props.accessToken &&
-        element.variation.cost_per_item == null
-      )
-        cards.push(
-          <>
-            {" "}
-            <ProductCard
-              key={element.variation.id}
-              // type={1}
-              closeGenericModal={this.props.closeGenericModal}
-              openGenericModal={this.props.openGenericModal}
-              userDevice={this.props.userDevice}
-              screenWidth={this.props.screenWidth}
-              activeAccount={this.props.activeAccount}
-              item={element.item}
-              variation={element.variation}
-              productInfoLink={`/#/StorePage/${element.item.account}/product_page/${element.item.id}`}
-              linkAllAround={`/#/StorePage/${element.item.account}`}
-              productName={`${element.item.name}`}
-              price="על מנת לראות את המחיר עליך להיות ברשימת אנשי הקשר של ספק זה"
-              currency={""}
-              pictures={element.image}
-            >
-              {" "}
-            </ProductCard>
-          </>
-        );
-      // }
-    }
+    // cards.push(<ProductCard productName={`${item.name}.....`} price="register to see prices"
+    // pictures={element.image}>  </ProductCard>)
+    /*search if*/
+    //  if (
+    //   element.item.name
+    //     .toUpperCase()
+    //     .includes(this.state.searchText.toUpperCase())
+    // ) {
+    let cards =
+      this.state.showList.length != 0
+        ? this.state.showList.map((item, i) => {
+            return item.item_variations.map((variation) => {
+              if (!this.props.accessToken) {
+                console.log(variation.id);
+                let card =
+                  variation.cost_per_item === null ? (
+                    <ProductCard
+                      // type={1}
+                      key={uuidv4()}
+                      closeGenericModal={this.props.closeGenericModal}
+                      openGenericModal={this.props.openGenericModal}
+                      userDevice={this.props.userDevice}
+                      screenWidth={this.props.screenWidth}
+                      activeAccount={this.props.activeAccount}
+                      item={item}
+                      variation={variation}
+                      productInfoLink={`/#/StorePage/${item.account}/product_page/${item.id}`}
+                      linkAllAround={`/#/StorePage/${item.account}`}
+                      currency={""}
+                      productName={`${item.name}`}
+                      price="הרשם  חינם לקבלת מידע נוסף"
+                      pictures={variation.image ? variation.image : item.image}
+                    >
+                      {" "}
+                    </ProductCard>
+                  ) : (
+                    <ProductCard
+                      // type={1}
+                      key={uuidv4()}
+                      closeGenericModal={this.props.closeGenericModal}
+                      openGenericModal={this.props.openGenericModal}
+                      userDevice={this.props.userDevice}
+                      screenWidth={this.props.screenWidth}
+                      activeAccount={this.props.activeAccount}
+                      item={item}
+                      variation={variation}
+                      productInfoLink={`/#/StorePage/${item.account}/product_page/${item.id}`}
+                      linkAllAround={`/#/StorePage/${item.account}`}
+                      productName={`${item.name}`}
+                      price={variation.cost_per_item}
+                      pictures={variation.image ? variation.image : item.image}
+                      currency={item.currency}
+                    >
+                      {" "}
+                    </ProductCard>
+                  );
+
+                return card;
+              } else if (
+                this.props.accessToken &&
+                variation.cost_per_item !== null
+              ) {
+                return (
+                  <ProductCard
+                    // type={1}
+                    key={uuidv4()}
+                    closeGenericModal={this.props.closeGenericModal}
+                    openGenericModal={this.props.openGenericModal}
+                    userDevice={this.props.userDevice}
+                    screenWidth={this.props.screenWidth}
+                    activeAccount={this.props.activeAccount}
+                    item={item}
+                    variation={variation}
+                    productInfoLink={`/#/StorePage/${item.account}/product_page/${item.id}`}
+                    linkAllAround={`/#/StorePage/${item.account}`}
+                    productName={`${item.name}`}
+                    currency={item.currency}
+                    price={variation.cost_per_item}
+                    pictures={variation.image ? variation.image : item.image}
+                  >
+                    {" "}
+                  </ProductCard>
+                );
+              } else if (
+                this.props.accessToken &&
+                variation.cost_per_item == null
+              )
+                return (
+                  <ProductCard
+                    // type={1}
+                    key={uuidv4()}
+                    closeGenericModal={this.props.closeGenericModal}
+                    openGenericModal={this.props.openGenericModal}
+                    userDevice={this.props.userDevice}
+                    screenWidth={this.props.screenWidth}
+                    activeAccount={this.props.activeAccount}
+                    item={item}
+                    variation={variation}
+                    productInfoLink={`/#/StorePage/${item.account}/product_page/${item.id}`}
+                    linkAllAround={`/#/StorePage/${item.account}`}
+                    productName={`${item.name}`}
+                    price="על מנת לראות את המחיר עליך להיות ברשימת אנשי הקשר של ספק זה"
+                    currency={""}
+                    pictures={variation.image ? variation.image : item.image}
+                  >
+                    {" "}
+                  </ProductCard>
+                );
+            });
+          })
+        : "";
+
+    // }
+    // }
 
     // {  <Col xl={4} className="productCardContainer">
     //   <img src={this.props.pictures} alt="product picture"/>
@@ -322,6 +330,7 @@ class HomePage extends React.Component {
           </Col>
           <Col className="homePageCol" style={{ paddingLeft: "0px" }}>
             <InfiniteScroll
+              // scrollThreshold={0.1}
               style={{
                 // paddingRight: infiniteCrollPaddingLeft,
                 marginRight: "20px",
