@@ -854,6 +854,7 @@ aside.emoji-picker-react:hover {
     flex-wrap: nowrap;
     overflow-x: scroll;
     background-color: #1d1237;
+    /* height: fit-content !important; */
   }
 
   .inStoreCategoryButton {

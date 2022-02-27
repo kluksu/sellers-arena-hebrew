@@ -175,6 +175,7 @@ class StorePageScroll extends React.Component {
     this.setState({ searchText: "" });
   };
   getItems = (token) => {
+    console.log("gotit");
     // if (this.state.next !== null) {
     const path =
       this.props.activeAccount &&
@@ -184,7 +185,7 @@ class StorePageScroll extends React.Component {
     const next =
       this.state.next !== undefined
         ? this.state.next
-        : `${domain}/${path}/?limit=5&offset=0&account_id=${this.props.match.params.id}&search=${this.state.searchText}&subcategory=${this.state.activeSubCategory}`;
+        : `${domain}/${path}/?limit=20&offset=0&account_id=${this.props.match.params.id}&search=${this.state.searchText}&subcategory=${this.state.activeSubCategory}`;
     const tokenfull = this.props.accessToken ? this.props.accessToken : token;
     const authorization = !this.props.accessToken
       ? null
@@ -270,7 +271,7 @@ class StorePageScroll extends React.Component {
         // this.getItems();
       } else {
         //if account type 3 prevent first items load
-        this.getItems();
+        // this.getItems();
       }
     }
     let userID =
@@ -386,6 +387,9 @@ class StorePageScroll extends React.Component {
   };
 
   componentDidMount() {
+    if (this.props.activeAccount) {
+      this.getItems();
+    }
     this.props.MyShoppingCarts.forEach((cart) => {
       if (cart.seller_account == this.props.match.params.id) {
         this.setState({ existingCart: true });
@@ -538,6 +542,10 @@ class StorePageScroll extends React.Component {
     //   //   this.getItems();
     // }
     if (this.state.currentStore.id !== prevState.currentStore.id) {
+      await this.setState({ showList: [], next: undefined });
+
+      this.getItems();
+
       this.getStoreCategoriesList(this.state.currentStore.id);
     }
     if (this.props.match.params.id !== prevProps.match.params.id) {
@@ -1282,11 +1290,11 @@ class StorePageScroll extends React.Component {
                 </Col> */}
           <Col className="productCardsCol">
             <InfiniteScroll
-              className="homePage"
+              className="productCardsRow"
               dataLength={cards.length}
               next={() => this.getItems()}
-              hasMore={true}
-              loader={loader}
+              hasMore={this.state.next !== null ? true : false}
+              loader={this.state.next !== null ? loader : "אין עוד מוצרים"}
             >
               <Row
                 className="productCardsRow"
