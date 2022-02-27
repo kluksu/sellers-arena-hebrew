@@ -10,6 +10,7 @@ import DetailsOnOrderSeller from "../components/DetailsOnOrderSeller";
 import detailsOnOrderBuyer from "../components/DetailsOnOrderBuyer";
 import DetailsOnOrderBuyer from "../components/DetailsOnOrderBuyer";
 import moment from "moment";
+import FullPageLoader from "../components/FullPageLoader";
 
 class SupplierOrder extends React.Component {
   constructor(props) {
@@ -455,7 +456,7 @@ class SupplierOrder extends React.Component {
       buyeraddress = this.state.buyer.store_address;
       buyeraddress = buyeraddress.replaceAll(" ", "20%");
     }
-    if (this.state.activeCart !== "") {
+    if (this.state.activeCart !== "" && this.props.activeAccount) {
       return (
         <div className="OrderSummeryPage">
           <h1 className="printOnly"> {this.state.copyOriginal}</h1>
@@ -543,7 +544,7 @@ class SupplierOrder extends React.Component {
           ></DiscountModal>
         </div>
       );
-    } else return null;
+    } else return <FullPageLoader></FullPageLoader>;
   }
 }
 export default withRouter(SupplierOrder);
