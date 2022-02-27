@@ -15,7 +15,7 @@ export default class BottomNav extends Component {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="/#/privecy_policy_sapakos">
+              <Nav.Link href="/#/privacy_policy_sapakos">
                 מדיניות הפרטיות
               </Nav.Link>
               <Nav.Link href="/#/terms_of_use_sapakos">תנאי שימוש</Nav.Link>

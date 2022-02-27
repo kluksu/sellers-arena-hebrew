@@ -24,6 +24,7 @@ import { ProSidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { CgArrowLeftO } from "react-icons/cg";
+import BottomNav from "../components/BottomNav";
 
 class FiltteredCategoryPage extends React.Component {
   constructor(props) {
@@ -341,6 +342,7 @@ class FiltteredCategoryPage extends React.Component {
             </InfiniteScroll>
           </Col>
         </Row>
+        <BottomNav></BottomNav>
       </>
     );
   }

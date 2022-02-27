@@ -8,31 +8,21 @@ export default class PrivecyPolicy extends Component {
         <Container>
           <h1> מדיניות הפרטיות</h1>
           <p>
-            <p dir="rtl">
-              <strong>מדיניות פרטיות</strong>
-            </p>
+            <p dir="rtl">מדיניות פרטיות</p>
             <p dir="rtl">
               <br></br>&nbsp;
             </p>
             <p dir="rtl">
-              ברוך הבא לאתר&nbsp;Sapakos.com (<strong>&quot;</strong>
-              <strong>האתר</strong>
-              <strong>&quot;</strong>). האתר בבעלות ומופעל על ידי ספקוס
-              בע&quot;מ&nbsp;(&quot;<strong>ספקוס</strong>&quot;), חברה בהקמה,
-              בשם זה או כל שם אחר שיאושר על ידי רשם החברות, שכתובתה
-              נמצאת&nbsp;הבנים&nbsp;12 הוד השרון&nbsp;(<strong>&quot;</strong>
-              <strong>החברה</strong>
-              <strong>&quot;</strong>, <strong>&quot;</strong>
-              <strong>אנחנו</strong>
-              <strong>&quot;</strong>, &quot;<strong>שלנו</strong>
-              <strong>&quot;</strong>).
+              ברוך הבא לאתר&nbsp;Sapakos.com (&quot; האתר &quot;). האתר בבעלות
+              ומופעל על ידי ספקוס בע&quot;מ&nbsp;(&quot;ספקוס&quot;), חברה
+              בהקמה, בשם זה או כל שם אחר שיאושר על ידי רשם החברות, שכתובתה
+              נמצאת&nbsp;הבנים&nbsp;12 הוד השרון&nbsp;(&quot; החברה &quot;,
+              &quot; אנחנו &quot;, &quot;שלנו &quot;).
             </p>
             <p dir="rtl">
               האתר מציע ללקוחותיו, בתי עסק וספקים, פלטפורמה מקוונת להנגשת מלאי
-              מוצרים על ידי ספקים להזמנה על ידיד בתי עסק&nbsp;(
-              <strong>&quot;</strong>
-              <strong>המוצר</strong>
-              <strong>&quot;</strong>).
+              מוצרים על ידי ספקים להזמנה על ידי בתי עסק&nbsp;( &quot; המוצר
+              &quot;).
             </p>
             <p dir="rtl">
               מדיניות פרטיות זו חלה על המידע האישי הנאסף כאשר אתה נכנס לאתר או
@@ -48,38 +38,30 @@ export default class PrivecyPolicy extends Component {
               <tbody>
                 <tr>
                   <td colspan="2" valign="top" width="100%">
-                    <p>
-                      <strong>מידע אישי שאנו מעבדים</strong>
-                    </p>
+                    <p>מידע אישי שאנו מעבדים</p>
                   </td>
                 </tr>
                 <tr>
                   <td width="36.97705802968961%">
                     <p>
-                      <strong>
-                        אנו מעבדים מידע שאתה מוסר לנו מרצונך ובידיעתך
-                      </strong>
-                      <strong>,&nbsp;</strong>
-                      <strong>כאשר אתה מגיש פנייה או הזמנה באמצעות האתר</strong>
-                      <strong>.</strong>
+                      אנו מעבדים מידע שאתה מוסר לנו מרצונך ובידיעתך ,&nbsp; כאשר
+                      אתה מגיש פנייה או הזמנה באמצעות האתר .
                     </p>
                   </td>
                   <td width="63.02294197031039%">
                     <p>
-                      <strong>מידע אודות פנייתך</strong>
-                      <strong>.</strong> כאשר אתה יוצר עמנו קשר באמצעות כתובת
+                      מידע אודות פנייתך . כאשר אתה יוצר עמנו קשר באמצעות כתובת
                       הדוא&quot;ל שלנו: support@sapakos.com או באמצעות
                       טופס&nbsp;&apos;צור קשר&apos; שלנו&nbsp;{" "}
                       <a href="https://sapakos.com/#/connect-us">
-                        https://sapakos.com/#/connect-us
+                        https://sapakos.com/#/contact-us
                       </a>
                       . אתה תתבקש למסור מידע כמו שמך, כתובת דוא&quot;ל, מספר
                       טלפון, נושא הפנייה ותוכן ההודעה. שדות שחובה למלא יסומנו
                       ככאלה&nbsp;(&quot;נתוני הפניה&quot;).
                     </p>
                     <p>
-                      <strong>מידע אודות הזמנתך</strong>
-                      <strong>.&nbsp;</strong>כדי לבצע הזמנה באתר, אתה תידרש
+                      מידע אודות הזמנתך .&nbsp;כדי לבצע הזמנה באתר, אתה תידרש
                       למסור לנו את שמך המלא, מספר טלפון, כתובת, מידע הנועד
                       לחיוב, מידע הנועד למשלוח המוצר ומידע לגבי המוצרים שברצונך
                       להזמין, כולל התמונה שברצונך לעשות בה שימוש כדי לעצב את
@@ -102,12 +84,7 @@ export default class PrivecyPolicy extends Component {
                 </tr>
                 <tr>
                   <td width="36.97705802968961%">
-                    <p>
-                      <strong>
-                        אנו אוספים גם מידע אנליטי לגבי שימושך באתר
-                      </strong>
-                      <strong>.</strong>
-                    </p>
+                    <p>אנו אוספים גם מידע אנליטי לגבי שימושך באתר .</p>
                   </td>
                   <td width="63.02294197031039%">
                     <p>
@@ -115,25 +92,18 @@ export default class PrivecyPolicy extends Component {
                       הפעולות שלך באתר, כולל כתובת ה-IPממנה נכנסת לאתר, התאריך
                       והשעה של הכניסה, סוג הדפדפן בו אתה משתמש, השפה בה אתה
                       משתמש, קישורים עליהם לחצת ופעולות שביצעת בזמן השימוש באתר.
-                      אנו קוראים למידע כזה&nbsp;<strong>&quot;</strong>
-                      <strong>מידע אנליטי</strong>
-                      <strong>&quot;</strong>.
+                      אנו קוראים למידע כזה&nbsp;&quot; מידע אנליטי &quot;.
                     </p>
                   </td>
                 </tr>
                 <tr>
                   <td colspan="2" valign="top" width="100%">
-                    <p>
-                      <strong>כיצד אנו משתמשים במידע האישי שלך</strong>
-                    </p>
+                    <p>כיצד אנו משתמשים במידע האישי שלך</p>
                   </td>
                 </tr>
                 <tr>
                   <td width="36.97705802968961%">
-                    <p>
-                      <strong>כדי לענות על פנייתך</strong>
-                      <strong>.</strong>
-                    </p>
+                    <p>כדי לענות על פנייתך .</p>
                   </td>
                   <td width="63.02294197031039%">
                     <p>
@@ -145,10 +115,8 @@ export default class PrivecyPolicy extends Component {
                 <tr>
                   <td width="36.97705802968961%">
                     <p>
-                      <strong>כדי לבצע את ההזמנה שלך</strong>
-                      <strong>,&nbsp;</strong>
-                      <strong>למטרות תיעוד ועבור דיווח ניהולי</strong>
-                      <strong>.</strong>
+                      כדי לבצע את ההזמנה שלך ,&nbsp; למטרות תיעוד ועבור דיווח
+                      ניהולי .
                     </p>
                   </td>
                   <td width="63.02294197031039%">
@@ -162,12 +130,7 @@ export default class PrivecyPolicy extends Component {
                 </tr>
                 <tr>
                   <td width="36.97705802968961%">
-                    <p>
-                      <strong>
-                        כדי לשלוח אלייך הודעות אדמיניסטרטיביות ושיווקיות
-                      </strong>
-                      <strong>.</strong>
-                    </p>
+                    <p>כדי לשלוח אלייך הודעות אדמיניסטרטיביות ושיווקיות .</p>
                   </td>
                   <td width="63.02294197031039%">
                     <p>
@@ -189,10 +152,7 @@ export default class PrivecyPolicy extends Component {
                 </tr>
                 <tr>
                   <td width="36.97705802968961%">
-                    <p>
-                      <strong>ייתכן שנשתמש בתמונות שלך למטרות שיווק</strong>
-                      <strong>.</strong>
-                    </p>
+                    <p>ייתכן שנשתמש בתמונות שלך למטרות שיווק .</p>
                   </td>
                   <td width="63.02294197031039%">
                     <p>
@@ -206,16 +166,9 @@ export default class PrivecyPolicy extends Component {
                 <tr>
                   <td width="36.97705802968961%">
                     <p>
-                      <strong>
-                        אנו משתמשים במידע אנליטי כדי לשפר ולשדרג את האתר
-                      </strong>
-                      <strong>,&nbsp;</strong>
-                      <strong>
-                        את השירותים שלנו ואת הודעות הדואר האלקטרוני שלנו
-                      </strong>
-                      <strong>.&nbsp;</strong>
-                      <strong>אנו משתמשים בו גם למטרות ניהול עסקים</strong>
-                      <strong>.</strong>
+                      אנו משתמשים במידע אנליטי כדי לשפר ולשדרג את האתר ,&nbsp;
+                      את השירותים שלנו ואת הודעות הדואר האלקטרוני שלנו .&nbsp;
+                      אנו משתמשים בו גם למטרות ניהול עסקים .
                     </p>
                   </td>
                   <td width="63.02294197031039%">
@@ -232,9 +185,7 @@ export default class PrivecyPolicy extends Component {
                 </tr>
                 <tr>
                   <td colspan="2" valign="top" width="100%">
-                    <p>
-                      <strong>מתי וכיצד אנו משתפים מידע אישי עם אחרים</strong>
-                    </p>
+                    <p>מתי וכיצד אנו משתפים מידע אישי עם אחרים</p>
                   </td>
                 </tr>
                 <tr>
@@ -252,11 +203,8 @@ export default class PrivecyPolicy extends Component {
                 <tr>
                   <td width="36.97705802968961%">
                     <p>
-                      <strong>
-                        אנו משתפים את המידע שלך עם ספקי השירותים שלנו המסייעים
-                        לנו בהפעלת העסק והאתר שלנו
-                      </strong>
-                      <strong>.</strong>
+                      אנו משתפים את המידע שלך עם ספקי השירותים שלנו המסייעים לנו
+                      בהפעלת העסק והאתר שלנו .
                     </p>
                   </td>
                   <td width="63.02294197031039%">
@@ -272,13 +220,8 @@ export default class PrivecyPolicy extends Component {
                 <tr>
                   <td width="36.97705802968961%">
                     <p>
-                      <strong>
-                        אנו נשתף מידע עם רשויות מוסמכות אם תנצל לרעה את זכותך
-                        להשתמש באתר
-                      </strong>
-                      <strong>,&nbsp;</strong>
-                      <strong>או תפר כל דין חל</strong>
-                      <strong>.</strong>
+                      אנו נשתף מידע עם רשויות מוסמכות אם תנצל לרעה את זכותך
+                      להשתמש באתר ,&nbsp; או תפר כל דין חל .
                     </p>
                   </td>
                   <td width="63.02294197031039%">
@@ -291,12 +234,7 @@ export default class PrivecyPolicy extends Component {
                 </tr>
                 <tr>
                   <td width="36.97705802968961%">
-                    <p>
-                      <strong>
-                        אנו נשתף את המידע שלך אם נדרש לעשות כן לפי דין
-                      </strong>
-                      <strong>.</strong>
-                    </p>
+                    <p>אנו נשתף את המידע שלך אם נדרש לעשות כן לפי דין .</p>
                   </td>
                   <td width="63.02294197031039%">
                     <p>
@@ -308,11 +246,8 @@ export default class PrivecyPolicy extends Component {
                 <tr>
                   <td width="36.97705802968961%">
                     <p>
-                      <strong>
-                        נשתף את המידע שלך עם צדדים שלישיים בכל מקרה של שינוי
-                        במבנה הארגוני שלנו
-                      </strong>
-                      <strong>.</strong>
+                      נשתף את המידע שלך עם צדדים שלישיים בכל מקרה של שינוי במבנה
+                      הארגוני שלנו .
                     </p>
                   </td>
                   <td width="63.02294197031039%">
@@ -326,22 +261,12 @@ export default class PrivecyPolicy extends Component {
                 </tr>
                 <tr>
                   <td colspan="2" valign="top" width="100%">
-                    <p>
-                      <strong>קבצי עוגיות&nbsp;</strong>
-                      <strong>(</strong>
-                      <strong>cookies</strong>
-                      <strong>)</strong>
-                    </p>
+                    <p>קבצי עוגיות&nbsp; ( cookies )</p>
                   </td>
                 </tr>
                 <tr>
                   <td width="36.97705802968961%">
-                    <p>
-                      <strong>מהם קבצי עוגיות&nbsp;</strong>
-                      <strong>(</strong>
-                      <strong>cookies</strong>
-                      <strong>)?</strong>
-                    </p>
+                    <p>מהם קבצי עוגיות&nbsp; ( cookies )?</p>
                   </td>
                   <td width="63.02294197031039%">
                     <p>
@@ -360,9 +285,7 @@ export default class PrivecyPolicy extends Component {
                 </tr>
                 <tr>
                   <td width="36.97705802968961%">
-                    <p>
-                      <strong>הסכמתך לשימוש בקבצי עוגיות</strong>
-                    </p>
+                    <p>הסכמתך לשימוש בקבצי עוגיות</p>
                   </td>
                   <td width="63.02294197031039%">
                     <p>
@@ -374,16 +297,9 @@ export default class PrivecyPolicy extends Component {
                 <tr>
                   <td width="36.97705802968961%">
                     <p>
-                      <strong>
-                        אנו משתמשים בקבצי עוגיות הנדרשים עבור תפעול האתר
-                      </strong>
-                      <strong>,&nbsp;</strong>
-                      <strong>עבור סטטיסטיקות של האתר</strong>
-                      <strong>,&nbsp;</strong>
-                      <strong>
-                        למטרות שיווק וכדי לזכור את העדפות האתר שלך
-                      </strong>
-                      <strong>.</strong>
+                      אנו משתמשים בקבצי עוגיות הנדרשים עבור תפעול האתר ,&nbsp;
+                      עבור סטטיסטיקות של האתר ,&nbsp; למטרות שיווק וכדי לזכור את
+                      העדפות האתר שלך .
                     </p>
                   </td>
                   <td width="63.02294197031039%">
@@ -392,34 +308,26 @@ export default class PrivecyPolicy extends Component {
                       להלן:
                     </p>
                     <p>
-                      <strong>קבצי עוגיות נדרשים</strong>
-                      <strong>.&nbsp;</strong>קבצי עוגיות אשר נדרשים לצורך
+                      קבצי עוגיות נדרשים .&nbsp;קבצי עוגיות אשר נדרשים לצורך
                       פעילותו התקינה של האתר. האתר לא יכול לפעול כהלכה בלי קבצי
                       עוגיות אלה. בכל עת, תוכל להגדיר את הדפדפן שלך כך שיחסום או
                       יודיע לך על קבצי עוגיות כאלה, אך אם תעשה זאת, חלקים
                       מסוימים של האתר לא יפעלו כראוי.
                     </p>
                     <p>
-                      <strong>לוקליזציה</strong>
-                      <strong>.</strong> קבצי עוגיות אשר עוזרים לנו לכוון את
-                      תעבורת המשתמשים לגרסה המקומית המתאימה של האתר שלנו.
+                      לוקליזציה . קבצי עוגיות אשר עוזרים לנו לכוון את תעבורת
+                      המשתמשים לגרסה המקומית המתאימה של האתר שלנו.
                     </p>
                     <p>
-                      <strong>סטטיסטיקה</strong>
-                      <strong>.&nbsp;</strong>קבציעוגיות אנליטיים אשר עוזרים לנו
-                      להבין כיצד אתה ומשתמשים אחרים פועלים באתר שלנו, על ידי
-                      איסוף מידע שאינו מזהה אותך.
+                      סטטיסטיקה .&nbsp;קבציעוגיות אנליטיים אשר עוזרים לנו להבין
+                      כיצד אתה ומשתמשים אחרים פועלים באתר שלנו, על ידי איסוף
+                      מידע שאינו מזהה אותך.
                     </p>
                   </td>
                 </tr>
                 <tr>
                   <td width="36.97705802968961%">
-                    <p>
-                      <strong>
-                        תמיד תוכל למחוק או למנוע את פעולת קבצי העוגיות
-                      </strong>
-                      <strong>.</strong>
-                    </p>
+                    <p>תמיד תוכל למחוק או למנוע את פעולת קבצי העוגיות .</p>
                   </td>
                   <td width="63.02294197031039%">
                     <p>
@@ -432,25 +340,15 @@ export default class PrivecyPolicy extends Component {
                 </tr>
                 <tr>
                   <td colspan="2" valign="top" width="100%">
-                    <p>
-                      <strong>ביטחון ושמירת מידע</strong>
-                    </p>
+                    <p>ביטחון ושמירת מידע</p>
                   </td>
                 </tr>
                 <tr>
                   <td width="36.97705802968961%">
                     <p>
-                      <strong>
-                        אנו נשמור על המידע האישי שלך ככל שנצטרך אותו כדי להפעיל
-                        את האתר ולפעול מול לקוחות
-                      </strong>
-                      <strong>,&nbsp;</strong>
-                      <strong>ולאחר מכן</strong>
-                      <strong>,&nbsp;</strong>
-                      <strong>
-                        כפי שיידרש למטרות תיעוד והניהול השוטף של העסק
-                      </strong>
-                      <strong>.</strong>
+                      אנו נשמור על המידע האישי שלך ככל שנצטרך אותו כדי להפעיל את
+                      האתר ולפעול מול לקוחות ,&nbsp; ולאחר מכן ,&nbsp; כפי
+                      שיידרש למטרות תיעוד והניהול השוטף של העסק .
                     </p>
                   </td>
                   <td width="63.02294197031039%">
@@ -469,12 +367,7 @@ export default class PrivecyPolicy extends Component {
                 </tr>
                 <tr>
                   <td width="36.97705802968961%">
-                    <p>
-                      <strong>
-                        אנו נוקטים בצעדים על מנת להגן על המידע שלך
-                      </strong>
-                      <strong>.</strong>
-                    </p>
+                    <p>אנו נוקטים בצעדים על מנת להגן על המידע שלך .</p>
                   </td>
                   <td width="63.02294197031039%">
                     <p>
@@ -489,18 +382,13 @@ export default class PrivecyPolicy extends Component {
                 </tr>
                 <tr>
                   <td colspan="2" valign="top" width="100%">
-                    <p>
-                      <strong>העברת נתונים בין מדינות</strong>
-                    </p>
+                    <p>העברת נתונים בין מדינות</p>
                   </td>
                 </tr>
                 <tr>
                   <td width="36.97705802968961%">
                     <p>
-                      <strong>
-                        אנו נעביר מידע בין מדינות בהתאם לחוקי הגנת המידע החלים
-                      </strong>
-                      <strong>.</strong>
+                      אנו נעביר מידע בין מדינות בהתאם לחוקי הגנת המידע החלים .
                     </p>
                   </td>
                   <td width="63.02294197031039%">
@@ -519,20 +407,14 @@ export default class PrivecyPolicy extends Component {
                 </tr>
                 <tr>
                   <td colspan="2" valign="top" width="100%">
-                    <p>
-                      <strong>מידע נוסף עבור אנשים באיחוד האירופי</strong>
-                    </p>
+                    <p>מידע נוסף עבור אנשים באיחוד האירופי</p>
                   </td>
                 </tr>
                 <tr>
                   <td width="36.97705802968961%">
                     <p>
-                      <strong>אנו בעלי השליטה במידע&nbsp;</strong>
-                      <strong>(</strong>
-                      <strong>data controller</strong>
-                      <strong>)&nbsp;</strong>
-                      <strong>של המידע שנאסף באמצעות האתר</strong>
-                      <strong>.</strong>
+                      אנו בעלי השליטה במידע&nbsp; ( data controller )&nbsp; של
+                      המידע שנאסף באמצעות האתר .
                     </p>
                   </td>
                   <td width="63.02294197031039%">
@@ -568,12 +450,7 @@ export default class PrivecyPolicy extends Component {
                 </tr>
                 <tr>
                   <td width="36.97705802968961%">
-                    <p>
-                      <strong>
-                        בסיס חוקי לפי הדין האירופי לעיבוד המידע האישי שלך
-                      </strong>
-                      <strong>.</strong>
-                    </p>
+                    <p>בסיס חוקי לפי הדין האירופי לעיבוד המידע האישי שלך .</p>
                   </td>
                   <td width="63.02294197031039%">
                     <p>
@@ -618,16 +495,9 @@ export default class PrivecyPolicy extends Component {
                 <tr>
                   <td width="36.97705802968961%">
                     <p>
-                      <strong>עומדות לך זכויות מסוימות לגשת אל</strong>
-                      <strong>,&nbsp;</strong>
-                      <strong>לעדכן או למחוק מידע</strong>
-                      <strong>,&nbsp;</strong>
-                      <strong>לקבל עותק מהמידע שלך</strong>
-                      <strong>,&nbsp;</strong>
-                      <strong>
-                        ולהתנגד או להגביל פעילויות עיבוד מידע מסוימות
-                      </strong>
-                      <strong>.</strong>
+                      עומדות לך זכויות מסוימות לגשת אל ,&nbsp; לעדכן או למחוק
+                      מידע ,&nbsp; לקבל עותק מהמידע שלך ,&nbsp; ולהתנגד או
+                      להגביל פעילויות עיבוד מידע מסוימות .
                     </p>
                   </td>
                   <td width="63.02294197031039%">
@@ -636,43 +506,39 @@ export default class PrivecyPolicy extends Component {
                       תקנות הגנת המידע הכלליות&nbsp;(GDPR):
                     </p>
                     <p>
-                      <strong>זכות לגשת&nbsp;</strong>למידע האישי שאנו מעבדים,
-                      ולקבל עותק ממנו.
+                      זכות לגשת&nbsp;למידע האישי שאנו מעבדים, ולקבל עותק ממנו.
                     </p>
                     <p>
-                      <strong>זכות לתקן ולהשלים&nbsp;</strong>מידע אישי אודותיך
-                      המצוי בידינו אם מצאת כי הוא שגוי, לא מדויק או חסר.
+                      זכות לתקן ולהשלים&nbsp;מידע אישי אודותיך המצוי בידינו אם
+                      מצאת כי הוא שגוי, לא מדויק או חסר.
                     </p>
                     <p>
-                      <strong>זכות לעבירות מידע</strong>
-                      <strong>,</strong>כלומר, הזכות לקבל את המידע האישי שמסרת
+                      זכות לעבירות מידע ,כלומר, הזכות לקבל את המידע האישי שמסרת
                       לנו, בפורמט מובנה, בשימוש נפוץ, הניתן לקריאה על ידי מחשב.
                       עומדת לך הזכות להעביר מידע זה לספק שירותים אחר. כאשר הדבר
                       אפשרי מבחינה טכנית, עומדת לך הזכות לכך שהמידע האישי שלך
                       יועבר ישירות מאיתנו לספק השירותים שתציין.
                     </p>
                     <p>
-                      <strong>זכות להתנגד</strong> לשימוש במידע האישי שלך הנעשה
-                      על בסיס האינטרס הלגיטימי שלנו כמפורט לעיל. אולם, ייתכן
-                      שנסרב לבקשתך, ונציג בסיס לגיטימי ומשכנע להמשך השימוש,
-                      לרבות לצורך פתיחה בהליך משפטי או הגנה מפני תביעות
-                      משפטיותכל עת, תוכל להתנגד לשימוש במידע האישי שלך למטרות
-                      דיוור ושיווק ישירים.
+                      זכות להתנגד לשימוש במידע האישי שלך הנעשה על בסיס האינטרס
+                      הלגיטימי שלנו כמפורט לעיל. אולם, ייתכן שנסרב לבקשתך, ונציג
+                      בסיס לגיטימי ומשכנע להמשך השימוש, לרבות לצורך פתיחה בהליך
+                      משפטי או הגנה מפני תביעות משפטיותכל עת, תוכל להתנגד לשימוש
+                      במידע האישי שלך למטרות דיוור ושיווק ישירים.
                     </p>
                     <p>
-                      <strong>זכות להגביל&nbsp;</strong>את עיבוד המידע האישי
-                      שלך&nbsp;(מלבד אחסונו), אם תערער על דיוק המידע האישי שלך,
-                      למשך תקופה שתאפשר לנו לאמת את דיוקו; אם אתה מאמין שהעיבוד
-                      אינו חוקי ואתה מתנגד למחיקת המידע האישי ומבקש במקום זאת
-                      להגביל את השימוש בו; אם אנו לא נדרשים עוד למידע האישי
-                      למטרות המצוינות במדיניות פרטיות זו, אך הוא נדרש לך לצורך
-                      הכנה, מימוש או הגנה בקשר לתביעות משפטיות, או אם אתה מתנגד
+                      זכות להגביל&nbsp;את עיבוד המידע האישי שלך&nbsp;(מלבד
+                      אחסונו), אם תערער על דיוק המידע האישי שלך, למשך תקופה
+                      שתאפשר לנו לאמת את דיוקו; אם אתה מאמין שהעיבוד אינו חוקי
+                      ואתה מתנגד למחיקת המידע האישי ומבקש במקום זאת להגביל את
+                      השימוש בו; אם אנו לא נדרשים עוד למידע האישי למטרות
+                      המצוינות במדיניות פרטיות זו, אך הוא נדרש לך לצורך הכנה,
+                      מימוש או הגנה בקשר לתביעות משפטיות, או אם אתה מתנגד
                       לעיבוד, עד שנוודא האם הבסיס הלגיטימי שלנו לעיבוד המידע
                       האישי שלך גובר על שלך טיעוניך.
                     </p>
                     <p>
-                      <strong>זכות להישכח</strong>
-                      <strong>.</strong>בנסיבות מסוימות, למשל כאשר אתה מתנגד לכך
+                      זכות להישכח .בנסיבות מסוימות, למשל כאשר אתה מתנגד לכך
                       שנעבד את המידע שלך או כאשר אין לנו בסיס לגיטימי משכנע
                       לגבור על ההתנגדות שלך, תעמוד לך הזכות לבקש מאיתנו למחוק את
                       המידע האישי שלך. אולם, נוכל עדיין לעבד את המידע האישי שלך
@@ -693,12 +559,7 @@ export default class PrivecyPolicy extends Component {
                 </tr>
                 <tr>
                   <td width="36.97705802968961%">
-                    <p>
-                      <strong>
-                        עומדת לך הזכות להגיש תלונה לרשות המפקחת הרלוונטית
-                      </strong>
-                      <strong>.</strong>
-                    </p>
+                    <p>עומדת לך הזכות להגיש תלונה לרשות המפקחת הרלוונטית .</p>
                   </td>
                   <td width="63.02294197031039%">
                     <p>
@@ -718,18 +579,14 @@ export default class PrivecyPolicy extends Component {
                 </tr>
                 <tr>
                   <td colspan="2" valign="top" width="100%">
-                    <p>
-                      <strong>שינויים במדיניות פרטיות זו</strong>
-                    </p>
+                    <p>שינויים במדיניות פרטיות זו</p>
                   </td>
                 </tr>
                 <tr>
                   <td width="36.97705802968961%">
                     <p>
-                      <strong>אם נשנה את מדיניות הפרטיות</strong>
-                      <strong>,&nbsp;</strong>
-                      <strong>נשתדל להודיע לך על שינויים כאמור מיוזמתנו</strong>
-                      <strong>.</strong>
+                      אם נשנה את מדיניות הפרטיות ,&nbsp; נשתדל להודיע לך על
+                      שינויים כאמור מיוזמתנו .
                     </p>
                   </td>
                   <td width="63.02294197031039%">
@@ -738,7 +595,7 @@ export default class PrivecyPolicy extends Component {
                       כן, נשתדל להודיע לך באופן יזום על שינויים כאמור. בכל מקרה,
                       המהדורה האחרונה של מדיניות הפרטיות תמיד תהיה נגישה
                       בכתובת&nbsp;
-                      <a href=" https://sapakos.com/#/privecy_policy_sapakos">
+                      <a href=" https://sapakos.com/#/privacy_policy_sapakos">
                         {" "}
                         https://sapakos.com/#/privecy_policy_sapakos
                       </a>

@@ -1359,7 +1359,7 @@ class App extends React.Component {
               accessToken={this.state.accessToken}
             ></Profile>
           </Route>
-          <Route exact path="/connect-us">
+          <Route exact path="/contact-us">
             <Pricing
               captchaResponse={this.state.captchaResponse}
               isRealUser={this.state.isRealUser}
@@ -1376,7 +1376,7 @@ class App extends React.Component {
               openGenericModal={this.openGenericModal}
             ></SupplierFeed>
           </Route>
-          <Route exact path="/privecy_policy_sapakos">
+          <Route exact path="/privacy_policy_sapakos">
             <PrivecyPolicy></PrivecyPolicy>
           </Route>
           <Route exact path="/terms_of_use_sapakos">
@@ -1423,7 +1423,6 @@ class App extends React.Component {
             isDiscountModalOpen={this.state.isGenericModalOpen}
           ></DiscountModal>
         </HashRouter>
-        {/* <BottomNav></BottomNav> */}
       </div>
     );
   }

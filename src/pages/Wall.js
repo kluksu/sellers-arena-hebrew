@@ -15,6 +15,7 @@ import PriceDropPost from "../components/PriceDropPost";
 import NewStockPost from "../components/NewStockPost";
 import ContactCard from "../components/ContactCard";
 import HorizontalScrollBox from "../components/HorizontalScrollBox";
+import BottomNav from "../components/BottomNav";
 
 export default class Wall extends Component {
   constructor(props) {
@@ -343,6 +344,7 @@ export default class Wall extends Component {
             </div>
           </Col>
           <Col xl={3} lg={3} md={3} sm={0} xs={0}></Col>
+          <BottomNav></BottomNav>
         </Row>
       );
     }

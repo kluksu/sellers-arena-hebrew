@@ -27,6 +27,7 @@ import { CgArrowLeftO } from "react-icons/cg";
 import Loader from "react-loader-spinner";
 import { uniqueId } from "lodash";
 import { v4 as uuidv4 } from "uuid";
+import BottomNav from "../components/BottomNav";
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -168,7 +169,7 @@ class HomePage extends React.Component {
       //    showSubCategories.push(<option value={subcategory}>{subcategory}</option>)
       //  });}); }
     });
-    let cards = [];
+    // let cards = [];
     // for (let i = 0; i < this.state.showList.length; i++) {
     //   const element = this.state.showList[i];
 
@@ -180,7 +181,7 @@ class HomePage extends React.Component {
     //     .toUpperCase()
     //     .includes(this.state.searchText.toUpperCase())
     // ) {
-    cards =
+    let cards =
       this.state.showList.length != 0
         ? this.state.showList.map((item, i) => {
             return item.item_variations.map((variation) => {
@@ -353,6 +354,7 @@ class HomePage extends React.Component {
             </InfiniteScroll>
           </Col>
         </Row>
+        <BottomNav></BottomNav>
       </>
     );
   }
