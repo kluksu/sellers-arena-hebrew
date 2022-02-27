@@ -2659,6 +2659,13 @@ input {
 .avatarDiv .list-group-flush {
   border-radius: 5px !important;
 }
+.avatarDiv img {
+  vertical-align: middle;
+  border-style: none;
+  width: 320px;
+  margin: 0px auto 30px auto;
+  border-radius: 5px;
+}
 .avatarDiv {
   margin-top: 86px;
   background-color: #1d1237;

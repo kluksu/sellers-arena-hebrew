@@ -79,7 +79,7 @@ class HomePage extends React.Component {
     const nextfetch =
       this.state.next !== undefined
         ? this.state.next
-        : `${domain}/public-items/?limit=20`;
+        : `${domain}/public-items/?limit=20&search=${this.state.searchText}`;
 
     const authorization = !this.props.accessToken
       ? null
@@ -306,6 +306,7 @@ class HomePage extends React.Component {
 
                 </Container> */}
         <Search
+          searchText={this.state.searchText}
           searchItems={this.searchItems}
           screenWidth={this.props.screenWidth}
           getSearchText={this.getSearchText}

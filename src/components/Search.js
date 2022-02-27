@@ -159,6 +159,7 @@ export default class Search extends Component {
                   this.props.getSearchText(event.target.value)
                 }
                 type="text"
+                value={this.props.searchText}
                 placeholder="...חפש"
               />
             </Form.Group>

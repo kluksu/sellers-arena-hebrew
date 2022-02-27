@@ -59,6 +59,7 @@ import Loader from "react-loader-spinner";
 import PrivecyPolicy from "./pages/PrivecyPolicy";
 import BottomNav from "./components/BottomNav";
 import TermOfUse from "./pages/TermOfUse";
+import StorePageScroll from "./pages/StorePageScroll";
 //${domain}/
 class App extends React.Component {
   constructor(props) {
@@ -1203,7 +1204,7 @@ class App extends React.Component {
             ></Features>
           </Route>
           <Route exact path={"/StorePage/:id"}>
-            <StorePageLoadAll
+            <StorePageScroll
               createPermDiscount={this.createPermDiscount}
               openGenericModal={this.openGenericModal}
               closeGenericModal={this.closeGenericModal}
@@ -1229,7 +1230,7 @@ class App extends React.Component {
               accessToken={this.state.accessToken}
               activeAccount={this.state.activeAccount}
               screenWidth={this.state.screenWidth}
-            ></StorePageLoadAll>
+            ></StorePageScroll>
           </Route>
           {/* <Route exact path="/StorePage/:id">
             <StorePage
