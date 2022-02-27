@@ -1423,7 +1423,7 @@ class App extends React.Component {
             isDiscountModalOpen={this.state.isGenericModalOpen}
           ></DiscountModal>
         </HashRouter>
-        <BottomNav></BottomNav>
+        {/* <BottomNav></BottomNav> */}
       </div>
     );
   }
