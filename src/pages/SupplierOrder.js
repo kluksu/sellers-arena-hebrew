@@ -4,7 +4,7 @@ import OrderInfo from "../components/OrderInfo";
 import { withRouter } from "react-router-dom";
 import { Button, Form, Container, Col, Row } from "react-bootstrap";
 import { delivered, domain, postData } from "../components/utils";
-import FullPageLoader from "../components/FullPageLoader";
+// import FullPageLoader from "../components/FullPageLoader";
 import DiscountModal from "../components/DiscountModal";
 import DetailsOnOrderSeller from "../components/DetailsOnOrderSeller";
 import detailsOnOrderBuyer from "../components/DetailsOnOrderBuyer";
@@ -442,13 +442,13 @@ class SupplierOrder extends React.Component {
       );
     }
 
-    if (
-      !this.state.activeCart ||
-      !this.props.accessToken ||
-      !this.props.accessToken
-    ) {
-      return <FullPageLoader></FullPageLoader>;
-    }
+    // if (
+    //   !this.state.activeCart ||
+    //   !this.props.accessToken ||
+    //   !this.props.accessToken
+    // ) {
+    //   return <FullPageLoader></FullPageLoader>;
+    // }
 
     let buyeraddress = "";
     if (this.state.buyer) {
