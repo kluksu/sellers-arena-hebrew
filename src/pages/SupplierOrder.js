@@ -330,7 +330,7 @@ class SupplierOrder extends React.Component {
         דחה הזמנה
       </Button>
     );
-    let headlineSize = this.props.screenWidth > 650 ? "60px" : "20px";
+    // let headlineSize = this.props.screenWidth > 650 ? "60px" : "20px";
 
     let isChangable = this.state.activeCartStatus !== "filled" ? true : false;
     let discountForm =
@@ -459,14 +459,14 @@ class SupplierOrder extends React.Component {
       return (
         <div className="OrderSummeryPage">
           <h1 className="printOnly"> {this.state.copyOriginal}</h1>
-          <Button
-            style={{ display: this.props.screenWidth > 650 ? "" : "none" }}
+          {/* <Button
+            // style={{ display: this.props.screenWidth > 650 ? "" : "none" }}
             className="printButton no-print "
             onClick={() => this.printOrder(minuts, hour)}
             type="button"
           >
             הדפס תעודת משלוח
-          </Button>
+          </Button> */}
           <Container fluid className="orderSummeryContainer">
             <DetailsOnOrderSeller
               activeAccount={this.props.activeAccount}
