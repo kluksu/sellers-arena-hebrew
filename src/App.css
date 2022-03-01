@@ -15,13 +15,34 @@
   /* text-align: right; */
 }
 .privacyPolicyPage {
-  padding: 70px;
+  padding-top: 70px;
+  font-size: 16px;
+  font-weight: 400;
 }
-.privacyPolicyPage td {
+.privacyPolicyPage .col-xl-6.col-lg-6.col-md-12.col-sm-12.col-12,
+.privacyPolicyPage .col {
   border: 1px SOLID BLACK;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  display: flex;
+  flex-direction: column;
 }
-.privacyPolicyPage table {
-  margin: auto;
+.privacyPolicyPage .col p {
+  /* font-size: 20px; */
+  font-weight: 600;
+}
+.privacyPolicyPage p {
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 400;
+}
+.dangerZone {
+  padding: 20px;
+  background-color: rgb(243, 167, 167);
+  width: 100%;
+}
+.privacyPolicyPage a {
+  word-break: break-word;
 }
 .postHeadline {
   font-size: 14px;

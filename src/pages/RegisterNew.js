@@ -182,6 +182,11 @@ export default class extends Component {
           </a>
           (ניתן לאשר את תנאי השימוש רק לאחר קריאתם)
           <div>
+            <br></br>
+            <label for="terms_agreed">
+              {" "}
+              קראתי ואני מאשר את תנאי השימוש של האתר{" "}
+            </label>
             <input
               onChange={(e) => this.handleInputChange(e)}
               disabled={this.state.isTermsCheckboxDisabled}
@@ -191,10 +196,7 @@ export default class extends Component {
               id="horns"
               name="terms_agreed"
             ></input>
-            <label for="terms_agreed">
-              {" "}
-              קראתי ואני מאשר את תנאי השימוש של האתר{" "}
-            </label>
+
             <p className="FormRejects">{this.state.terms_agreed_error}</p>
           </div>
         </div>
@@ -221,6 +223,12 @@ export default class extends Component {
           </a>
           (ניתן לאשר את מדיניות הפרטיות רק לאחר קריאתה)
           <div>
+            <br></br>
+
+            <label for="privacy_policy_agreed">
+              {" "}
+              קראתי ואני מאשר את מדיניות הפרטיות של האתר
+            </label>
             <input
               onChange={(e) => this.handleInputChange(e)}
               disabled={this.state.isPrivecyCheckboxDisabled}
@@ -230,10 +238,7 @@ export default class extends Component {
               id="horns"
               name="privacy_policy_agreed"
             ></input>
-            <label for="privacy_policy_agreed">
-              {" "}
-              קראתי ואני מאשר את מדיניות הפרטיות של האתר
-            </label>
+
             <p className="FormRejects">
               {this.state.privacy_policy_agreed_error}
             </p>

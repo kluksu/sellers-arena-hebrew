@@ -643,6 +643,22 @@ class App extends React.Component {
       this.setState({ me: res.data });
     });
   };
+  deleteAccount = (accountID) => {
+    const authorization = !this.state.accessToken
+      ? null
+      : `Bearer ${this.state.accessToken}`;
+    const config = {
+      headers: { "Content-Type": "application/json", authorization },
+    };
+    axios
+      .delete(`${domain}/my-accounts/${accountID}/`, config)
+      .then((res) => {
+        this.openGenericModal("החשבון נמחק בהצלחה");
+      })
+      .catch((error) => {
+        this.props.openGenericModal("אופס, ישנה שגיאה", error.response);
+      });
+  };
   componentDidMount() {
     this.keepLoggedIn();
     this.getMe();
@@ -1352,6 +1368,7 @@ class App extends React.Component {
           </Route>
           <Route exact path="/me">
             <Profile
+              deleteAccount={this.deleteAccount}
               resetPassword={this.resetPassword}
               closeGenericModal={this.closeGenericModal}
               openGenericModal={this.openGenericModal}
