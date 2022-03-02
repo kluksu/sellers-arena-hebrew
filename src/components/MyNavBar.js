@@ -355,6 +355,7 @@ class MyNavBar extends React.Component {
           </Navbar.Collapse>
         </Navbar>
         <LoginModal
+          sendEmailAgain={this.props.sendEmailAgain}
           openGenericModal={this.props.openGenericModal}
           closeGenericModal={this.props.closeGenericModal}
           resetPassword={this.props.resetPassword}

@@ -31,7 +31,7 @@ export default class extends Component {
         if (data.id) {
           this.props.openGenericModal(
             "הצלחה",
-            " 'הודעת אימות נשלחה למייל שלך, נא אשר את הרשמתך ולאחר מכן התחבר לאתר דרך לחצן 'התחבר' בצד שמאל למעלה. במידה ואינך רואה את הודעת האימות חפש בתקיית דואר הזבל. אם ישנן בעיות נוספות צור איתנו קשר דרך עמוד 'צור קשר",
+            " 'הודעת אימות נשלחה למייל שלך, נא אשר את הרשמתך ולאחר מכן התחבר לאתר דרך לחצן 'התחבר' בצד שמאל למעלה. במידה ואינך רואה את הודעת האימות חפש בתקיית דואר הזבל. אם עדיין אינך מוצא את ההודעה לחץ על כפתור שחזר סיסמא בעמוד ההתחברות לאתר",
             <Button onClick={this.props.closeGenericModal}> סגור</Button>,
             "prevent"
           );
@@ -244,7 +244,12 @@ export default class extends Component {
             </p>
           </div>
         </div>
-        <Button onClick={this.sendForm} type="button">
+        <Button
+          onClick={() => {
+            this.sendForm();
+          }}
+          type="button"
+        >
           {" "}
           שלח
         </Button>

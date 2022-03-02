@@ -113,6 +113,18 @@ class App extends React.Component {
       accountsYouMayLike: [],
     };
   }
+  sendEmailAgain = (email) => {
+    axios
+      .post(`${domain}/resend-user-verification-email/`, { email: email })
+      .then((res) => {
+        console.log(res);
+        if (res.status == "200") {
+          this.openGenericModal(
+            "מייל אימות נשלח לתיבת הדואר שלך, אנא הקש על הלינק, במידה ואינך רואה את ההודעה יש לבדוק בתיבת הספאם"
+          );
+        }
+      });
+  };
   getMatchingAccounts = () => {
     const authorization = !this.state.accessToken
       ? null
@@ -1036,6 +1048,7 @@ class App extends React.Component {
             {showMasseges}
           </ul>
           <MyNavBar
+            sendEmailAgain={this.sendEmailAgain}
             openGenericModal={this.openGenericModal}
             closeGenericModal={this.closeGenericModal}
             resetPassword={this.resetPassword}

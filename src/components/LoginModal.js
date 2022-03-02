@@ -89,7 +89,7 @@ export default class LoginModal extends Component {
               this.props.openGenericModal(
                 "על מנת לשחזר את הסיסמא הזן את כתובת המייל של החשבון ולאחר מכן לחץ על המשך",
                 <Form.Group controlId="exampleForm.ControlSelect1">
-                  <Form.Label> אימייל לשחזור סיסמא</Form.Label>
+                  <Form.Label> אימייל </Form.Label>
                   <Form.Control
                     onChange={this.handleChange}
                     name="category"
@@ -98,16 +98,28 @@ export default class LoginModal extends Component {
                     placeholder={this.state.email}
                   ></Form.Control>
                 </Form.Group>,
-                <Button
-                  onClick={() => {
-                    this.props.resetPassword(this.state.email);
-                    this.props.closeModal();
-                    this.props.closeGenericModal();
-                  }}
-                >
-                  {" "}
-                  שחזר סיסמא
-                </Button>
+                <>
+                  <Button
+                    onClick={() => {
+                      this.props.resetPassword(this.state.email);
+                      this.props.closeModal();
+                      this.props.closeGenericModal();
+                    }}
+                  >
+                    {" "}
+                    שחזר סיסמא
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      this.props.sendEmailAgain(this.state.email);
+                      // this.props.closeModal();
+                      // this.props.closeGenericModal();
+                    }}
+                  >
+                    {" "}
+                    שלח מייל אימות שנית{" "}
+                  </Button>
+                </>
               )
             }
           >
