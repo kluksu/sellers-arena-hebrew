@@ -16,7 +16,7 @@ export default class extends Component {
   }
   sendForm = () => {
     postData(`${domain}/register/`, {
-      email: this.state.email,
+      email: this.state.email.toLowerCase(),
       password: this.state.password,
       phone_number: this.state.phone_number,
       terms_agreed: this.state.terms_agreed,

@@ -568,9 +568,9 @@ export default class PrivecyPolicy extends Component {
                   האחרונה של מדיניות הפרטיות תמיד תהיה נגישה בכתובת&nbsp;
                   <a href=" https://sapakos.com/#/privacy_policy_sapakos">
                     {" "}
-                    https://sapakos.com/#/privecy_policy_sapakos
+                    https://sapakos.com/#/privacy_policy_sapakos{" "}
                   </a>
-                  &nbsp; .
+                  &nbsp;.
                 </p>
               </Col>
             </Row>

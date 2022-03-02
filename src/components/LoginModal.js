@@ -36,7 +36,10 @@ export default class LoginModal extends Component {
       <Modal
         onKeyDown={(event) =>
           handleKeyDown(event, () =>
-            this.props.loginPostData(this.state.email, this.state.password)
+            this.props.loginPostData(
+              this.state.email.toLowerCase(),
+              this.state.password
+            )
           )
         }
         show={this.props.isOpen}

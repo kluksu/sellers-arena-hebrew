@@ -41,6 +41,11 @@
   background-color: rgb(243, 167, 167);
   width: 100%;
 }
+.dangerZone .btn {
+  margin-bottom: 20px;
+  width: 20%;
+  min-width: 200px;
+}
 .privacyPolicyPage a {
   word-break: break-word;
 }
