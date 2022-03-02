@@ -51,6 +51,7 @@ class StorePageDetailsNav extends React.Component {
                 onClick={this.props.addCartItemsAndCheckout}
                 variant="success"
               >
+                {/*this.props.me.type_unregisered?"סיים הזמנה":    "הוסף ועבור לעמוד סיום הזמנה"*/}
                 הוסף ועבור לעמוד סיום הזמנה
               </Button>
             </Navbar.Collapse>

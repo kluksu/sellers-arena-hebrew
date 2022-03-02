@@ -60,6 +60,8 @@ import PrivecyPolicy from "./pages/PrivecyPolicy";
 import BottomNav from "./components/BottomNav";
 import TermOfUse from "./pages/TermOfUse";
 import StorePageScroll from "./pages/StorePageScroll";
+import WhiteLabelNav from "./components/WhiteLabelNav";
+import LoginModal from "./components/LoginModal";
 //${domain}/
 class App extends React.Component {
   constructor(props) {
@@ -990,7 +992,7 @@ class App extends React.Component {
     // ) {
     //   minwidth = "740px";
     // }
-    return (
+    return window.location.href.includes("sapakos") ? (
       <div className="App">
         {/* {this.state.activeAccount &&
         !window.location.href.includes("feed") &&
@@ -1440,6 +1442,116 @@ class App extends React.Component {
             closeModal={this.closeGenericModal}
             isDiscountModalOpen={this.state.isGenericModalOpen}
           ></DiscountModal>
+        </HashRouter>
+      </div>
+    ) : (
+      <div className="App">
+        <HashRouter>
+          <WhiteLabelNav
+            openGenericModal={this.openGenericModal}
+            closeGenericModal={this.closeGenericModal}
+            resetPassword={this.resetPassword}
+            handleKeyDown={this.handleKeyDown}
+            getAccount={this.getAccount}
+            screenWidth={this.state.screenWidth}
+            me={this.state.me}
+            payedOrders={this.state.payedOrders}
+            fulfilledOrders={this.state.fulfilledOrders}
+            sellerApprovedOrders={this.state.sellerApprovedOrders}
+            MySupplierOrders={this.state.MySupplierOrders}
+            deleteCart={this.deleteCart}
+            getCarts={this.getCarts}
+            MyShoppingCarts={this.state.MyShoppingCarts}
+            accessToken={this.state.accessToken}
+            logout={this.logout}
+            openModal={this.openModal}
+            closeModal={this.closeModal}
+            isOpen={this.state.isOpen}
+            userAccounts={this.state.userAccounts}
+            loginData={this.state.loginData}
+            activeAccount={this.state.activeAccount}
+            loginPostData={this.loginPostData}
+          ></WhiteLabelNav>
+          <Route exact path={`/${this.state.activeAccount ? ":id" : ""}`}>
+            <StorePageScroll
+              createPermDiscount={this.createPermDiscount}
+              openGenericModal={this.openGenericModal}
+              closeGenericModal={this.closeGenericModal}
+              getAllOrders={this.getAllOrders}
+              userDevice={this.state.userDevice}
+              screenWidth={this.state.screenWidth}
+              getUnregistered={this.getUnregistered}
+              getActiveCart={this.getActiveCart}
+              checkOut={this.checkOut}
+              myContacts={this.state.myContacts}
+              removeContact={this.removeContact}
+              getMessagesArcive={this.getMessagesArcive}
+              postAndGetContacts={this.postAndGetContacts}
+              refreshToken={this.state.refreshToken}
+              allThreads={this.state.allThreads}
+              getCurrentstore={this.getCurrentstore}
+              handleOpenMessage={this.handleOpenMessage}
+              modalMessages={this.state.modalMessages}
+              getThreads={this.getThreads}
+              getCarts={this.getCarts}
+              deleteCart={this.deleteCart}
+              MyShoppingCarts={this.state.MyShoppingCarts}
+              accessToken={this.state.accessToken}
+              activeAccount={this.state.activeAccount}
+              screenWidth={this.state.screenWidth}
+            ></StorePageScroll>
+          </Route>
+          <Route exact path="/supplier-order/:id">
+            <SupplierOrder
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
+              openGenericModalOrderSummery={this.openGenericModalOrderSummery}
+              getCarts={this.getCarts}
+              screenWidth={this.state.screenWidth}
+              getAllOrders={this.getAllOrders}
+              markOrderAs={this.markOrderAs}
+              accessToken={this.state.accessToken}
+              activeAccount={this.state.activeAccount}
+            ></SupplierOrder>
+          </Route>
+          <Route exact path="/my-feed/:id">
+            <SupplierFeed
+              screenWidth={this.state.screenWidth}
+              myContacts={this.state.myContacts}
+              accountsYouMayLike={this.state.accountsYouMayLike}
+              allThreads={this.state.allThreads}
+              handleOpenMessage={this.handleOpenMessage}
+              handleClose={this.handleClose}
+              addToContacts={this.addToContacts}
+              postAndGetContacts={this.postAndGetContacts}
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
+              allMessages={this.state.allMessages}
+              getContactsMesssageBoard={this.getContactsMesssageBoard}
+              myContacts={this.state.myContacts}
+              activeAccount={this.state.activeAccount}
+              accessToken={this.state.accessToken}
+            ></SupplierFeed>
+          </Route>{" "}
+          <DiscountModal
+            preventModalDefult={this.state.preventModalDefult}
+            bottom={this.state.modalBottom}
+            top={this.state.modalTop}
+            className={this.state.modalClass}
+            text={this.state.modalText}
+            closeModal={this.closeGenericModal}
+            isDiscountModalOpen={this.state.isGenericModalOpen}
+          ></DiscountModal>
+          <LoginModal
+            openGenericModal={this.openGenericModal}
+            closeGenericModal={this.closeGenericModal}
+            resetPassword={this.resetPassword}
+            handleKeyDown={this.handleKeyDown}
+            loginData={this.state.loginData}
+            loginPostData={this.loginPostData}
+            isOpen={this.state.isOpen}
+            closeModal={this.closeModal}
+          ></LoginModal>
         </HashRouter>
       </div>
     );

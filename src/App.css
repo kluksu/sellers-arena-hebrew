@@ -2637,6 +2637,7 @@ input {
   margin-top: 86px;
   background-color: #1d1237;
   color: white;
+  text-align: center;
   /* background: linear-gradient(
     180deg,
     rgba(131, 184, 215, 1) -62%,
