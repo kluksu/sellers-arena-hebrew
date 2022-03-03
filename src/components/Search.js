@@ -76,10 +76,10 @@ export default class Search extends Component {
     let carouselItems = [];
     if (this.props.storeSubCategories) {
       this.props.storeSubCategories.forEach((subCategory, i) => {
-        let clearAll = subCategory === "כל החנות" ? "warning" : "primary";
+        // let clearAll = subCategory === "כל החנות" ? "warning" : "primary";
         let fontSize = this.props.storeSubCategories.length > 15 ? 10 : 12;
-        let variant =
-          this.props.activeSubCategory === subCategory ? "success" : clearAll;
+        // let variant =
+        //   this.props.activeSubCategory === subCategory ? "success" : clearAll;
         //
         let funcCatogory = subCategory === "כל החנות" ? "" : subCategory;
 
@@ -107,10 +107,15 @@ export default class Search extends Component {
             }}
           >
             {" "}
-            <>
+            <div
+              style={{
+                background:
+                  this.props.activeSubCategory === subCategory ? "orange" : "",
+              }}
+            >
               &nbsp; {subCategory} &nbsp;
               {i !== this.props.storeSubCategories.length - 1 ? `${"| "} ` : ""}
-            </>{" "}
+            </div>{" "}
           </div>
         );
         storeCategoriesButtons.push(

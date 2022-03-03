@@ -79,7 +79,8 @@ class StorePageScroll extends React.Component {
       clientsListVisibility: "none",
     };
   }
-  getStoreCategoriesList = (accountID) => {
+  getStoreCategoriesList = async (accountID) => {
+    // this.setState({ storeSubCategories: [] });
     // const tokenfull = this.props.accessToken ? this.props.accessToken : token;
 
     // const authorization = !this.props.accessToken
@@ -168,11 +169,11 @@ class StorePageScroll extends React.Component {
     this.setState({ cartItems: cart });
   };
   searchItems = async () => {
-    this.setState({ next: undefined });
+    await this.setState({ next: undefined });
     await this.setState({ showList: [] });
 
-    this.getItems();
-    this.setState({ searchText: "" });
+    await this.getItems();
+    // this.setState({ searchText: "" });
   };
   getItems = (token) => {
     console.log("gotit");
@@ -255,10 +256,13 @@ class StorePageScroll extends React.Component {
     }
   };
   loadStoreComponent = async () => {
+    await this.setState({ storeSubCategories: ["כל החנות"] });
+    this.getStoreCategoriesList(this.props.match.params.id);
+
     if (this.props.accessToken) {
       await this.setState({
         next: undefined,
-        showList: [],
+        // showList: [],
         loadShowList: false,
         // wasNextNull: false,
       });
@@ -268,10 +272,10 @@ class StorePageScroll extends React.Component {
         this.props.activeAccount &&
         this.props.activeAccount.account_type == 3
       ) {
-        // this.getItems();
+        // await this.getItems();
       } else {
         //if account type 3 prevent first items load
-        // this.getItems();
+        // await this.getItems();
       }
     }
     let userID =
@@ -386,8 +390,12 @@ class StorePageScroll extends React.Component {
     }
   };
 
-  componentDidMount() {
+  componentDidMount = async () => {
+    this.getStoreCategoriesList(this.props.match.params.id);
+
     if (this.props.activeAccount) {
+      await this.setState({ showList: [], next: undefined });
+
       this.getItems();
     }
     this.props.MyShoppingCarts.forEach((cart) => {
@@ -404,7 +412,7 @@ class StorePageScroll extends React.Component {
     this.loadStoreComponent();
 
     /////
-  }
+  };
 
   creatCart = (isChangingPage, unregisteredAccountID) => {
     let unregisterConfig = "";
@@ -536,7 +544,9 @@ class StorePageScroll extends React.Component {
   // };
   componentDidUpdate = async (prevProps, prevState) => {
     if (this.state.activeSubCategory !== prevState.activeSubCategory) {
-      this.setState({ showList: [], next: undefined });
+      await this.setState({ showList: [], next: undefined });
+
+      this.getItems();
     }
     // if (this.state.next !== prevState.next && this.state.next === undefined) {
     //   //   this.getItems();
@@ -545,10 +555,9 @@ class StorePageScroll extends React.Component {
       await this.setState({ showList: [], next: undefined });
 
       this.getItems();
-
-      this.getStoreCategoriesList(this.state.currentStore.id);
     }
     if (this.props.match.params.id !== prevProps.match.params.id) {
+      this.setState({ activeCart: null });
       this.loadStoreComponent();
     }
     if (this.state.next !== prevState.next && this.state.next === null) {
@@ -630,6 +639,9 @@ class StorePageScroll extends React.Component {
       this.loadStoreComponent();
     }
     if (this.state.selectedContactID !== prevState.selectedContactID) {
+      await this.setState({ showList: [], next: undefined });
+
+      await this.getItems();
       console.log(this.state.selectedContactID);
       this.setState({
         wasNextNull: false,
@@ -646,6 +658,9 @@ class StorePageScroll extends React.Component {
         },
       });
       this.props.getCarts();
+      // await this.setState({ showList: [], next: undefined });
+
+      // await this.getItems();
       // this.loadStoreComponent();
 
       let messageUserID =
@@ -776,6 +791,7 @@ class StorePageScroll extends React.Component {
     }
   };
   render() {
+    console.log(this.state.activeCart);
     let contacts = this.state.contactsArr.map((contact) => {
       console.log(contact.props.children);
       if (
@@ -1042,6 +1058,8 @@ class StorePageScroll extends React.Component {
         {" "}
         {/* <h1>הזמנה נוכחית</h1> */}
         <OrderInfo
+          storeID={this.props.match.params.id}
+          selectedContactID={this.state.selectedContactID}
           isPriceFiledDisabled={"disabled"}
           createDelta={this.createDelta}
           getCartProducts={this.getCartProducts}
@@ -1292,7 +1310,9 @@ class StorePageScroll extends React.Component {
             <InfiniteScroll
               className="productCardsRow"
               dataLength={cards.length}
-              next={() => this.getItems()}
+              next={
+                this.state.showList.length !== 0 ? () => this.getItems() : ""
+              }
               hasMore={this.state.next !== null ? true : false}
               loader={this.state.next !== null ? loader : "אין עוד מוצרים"}
             >
