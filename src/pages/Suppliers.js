@@ -42,6 +42,7 @@ export default class Suppliers extends Component {
           showAccounts.push(
             // <li className="suppliersPageAccount">
             <ContactCard
+              postAndGetContacts={this.props.postAndGetContacts}
               openGenericModal={this.props.openGenericModal}
               closeGenericModal={this.props.closeGenericModal}
               activeAccount={this.props.activeAccount}

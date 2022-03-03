@@ -1373,6 +1373,7 @@ class App extends React.Component {
           </Route>
           <Route exact path="/suppliers">
             <Suppliers
+              postAndGetContacts={this.postAndGetContacts}
               openGenericModal={this.openGenericModal}
               closeGenericModal={this.closeGenericModal}
               activeAccount={this.state.activeAccount}
