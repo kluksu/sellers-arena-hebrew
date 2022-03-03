@@ -16,7 +16,7 @@ class AddMyItems extends React.Component {
       items: "",
       variations: "",
       categories: "",
-      fullItemsList: [],
+      showList: [],
       searchText: "",
       subcategories: ["כל החנות"],
       activeSubCategory: "",
@@ -54,41 +54,53 @@ class AddMyItems extends React.Component {
       let path =
         this.state.next !== undefined
           ? this.state.next
-          : `${domain}/items/?limit=50&account_id=${this.props.activeAccount.id}`;
+          : `${domain}/items/?limit=50&account_id=${this.props.activeAccount.id}&search=${this.state.searchText}&subcategory=${this.state.activeSubCategory}`;
       axios.get(path, config).then(async (response) => {
         this.setState({ next: response.data.next });
         await this.getMyItems();
+        this.setState({ showList: response.data.results });
 
-        for (let i = 0; i < response.data.results.length; i++) {
-          const item = response.data.results[i];
-          const category = item.category;
-          let subcategory = item.subcategory;
-          let fullItem = { category: category, item: item };
-          this.setState({
-            fullItemsList: this.state.fullItemsList.concat(fullItem),
-          });
-          if (!(`${category}` in categoriesList)) {
-            categoriesList[category] = category;
-            categories.push(category);
-          }
-          //    for (let j = 0; j < item.item_variations.length; j++) {
-          //        const variation =  item.item_variations[j];
-          //        let fullItem={category:category, item:item, variation:variation}
-          //        this.setState({fullItemsList:this.state.fullItemsList.concat(fullItem)})
-          //
-          //    } this.setState({categories:categories})
-          //
-        }
+        // for (let i = 0; i < response.data.results.length; i++) {
+        //   const item = response.data.results[i];
+        //   const category = item.category;
+        //   let subcategory = item.subcategory;
+        //   let fullItem = { category: category, item: item };
+        //   this.setState({
+        //     fullItemsList: this.state.fullItemsList.concat(fullItem),
+        //   });
+        //   if (!(`${category}` in categoriesList)) {
+        //     categoriesList[category] = category;
+        //     categories.push(category);
+        //   }
+        //    for (let j = 0; j < item.item_variations.length; j++) {
+        //        const variation =  item.item_variations[j];
+        //        let fullItem={category:category, item:item, variation:variation}
+        //        this.setState({fullItemsList:this.state.fullItemsList.concat(fullItem)})
+        //
+        //    } this.setState({categories:categories})
+        //
+
         //////////////////////////////////////////////////////////////
       });
     }
   };
-  componentDidUpdate(prevProps, prevState) {
+  searchItems = async () => {
+    await this.setState({ next: undefined });
+    await this.setState({ showList: [] });
+
+    await this.getMyItems();
+    // this.setState({ searchText: "" });
+  };
+  componentDidUpdate = async (prevProps, prevState) => {
+    if (this.state.activeSubCategory !== prevState.activeSubCategory) {
+      await this.setState({ next: undefined, showList: [] });
+      this.getMyItems();
+    }
     if (this.props.activeAccount !== prevProps.activeAccount) {
       this.getMyItems();
       this.getStoreSubCategoriesList();
     }
-  }
+  };
   componentDidMount = () => {
     if (this.props.accessToken) {
       this.getMyItems();
@@ -99,58 +111,28 @@ class AddMyItems extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
   };
   render() {
-    let showCategories = [];
-    let showItems = [];
-    for (let i = 0; i < this.state.categories.length; i++) {
-      const category = this.state.categories[i];
+    let showItems = this.state.showList.map((item) => {
+      return (
+        <ProductCard
+          closeGenericModal={this.props.closeGenericModal}
+          openGenericModal={this.props.openGenericModal}
+          item={item}
+          onclickFunc={this.additMyItems}
+          pictures={item.image}
+          supplier={""}
+          productName={item.name}
+          price={""}
+          currency=""
+          linkAllAround={`/#/edit_item/${item.id}`}
+        ></ProductCard>
+      );
+    });
 
-      if (
-        category.toUpperCase().includes(this.state.searchText.toUpperCase())
-      ) {
-        showCategories.push(
-          <Col xl={3} lg={3} md={4} sm={6} xs={1}>
-            {" "}
-            <Category
-              fullItemsList={this.state.fullItemsList}
-              category={category}
-            ></Category>
-          </Col>
-        );
-      }
-    }
-    for (let j = 0; j < this.state.fullItemsList.length; j++) {
-      const fullItem = this.state.fullItemsList[j];
-
-      if (
-        fullItem.item.name
-          .toUpperCase()
-          .includes(this.state.searchText.toUpperCase())
-      ) {
-        if (
-          this.state.activeSubCategory === fullItem.item.subcategory ||
-          this.state.activeSubCategory === ""
-        ) {
-          showItems.push(
-            <ProductCard
-              closeGenericModal={this.props.closeGenericModal}
-              openGenericModal={this.props.openGenericModal}
-              item={fullItem.item}
-              onclickFunc={this.additMyItems}
-              pictures={fullItem.item.image}
-              supplier={""}
-              productName={fullItem.item.name}
-              price={""}
-              currency=""
-              fullItem={fullItem}
-              linkAllAround={`/#/edit_item/${fullItem.item.id}`}
-            ></ProductCard>
-          );
-        }
-      }
-    } ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     return (
       <div className="editItemsPage">
         <Search
+          searchItems={this.searchItems}
           activeSubCategory={this.state.activeSubCategory}
           getStoreSubCategory={this.getStoreSubCategory}
           storeSubCategories={this.state.subcategories}
@@ -159,7 +141,6 @@ class AddMyItems extends React.Component {
         ></Search>
 
         {/* <div className="homePage "> */}
-        <Row className="upperProductEdit">{showCategories}</Row>
         <Row className="productCardsRow">{showItems}</Row>
         {/* </div> */}
       </div>

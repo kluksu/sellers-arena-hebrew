@@ -30,7 +30,12 @@ class OrderInfo extends React.Component {
     return axios.get(`${domain}/item-variations/${itemID}/`, config);
   };
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.activeCart !== prevProps.activeCart) {
+    if (
+      this.props.activeCart !== prevProps.activeCart ||
+      this.props.storeID !== prevProps.storeID
+    ) {
+      console.log(this.props.activeCart);
+      console.log(this.state.itemsQuantityArr);
       this.getQuantities();
     }
   }
@@ -55,7 +60,8 @@ class OrderInfo extends React.Component {
       this.getQuantities();
     }
   }
-  getQuantities = () => {
+  getQuantities = async () => {
+    await this.setState({ itemsQuantityArr: {} });
     this.props.activeCart.all_item_variations.forEach((variation, i) => {
       this.getItemDits(variation.item_variation.id).then((res) => {
         let obj = this.state.itemsQuantityArr;
@@ -67,6 +73,7 @@ class OrderInfo extends React.Component {
         this.setState({
           itemsQuantityArr: obj,
         });
+        console.log(this.state.obj);
       });
     });
   };

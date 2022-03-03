@@ -176,7 +176,6 @@ class StorePageScroll extends React.Component {
     // this.setState({ searchText: "" });
   };
   getItems = (token) => {
-    console.log("gotit");
     // if (this.state.next !== null) {
     const path =
       this.props.activeAccount &&
@@ -557,7 +556,7 @@ class StorePageScroll extends React.Component {
       this.getItems();
     }
     if (this.props.match.params.id !== prevProps.match.params.id) {
-      this.setState({ activeCart: null });
+      this.setState({ activeCart: null, cartItems: {} });
       this.loadStoreComponent();
     }
     if (this.state.next !== prevState.next && this.state.next === null) {
@@ -642,7 +641,7 @@ class StorePageScroll extends React.Component {
       await this.setState({ showList: [], next: undefined });
 
       await this.getItems();
-      console.log(this.state.selectedContactID);
+
       this.setState({
         wasNextNull: false,
         activeCart: {
@@ -791,9 +790,7 @@ class StorePageScroll extends React.Component {
     }
   };
   render() {
-    console.log(this.state.activeCart);
     let contacts = this.state.contactsArr.map((contact) => {
-      console.log(contact.props.children);
       if (
         contact.props.children.find((element) => {
           if (
