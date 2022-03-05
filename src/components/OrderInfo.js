@@ -34,8 +34,6 @@ class OrderInfo extends React.Component {
       this.props.activeCart !== prevProps.activeCart ||
       this.props.storeID !== prevProps.storeID
     ) {
-      console.log(this.props.activeCart);
-      console.log(this.state.itemsQuantityArr);
       this.getQuantities();
     }
   }
@@ -73,7 +71,6 @@ class OrderInfo extends React.Component {
         this.setState({
           itemsQuantityArr: obj,
         });
-        console.log(this.state.obj);
       });
     });
   };

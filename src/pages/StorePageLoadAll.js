@@ -585,7 +585,6 @@ class StorePageLoadAll extends React.Component {
       this.loadStoreComponent();
     }
     if (this.state.selectedContactID !== prevState.selectedContactID) {
-      console.log(this.state.selectedContactID);
       this.setState({
         wasNextNull: false,
         activeCart: {
@@ -732,7 +731,6 @@ class StorePageLoadAll extends React.Component {
   };
   render() {
     let contacts = this.state.contactsArr.map((contact) => {
-      console.log(contact.props.children);
       if (
         contact.props.children.find((element) => {
           if (

@@ -62,12 +62,9 @@ export default class Feed extends Component {
     if (this.props.activeAccount) {
       // this.props.getContactsMesssageBoard();
       if (this.props.myContacts) {
-        console.log("!!!!!!!!!!!!");
         this.setState((prevState) => {
           let contactsObj = Object.assign({}, prevState.contactsObj);
           this.props.myContacts.forEach((contact) => {
-            console.log(contact);
-
             // creating copy of state variable jasper
             contactsObj[contact.account_contact.id] = contact; // update the name property, assign a new value
             this.setState({ contactsObj: contactsObj });
@@ -87,7 +84,7 @@ export default class Feed extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (this.props.myContacts !== prevProps.myContacts) {
       this.createContactsObj();
-      console.log(this.props.myContacts);
+
       if (this.props.activeAccount) {
         // this.props.getContactsMesssageBoard();
       }
@@ -97,9 +94,7 @@ export default class Feed extends Component {
     }
   }
   render() {
-    console.log(this.state.contactsObj);
     let youMayLikeCards = this.props.accountsYouMayLike.map((account) => {
-      console.log(this.state.contactsObj[account.id]);
       if (this.state.contactsObj[account.id] === undefined) {
         return (
           <ContactCard

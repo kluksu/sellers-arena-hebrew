@@ -117,7 +117,6 @@ class App extends React.Component {
     axios
       .post(`${domain}/resend-user-verification-email/`, { email: email })
       .then((res) => {
-        console.log(res);
         if (res.status == "200") {
           this.openGenericModal(
             "מייל אימות נשלח לתיבת הדואר שלך, אנא הקש על הלינק, במידה ואינך רואה את ההודעה יש לבדוק בתיבת הספאם"
@@ -868,7 +867,6 @@ class App extends React.Component {
   };
   componentDidUpdate(prevProps, prevState) {
     if (this.state.myContacts !== prevState.myContacts) {
-      console.log(this.state.myContacts);
     }
     if (this.state.accessToken !== prevState.accessToken) {
       this.keepLoggedIn();
@@ -890,7 +888,6 @@ class App extends React.Component {
         this.getMatchingAccounts();
         this.getThreadsAndMarkUnRead();
         this.getContacts().then((res) => {
-          console.log("!!!!!!!!");
           this.setState({ myContacts: res.data.results });
         });
         this.getAllOrders();

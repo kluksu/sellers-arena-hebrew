@@ -14,11 +14,10 @@ export default class NewItemPost extends Component {
   }
   componentDidMount() {}
   render() {
-    console.log(this.props.post);
     let postHeadline = "";
     let postHeadlineARR = this.props.post.text.split(" ");
     let frontarr = [];
-    console.log(postHeadline);
+
     for (let index = 1; index < postHeadlineARR.length; index++) {
       const word = postHeadlineARR[index];
       if (word === "has") {
@@ -34,7 +33,6 @@ export default class NewItemPost extends Component {
       }
       backArr.push(word);
     }
-    console.log(backArr);
 
     postHeadline = `${frontarr}   העלה ${
       this.props.isVariation !== true ? "" : "דגם"

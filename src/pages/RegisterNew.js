@@ -27,7 +27,6 @@ export default class extends Component {
       last_name: this.state.last_name,
     })
       .then((data) => {
-        console.log(data);
         if (data.id) {
           this.props.openGenericModal(
             "הצלחה",
@@ -42,9 +41,7 @@ export default class extends Component {
           window.scrollTo(0, 0);
         }
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   };
   activetTermsCheckbox = (state) => {
     this.setState({ [state]: false });
@@ -62,7 +59,6 @@ export default class extends Component {
   }
   componentDidUpdate(prevProps, prevState) {
     if (this.state !== prevState) {
-      console.log(this.state);
     }
   }
   render() {

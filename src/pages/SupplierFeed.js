@@ -33,12 +33,9 @@ class SupplierFeed extends Component {
     if (this.props.activeAccount) {
       // this.props.getContactsMesssageBoard();
       if (this.props.myContacts) {
-        console.log("!!!!!!!!!!!!");
         this.setState((prevState) => {
           let contactsObj = Object.assign({}, prevState.contactsObj);
           this.props.myContacts.forEach((contact) => {
-            console.log(contact);
-
             // creating copy of state variable jasper
             contactsObj[contact.account_contact.id] = contact; // update the name property, assign a new value
             this.setState({ contactsObj: contactsObj });
@@ -75,7 +72,6 @@ class SupplierFeed extends Component {
     this.setState({ [state]: value });
   };
   getWallEvents = () => {
-    console.log(this.props.match.params);
     let next =
       this.state.next !== ""
         ? this.state.next
@@ -128,7 +124,7 @@ class SupplierFeed extends Component {
   };
   render() {
     // let youMayLikeCards = this.props.accountsYouMayLike.map((account) => {
-    //   console.log(this.state.contactsObj[account.id]);
+    //
     //   if (this.state.contactsObj[account.id] === undefined) {
     //     return (
     //       <ContactCard

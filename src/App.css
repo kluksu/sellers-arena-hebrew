@@ -352,7 +352,7 @@ body {
   width: 100%;
 }
 .readAllBox {
-  max-height: 50vh;
+  max-height: 70vh;
   overflow: scroll;
   overflow-wrap: break-word;
 }

@@ -112,7 +112,7 @@ class HomePage extends React.Component {
           //       variation: variation,
           //       image: variation.image,
           //     };
-          console.log(response.data.results);
+
           this.setState({
             showList: this.state.showList.concat(response.data.results),
           });
@@ -186,7 +186,6 @@ class HomePage extends React.Component {
         ? this.state.showList.map((item, i) => {
             return item.item_variations.map((variation) => {
               if (!this.props.accessToken) {
-                console.log(variation.id);
                 let card =
                   variation.cost_per_item === null ? (
                     <ProductCard

@@ -99,7 +99,6 @@ export default class OpenAccount extends Component {
         axios
           .post(`${domain}/my-accounts/`, accountInfo, config)
           .then((data) => {
-            console.log(data);
             this.setState({ responseData: data });
             this.props.goToNewAccount(data);
             if (data.data.id) {
@@ -120,7 +119,6 @@ export default class OpenAccount extends Component {
             }
           })
           .catch((error) => {
-            console.log(error.response);
             Object.entries(error.response.data).forEach((field) => {
               this.setState({ [`${field[0]}_error`]: field[1] });
             });

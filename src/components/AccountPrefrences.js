@@ -58,7 +58,7 @@ export default class AccountPrefrences extends Component {
     const target = event.target;
     const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
-    console.log(name, value);
+
     this.setState({
       [name]: value,
     });
@@ -118,7 +118,7 @@ export default class AccountPrefrences extends Component {
     this.state.eventsList.forEach((event) => {
       changedEvents[Object.keys(event)] = this.state[Object.keys(event)];
     });
-    console.log(changedEvents);
+
     axios
       .patch(
         `${domain}/my-account-preferences/${this.props.activeAccount.id}/`,
