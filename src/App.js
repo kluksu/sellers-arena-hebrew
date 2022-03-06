@@ -914,7 +914,9 @@ class App extends React.Component {
       });
   };
   render() {
-    let href = window.location.href.split("/")[2];
+    let href = !window.location.href.includes("sapakos")
+      ? window.location.href.split("/")[2]
+      : "";
     console.log(href);
     let unreadMessages = 0;
     for (const [key, value] of Object.entries(this.state.messagesWasReadObj)) {
@@ -1502,6 +1504,7 @@ class App extends React.Component {
               accessToken={this.state.accessToken}
               activeAccount={this.state.activeAccount}
               screenWidth={this.state.screenWidth}
+              href={href}
             ></StorePageScroll>
           </Route>
           <Route exact path="/supplier-order/:id">
@@ -1515,7 +1518,16 @@ class App extends React.Component {
               markOrderAs={this.markOrderAs}
               accessToken={this.state.accessToken}
               activeAccount={this.state.activeAccount}
+              href={href}
             ></SupplierOrder>
+          </Route>
+          <Route exact path="/register/">
+            <RegisterNew
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
+              isGenericModalOpen={this.state.isGenericModalOpen}
+              href={href}
+            ></RegisterNew>
           </Route>
           <Route exact path="/my-feed/:id">
             <SupplierFeed
@@ -1534,6 +1546,7 @@ class App extends React.Component {
               myContacts={this.state.myContacts}
               activeAccount={this.state.activeAccount}
               accessToken={this.state.accessToken}
+              href={href}
             ></SupplierFeed>
           </Route>{" "}
           <DiscountModal
@@ -1544,6 +1557,7 @@ class App extends React.Component {
             text={this.state.modalText}
             closeModal={this.closeGenericModal}
             isDiscountModalOpen={this.state.isGenericModalOpen}
+            href={href}
           ></DiscountModal>
           <LoginModal
             openGenericModal={this.openGenericModal}
@@ -1554,6 +1568,7 @@ class App extends React.Component {
             loginPostData={this.loginPostData}
             isOpen={this.state.isOpen}
             closeModal={this.closeModal}
+            href={href}
           ></LoginModal>
         </HashRouter>
       </div>
