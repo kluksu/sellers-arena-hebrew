@@ -218,7 +218,7 @@ class MyNavBar extends React.Component {
               {" "}
               <NavLink href="/#/add_items">עריכת מוצר</NavLink>
               <NavLink href="/#/edit-multiple">עריכה וריאציות מהירה</NavLink>
-              <NavLink href="/#/edit-multiple-items">עריכה פריט מהירה</NavLink>
+              {/* <NavLink href="/#/edit-multiple-items">עריכה פריט מהירה</NavLink> */}
             </NavDropdown>
           </>
         ) : (

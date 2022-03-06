@@ -12,9 +12,10 @@ import { BiWinkSmile } from "react-icons/bi";
 
 import Picker from "emoji-picker-react";
 import axios from "axios";
-import { domain } from "./utils";
+import { domain, handleKeyDown } from "./utils";
 import DropDownSearch from "./DropDownSearch";
 import InfoBox from "./InfoBox";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 export default class PostComponent extends Component {
   constructor(props) {
@@ -31,8 +32,63 @@ export default class PostComponent extends Component {
       picturesArr: [],
       itemSearchText: "",
       variationSearchText: "",
+      next: undefined,
+      searchText: "",
+      activeSubCategory: "",
+      storeSubCategories: ["כל החנות"],
     };
   }
+  getSearchText = (searchText) => {
+    this.setState({ searchText: searchText });
+  };
+  // getStoreSubCategory = (e, subCategory) => {
+  //   this.setState({ activeSubCategory: subCategory });
+  //   // window.scrollTo(0, document.getElementById("productCardsRow").scrollHeight);
+  //   document.getElementById("productCardsRow").scrollIntoView();
+  // };
+  searchItems = async () => {
+    await this.setState({ next: undefined });
+    await this.setState({ myItems: [] });
+
+    await this.getMyItems();
+    // this.setState({ searchText: "" });
+  };
+  getStoreCategoriesList = async (accountID) => {
+    axios.get(`${domain}/account-subcategories/${accountID}/`).then((res) => {
+      res.data.results.forEach((pair) => {
+        if (!this.state.storeSubCategories.includes(pair["subcategory"])) {
+          this.setState({
+            storeSubCategories: this.state.storeSubCategories.concat(
+              pair["subcategory"]
+            ),
+          });
+        }
+      });
+    });
+  };
+  handleChange = (event) => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
+  getMyItems = () => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${this.props.accessToken}`,
+        "Content-Type": "application/json",
+      },
+    };
+    let path =
+      this.state.next !== undefined
+        ? this.state.next
+        : `${domain}/items/?limit=20&account_id=${this.props.activeAccount.id}&search=${this.state.itemSearchText}&subcategory=${this.state.activeSubCategory}`;
+    axios.get(path, config).then((response) => {
+      this.setState({ next: response.data.next });
+      console.log(response.data.results);
+      this.setState({
+        myItems: this.state.myItems.concat(response.data.results),
+      });
+    });
+  };
 
   handleDropDownPick = (state, value) => {
     this.setState({ [state]: value });
@@ -88,27 +144,31 @@ export default class PostComponent extends Component {
       });
     }
   };
-  getItems = () => {
-    const authorization = !this.props.accessToken
-      ? null
-      : `Bearer ${this.props.accessToken}`;
-    const config = {
-      headers: { "Content-Type": "application/json", authorization },
-    };
-    return axios.get(`${domain}/items/`, config);
-  };
-  onMount = () => {
-    if (!this.props.myItems) {
-      this.getItems()
-        .then((res) => {
-          this.setState({ myItems: res.data.results });
-        })
-        .catch((error) => {});
-    } else {
-      this.setState({ myItems: this.props.myItems });
-    }
-  };
+  // getItems = () => {
+  //   const authorization = !this.props.accessToken
+  //     ? null
+  //     : `Bearer ${this.props.accessToken}`;
+  //   const config = {
+  //     headers: { "Content-Type": "application/json", authorization },
+  //   };
+  //   return axios.get(`${domain}/items/`, config);
+  // };
+  // onMount = () => {
+  //   if (!this.props.myItems) {
+  //     this.getItems()
+  //       .then((res) => {
+  //         this.setState({ myItems: res.data.results });
+  //       })
+  //       .catch((error) => {});
+  //   } else {
+  //     this.setState({ myItems: this.props.myItems });
+  //   }
+  // };
   componentDidMount = () => {
+    if (this.props.activeAccount && this.props.activeAccount.accout_type == 3) {
+      this.getStoreCategoriesList(this.props.activeAccount.id);
+      this.getMyItems();
+    }
     if (this.props.post) {
       let text = this.props.post.text;
       let textArr = text.split("pictures//");
@@ -119,14 +179,23 @@ export default class PostComponent extends Component {
 
       // this.setState({ picturesArr: textArr[1] });
     }
-    this.onMount();
+    // this.onMount();
   };
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate = async (prevProps, prevState) => {
+    if (this.props.activeAccount !== prevProps.activeAccount) {
+      this.getMyItems();
+      this.getStoreCategoriesList(this.props.activeAccount.id);
+    }
+    if (this.state.activeSubCategory !== prevState.activeSubCategory) {
+      await this.setState({ myItems: [], next: undefined });
+
+      this.getMyItems();
+    }
     if (this.state.myItems !== prevState.myItems && this.props.getStateInfo) {
       this.props.getStateInfo("myItems", this.state.myItems);
     }
     if (this.props.activeAccount !== prevProps.activeAccount) {
-      this.onMount();
+      // this.onMount();
     }
     if (this.state.selectedItemID !== prevState.selectedItemID) {
       this.state.myItems.forEach((item) => {
@@ -142,14 +211,15 @@ export default class PostComponent extends Component {
         }
       });
     }
-  }
+    // if (this.state.itemSearchText !== prevState.itemSearchText) {
+    //   this.searchItems();
+    // }
+  };
   onEmojiClick = (e, emojiObject) => {
     this.setState({ chosenEmoji: emojiObject });
     this.setState({ text: this.state.text + emojiObject.emoji });
   };
-  handleChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
+
   togglePicker = (e) => {
     e.stopPropagation();
     this.setState({
@@ -157,7 +227,10 @@ export default class PostComponent extends Component {
     });
   };
   render() {
+    console.log(this.state.myItems);
+
     let variations = [];
+
     let allitems = this.state.myItems.map((item) => {
       if (this.state.selectedItemID == item.id) {
         item.item_variations.forEach((variation, i) => {
@@ -183,13 +256,14 @@ export default class PostComponent extends Component {
           }
         });
       }
-      if (
-        `${item.id}`.includes(this.state.itemSearchText) ||
-        `${item.name}`.includes(this.state.itemSearchText)
-      ) {
+      // if (
+      //   `${item.id}`.includes(this.state.itemSearchText) ||
+      //   `${item.name}`.includes(this.state.itemSearchText)
+      // )
+      {
         return (
           <>
-            {" "}
+            {console.log(item)}
             <NavDropdown.Item
               onClick={() => this.handleDropDownPick("selectedItemID", item.id)}
             >
@@ -248,7 +322,11 @@ export default class PostComponent extends Component {
               <Nav className="mr-auto">
                 {" "}
                 {/* <Form.Group> */}
-                <div>
+                <div
+                  onKeyDown={(event) =>
+                    handleKeyDown(event, () => this.searchItems())
+                  }
+                >
                   <NavDropdown
                     title={`${
                       this.state.selectedItem
@@ -262,7 +340,25 @@ export default class PostComponent extends Component {
                       handleChange={this.handleChange}
                       state={"itemSearchText"}
                     ></DropDownSearch>
-                    {allitems}
+                    <InfiniteScroll
+                      style={{ width: "100vw" }} //To put endMessage and loader to the top.
+                      // className="productCardsRow"
+                      dataLength={allitems.length}
+                      next={
+                        this.state.myItems.length !== 0
+                          ? () => this.getMyItems()
+                          : ""
+                      }
+                      hasMore={
+                        true
+                        // this.state.next !== null ? true : false
+                      }
+                      loader={
+                        this.state.next !== null ? "loader" : "אין עוד מוצרים"
+                      }
+                    >
+                      {allitems}
+                    </InfiniteScroll>
                   </NavDropdown>
                   {/* <Form.Control
                     onChange={this.handleChange}

@@ -11,11 +11,11 @@ class Crop extends PureComponent {
       base64: "",
       blob: "",
       crop: {
-        unit: "px", // default, can be 'px' or '%'
-        x: 130,
-        y: 50,
-        width: 50,
-        height: 50,
+        unit: "%", // default, can be 'px' or '%'
+        // x: 130,
+        // y: 50,
+        width: 100,
+        height: 100,
       },
     };
   }

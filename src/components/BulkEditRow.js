@@ -42,9 +42,15 @@ export default class BulkEditRow extends Component {
   render() {
     return (
       <tr>
-        <td>{this.props.item.id}</td>
+        <td>
+          <div>מספר פריט</div>
+          <div>{this.props.item.id}</div>
+        </td>
 
-        <td>{this.props.variation.id}</td>
+        <td>
+          <div>מספר דגם</div>
+          <div>{this.props.variation.id}</div>
+        </td>
 
         <td>
           {" "}
@@ -56,7 +62,9 @@ export default class BulkEditRow extends Component {
           {" "}
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>
-              {this.props.screenWidth <= 1268 ? "מנה" : null}
+              {/* {this.props.screenWidth <= 1268 ?  */}
+              מנה
+              {/* : null} */}
             </Form.Label>
             <Form.Control
               onChange={this.handleChange}
@@ -71,7 +79,9 @@ export default class BulkEditRow extends Component {
         <td>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>
-              {this.props.screenWidth <= 1268 ? "מחיר" : null}
+              {/* {this.props.screenWidth <= 1268 ? */}
+              מחיר
+              {/* //  : null} */}
             </Form.Label>
             <Form.Control
               type="number"
@@ -85,7 +95,9 @@ export default class BulkEditRow extends Component {
         <td>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>
-              {this.props.screenWidth <= 1268 ? "מלאי" : null}
+              {/* {this.props.screenWidth <= 1268 ? */}
+              מלאי
+              {/* : null} */}
             </Form.Label>
             <Form.Control
               type="number"

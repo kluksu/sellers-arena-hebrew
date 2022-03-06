@@ -28,7 +28,7 @@ export default class BulkEditing extends Component {
   };
   searchItems = async () => {
     await this.setState({ next: undefined });
-    await this.setState({ showList: [] });
+    await this.setState({ myItems: [] });
 
     await this.getMyItems();
     // this.setState({ searchText: "" });
@@ -155,7 +155,7 @@ export default class BulkEditing extends Component {
         </Table> */}
 
           <Table className="" hover striped>
-            <thead>
+            {/* <thead>
               <tr>
                 <th>קוד מוצר</th>
 
@@ -169,26 +169,26 @@ export default class BulkEditing extends Component {
                 <th>מלאי זמין</th>
 
                 {/* <th>תיאור</th> */}
-                <th></th>
+            {/* <th></th>
               </tr>
             </thead>
-            <tbody>
-              <InfiniteScroll
-                style={{ width: "100vw" }} //To put endMessage and loader to the top.
-                // className="productCardsRow"
-                dataLength={rowsArr.length}
-                next={
-                  this.state.myItems.length !== 0 ? () => this.getMyItems() : ""
-                }
-                hasMore={
-                  true
-                  // this.state.next !== null ? true : false
-                }
-                loader={this.state.next !== null ? "loader" : "אין עוד מוצרים"}
-              >
-                {rowsArr}
-              </InfiniteScroll>
-            </tbody>
+            <tbody>  */}
+            <InfiniteScroll
+              style={{ width: "100vw" }} //To put endMessage and loader to the top.
+              // className="productCardsRow"
+              dataLength={rowsArr.length}
+              next={
+                this.state.myItems.length !== 0 ? () => this.getMyItems() : ""
+              }
+              hasMore={
+                true
+                // this.state.next !== null ? true : false
+              }
+              loader={this.state.next !== null ? "loader" : "אין עוד מוצרים"}
+            >
+              {rowsArr}
+            </InfiniteScroll>
+            {/* </tbody> */}
           </Table>
         </div>
       </>

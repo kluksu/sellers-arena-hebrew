@@ -1657,7 +1657,11 @@ label.form-label {
 .postComponent .dropdown-menu {
   text-align: center !important;
   max-height: 400px;
-  overflow-x: scroll;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+.postComponent .dropdown-menu .dropdown-item {
+  width: 310px;
 }
 .dropdown-menu {
   text-align: right;
