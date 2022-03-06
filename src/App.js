@@ -914,6 +914,8 @@ class App extends React.Component {
       });
   };
   render() {
+    let href = window.location.href.split("/")[2];
+    console.log(href);
     let unreadMessages = 0;
     for (const [key, value] of Object.entries(this.state.messagesWasReadObj)) {
       if (value === "red") {
@@ -1471,6 +1473,7 @@ class App extends React.Component {
             loginData={this.state.loginData}
             activeAccount={this.state.activeAccount}
             loginPostData={this.loginPostData}
+            href={href}
           ></WhiteLabelNav>
           <Route exact path={`/${this.state.activeAccount ? ":id" : ""}`}>
             <StorePageScroll

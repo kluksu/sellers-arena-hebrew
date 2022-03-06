@@ -8,7 +8,7 @@ import {
   Navbar,
   NavDropdown,
 } from "react-bootstrap";
-import { domain } from "./utils";
+import { domain, whiteLableStores } from "./utils";
 
 export default class extends Component {
   constructor(props) {
@@ -39,6 +39,7 @@ export default class extends Component {
   // fulfilledOrders={this.state.fulfilledOrders}
   // sellerApprovedOrders={this.state.sellerApprovedOrders}
   render() {
+    console.log(this.props.activeAccount);
     let logInOut = !this.props.activeAccount ? (
       <Nav.Link
         href={window.location.href}
@@ -61,11 +62,7 @@ export default class extends Component {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="m-auto">
-              <Nav.Link
-                href={`#/${
-                  this.props.activeAccount ? this.props.activeAccount.id : ""
-                }`}
-              >
+              <Nav.Link href={`#/${whiteLableStores[this.props.href]}`}>
                 החנות
               </Nav.Link>
               <Nav.Link href="#/my-feed">עדכוני ספק</Nav.Link>
