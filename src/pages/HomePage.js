@@ -342,12 +342,16 @@ class HomePage extends React.Component {
               hasMore={true}
               endMessage={"אין עוד תוצאות"}
               loader={
-                <Loader
-                  className="m-auto"
-                  Color="blue"
-                  height={100}
-                  type="ThreeDots"
-                ></Loader>
+                this.state.next !== null ? (
+                  <Loader
+                    className="m-auto"
+                    Color="blue"
+                    height={100}
+                    type="ThreeDots"
+                  ></Loader>
+                ) : (
+                  "אין מוצרים נוספים"
+                )
               }
             >
               <Row className="homePage"> {cards}</Row>

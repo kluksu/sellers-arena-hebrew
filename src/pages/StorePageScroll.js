@@ -80,15 +80,6 @@ class StorePageScroll extends React.Component {
     };
   }
   getStoreCategoriesList = async (accountID) => {
-    // this.setState({ storeSubCategories: [] });
-    // const tokenfull = this.props.accessToken ? this.props.accessToken : token;
-
-    // const authorization = !this.props.accessToken
-    //   ? null
-    //   : `Bearer ${tokenfull}`;
-    // const config = {
-    //   headers: { "Content-Type": "application/json", authorization },
-    // };
     axios.get(`${domain}/account-subcategories/${accountID}/`).then((res) => {
       res.data.results.forEach((pair) => {
         if (!this.state.storeSubCategories.includes(pair["subcategory"])) {
@@ -1311,7 +1302,18 @@ class StorePageScroll extends React.Component {
                 this.state.showList.length !== 0 ? () => this.getItems() : ""
               }
               hasMore={this.state.next !== null ? true : false}
-              loader={this.state.next !== null ? loader : "אין עוד מוצרים"}
+              loader={
+                this.state.next !== null ? (
+                  <Loader
+                    className="m-auto"
+                    Color="blue"
+                    height={100}
+                    type="ThreeDots"
+                  ></Loader>
+                ) : (
+                  "אין מוצרים נוספים"
+                )
+              }
             >
               <Row
                 className="productCardsRow"

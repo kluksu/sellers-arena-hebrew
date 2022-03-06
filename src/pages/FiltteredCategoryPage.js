@@ -25,6 +25,7 @@ import "react-pro-sidebar/dist/css/styles.css";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { CgArrowLeftO } from "react-icons/cg";
 import BottomNav from "../components/BottomNav";
+import Loader from "react-loader-spinner";
 
 class FiltteredCategoryPage extends React.Component {
   constructor(props) {
@@ -336,7 +337,18 @@ class FiltteredCategoryPage extends React.Component {
               dataLength={cards.length}
               next={() => this.getItems()}
               hasMore={this.state.hasMore}
-              loader={<h4>Loading...</h4>}
+              loader={
+                this.state.next !== null ? (
+                  <Loader
+                    className="m-auto"
+                    Color="blue"
+                    height={100}
+                    type="ThreeDots"
+                  ></Loader>
+                ) : (
+                  "אין מוצרים נוספים"
+                )
+              }
               endMessage={"אין עוד תוצאות"}
             >
               <Row className="homePage">{cards}</Row>
