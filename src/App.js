@@ -997,7 +997,9 @@ class App extends React.Component {
     //   minwidth = "740px";
     // }
     console.log(this.state.accessToken);
-    return window.location.href.includes("sapakos") ? (
+    return window.location.href.includes("sapakos") ||
+      (this.state.activeAccount &&
+        this.state.activeAccount.account_type == 3) ? (
       <div className="App">
         {/* {this.state.activeAccount &&
         !window.location.href.includes("feed") &&
@@ -1563,6 +1565,50 @@ class App extends React.Component {
               href={href}
             ></SupplierFeed>
           </Route>{" "}
+          <Route exact path="/all-orders">
+            <AllOrders
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
+              myUsers={this.state.myUsers}
+              getAccount={this.getAccount}
+              myContacts={this.state.myContacts}
+              screenWidth={this.state.screenWidth}
+              payedOrders={this.state.payedOrders}
+              fulfilledOrders={this.state.fulfilledOrders}
+              sellerApprovedOrders={this.state.sellerApprovedOrders}
+              MySupplierOrders={this.state.MySupplierOrders}
+              activeAccount={this.state.activeAccount}
+              accessToken={this.state.accessToken}
+            ></AllOrders>
+          </Route>
+          <Route exact path="/openAccount">
+            <OpenAccount
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
+              captchaResponse={this.state.captchaResponse}
+              isRealUser={this.state.isRealUser}
+              verifyCallback={this.verifyCallback}
+              reCaptchaLoded={this.reCaptchaLoded}
+              // handleVerified={this.handleVerified}
+              goToNewAccount={this.goToNewAccount}
+              activeAccount={this.state.activeAccount}
+              accessToken={this.state.accessToken}
+              me={this.state.me}
+              href={href}
+            ></OpenAccount>
+          </Route>
+          <Route exact path="/order-summery/:id">
+            <OrderSummery
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
+              openGenericModalOrderSummery={this.openGenericModalOrderSummery}
+              getSpecificOrder={this.getSpecificOrder}
+              checkOut={this.checkOut}
+              activeAccount={this.state.activeAccount}
+              deleteCart={this.deleteCart}
+              accessToken={this.state.accessToken}
+            ></OrderSummery>
+          </Route>
           <DiscountModal
             preventModalDefult={this.state.preventModalDefult}
             bottom={this.state.modalBottom}

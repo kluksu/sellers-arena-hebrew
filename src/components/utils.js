@@ -20,7 +20,7 @@ export async function postData(URL = "", data = {}, token) {
     headers: {
       "Content-Type": "application/json",
       accept: "application/json",
-      Authorization: "Bearer" + ` ${token}`,
+      Authorization: "Bearer" + `${token}`,
 
       // 'Content-Type': 'application/x-www-form-urlencoded',
     },

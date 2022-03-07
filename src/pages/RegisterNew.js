@@ -2,7 +2,12 @@ import axios from "axios";
 import React, { Component } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import ReadAllBox from "../components/ReadAllBox";
-import { domain, handleKeyDown, postData } from "../components/utils";
+import {
+  domain,
+  handleKeyDown,
+  postData,
+  whiteLableStores,
+} from "../components/utils";
 import PrivecyPolicy from "./PrivecyPolicy";
 import TermOfUse from "./TermOfUse";
 
@@ -25,11 +30,17 @@ export default class extends Component {
     //     },
     //   };
     // }
-    let path = this.props.href ? "separated-users" : "register";
+    let path =
+      // this.props.href ? "separated-users" :
+      "register";
+    let seller_account = this.props.href
+      ? whiteLableStores[this.props.href]
+      : "";
     postData(
       `${domain}/${path}/`,
       {
         email: this.state.email.toLowerCase(),
+        seller_account,
         password: this.state.password,
         phone_number: this.state.phone_number,
         terms_agreed: this.state.terms_agreed,
@@ -38,8 +49,8 @@ export default class extends Component {
         privacy_policy_agreed: this.state.privacy_policy_agreed,
         first_name: this.state.first_name,
         last_name: this.state.last_name,
-      },
-      this.props.accessToken
+      }
+      // this.props.accessToken
     )
       .then((data) => {
         console.log(data);

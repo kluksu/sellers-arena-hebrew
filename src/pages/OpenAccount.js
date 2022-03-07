@@ -26,7 +26,7 @@ export default class OpenAccount extends Component {
       country: "",
       language: "",
 
-      account_type: "",
+      account_type: this.props.href !== "" ? 2 : "",
       responseData: "",
       category: "",
       captchaError: "",
@@ -64,7 +64,7 @@ export default class OpenAccount extends Component {
       this.state.country !== "" &&
       this.state.language !== ""
     ) {
-      if (this.props.isRealUser) {
+      if (this.props.isRealUser || window.location.href.includes("localhost")) {
         // this.setState({discounts: Object.assign(  this.state.newDIscount)} )
         // this.setState({
         //   varsInfo: Object.assign(Object.entries(this.state.newVariations)),
@@ -207,6 +207,31 @@ export default class OpenAccount extends Component {
   };
 
   render() {
+    console.log(this.state.account_type);
+    let accountType = this.props.href ? (
+      ""
+    ) : (
+      <>
+        {" "}
+        <Form.Group>
+          <FormLabel>סוג חשבון</FormLabel>
+          <Form.Control
+            onChange={this.handleChange}
+            size="md"
+            as="select"
+            name="account_type"
+          >
+            <option value={""}>-------</option>
+            <option value={3}>ספק</option>
+            <option value={2}>קימונאי</option>
+          </Form.Control>
+        </Form.Group>
+        <p className="FormRejects">
+          {/* {this.state.responseData.account_type ? "שדה חובה" : ""} */}
+        </p>{" "}
+        <p className="FormRejects">{this.state.account_type_error}</p>
+      </>
+    );
     let mainCategoryArr = [];
 
     categoriesAndSubCategories.forEach((category) => {
@@ -279,23 +304,7 @@ export default class OpenAccount extends Component {
               {this.state.responseData.phone_number}
             </p>{" "}
             <p className="FormRejects">{this.state.phone_number_error}</p>
-            <Form.Group>
-              <FormLabel>סוג חשבון</FormLabel>
-              <Form.Control
-                onChange={this.handleChange}
-                size="md"
-                as="select"
-                name="account_type"
-              >
-                <option value={""}>-------</option>
-                <option value={3}>ספק</option>
-                <option value={2}>קימונאי</option>
-              </Form.Control>
-            </Form.Group>
-            <p className="FormRejects">
-              {/* {this.state.responseData.account_type ? "שדה חובה" : ""} */}
-            </p>{" "}
-            <p className="FormRejects">{this.state.account_type_error}</p>
+            {accountType}{" "}
             <Form.Group>
               <FormLabel>קטגוריית חנות</FormLabel>
               <Form.Control
