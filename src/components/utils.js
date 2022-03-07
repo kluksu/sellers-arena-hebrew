@@ -8,6 +8,7 @@ import { element } from "prop-types";
 // https://supplierzz.herokuapp.com
 export let domain = "https://supplierzz.westeurope.cloudapp.azure.com";
 // export let domain = "https://supplierzz.herokuapp.com";
+// export let domain = "https://supplierzz-integration.herokuapp.com";
 export async function postData(URL = "", data = {}, token) {
   // Default options are marked with *
   const response = await fetch(URL, {
