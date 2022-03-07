@@ -8,7 +8,8 @@ export const whiteLableStores = { "localhost:3000": 10 };
 // Example POST method implementation:
 // https://supplierzz.herokuapp.com
 // export let domain = "https://supplierzz.westeurope.cloudapp.azure.com";
-export let domain = "https://supplierzz.herokuapp.com";
+// export let domain = "https://supplierzz.herokuapp.com";
+export let domain = "https://supplierzz-integration.herokuapp.com";
 export async function postData(URL = "", data = {}, token) {
   // Default options are marked with *
   const response = await fetch(URL, {
@@ -19,7 +20,7 @@ export async function postData(URL = "", data = {}, token) {
     headers: {
       "Content-Type": "application/json",
       accept: "application/json",
-      Authorization: "Bearer" + `${token}`,
+      Authorization: "Bearer" + ` ${token}`,
 
       // 'Content-Type': 'application/x-www-form-urlencoded',
     },

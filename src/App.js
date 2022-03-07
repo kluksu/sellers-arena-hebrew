@@ -996,6 +996,7 @@ class App extends React.Component {
     // ) {
     //   minwidth = "740px";
     // }
+    console.log(this.state.accessToken);
     return window.location.href.includes("sapakos") ? (
       <div className="App">
         {/* {this.state.activeAccount &&
@@ -1477,7 +1478,18 @@ class App extends React.Component {
             loginPostData={this.loginPostData}
             href={href}
           ></WhiteLabelNav>
-          <Route exact path={`/${this.state.activeAccount ? ":id" : ""}`}>
+          <Route exact path="/profile">
+            <Profile
+              deleteAccount={this.deleteAccount}
+              resetPassword={this.resetPassword}
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
+              me={this.state.me}
+              activeAccount={this.state.activeAccount}
+              accessToken={this.state.accessToken}
+            ></Profile>
+          </Route>
+          <Route exact path={`/store/${this.state.activeAccount ? ":id" : ""}`}>
             <StorePageScroll
               createPermDiscount={this.createPermDiscount}
               openGenericModal={this.openGenericModal}
@@ -1523,13 +1535,15 @@ class App extends React.Component {
           </Route>
           <Route exact path="/register/">
             <RegisterNew
+              accessToken={this.state.accessToken}
+              activeAccount={this.state.activeAccount}
               closeGenericModal={this.closeGenericModal}
               openGenericModal={this.openGenericModal}
               isGenericModalOpen={this.state.isGenericModalOpen}
               href={href}
             ></RegisterNew>
           </Route>
-          <Route exact path="/my-feed/:id">
+          <Route exact path="/feed/:id">
             <SupplierFeed
               screenWidth={this.state.screenWidth}
               myContacts={this.state.myContacts}

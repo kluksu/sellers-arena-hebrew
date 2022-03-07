@@ -8,6 +8,7 @@ import {
   Navbar,
   NavDropdown,
 } from "react-bootstrap";
+import Profile from "../pages/Profile";
 import { domain, whiteLableStores } from "./utils";
 
 export default class extends Component {
@@ -52,6 +53,19 @@ export default class extends Component {
         התנתק
       </Nav.Link>
     );
+    let creatUser =
+      this.props.activeAccount && this.props.activeAccount.account_type == 3 ? (
+        <Nav.Link href="/#/register"> צור משתמש</Nav.Link>
+      ) : (
+        ""
+      );
+    let profile =
+      this.props.activeAccount && this.props.activeAccount.account_type == 3 ? (
+        <Nav.Link href="/#/profile"> פרופיל </Nav.Link>
+      ) : (
+        ""
+      );
+
     return (
       <div className="myNavBar">
         <Navbar collapseOnSelect expand="lg" bg="light">
@@ -62,11 +76,15 @@ export default class extends Component {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="m-auto">
-              <Nav.Link href={`#/${whiteLableStores[this.props.href]}`}>
+              <Nav.Link href={`/#/store/${whiteLableStores[this.props.href]}`}>
                 החנות
               </Nav.Link>
-              <Nav.Link href="#/my-feed">עדכוני ספק</Nav.Link>
+              <Nav.Link href={`/#/feed/${whiteLableStores[this.props.href]}`}>
+                עדכוני ספק
+              </Nav.Link>
               <Nav.Link href="#my-orders">ההזמנות שלי</Nav.Link>
+              {creatUser}
+              {profile}
               <NavDropdown title="ההזמנות שלי" id="collasible-nav-dropdown">
                 <NavDropdown.Item href="#new-order">
                   הזמנות חדשות

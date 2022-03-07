@@ -15,17 +15,32 @@ export default class extends Component {
     };
   }
   sendForm = () => {
-    postData(`${domain}/register/`, {
-      email: this.state.email.toLowerCase(),
-      password: this.state.password,
-      phone_number: this.state.phone_number,
-      terms_agreed: this.state.terms_agreed,
-      terms_revision: "1.0.0",
-      privacy_policy_revision: "1.0.0",
-      privacy_policy_agreed: this.state.privacy_policy_agreed,
-      first_name: this.state.first_name,
-      last_name: this.state.last_name,
-    })
+    // console.log("!!!!!!!!!!!!!!!!!!!!!");
+    // let config = {};
+    // if (this.props.accessToken) {
+    //   config = {
+    //     headers: {
+    //       Authorization: `Bearer ${this.props.accessToken}`,
+    //       "Content-Type": "application/json",
+    //     },
+    //   };
+    // }
+    let path = this.props.href ? "separated-users" : "register";
+    postData(
+      `${domain}/${path}/`,
+      {
+        email: this.state.email.toLowerCase(),
+        password: this.state.password,
+        phone_number: this.state.phone_number,
+        terms_agreed: this.state.terms_agreed,
+        terms_revision: "1.0.0",
+        privacy_policy_revision: "1.0.0",
+        privacy_policy_agreed: this.state.privacy_policy_agreed,
+        first_name: this.state.first_name,
+        last_name: this.state.last_name,
+      },
+      this.props.accessToken
+    )
       .then((data) => {
         console.log(data);
         if (data.id) {
