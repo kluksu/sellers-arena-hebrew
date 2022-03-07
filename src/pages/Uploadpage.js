@@ -25,7 +25,7 @@ class Uploadpage extends React.Component {
       base64: "",
       productName: "",
       description: "",
-      visibility: '{"price":2,"item":1}',
+      visibility: '{"price":5,"item":1}',
       currency: "ils",
       category: "",
       subcategory: "",
