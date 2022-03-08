@@ -958,7 +958,9 @@ class StorePageScroll extends React.Component {
           <Row>
             <Col xl={4}>
               {" "}
-              {this.state.currentStore.image ? (
+              {this.props.href ? (
+                ""
+              ) : this.state.currentStore.image ? (
                 <img src={this.state.currentStore.image}></img>
               ) : (
                 <ImProfile className="profileIcon" />
@@ -987,23 +989,28 @@ class StorePageScroll extends React.Component {
                   </Button>
                 </a>
               ) : null}
-              <Button
-                disabled={unregisterDisable}
-                className="w-50"
-                variant="success"
-                onClick={
-                  () =>
-                    this.props.handleOpenMessage(
-                      messageUserID,
-                      this.state.threadID
-                    ) /////////////////////////////////////////////////////////////////////////////////////
-                }
-              >
-                שלח הודעה <BiMailSend />
-              </Button>
-              {this.props.activeAccount &&
-              this.props.match.params.id ==
-                this.props.activeAccount.id ? null : (
+              {!this.props.href ? (
+                <Button
+                  disabled={unregisterDisable}
+                  className="w-50"
+                  variant="success"
+                  onClick={
+                    () =>
+                      this.props.handleOpenMessage(
+                        messageUserID,
+                        this.state.threadID
+                      ) /////////////////////////////////////////////////////////////////////////////////////
+                  }
+                >
+                  שלח הודעה <BiMailSend />
+                </Button>
+              ) : (
+                ""
+              )}
+
+              {(this.props.activeAccount &&
+                this.props.match.params.id == this.props.activeAccount.id) ||
+              this.props.href ? null : (
                 <Button
                   onClick={() => this.props.postAndGetContacts(messageUserID)}
                   className="w-50"
