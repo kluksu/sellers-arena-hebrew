@@ -18,6 +18,7 @@ import FullPageLoader from "../components/FullPageLoader";
 import AddUnregisterdAccount from "../components/AddUnregisterdAccount";
 import AllOrders from "./AllOrders";
 import AccountPrefrences from "../components/AccountPrefrences";
+import SeparateAccountsManage from "../components/SeparateAccountsManage";
 
 class ControlPanel extends React.Component {
   constructor(props) {
@@ -51,6 +52,13 @@ class ControlPanel extends React.Component {
               <NavLink href="/#/control_panel/account_prefrences">
                 העדפות{" "}
               </NavLink>
+              {/* {this.props.href !== "" ? ( */}
+              <NavLink href="/#/control_panel/manage_separate_accounts">
+                נהל קונים{" "}
+              </NavLink>
+              {/* ) : (
+                ""
+              )} */}
             </Nav>
           </Container>
         </Navbar>
@@ -130,6 +138,19 @@ class ControlPanel extends React.Component {
             accessToken={this.props.accessToken}
             activeAccount={this.props.activeAccount}
           ></AddUnregisterdAccount>
+          {/* <ManageOrders></ManageOrders> */}
+        </Route>
+        <Route exact path="/control_panel/manage_separate_accounts/">
+          <SeparateAccountsManage
+            activeAccount={this.props.activeAccount}
+            accessToken={this.props.accessToken}
+            deleteAccount={this.props.deleteAccount}
+            resetPassword={this.props.resetPassword}
+            me={this.props.me}
+            href={this.props.href}
+            closeGenericModal={this.props.closeGenericModal}
+            openGenericModal={this.props.openGenericModal}
+          ></SeparateAccountsManage>
           {/* <ManageOrders></ManageOrders> */}
         </Route>
         <Route exact path="/control_panel/account_prefrences/">

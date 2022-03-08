@@ -789,12 +789,28 @@ class App extends React.Component {
       password: password,
       seller_account: seller_account_id,
     }).then((data) => {
-      if (data) {
-        this.setState({ loginData: data });
-      }
-      this.getAllInfo(data);
-      if (this.state.activeAccount) {
-        takeMeHome();
+      if (data.detail) {
+        postData(`${domain}/token/`, {
+          email: email,
+          password: password,
+          // seller_account: seller_account_id,
+        }).then((res) => {
+          if (res) {
+            this.setState({ loginData: res });
+          }
+          this.getAllInfo(res);
+          if (this.state.activeAccount) {
+            takeMeHome();
+          }
+        });
+      } else {
+        if (data) {
+          this.setState({ loginData: data });
+        }
+        this.getAllInfo(data);
+        if (this.state.activeAccount) {
+          takeMeHome();
+        }
       }
     });
   };
@@ -1324,6 +1340,10 @@ class App extends React.Component {
           </Route>
           <Route exact path="/control_panel/">
             <ControlPanel
+              deleteAccount={this.deleteAccount}
+              resetPassword={this.resetPassword}
+              me={this.state.me}
+              href={href}
               closeGenericModal={this.closeGenericModal}
               openGenericModal={this.openGenericModal}
               myUsers={this.state.myUsers}
@@ -1389,11 +1409,13 @@ class App extends React.Component {
           </Route>
           <Route exact path="/me">
             <Profile
+              accountToEdit={this.state.activeAccount}
+              path="my-accounts"
               deleteAccount={this.deleteAccount}
               resetPassword={this.resetPassword}
               closeGenericModal={this.closeGenericModal}
               openGenericModal={this.openGenericModal}
-              me={this.state.me}
+              userToEdit={this.state.me}
               activeAccount={this.state.activeAccount}
               accessToken={this.state.accessToken}
             ></Profile>
@@ -1502,6 +1524,7 @@ class App extends React.Component {
               me={this.state.me}
               activeAccount={this.state.activeAccount}
               accessToken={this.state.accessToken}
+              // href={href}
             ></Profile>
           </Route>
           <Route

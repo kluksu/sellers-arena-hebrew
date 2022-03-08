@@ -19,6 +19,10 @@ export default class Profile extends Component {
       category: "",
       error: {},
       userError: {},
+      user_phone_number: "",
+      last_name: "",
+      first_name: "",
+      email: "",
     };
   }
   deleteMe = () => {
@@ -52,21 +56,21 @@ export default class Profile extends Component {
     };
     axios
       .patch(
-        `${domain}/my-accounts/${this.props.activeAccount.id}/`,
+        `${domain}/my-accounts/${this.props.accountToEdit.id}/`,
         {
           name: this.state.name,
           store_address: this.state.address,
           tax_id: this.state.tax_id,
           phone_number: this.state.phone_number,
           is_active: true,
-          account_type: this.props.activeAccount.account_type,
+          account_type: this.props.accountToEdit.account_type,
           category: this.state.category,
           //   messages:
           //     this.state.messages == ""
-          //       ? this.props.activeAccount.messages
+          //       ? this.props.accountToEdit.messages
           //       : this.state.messages,
-          country: this.props.activeAccount.country,
-          language: this.props.activeAccount.language,
+          country: this.props.accountToEdit.country,
+          language: this.props.accountToEdit.language,
         },
         config
       )
@@ -115,52 +119,64 @@ export default class Profile extends Component {
   };
   componentDidUpdate = (prevProps, prevState) => {
     if (
-      this.props.activeAccount !== prevProps.activeAccount ||
-      (!prevProps.activeAccount && this.props.activeAccount)
+      this.props.accountToEdit !== prevProps.accountToEdit ||
+      (!prevProps.accountToEdit && this.props.accountToEdit)
     ) {
       this.setState({
-        tax_id: this.props.activeAccount.tax_id,
-        name: this.props.activeAccount.name,
-        address: this.props.activeAccount.store_address,
-        phone_number: this.props.activeAccount.phone_number,
-        messages: this.props.activeAccount.messages,
-        category: this.props.activeAccount.category,
-        email: this.props.me.email,
-        first_name: this.props.me.first_name,
-        last_name: this.props.me.last_name,
-        user_phone_number: this.props.me.phone_number,
+        tax_id: this.props.accountToEdit.tax_id,
+        name: this.props.accountToEdit.name,
+        address: this.props.accountToEdit.store_address,
+        phone_number: this.props.accountToEdit.phone_number,
+        messages: this.props.accountToEdit.messages,
+        category: this.props.accountToEdit.category,
       });
-      // <div>{`אימייל:${this.props.me.email}`}</div>
-      // <div>{`שם:${this.props.me.first_name}`}</div>
-      // <div>{`שם משפחה:${this.props.me.last_name}`}</div>
-      // <div>{`מספר משתמש:${this.props.me.id}`}</div>
-      // <div>{`טלפון משתמש :${this.props.me.phone_number}`}</div>
+      if (
+        this.props.userToEdit.id !== prevProps.userToEdit.id ||
+        (this.props.userToEdit && !prevProps.userToEdit)
+      ) {
+        this.setState({
+          email: this.props.userToEdit.email,
+          first_name: this.props.userToEdit.first_name,
+          last_name: this.props.userToEdit.last_name,
+          user_phone_number: this.props.userToEdit.phone_number,
+        });
+      }
+      // <div>{`אימייל:${this.props.userToEdit.email}`}</div>
+      // <div>{`שם:${this.props.userToEdit.first_name}`}</div>
+      // <div>{`שם משפחה:${this.props.userToEdit.last_name}`}</div>
+      // <div>{`מספר משתמש:${this.props.userToEdit.id}`}</div>
+      // <div>{`טלפון משתמש :${this.props.userToEdit.phone_number}`}</div>
     }
   };
   componentDidMount = () => {
-    if (this.props.activeAccount) {
+    if (this.props.accountToEdit) {
       this.setState({
-        tax_id: this.props.activeAccount.tax_id,
-        name: this.props.activeAccount.name,
-        address: this.props.activeAccount.store_address,
-        phone_number: this.props.activeAccount.phone_number,
-        messages: this.props.activeAccount.messages,
-        category: this.props.activeAccount.category,
-        email: this.props.me.email,
-        first_name: this.props.me.first_name,
-        last_name: this.props.last_name,
-        user_phone_number: this.props.me.phone_number,
+        tax_id: this.props.accountToEdit.tax_id,
+        name: this.props.accountToEdit.name,
+        address: this.props.accountToEdit.store_address,
+        phone_number: this.props.accountToEdit.phone_number,
+        messages: this.props.accountToEdit.messages,
+        category: this.props.accountToEdit.category,
       });
+      if (this.props.userToEdit) {
+        this.setState({
+          email: this.props.userToEdit.email,
+          first_name: this.props.userToEdit.first_name,
+          last_name: this.props.userToEdit.last_name,
+          user_phone_number: this.props.userToEdit.phone_number,
+        });
+      }
     }
   };
   render() {
+    console.log(this.props.userToEdit, this.props.accountToEdit);
     let showCategories = [];
     categoriesAndSubCategories.forEach((category) => {
       showCategories.push(
         <option value={Object.keys(category)}>{Object.keys(category)}</option>
       );
     });
-    if (this.props.activeAccount) {
+    if (this.props.accountToEdit) {
       return (
         <>
           {" "}
@@ -175,7 +191,9 @@ export default class Profile extends Component {
                 <h1> פרטי חשבון</h1>
 
                 <Button
-                  onClick={() => this.props.resetPassword(this.props.me.email)}
+                  onClick={() =>
+                    this.props.resetPassword(this.props.userToEdit.email)
+                  }
                   type="button"
                 >
                   אפס סיסמא
@@ -253,15 +271,15 @@ export default class Profile extends Component {
                 </Form.Group>
                 <p className="FormRejects">{this.state.error.category}</p>
               </Form>{" "}
-              <div>{`סוג חשבון : ${this.props.activeAccount.account_type}`}</div>
-              <div>{`מדינה : ${this.props.activeAccount.country}`}</div>
-              <div>{`מספר חשבון :  ${this.props.activeAccount.id}`}</div>
-              <div>{`שפה : ${this.props.activeAccount.language}`}</div>
+              <div>{`סוג חשבון : ${this.props.accountToEdit.account_type}`}</div>
+              <div>{`מדינה : ${this.props.accountToEdit.country}`}</div>
+              <div>{`מספר חשבון :  ${this.props.accountToEdit.id}`}</div>
+              <div>{`שפה : ${this.props.accountToEdit.language}`}</div>
               <Button onClick={this.submitAccountChanges} type="button">
                 עדכן פרטי חשבון
               </Button>
               <h1> פרטי משתמש</h1>
-              <div>{`מספר משתמש:${this.props.me.id}`}</div>
+              <div>{`מספר משתמש:${this.props.userToEdit.id}`}</div>
               <div>{`אימייל: ${this.state.email}`}</div>
               <p className="FormRejects">{this.state.error.email}</p>
               <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -311,7 +329,7 @@ export default class Profile extends Component {
                   <Button
                     variant="danger"
                     onClick={() =>
-                      this.props.deleteAccount(this.props.activeAccount.id)
+                      this.props.deleteAccount(this.props.accountToEdit.id)
                     }
                   >
                     מחק חשבון
