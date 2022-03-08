@@ -12,7 +12,7 @@ import {
 import { FiShoppingCart } from "react-icons/fi";
 import { MdRemoveShoppingCart } from "react-icons/md";
 import Profile from "../pages/Profile";
-import { domain, whiteLableStores } from "./utils";
+import { domain, whiteLableStores, logo } from "./utils";
 
 export default class extends Component {
   constructor(props) {
@@ -301,12 +301,14 @@ export default class extends Component {
         <Navbar collapseOnSelect expand="lg" bg="light">
           {/* <Container> */}
           <Navbar.Brand href="#home">
-            <img src="" alt="logo"></img>
+            <img src={this.props.whiteLableStore.image} alt="logo"></img>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="m-auto">
-              <Nav.Link href={`/#/store/${whiteLableStores[this.props.href]}`}>
+              <Nav.Link
+                href={`/#/StorePage/${whiteLableStores[this.props.href]}`}
+              >
                 החנות
               </Nav.Link>
               <Nav.Link href={`/#/feed/${whiteLableStores[this.props.href]}`}>
@@ -314,6 +316,7 @@ export default class extends Component {
               </Nav.Link>
               {creatUser}
               {profile}
+              {shoppingCart}
               {ordersNav}
               {creatAccount}{" "}
             </Nav>

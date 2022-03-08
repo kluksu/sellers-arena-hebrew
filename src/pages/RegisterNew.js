@@ -33,14 +33,14 @@ export default class extends Component {
     let path =
       // this.props.href ? "separated-users" :
       "register";
-    let seller_account = this.props.href
+    let seller_account_id = this.props.href
       ? whiteLableStores[this.props.href]
       : "";
     postData(
       `${domain}/${path}/`,
       {
         email: this.state.email.toLowerCase(),
-        seller_account,
+        seller_account_id,
         password: this.state.password,
         phone_number: this.state.phone_number,
         terms_agreed: this.state.terms_agreed,

@@ -17,6 +17,7 @@ import {
   postData,
   shuffle,
   takeMeHome,
+  whiteLableStores,
 } from "./components/utils";
 import NewMessageModal from "./components/NewMessageModal";
 import Uploadpage from "./pages/Uploadpage";
@@ -113,6 +114,8 @@ class App extends React.Component {
       allMessages: [],
       myUsers: [],
       accountsYouMayLike: [],
+      whiteLableStore: {},
+      href: null,
     };
   }
   getMatchingAccounts = () => {
@@ -662,6 +665,16 @@ class App extends React.Component {
       });
   };
   componentDidMount() {
+    if (!window.location.href.includes("sapakos")) {
+      this.setState({ href: window.location.href.split("/")[2] });
+
+      this.getAccount(
+        whiteLableStores[window.location.href.split("/")[2]]
+      ).then((res) => {
+        console.log(res.data);
+        this.setState({ whiteLableStore: res.data });
+      });
+    }
     this.keepLoggedIn();
     this.getMe();
     this.isMobile();
@@ -769,11 +782,12 @@ class App extends React.Component {
   };
   openModal = () => this.setState({ isOpen: true, loginData: {} });
   closeModal = () => this.setState({ isOpen: false });
-  loginPostData = (email, password) => {
+  loginPostData = (email, password, seller_account_id) => {
     //
     postData(`${domain}/token/`, {
       email: email,
       password: password,
+      seller_account: seller_account_id,
     }).then((data) => {
       if (data) {
         this.setState({ loginData: data });
@@ -914,9 +928,7 @@ class App extends React.Component {
       });
   };
   render() {
-    let href = !window.location.href.includes("sapakos")
-      ? window.location.href.split("/")[2]
-      : "";
+    let href = this.state.href;
     console.log(href);
     let unreadMessages = 0;
     for (const [key, value] of Object.entries(this.state.messagesWasReadObj)) {
@@ -1455,6 +1467,7 @@ class App extends React.Component {
       <div className="App">
         <HashRouter>
           <WhiteLabelNav
+            whiteLableStore={this.state.whiteLableStore}
             openGenericModal={this.openGenericModal}
             closeGenericModal={this.closeGenericModal}
             resetPassword={this.resetPassword}
@@ -1491,7 +1504,10 @@ class App extends React.Component {
               accessToken={this.state.accessToken}
             ></Profile>
           </Route>
-          <Route exact path={`/store/${this.state.activeAccount ? ":id" : ""}`}>
+          <Route
+            exact
+            path={`/StorePage/${this.state.activeAccount ? ":id" : ""}`}
+          >
             <StorePageScroll
               createPermDiscount={this.createPermDiscount}
               openGenericModal={this.openGenericModal}
@@ -1609,6 +1625,16 @@ class App extends React.Component {
               accessToken={this.state.accessToken}
             ></OrderSummery>
           </Route>
+          <Route exact path="/my-order/:id">
+            <MyOrder
+              getSpecificOrder={this.getSpecificOrder}
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
+              screenWidth={this.state.screenWidth}
+              activeAccount={this.state.activeAccount}
+              accessToken={this.state.accessToken}
+            ></MyOrder>
+          </Route>{" "}
           <DiscountModal
             preventModalDefult={this.state.preventModalDefult}
             bottom={this.state.modalBottom}
