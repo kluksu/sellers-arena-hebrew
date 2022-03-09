@@ -649,6 +649,9 @@ class App extends React.Component {
     });
   };
   deleteAccount = (accountID) => {
+    console.log(
+      "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+    );
     const authorization = !this.state.accessToken
       ? null
       : `Bearer ${this.state.accessToken}`;
@@ -656,12 +659,19 @@ class App extends React.Component {
       headers: { "Content-Type": "application/json", authorization },
     };
     axios
-      .delete(`${domain}/my-accounts/${accountID}/`, config)
+      .delete(
+        `${domain}/${
+          window.location.href.includes("sapakos")
+            ? "my-accounts"
+            : "separated-accounts"
+        }/${accountID}/`,
+        config
+      )
       .then((res) => {
         this.openGenericModal("החשבון נמחק בהצלחה");
       })
       .catch((error) => {
-        this.props.openGenericModal("אופס, ישנה שגיאה", error.response);
+        this.openGenericModal("אופס, ישנה שגיאה", error.response);
       });
   };
   componentDidMount() {
@@ -1024,7 +1034,7 @@ class App extends React.Component {
     // ) {
     //   minwidth = "740px";
     // }
-    console.log(this.state.accessToken);
+    console.log(href);
     return window.location.href.includes("sapakos") ||
       (this.state.activeAccount &&
         this.state.activeAccount.account_type == 3) ? (
@@ -1381,11 +1391,21 @@ class App extends React.Component {
           </Route>
           <Route exact path="/control_panel/:name">
             <ControlPanel
-              myUsers={this.state.myUsers}
+              deleteAccount={this.deleteAccount}
+              resetPassword={this.resetPassword}
+              me={this.state.me}
+              href={href}
               closeGenericModal={this.closeGenericModal}
               openGenericModal={this.openGenericModal}
-              accessToken={this.state.accessToken}
+              myUsers={this.state.myUsers}
+              myContacts={this.state.myContacts}
+              screenWidth={this.state.screenWidth}
+              payedOrders={this.state.payedOrders}
+              fulfilledOrders={this.state.fulfilledOrders}
+              sellerApprovedOrders={this.state.sellerApprovedOrders}
+              MySupplierOrders={this.state.MySupplierOrders}
               activeAccount={this.state.activeAccount}
+              accessToken={this.state.accessToken}
             ></ControlPanel>
           </Route>
           <Route exact path="/storePage/:storeId/product_page/:productId">

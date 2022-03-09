@@ -37,6 +37,7 @@ class ControlPanel extends React.Component {
     }
   }
   render() {
+    console.log(this.props.href);
     // if (!this.props.myUsers) {
     //   return <FullPageLoader></FullPageLoader>;
     // } else

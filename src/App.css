@@ -1654,6 +1654,12 @@ label.form-label {
 .navbar.navbar-expand-xl.navbar-light.bg-light a.nav-link {
   padding: 5px 10px 5px 10px;
 }
+.minNav {
+  /* width: 320px;
+  margin: auto; */
+  /* display: block; */
+  /* display: unset !important; */
+}
 .postComponent .dropdown-menu {
   text-align: center !important;
   max-height: 400px;

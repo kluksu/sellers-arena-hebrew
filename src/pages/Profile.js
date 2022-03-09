@@ -56,13 +56,15 @@ export default class Profile extends Component {
     };
     axios
       .patch(
-        `${domain}/my-accounts/${this.props.accountToEdit.id}/`,
+        `${domain}/${this.props.path ? this.props.path : "my-accounts"}/${
+          this.props.accountToEdit.id
+        }/`,
         {
           name: this.state.name,
           store_address: this.state.address,
           tax_id: this.state.tax_id,
           phone_number: this.state.phone_number,
-          is_active: true,
+          is_active: this.state.is_active,
           account_type: this.props.accountToEdit.account_type,
           category: this.state.category,
           //   messages:
@@ -129,6 +131,7 @@ export default class Profile extends Component {
         phone_number: this.props.accountToEdit.phone_number,
         messages: this.props.accountToEdit.messages,
         category: this.props.accountToEdit.category,
+        is_active: this.props.accountToEdit.is_active,
       });
       if (
         this.props.userToEdit.id !== prevProps.userToEdit.id ||
@@ -157,6 +160,7 @@ export default class Profile extends Component {
         phone_number: this.props.accountToEdit.phone_number,
         messages: this.props.accountToEdit.messages,
         category: this.props.accountToEdit.category,
+        is_active: this.props.accountToEdit.is_active,
       });
       if (this.props.userToEdit) {
         this.setState({
@@ -268,54 +272,87 @@ export default class Profile extends Component {
                     </option>
                     {showCategories}
                   </Form.Control>
+
+                  <p className="FormRejects">{this.state.error.category}</p>
+
+                  <Form.Label> האם החשבון פעיל</Form.Label>
+                  <Form.Control
+                    onChange={this.handleChange}
+                    as="select"
+                    name="is_active"
+                  >
+                    <option value={this.state.is_active ? true : false}>
+                      {this.state.is_active ? "פעיל" : "לא פעיל"}
+                    </option>
+                    <option value={this.state.is_active ? false : true}>
+                      {this.state.is_active ? "לא פעיל" : "פעיל"}
+                    </option>
+                  </Form.Control>
+                  <p className="FormRejects">{this.state.error.is_active}</p>
                 </Form.Group>
-                <p className="FormRejects">{this.state.error.category}</p>
               </Form>{" "}
               <div>{`סוג חשבון : ${this.props.accountToEdit.account_type}`}</div>
               <div>{`מדינה : ${this.props.accountToEdit.country}`}</div>
               <div>{`מספר חשבון :  ${this.props.accountToEdit.id}`}</div>
+              {/* <div>{` האם פעיל :  ${
+                this.props.accountToEdit.is_active ? "פעיל" : "לא פעיל"
+              }`}</div> */}
               <div>{`שפה : ${this.props.accountToEdit.language}`}</div>
               <Button onClick={this.submitAccountChanges} type="button">
                 עדכן פרטי חשבון
               </Button>
-              <h1> פרטי משתמש</h1>
-              <div>{`מספר משתמש:${this.props.userToEdit.id}`}</div>
-              <div>{`אימייל: ${this.state.email}`}</div>
-              <p className="FormRejects">{this.state.error.email}</p>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label> שם פרטי </Form.Label>
-                <Form.Control
-                  type="text"
-                  name="first_name"
-                  onChange={this.handleChange}
-                  value={`${this.state.first_name}`}
-                />
-                <Form.Group></Form.Group>
-              </Form.Group>
-              <p className="FormRejects">{this.state.userError.first_name}</p>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label> שם משפחה </Form.Label>
-                <Form.Control
-                  type="text"
-                  name="last_name"
-                  onChange={this.handleChange}
-                  value={`${this.state.last_name}`}
-                />
-                <Form.Group></Form.Group>
-              </Form.Group>
-              <p className="FormRejects">{this.state.userError.last_name}</p>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label> טלפון משתמש</Form.Label>
-                <Form.Control
-                  type="number"
-                  onChange={this.handleChange}
-                  name="user_phone_number"
-                  value={`${this.state.user_phone_number}`}
-                />
-                <Form.Text className="text-muted"></Form.Text>
-              </Form.Group>
-              <p className="FormRejects">{this.state.userError.phone_number}</p>
-              <Button onClick={this.submitUserChanges}>שמור פרטי משתמש</Button>
+              {this.props.userToEdit.id ? (
+                <>
+                  <h1> פרטי משתמש</h1>
+                  <div>{`מספר משתמש:${this.props.userToEdit.id}`}</div>
+                  <div>{`אימייל: ${this.state.email}`}</div>
+                  <p className="FormRejects">{this.state.error.email}</p>
+                  <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label> שם פרטי </Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="first_name"
+                      onChange={this.handleChange}
+                      value={`${this.state.first_name}`}
+                    />
+                    <Form.Group></Form.Group>
+                  </Form.Group>
+                  <p className="FormRejects">
+                    {this.state.userError.first_name}
+                  </p>
+                  <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label> שם משפחה </Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="last_name"
+                      onChange={this.handleChange}
+                      value={`${this.state.last_name}`}
+                    />
+                    <Form.Group></Form.Group>
+                  </Form.Group>
+                  <p className="FormRejects">
+                    {this.state.userError.last_name}
+                  </p>
+                  <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label> טלפון משתמש</Form.Label>
+                    <Form.Control
+                      type="number"
+                      onChange={this.handleChange}
+                      name="user_phone_number"
+                      value={`${this.state.user_phone_number}`}
+                    />
+                    <Form.Text className="text-muted"></Form.Text>
+                  </Form.Group>
+                  <p className="FormRejects">
+                    {this.state.userError.phone_number}
+                  </p>
+                  <Button onClick={this.submitUserChanges}>
+                    שמור פרטי משתמש
+                  </Button>
+                </>
+              ) : (
+                ""
+              )}
             </Container>
           </div>
           <div className="dangerZone">
@@ -328,9 +365,9 @@ export default class Profile extends Component {
                   "?מחיקת חשבון הינה פעולה שלא ניתנת לביטול, במידה ותפתח את חשבונך מחדש יהיה עליך להזין את כל המידע (מוצרים, תמונות וכו) שנית, מה ברצונך לעשות",
                   <Button
                     variant="danger"
-                    onClick={() =>
-                      this.props.deleteAccount(this.props.accountToEdit.id)
-                    }
+                    onClick={() => {
+                      this.props.deleteAccount(this.props.accountToEdit.id);
+                    }}
                   >
                     מחק חשבון
                   </Button>
@@ -341,21 +378,25 @@ export default class Profile extends Component {
               מחיקת חשבון
             </Button>
             <br></br>
-            <Button
-              variant="danger"
-              onClick={() => {
-                this.props.openGenericModal(
-                  "שים לב!!",
-                  "מחיקת משתמש הינה פעולה שלא ניתנת לביטול, במידה ותפתח משתמש נוסף בעתיד לא יהיה ניתן לשייך את המידע של משתמש זה אל המשתמש החדש, מה ברצונך לעשות?",
-                  <Button variant="danger" onClick={() => this.deleteMe()}>
-                    מחק משתמש
-                  </Button>
-                );
-              }}
-            >
-              {" "}
-              מחיקת משתמש
-            </Button>
+            {this.props.userToEdit.id ? (
+              <Button
+                variant="danger"
+                onClick={() => {
+                  this.props.openGenericModal(
+                    "שים לב!!",
+                    "מחיקת משתמש הינה פעולה שלא ניתנת לביטול, במידה ותפתח משתמש נוסף בעתיד לא יהיה ניתן לשייך את המידע של משתמש זה אל המשתמש החדש, מה ברצונך לעשות?",
+                    <Button variant="danger" onClick={() => this.deleteMe()}>
+                      מחק משתמש
+                    </Button>
+                  );
+                }}
+              >
+                {" "}
+                מחיקת משתמש
+              </Button>
+            ) : (
+              ""
+            )}
           </div>
         </>
       );
