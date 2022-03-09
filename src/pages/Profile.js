@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { Component } from "react";
 import { Button, Container, Form } from "react-bootstrap";
+import Crop from "../components/Crop";
 import {
   categoriesAndSubCategories,
   domain,
@@ -13,7 +14,7 @@ export default class Profile extends Component {
     this.state = {
       tax_id: "",
       name: "",
-      address: "",
+      store_address: "",
       phone_number: "",
       messages: "",
       category: "",
@@ -23,8 +24,25 @@ export default class Profile extends Component {
       last_name: "",
       first_name: "",
       email: "",
+      image: "",
     };
   }
+  getCropedSizes = (width, height) => {
+    this.setState({ width: width, height: height });
+  };
+  getBase64 = (base64) => {
+    this.setState({ newBlob: base64 });
+
+    const getInfo = (image) => {
+      this.setState({ uploadImage: image });
+    };
+    let reader = new FileReader();
+    reader.readAsDataURL(base64);
+    reader.onloadend = function () {
+      let base64data = reader.result;
+      getInfo(base64data);
+    };
+  };
   deleteMe = () => {
     const config = {
       headers: {
@@ -51,29 +69,54 @@ export default class Profile extends Component {
     const config = {
       headers: {
         Authorization: `Bearer ${this.props.accessToken}`,
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
       },
     };
+    let accountInfo = new FormData();
+
+    accountInfo.append("name", this.state.name);
+    accountInfo.append("store_address", this.state.store_address);
+    accountInfo.append("tax_id", this.state.tax_id);
+    accountInfo.append("account_type", this.state.account_type);
+    accountInfo.append("phone_number", this.state.phone_number);
+    accountInfo.append("category", this.state.category);
+    accountInfo.append("country", this.state.country); //this.props.CurrentUploadItemId
+    accountInfo.append("language", this.state.language); //this.props.CurrentUploadItemId
+    // accountInfo.append("image", this.state.image); //this.props.CurrentUploadItemId
+    if (this.state.newBlob) {
+      console.log(this.state.newBlob);
+      accountInfo.append("image", this.state.newBlob, this.state.newBlob.name);
+    }
+
+    this.setState({ itemFormData: accountInfo });
+
+    // const config = {
+    //   headers: {
+    //     Authorization: `Bearer ${this.props.accessToken}`,
+    //     "Content-Type": "multipart/form-data",
+    //   },
+    // };
     axios
       .patch(
         `${domain}/${this.props.path ? this.props.path : "my-accounts"}/${
           this.props.accountToEdit.id
         }/`,
-        {
-          name: this.state.name,
-          store_address: this.state.address,
-          tax_id: this.state.tax_id,
-          phone_number: this.state.phone_number,
-          is_active: this.state.is_active,
-          account_type: this.props.accountToEdit.account_type,
-          category: this.state.category,
-          //   messages:
-          //     this.state.messages == ""
-          //       ? this.props.accountToEdit.messages
-          //       : this.state.messages,
-          country: this.props.accountToEdit.country,
-          language: this.props.accountToEdit.language,
-        },
+
+        accountInfo,
+        // name: this.state.name,
+        // store_address: this.state.address,
+        // tax_id: this.state.tax_id,
+        // phone_number: this.state.phone_number,
+        // is_active: this.state.is_active,
+        // account_type: this.props.accountToEdit.account_type,
+        // category: this.state.category,
+        // //   messages:
+        // //     this.state.messages == ""
+        // //       ? this.props.accountToEdit.messages
+        // //       : this.state.messages,
+        // country: this.props.accountToEdit.country,
+        // language: this.props.accountToEdit.language,
+
         config
       )
       .then((res) => {
@@ -127,11 +170,13 @@ export default class Profile extends Component {
       this.setState({
         tax_id: this.props.accountToEdit.tax_id,
         name: this.props.accountToEdit.name,
-        address: this.props.accountToEdit.store_address,
+        store_address: this.props.accountToEdit.store_address,
         phone_number: this.props.accountToEdit.phone_number,
         messages: this.props.accountToEdit.messages,
         category: this.props.accountToEdit.category,
         is_active: this.props.accountToEdit.is_active,
+        country: this.props.accountToEdit.country,
+        language: this.props.accountToEdit.language,
       });
       if (
         this.props.userToEdit.id !== prevProps.userToEdit.id ||
@@ -151,16 +196,21 @@ export default class Profile extends Component {
       // <div>{`טלפון משתמש :${this.props.userToEdit.phone_number}`}</div>
     }
   };
+  getCropedBlob = (blob) => {
+    this.setState({ image: blob });
+  };
   componentDidMount = () => {
     if (this.props.accountToEdit) {
       this.setState({
         tax_id: this.props.accountToEdit.tax_id,
         name: this.props.accountToEdit.name,
-        address: this.props.accountToEdit.store_address,
+        store_address: this.props.accountToEdit.store_address,
         phone_number: this.props.accountToEdit.phone_number,
         messages: this.props.accountToEdit.messages,
         category: this.props.accountToEdit.category,
         is_active: this.props.accountToEdit.is_active,
+        country: this.props.accountToEdit.country,
+        language: this.props.accountToEdit.language,
       });
       if (this.props.userToEdit) {
         this.setState({
@@ -242,9 +292,9 @@ export default class Profile extends Component {
                   <Form.Label>כתובת העסק</Form.Label>
                   <Form.Control
                     type="text"
-                    name="address"
+                    name="store_address"
                     onChange={this.handleChange}
-                    value={`${this.state.address}`}
+                    value={`${this.state.store_address}`}
                   />
                   <p className="FormRejects">
                     {this.state.error.store_address}
@@ -274,22 +324,36 @@ export default class Profile extends Component {
                   </Form.Control>
 
                   <p className="FormRejects">{this.state.error.category}</p>
+                  {this.props.activeAccount.id !==
+                  this.props.accountToEdit.id ? (
+                    <>
+                      {" "}
+                      <Form.Label> האם החשבון פעיל</Form.Label>
+                      <Form.Control
+                        onChange={this.handleChange}
+                        as="select"
+                        name="is_active"
+                      >
+                        <option value={this.state.is_active ? true : false}>
+                          {this.state.is_active ? "פעיל" : "לא פעיל"}
+                        </option>
+                        <option value={this.state.is_active ? false : true}>
+                          {this.state.is_active ? "לא פעיל" : "פעיל"}
+                        </option>
+                      </Form.Control>
+                    </>
+                  ) : (
+                    ""
+                  )}
 
-                  <Form.Label> האם החשבון פעיל</Form.Label>
-                  <Form.Control
-                    onChange={this.handleChange}
-                    as="select"
-                    name="is_active"
-                  >
-                    <option value={this.state.is_active ? true : false}>
-                      {this.state.is_active ? "פעיל" : "לא פעיל"}
-                    </option>
-                    <option value={this.state.is_active ? false : true}>
-                      {this.state.is_active ? "לא פעיל" : "פעיל"}
-                    </option>
-                  </Form.Control>
                   <p className="FormRejects">{this.state.error.is_active}</p>
                 </Form.Group>
+                <Crop
+                  getCropedSizes={this.getCropedSizes}
+                  className="cropper"
+                  getCropedBlob={this.getCropedBlob}
+                  getBase64={this.getBase64}
+                ></Crop>
               </Form>{" "}
               <div>{`סוג חשבון : ${this.props.accountToEdit.account_type}`}</div>
               <div>{`מדינה : ${this.props.accountToEdit.country}`}</div>

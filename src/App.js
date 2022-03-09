@@ -63,6 +63,8 @@ import TermOfUse from "./pages/TermOfUse";
 import StorePageScroll from "./pages/StorePageScroll";
 import WhiteLabelNav from "./components/WhiteLabelNav";
 import LoginModal from "./components/LoginModal";
+import WhiteLableHome from "./pages/WhiteLableHome";
+import SiteBottom from "./components/SiteBottom";
 //${domain}/
 class App extends React.Component {
   constructor(props) {
@@ -781,14 +783,14 @@ class App extends React.Component {
 
   logout = () => {
     localStorage.setItem("refresh", null);
-    this.state = [];
+    this.state = {};
     this.setState({ refreshToken: "" });
     this.setState({ activeAccount: "" });
     this.setState({ accessToken: null });
     this.setState({ MyShoppingCarts: [] });
     this.setState({ allThreads: [] });
 
-    takeMeHome();
+    window.location.replace("/#/");
   };
   openModal = () => this.setState({ isOpen: true, loginData: {} });
   closeModal = () => this.setState({ isOpen: false });
@@ -1034,6 +1036,8 @@ class App extends React.Component {
     // ) {
     //   minwidth = "740px";
     // }
+    console.log(this.state.whiteLableStore);
+
     console.log(href);
     return window.location.href.includes("sapakos") ||
       (this.state.activeAccount &&
@@ -1547,38 +1551,55 @@ class App extends React.Component {
               // href={href}
             ></Profile>
           </Route>
-          <Route
-            exact
-            path={`/StorePage/${this.state.activeAccount ? ":id" : ""}`}
-          >
-            <StorePageScroll
-              createPermDiscount={this.createPermDiscount}
-              openGenericModal={this.openGenericModal}
-              closeGenericModal={this.closeGenericModal}
-              getAllOrders={this.getAllOrders}
-              userDevice={this.state.userDevice}
-              screenWidth={this.state.screenWidth}
-              getUnregistered={this.getUnregistered}
-              getActiveCart={this.getActiveCart}
-              checkOut={this.checkOut}
-              myContacts={this.state.myContacts}
-              removeContact={this.removeContact}
-              getMessagesArcive={this.getMessagesArcive}
-              postAndGetContacts={this.postAndGetContacts}
-              refreshToken={this.state.refreshToken}
-              allThreads={this.state.allThreads}
-              getCurrentstore={this.getCurrentstore}
-              handleOpenMessage={this.handleOpenMessage}
-              modalMessages={this.state.modalMessages}
-              getThreads={this.getThreads}
-              getCarts={this.getCarts}
-              deleteCart={this.deleteCart}
-              MyShoppingCarts={this.state.MyShoppingCarts}
-              accessToken={this.state.accessToken}
-              activeAccount={this.state.activeAccount}
-              screenWidth={this.state.screenWidth}
-              href={href}
-            ></StorePageScroll>
+          <Route exact path={`/StorePage/:id`}>
+            {this.state.activeAccount ? (
+              <StorePageScroll
+                createPermDiscount={this.createPermDiscount}
+                openGenericModal={this.openGenericModal}
+                closeGenericModal={this.closeGenericModal}
+                getAllOrders={this.getAllOrders}
+                userDevice={this.state.userDevice}
+                screenWidth={this.state.screenWidth}
+                getUnregistered={this.getUnregistered}
+                getActiveCart={this.getActiveCart}
+                checkOut={this.checkOut}
+                myContacts={this.state.myContacts}
+                removeContact={this.removeContact}
+                getMessagesArcive={this.getMessagesArcive}
+                postAndGetContacts={this.postAndGetContacts}
+                refreshToken={this.state.refreshToken}
+                allThreads={this.state.allThreads}
+                getCurrentstore={this.getCurrentstore}
+                handleOpenMessage={this.handleOpenMessage}
+                modalMessages={this.state.modalMessages}
+                getThreads={this.getThreads}
+                getCarts={this.getCarts}
+                deleteCart={this.deleteCart}
+                MyShoppingCarts={this.state.MyShoppingCarts}
+                accessToken={this.state.accessToken}
+                activeAccount={this.state.activeAccount}
+                screenWidth={this.state.screenWidth}
+                href={href}
+              ></StorePageScroll>
+            ) : (
+              <WhiteLableHome
+                isOpen={this.state.isOpen}
+                openModal={this.openModal}
+                whiteLableStore={this.state.whiteLableStore}
+                closeGenericModal={this.closeGenericModal}
+                openGenericModal={this.openGenericModal}
+                captchaResponse={this.state.captchaResponse}
+                isRealUser={this.state.isRealUser}
+                verifyCallback={this.verifyCallback}
+                reCaptchaLoded={this.reCaptchaLoded}
+                // handleVerified={this.handleVerified}
+                goToNewAccount={this.goToNewAccount}
+                activeAccount={this.state.activeAccount}
+                accessToken={this.state.accessToken}
+                me={this.state.me}
+                href={href}
+              ></WhiteLableHome>
+            )}
           </Route>
           <Route exact path="/supplier-order/:id">
             <SupplierOrder
@@ -1656,6 +1677,25 @@ class App extends React.Component {
               href={href}
             ></OpenAccount>
           </Route>
+          <Route exact path="/">
+            <WhiteLableHome
+              isOpen={this.state.isOpen}
+              openModal={this.openModal}
+              whiteLableStore={this.state.whiteLableStore}
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
+              captchaResponse={this.state.captchaResponse}
+              isRealUser={this.state.isRealUser}
+              verifyCallback={this.verifyCallback}
+              reCaptchaLoded={this.reCaptchaLoded}
+              // handleVerified={this.handleVerified}
+              goToNewAccount={this.goToNewAccount}
+              activeAccount={this.state.activeAccount}
+              accessToken={this.state.accessToken}
+              me={this.state.me}
+              href={href}
+            ></WhiteLableHome>
+          </Route>
           <Route exact path="/order-summery/:id">
             <OrderSummery
               closeGenericModal={this.closeGenericModal}
@@ -1678,6 +1718,12 @@ class App extends React.Component {
               accessToken={this.state.accessToken}
             ></MyOrder>
           </Route>{" "}
+          <Route exact path="/privacy_policy">
+            <PrivecyPolicy></PrivecyPolicy>
+          </Route>
+          <Route exact path="/terms_of_use">
+            <TermOfUse></TermOfUse>
+          </Route>
           <DiscountModal
             preventModalDefult={this.state.preventModalDefult}
             bottom={this.state.modalBottom}
@@ -1699,6 +1745,14 @@ class App extends React.Component {
             closeModal={this.closeModal}
             href={href}
           ></LoginModal>
+          <SiteBottom
+            phone={this.state.whiteLableStore.phone_number}
+            address={this.state.whiteLableStore.store_address}
+            name={this.state.whiteLableStore.name}
+            email={this.state.whiteLableStore.email}
+            termsLink={<a href="/#/terms_of_use"> תנאי שימוש</a>}
+            privacyLink={<a href="/#/privacy_policy"> מדיניות פרטיות</a>}
+          ></SiteBottom>
         </HashRouter>
       </div>
     );

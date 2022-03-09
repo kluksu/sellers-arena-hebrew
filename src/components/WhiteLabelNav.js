@@ -296,16 +296,22 @@ export default class extends Component {
         </NavDropdown>
       ) : null;
     }
+    console.log(this.props.whiteLableStore);
     return (
-      <div className="myNavBar">
-        <Navbar collapseOnSelect expand="lg" bg="light">
+      <div className="whiteLableNav">
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
           {/* <Container> */}
-          <Navbar.Brand href="#home">
-            <img src={this.props.whiteLableStore.image} alt="logo"></img>
+          <Navbar.Brand href="/#/">
+            <img
+              className="navBarLogo"
+              src={this.props.whiteLableStore.image}
+              alt="logo"
+            ></img>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="m-auto">
+              <Nav.Link href={`/#/`}>בית </Nav.Link>
               <Nav.Link
                 href={`/#/StorePage/${whiteLableStores[this.props.href]}`}
               >
