@@ -14,6 +14,7 @@ import {
   delivered,
   domain,
   getData,
+  logo,
   postData,
   shuffle,
   takeMeHome,
@@ -1200,7 +1201,6 @@ class App extends React.Component {
               openGenericModal={this.openGenericModal}
               allMessages={this.state.allMessages}
               getContactsMesssageBoard={this.getContactsMesssageBoard}
-              myContacts={this.state.myContacts}
               activeAccount={this.state.activeAccount}
               accessToken={this.state.accessToken}
             ></Wall>
@@ -1219,7 +1219,6 @@ class App extends React.Component {
               openGenericModal={this.openGenericModal}
               allMessages={this.state.allMessages}
               getContactsMesssageBoard={this.getContactsMesssageBoard}
-              myContacts={this.state.myContacts}
               activeAccount={this.state.activeAccount}
               accessToken={this.state.accessToken}
             ></Feed>
@@ -1233,7 +1232,6 @@ class App extends React.Component {
               CurrentUploadItemId={this.state.CurrentUploadItemId}
               currency={this.state.currency}
               accessToken={this.state.accessToken}
-              activeAccount={this.state.activeAccount}
             ></ProductVaritionPage>
           </Route>
           <Route exact path="/add_items">
@@ -1306,7 +1304,6 @@ class App extends React.Component {
               MyShoppingCarts={this.state.MyShoppingCarts}
               accessToken={this.state.accessToken}
               activeAccount={this.state.activeAccount}
-              screenWidth={this.state.screenWidth}
             ></StorePageScroll>
           </Route>
           {/* <Route exact path="/StorePage/:id">
@@ -1518,6 +1515,16 @@ class App extends React.Component {
             closeModal={this.closeGenericModal}
             isDiscountModalOpen={this.state.isGenericModalOpen}
           ></DiscountModal>
+          <SiteBottom
+            topics={[
+              <div style={{ background: "white" }}>{logo}</div>,
+              <div>הבנים 12 הוד השרון</div>,
+              <div>0507780982</div>,
+
+              <a href="/#/terms_of_use"> תנאי שימוש</a>,
+              <a href="/#/privacy_policy"> מדיניות פרטיות</a>,
+            ]}
+          ></SiteBottom>
         </HashRouter>
       </div>
     ) : (
@@ -1589,7 +1596,6 @@ class App extends React.Component {
                 MyShoppingCarts={this.state.MyShoppingCarts}
                 accessToken={this.state.accessToken}
                 activeAccount={this.state.activeAccount}
-                screenWidth={this.state.screenWidth}
                 href={href}
               ></StorePageScroll>
             ) : (
@@ -1650,7 +1656,6 @@ class App extends React.Component {
               openGenericModal={this.openGenericModal}
               allMessages={this.state.allMessages}
               getContactsMesssageBoard={this.getContactsMesssageBoard}
-              myContacts={this.state.myContacts}
               activeAccount={this.state.activeAccount}
               accessToken={this.state.accessToken}
               href={href}
@@ -1757,12 +1762,14 @@ class App extends React.Component {
             href={href}
           ></LoginModal>
           <SiteBottom
-            phone={this.state.whiteLableStore.phone_number}
-            address={this.state.whiteLableStore.store_address}
-            name={this.state.whiteLableStore.name}
-            email={this.state.whiteLableStore.email}
-            termsLink={<a href="/#/terms_of_use"> תנאי שימוש</a>}
-            privacyLink={<a href="/#/privacy_policy"> מדיניות פרטיות</a>}
+            topics={[
+              this.state.whiteLableStore.name,
+              this.state.whiteLableStore.store_address,
+
+              this.state.whiteLableStore.phone_number,
+              <a href="/#/terms_of_use"> תנאי שימוש</a>,
+              <a href="/#/privacy_policy"> מדיניות פרטיות</a>,
+            ]}
           ></SiteBottom>
         </HashRouter>
       </div>

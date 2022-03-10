@@ -1676,6 +1676,10 @@ label.form-label {
   flex-wrap: wrap;
   color: white;
 }
+.siteBottom div {
+  margin: 5px;
+  white-space: nowrap;
+}
 .whiteLableHome {
   background-color: #272727e8;
   color: rgb(255, 255, 255);

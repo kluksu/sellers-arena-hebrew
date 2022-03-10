@@ -21,11 +21,11 @@ export default class BulkEditing extends Component {
   getSearchText = (searchText) => {
     this.setState({ searchText: searchText });
   };
-  getStoreSubCategory = (e, subCategory) => {
-    this.setState({ activeSubCategory: subCategory });
-    // window.scrollTo(0, document.getElementById("productCardsRow").scrollHeight);
-    document.getElementById("productCardsRow").scrollIntoView();
-  };
+  // getStoreSubCategory = (e, subCategory) => {
+  //   this.setState({ activeSubCategory: subCategory });
+  //   // window.scrollTo(0, document.getElementById("productCardsRow").scrollHeight);
+  //   document.getElementById("productCardsRow").scrollIntoView();
+  // };
   searchItems = async () => {
     await this.setState({ next: undefined });
     await this.setState({ myItems: [] });
@@ -132,7 +132,6 @@ export default class BulkEditing extends Component {
             searchText={this.state.searchText}
             searchButton={false}
             searchItems={this.searchItems}
-            screenWidth={this.props.screenWidth}
             screenWidth={this.props.screenWidth}
             activeSubCategory={this.state.activeSubCategory}
             getStoreSubCategory={this.getStoreSubCategory}
