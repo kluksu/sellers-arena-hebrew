@@ -178,6 +178,7 @@ class Uploadpage extends React.Component {
   };
 
   render() {
+    console.log("!!!!");
     let showSubCategories = [];
     let showCategories = [];
 

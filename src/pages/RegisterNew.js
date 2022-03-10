@@ -2,7 +2,12 @@ import axios from "axios";
 import React, { Component } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import ReadAllBox from "../components/ReadAllBox";
-import { domain, handleKeyDown, postData } from "../components/utils";
+import {
+  domain,
+  handleKeyDown,
+  postData,
+  whiteLableStores,
+} from "../components/utils";
 import PrivecyPolicy from "./PrivecyPolicy";
 import TermOfUse from "./TermOfUse";
 
@@ -15,17 +20,38 @@ export default class extends Component {
     };
   }
   sendForm = () => {
-    postData(`${domain}/register/`, {
-      email: this.state.email.toLowerCase(),
-      password: this.state.password,
-      phone_number: this.state.phone_number,
-      terms_agreed: this.state.terms_agreed,
-      terms_revision: "1.0.0",
-      privacy_policy_revision: "1.0.0",
-      privacy_policy_agreed: this.state.privacy_policy_agreed,
-      first_name: this.state.first_name,
-      last_name: this.state.last_name,
-    })
+    // console.log("!!!!!!!!!!!!!!!!!!!!!");
+    // let config = {};
+    // if (this.props.accessToken) {
+    //   config = {
+    //     headers: {
+    //       Authorization: `Bearer ${this.props.accessToken}`,
+    //       "Content-Type": "application/json",
+    //     },
+    //   };
+    // }
+    let path =
+      // this.props.href ? "separated-users" :
+      "register";
+    let seller_account_id = this.props.href
+      ? whiteLableStores[this.props.href]
+      : "";
+    postData(
+      `${domain}/${path}/`,
+      {
+        email: this.state.email.toLowerCase(),
+        seller_account_id,
+        password: this.state.password,
+        phone_number: this.state.phone_number,
+        terms_agreed: this.state.terms_agreed,
+        terms_revision: "1.0.0",
+        privacy_policy_revision: "1.0.0",
+        privacy_policy_agreed: this.state.privacy_policy_agreed,
+        first_name: this.state.first_name,
+        last_name: this.state.last_name,
+      }
+      // this.props.accessToken
+    )
       .then((data) => {
         if (data.id) {
           this.props.openGenericModal(

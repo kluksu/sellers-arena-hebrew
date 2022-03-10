@@ -4,6 +4,7 @@ import emailjs from "emailjs-com";
 import { el } from "date-fns/locale";
 import { element } from "prop-types";
 
+export const whiteLableStores = { "localhost:3000": 6 };
 // Example POST method implementation:
 // https://supplierzz.herokuapp.com
 export let domain = "https://supplierzz.westeurope.cloudapp.azure.com";

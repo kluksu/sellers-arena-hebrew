@@ -292,8 +292,8 @@ class SupplierFeed extends Component {
     {
       return (
         <Row>
-          <Col xl={3} lg={3} md={3} sm={0} xs={0} className="contactsCardsCol">
-            {this.props.screenWidth > 767 ? (
+          {!this.props.href ? (
+            this.props.screenWidth > 767 ? (
               <div className="contactsCardsRow">
                 <div
                   style={{ height: "60px", padding: "30px", fontSize: "20px" }}
@@ -304,8 +304,18 @@ class SupplierFeed extends Component {
               </div>
             ) : (
               ""
-            )}
-          </Col>
+            )
+          ) : (
+            ""
+          )}
+          <Col
+            xl={3}
+            lg={3}
+            md={3}
+            sm={0}
+            xs={0}
+            className="contactsCardsCol"
+          ></Col>
           <Col xl={6} lg={6} md={6} sm={12} xs={12}>
             <div className="wall">
               {/* <Row> */}{" "}

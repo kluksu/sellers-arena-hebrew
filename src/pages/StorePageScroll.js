@@ -433,22 +433,25 @@ class StorePageScroll extends React.Component {
       });
 
       this.postAndRetrevData(data.id).then((data) => {
-        this.editItem(data.id, this.state.changedQuantities).then(
-          this.openModal("הצלחה!", "השינויים נוספו בהצלחה"),
-          this.setState({ changedQuantities: {} }),
-
-          this.setState({ activeCart: data }),
-          getData(
-            `${domain}/cart/${this.state.activeCart.id}/`,
-            "",
-            ` ${this.props.accessToken}`
-          ).then((res) => {
-            // this.setState({ cartsError: "" });
-            this.setState({ activeCart: res });
-          }),
-          this.setState({ LoaderVisibilty: "none" }),
-          this.props.getCarts()
-        );
+        this.editItem(data.id, this.state.changedQuantities)
+          .then((res) => {
+            this.openModal("הצלחה!", "השינויים נוספו בהצלחה");
+            this.setState({ changedQuantities: {} });
+            this.setState({ activeCart: data });
+            getData(
+              `${domain}/cart/${this.state.activeCart.id}/`,
+              "",
+              ` ${this.props.accessToken}`
+            ).then((res) => {
+              // this.setState({ cartsError: "" });
+              this.setState({ activeCart: res });
+            });
+            this.setState({ LoaderVisibilty: "none" });
+            this.props.getCarts();
+          })
+          .catch((error) => {
+            this.props.openGenericModal("אופס", error.response);
+          });
 
         if (isChangingPage === true) {
           if (this.props.activeAccount.account_type == 3) {
@@ -672,24 +675,27 @@ class StorePageScroll extends React.Component {
     if (this.state.activeCart == null || this.state.activeCart.id === "notID") {
       this.creatCart();
     } else {
-      this.postAndRetrevData(this.state.activeCart.id).then((data) => {
-        this.openModal("הצלחה!", "השינויים נוספו להזמנה");
-        this.editItem(data.id, this.state.changedQuantities).then(
-          this.openModal("הצלחה!", "השינויים נוספו להזמנה"),
-          this.setState({ changedQuantities: {} }),
-          this.setState({ activeCart: data }),
-
-          getData(
-            `${domain}/cart/${this.state.activeCart.id}/`,
-            "",
-            ` ${this.props.accessToken}`
-          ).then((res) => {
-            this.setState({ activeCart: res });
-          }),
-          this.setState({ LoaderVisibilty: "none" })
-          // window.location.reload()
-        );
-      });
+      this.postAndRetrevData(this.state.activeCart.id)
+        .then((data) => {
+          this.openModal("הצלחה!", "השינויים נוספו להזמנה");
+          this.editItem(data.id, this.state.changedQuantities).then((res) => {
+            this.openModal("הצלחה!", "השינויים נוספו להזמנה");
+            this.setState({ changedQuantities: {} });
+            this.setState({ activeCart: data });
+            getData(
+              `${domain}/cart/${this.state.activeCart.id}/`,
+              "",
+              ` ${this.props.accessToken}`
+            ).then((res) => {
+              this.setState({ activeCart: res });
+            });
+            this.setState({ LoaderVisibilty: "none" });
+            // window.location.reload()
+          });
+        })
+        .catch((error) => {
+          this.props.openGenericModal("אופס", error.response);
+        });
     }
   };
   editItem = (id, delta) => {
@@ -956,7 +962,9 @@ class StorePageScroll extends React.Component {
           <Row>
             <Col xl={4}>
               {" "}
-              {this.state.currentStore.image ? (
+              {this.props.href ? (
+                ""
+              ) : this.state.currentStore.image ? (
                 <img src={this.state.currentStore.image}></img>
               ) : (
                 <ImProfile className="profileIcon" />
@@ -985,23 +993,28 @@ class StorePageScroll extends React.Component {
                   </Button>
                 </a>
               ) : null}
-              <Button
-                disabled={unregisterDisable}
-                className="w-50"
-                variant="success"
-                onClick={
-                  () =>
-                    this.props.handleOpenMessage(
-                      messageUserID,
-                      this.state.threadID
-                    ) /////////////////////////////////////////////////////////////////////////////////////
-                }
-              >
-                שלח הודעה <BiMailSend />
-              </Button>
-              {this.props.activeAccount &&
-              this.props.match.params.id ==
-                this.props.activeAccount.id ? null : (
+              {!this.props.href ? (
+                <Button
+                  disabled={unregisterDisable}
+                  className="w-50"
+                  variant="success"
+                  onClick={
+                    () =>
+                      this.props.handleOpenMessage(
+                        messageUserID,
+                        this.state.threadID
+                      ) /////////////////////////////////////////////////////////////////////////////////////
+                  }
+                >
+                  שלח הודעה <BiMailSend />
+                </Button>
+              ) : (
+                ""
+              )}
+
+              {(this.props.activeAccount &&
+                this.props.match.params.id == this.props.activeAccount.id) ||
+              this.props.href ? null : (
                 <Button
                   onClick={() => this.props.postAndGetContacts(messageUserID)}
                   className="w-50"

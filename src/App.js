@@ -17,6 +17,7 @@ import {
   postData,
   shuffle,
   takeMeHome,
+  whiteLableStores,
 } from "./components/utils";
 import NewMessageModal from "./components/NewMessageModal";
 import Uploadpage from "./pages/Uploadpage";
@@ -60,6 +61,10 @@ import PrivecyPolicy from "./pages/PrivecyPolicy";
 import BottomNav from "./components/BottomNav";
 import TermOfUse from "./pages/TermOfUse";
 import StorePageScroll from "./pages/StorePageScroll";
+import WhiteLabelNav from "./components/WhiteLabelNav";
+import LoginModal from "./components/LoginModal";
+import WhiteLableHome from "./pages/WhiteLableHome";
+import SiteBottom from "./components/SiteBottom";
 //${domain}/
 class App extends React.Component {
   constructor(props) {
@@ -111,6 +116,8 @@ class App extends React.Component {
       allMessages: [],
       myUsers: [],
       accountsYouMayLike: [],
+      whiteLableStore: {},
+      href: null,
     };
   }
   sendEmailAgain = (email) => {
@@ -655,6 +662,9 @@ class App extends React.Component {
     });
   };
   deleteAccount = (accountID) => {
+    console.log(
+      "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+    );
     const authorization = !this.state.accessToken
       ? null
       : `Bearer ${this.state.accessToken}`;
@@ -662,15 +672,32 @@ class App extends React.Component {
       headers: { "Content-Type": "application/json", authorization },
     };
     axios
-      .delete(`${domain}/my-accounts/${accountID}/`, config)
+      .delete(
+        `${domain}/${
+          window.location.href.includes("sapakos")
+            ? "my-accounts"
+            : "separated-accounts"
+        }/${accountID}/`,
+        config
+      )
       .then((res) => {
         this.openGenericModal("החשבון נמחק בהצלחה");
       })
       .catch((error) => {
-        this.props.openGenericModal("אופס, ישנה שגיאה", error.response);
+        this.openGenericModal("אופס, ישנה שגיאה", error.response);
       });
   };
   componentDidMount() {
+    if (!window.location.href.includes("sapakos")) {
+      this.setState({ href: window.location.href.split("/")[2] });
+
+      this.getAccount(
+        whiteLableStores[window.location.href.split("/")[2]]
+      ).then((res) => {
+        console.log(res.data);
+        this.setState({ whiteLableStore: res.data });
+      });
+    }
     this.keepLoggedIn();
     this.getMe();
     this.isMobile();
@@ -767,29 +794,46 @@ class App extends React.Component {
 
   logout = () => {
     localStorage.setItem("refresh", null);
-    this.state = [];
+    this.state = {};
     this.setState({ refreshToken: "" });
     this.setState({ activeAccount: "" });
     this.setState({ accessToken: null });
     this.setState({ MyShoppingCarts: [] });
     this.setState({ allThreads: [] });
 
-    takeMeHome();
+    window.location.replace("/#/");
   };
   openModal = () => this.setState({ isOpen: true, loginData: {} });
   closeModal = () => this.setState({ isOpen: false });
-  loginPostData = (email, password) => {
+  loginPostData = (email, password, seller_account_id) => {
     //
     postData(`${domain}/token/`, {
       email: email,
       password: password,
+      seller_account: seller_account_id,
     }).then((data) => {
-      if (data) {
-        this.setState({ loginData: data });
-      }
-      this.getAllInfo(data);
-      if (this.state.activeAccount) {
-        takeMeHome();
+      if (data.detail) {
+        postData(`${domain}/token/`, {
+          email: email,
+          password: password,
+          // seller_account: seller_account_id,
+        }).then((res) => {
+          if (res) {
+            this.setState({ loginData: res });
+          }
+          this.getAllInfo(res);
+          if (this.state.activeAccount) {
+            takeMeHome();
+          }
+        });
+      } else {
+        if (data) {
+          this.setState({ loginData: data });
+        }
+        this.getAllInfo(data);
+        if (this.state.activeAccount) {
+          takeMeHome();
+        }
       }
     });
   };
@@ -921,6 +965,8 @@ class App extends React.Component {
       });
   };
   render() {
+    let href = this.state.href;
+    console.log(href);
     let unreadMessages = 0;
     for (const [key, value] of Object.entries(this.state.messagesWasReadObj)) {
       if (value === "red") {
@@ -999,7 +1045,12 @@ class App extends React.Component {
     // ) {
     //   minwidth = "740px";
     // }
-    return (
+    console.log(this.state.whiteLableStore);
+
+    console.log(href);
+    return window.location.href.includes("sapakos") ||
+      (this.state.activeAccount &&
+        this.state.activeAccount.account_type == 3) ? (
       <div className="App">
         {/* {this.state.activeAccount &&
         !window.location.href.includes("feed") &&
@@ -1313,6 +1364,10 @@ class App extends React.Component {
           </Route>
           <Route exact path="/control_panel/">
             <ControlPanel
+              deleteAccount={this.deleteAccount}
+              resetPassword={this.resetPassword}
+              me={this.state.me}
+              href={href}
               closeGenericModal={this.closeGenericModal}
               openGenericModal={this.openGenericModal}
               myUsers={this.state.myUsers}
@@ -1350,11 +1405,21 @@ class App extends React.Component {
           </Route>
           <Route exact path="/control_panel/:name">
             <ControlPanel
-              myUsers={this.state.myUsers}
+              deleteAccount={this.deleteAccount}
+              resetPassword={this.resetPassword}
+              me={this.state.me}
+              href={href}
               closeGenericModal={this.closeGenericModal}
               openGenericModal={this.openGenericModal}
-              accessToken={this.state.accessToken}
+              myUsers={this.state.myUsers}
+              myContacts={this.state.myContacts}
+              screenWidth={this.state.screenWidth}
+              payedOrders={this.state.payedOrders}
+              fulfilledOrders={this.state.fulfilledOrders}
+              sellerApprovedOrders={this.state.sellerApprovedOrders}
+              MySupplierOrders={this.state.MySupplierOrders}
               activeAccount={this.state.activeAccount}
+              accessToken={this.state.accessToken}
             ></ControlPanel>
           </Route>
           <Route exact path="/storePage/:storeId/product_page/:productId">
@@ -1379,11 +1444,13 @@ class App extends React.Component {
           </Route>
           <Route exact path="/me">
             <Profile
+              accountToEdit={this.state.activeAccount}
+              path="my-accounts"
               deleteAccount={this.deleteAccount}
               resetPassword={this.resetPassword}
               closeGenericModal={this.closeGenericModal}
               openGenericModal={this.openGenericModal}
-              me={this.state.me}
+              userToEdit={this.state.me}
               activeAccount={this.state.activeAccount}
               accessToken={this.state.accessToken}
             ></Profile>
@@ -1451,6 +1518,252 @@ class App extends React.Component {
             closeModal={this.closeGenericModal}
             isDiscountModalOpen={this.state.isGenericModalOpen}
           ></DiscountModal>
+        </HashRouter>
+      </div>
+    ) : (
+      <div className="App">
+        <HashRouter>
+          <WhiteLabelNav
+            whiteLableStore={this.state.whiteLableStore}
+            openGenericModal={this.openGenericModal}
+            closeGenericModal={this.closeGenericModal}
+            resetPassword={this.resetPassword}
+            handleKeyDown={this.handleKeyDown}
+            getAccount={this.getAccount}
+            screenWidth={this.state.screenWidth}
+            me={this.state.me}
+            payedOrders={this.state.payedOrders}
+            fulfilledOrders={this.state.fulfilledOrders}
+            sellerApprovedOrders={this.state.sellerApprovedOrders}
+            MySupplierOrders={this.state.MySupplierOrders}
+            deleteCart={this.deleteCart}
+            getCarts={this.getCarts}
+            MyShoppingCarts={this.state.MyShoppingCarts}
+            accessToken={this.state.accessToken}
+            logout={this.logout}
+            openModal={this.openModal}
+            closeModal={this.closeModal}
+            isOpen={this.state.isOpen}
+            userAccounts={this.state.userAccounts}
+            loginData={this.state.loginData}
+            activeAccount={this.state.activeAccount}
+            loginPostData={this.loginPostData}
+            href={href}
+          ></WhiteLabelNav>
+          <Route exact path="/profile">
+            <Profile
+              deleteAccount={this.deleteAccount}
+              resetPassword={this.resetPassword}
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
+              me={this.state.me}
+              activeAccount={this.state.activeAccount}
+              accessToken={this.state.accessToken}
+              // href={href}
+            ></Profile>
+          </Route>
+          <Route exact path={`/StorePage/:id`}>
+            {this.state.activeAccount ? (
+              <StorePageScroll
+                createPermDiscount={this.createPermDiscount}
+                openGenericModal={this.openGenericModal}
+                closeGenericModal={this.closeGenericModal}
+                getAllOrders={this.getAllOrders}
+                userDevice={this.state.userDevice}
+                screenWidth={this.state.screenWidth}
+                getUnregistered={this.getUnregistered}
+                getActiveCart={this.getActiveCart}
+                checkOut={this.checkOut}
+                myContacts={this.state.myContacts}
+                removeContact={this.removeContact}
+                getMessagesArcive={this.getMessagesArcive}
+                postAndGetContacts={this.postAndGetContacts}
+                refreshToken={this.state.refreshToken}
+                allThreads={this.state.allThreads}
+                getCurrentstore={this.getCurrentstore}
+                handleOpenMessage={this.handleOpenMessage}
+                modalMessages={this.state.modalMessages}
+                getThreads={this.getThreads}
+                getCarts={this.getCarts}
+                deleteCart={this.deleteCart}
+                MyShoppingCarts={this.state.MyShoppingCarts}
+                accessToken={this.state.accessToken}
+                activeAccount={this.state.activeAccount}
+                screenWidth={this.state.screenWidth}
+                href={href}
+              ></StorePageScroll>
+            ) : (
+              <WhiteLableHome
+                isOpen={this.state.isOpen}
+                openModal={this.openModal}
+                whiteLableStore={this.state.whiteLableStore}
+                closeGenericModal={this.closeGenericModal}
+                openGenericModal={this.openGenericModal}
+                captchaResponse={this.state.captchaResponse}
+                isRealUser={this.state.isRealUser}
+                verifyCallback={this.verifyCallback}
+                reCaptchaLoded={this.reCaptchaLoded}
+                // handleVerified={this.handleVerified}
+                goToNewAccount={this.goToNewAccount}
+                activeAccount={this.state.activeAccount}
+                accessToken={this.state.accessToken}
+                me={this.state.me}
+                href={href}
+              ></WhiteLableHome>
+            )}
+          </Route>
+          <Route exact path="/supplier-order/:id">
+            <SupplierOrder
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
+              openGenericModalOrderSummery={this.openGenericModalOrderSummery}
+              getCarts={this.getCarts}
+              screenWidth={this.state.screenWidth}
+              getAllOrders={this.getAllOrders}
+              markOrderAs={this.markOrderAs}
+              accessToken={this.state.accessToken}
+              activeAccount={this.state.activeAccount}
+              href={href}
+            ></SupplierOrder>
+          </Route>
+          <Route exact path="/register/">
+            <RegisterNew
+              accessToken={this.state.accessToken}
+              activeAccount={this.state.activeAccount}
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
+              isGenericModalOpen={this.state.isGenericModalOpen}
+              href={href}
+            ></RegisterNew>
+          </Route>
+          <Route exact path="/feed/:id">
+            <SupplierFeed
+              screenWidth={this.state.screenWidth}
+              myContacts={this.state.myContacts}
+              accountsYouMayLike={this.state.accountsYouMayLike}
+              allThreads={this.state.allThreads}
+              handleOpenMessage={this.handleOpenMessage}
+              handleClose={this.handleClose}
+              addToContacts={this.addToContacts}
+              postAndGetContacts={this.postAndGetContacts}
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
+              allMessages={this.state.allMessages}
+              getContactsMesssageBoard={this.getContactsMesssageBoard}
+              myContacts={this.state.myContacts}
+              activeAccount={this.state.activeAccount}
+              accessToken={this.state.accessToken}
+              href={href}
+            ></SupplierFeed>
+          </Route>{" "}
+          <Route exact path="/all-orders">
+            <AllOrders
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
+              myUsers={this.state.myUsers}
+              getAccount={this.getAccount}
+              myContacts={this.state.myContacts}
+              screenWidth={this.state.screenWidth}
+              payedOrders={this.state.payedOrders}
+              fulfilledOrders={this.state.fulfilledOrders}
+              sellerApprovedOrders={this.state.sellerApprovedOrders}
+              MySupplierOrders={this.state.MySupplierOrders}
+              activeAccount={this.state.activeAccount}
+              accessToken={this.state.accessToken}
+            ></AllOrders>
+          </Route>
+          <Route exact path="/openAccount">
+            <OpenAccount
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
+              captchaResponse={this.state.captchaResponse}
+              isRealUser={this.state.isRealUser}
+              verifyCallback={this.verifyCallback}
+              reCaptchaLoded={this.reCaptchaLoded}
+              // handleVerified={this.handleVerified}
+              goToNewAccount={this.goToNewAccount}
+              activeAccount={this.state.activeAccount}
+              accessToken={this.state.accessToken}
+              me={this.state.me}
+              href={href}
+            ></OpenAccount>
+          </Route>
+          <Route exact path="/">
+            <WhiteLableHome
+              isOpen={this.state.isOpen}
+              openModal={this.openModal}
+              whiteLableStore={this.state.whiteLableStore}
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
+              captchaResponse={this.state.captchaResponse}
+              isRealUser={this.state.isRealUser}
+              verifyCallback={this.verifyCallback}
+              reCaptchaLoded={this.reCaptchaLoded}
+              // handleVerified={this.handleVerified}
+              goToNewAccount={this.goToNewAccount}
+              activeAccount={this.state.activeAccount}
+              accessToken={this.state.accessToken}
+              me={this.state.me}
+              href={href}
+            ></WhiteLableHome>
+          </Route>
+          <Route exact path="/order-summery/:id">
+            <OrderSummery
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
+              openGenericModalOrderSummery={this.openGenericModalOrderSummery}
+              getSpecificOrder={this.getSpecificOrder}
+              checkOut={this.checkOut}
+              activeAccount={this.state.activeAccount}
+              deleteCart={this.deleteCart}
+              accessToken={this.state.accessToken}
+            ></OrderSummery>
+          </Route>
+          <Route exact path="/my-order/:id">
+            <MyOrder
+              getSpecificOrder={this.getSpecificOrder}
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
+              screenWidth={this.state.screenWidth}
+              activeAccount={this.state.activeAccount}
+              accessToken={this.state.accessToken}
+            ></MyOrder>
+          </Route>{" "}
+          <Route exact path="/privacy_policy">
+            <PrivecyPolicy></PrivecyPolicy>
+          </Route>
+          <Route exact path="/terms_of_use">
+            <TermOfUse></TermOfUse>
+          </Route>
+          <DiscountModal
+            preventModalDefult={this.state.preventModalDefult}
+            bottom={this.state.modalBottom}
+            top={this.state.modalTop}
+            className={this.state.modalClass}
+            text={this.state.modalText}
+            closeModal={this.closeGenericModal}
+            isDiscountModalOpen={this.state.isGenericModalOpen}
+            href={href}
+          ></DiscountModal>
+          <LoginModal
+            openGenericModal={this.openGenericModal}
+            closeGenericModal={this.closeGenericModal}
+            resetPassword={this.resetPassword}
+            handleKeyDown={this.handleKeyDown}
+            loginData={this.state.loginData}
+            loginPostData={this.loginPostData}
+            isOpen={this.state.isOpen}
+            closeModal={this.closeModal}
+            href={href}
+          ></LoginModal>
+          <SiteBottom
+            phone={this.state.whiteLableStore.phone_number}
+            address={this.state.whiteLableStore.store_address}
+            name={this.state.whiteLableStore.name}
+            email={this.state.whiteLableStore.email}
+            termsLink={<a href="/#/terms_of_use"> תנאי שימוש</a>}
+            privacyLink={<a href="/#/privacy_policy"> מדיניות פרטיות</a>}
+          ></SiteBottom>
         </HashRouter>
       </div>
     );
