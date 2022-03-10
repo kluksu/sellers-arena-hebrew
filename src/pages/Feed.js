@@ -177,8 +177,8 @@ export default class Feed extends Component {
               openGenericModal={this.props.openGenericModal}
               hidePost={this.hidePost}
               deletePost={this.deletePost}
-              closeGenericModal={this.props.closeGenericModal}
-              openGenericModal={this.props.openGenericModal}
+              // closeGenericModal={this.props.closeGenericModal}
+              // openGenericModal={this.props.openGenericModal}
               allThreads={this.props.allThreads}
               handleOpenMessage={this.props.handleOpenMessage}
               handleClose={this.props.handleClose}
@@ -198,8 +198,8 @@ export default class Feed extends Component {
               openGenericModal={this.props.openGenericModal}
               hidePost={this.hidePost}
               deletePost={this.deletePost}
-              closeGenericModal={this.props.closeGenericModal}
-              openGenericModal={this.props.openGenericModal}
+              // closeGenericModal={this.props.closeGenericModal}
+              // openGenericModal={this.props.openGenericModal}
               allThreads={this.props.allThreads}
               handleOpenMessage={this.props.handleOpenMessage}
               handleClose={this.props.handleClose}
@@ -219,8 +219,8 @@ export default class Feed extends Component {
               openGenericModal={this.props.openGenericModal}
               hidePost={this.hidePost}
               deletePost={this.deletePost}
-              closeGenericModal={this.props.closeGenericModal}
-              openGenericModal={this.props.openGenericModal}
+              // closeGenericModal={this.props.closeGenericModal}
+              // openGenericModal={this.props.openGenericModal}
               allThreads={this.props.allThreads}
               handleOpenMessage={this.props.handleOpenMessage}
               handleClose={this.props.handleClose}
@@ -275,7 +275,7 @@ export default class Feed extends Component {
             </div>
           </Col>
           <Col xl={3} lg={3} md={3} sm={0} xs={0}></Col>
-          <BottomNav></BottomNav>
+          {/* <BottomNav></BottomNav> */}
         </Row>
       );
     }

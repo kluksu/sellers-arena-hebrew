@@ -342,7 +342,7 @@ class SupplierFeed extends Component {
             </div>
           </Col>
           <Col xl={3} lg={3} md={3} sm={0} xs={0}></Col>
-          <BottomNav></BottomNav>
+          {/* <BottomNav></BottomNav> */}
         </Row>
       );
     }

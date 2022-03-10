@@ -331,7 +331,7 @@ class FiltteredCategoryPage extends React.Component {
             //  style={{ paddingRight: "79px" }}
           >
             <InfiniteScroll
-              style={{ overflowX: "hidden" }}
+              // style={{ overflowX: "hidden" }}
               style={{ paddingLeft: infiniteCrollPaddingLeft }}
               className="homePage"
               dataLength={cards.length}
@@ -355,7 +355,7 @@ class FiltteredCategoryPage extends React.Component {
             </InfiniteScroll>
           </Col>
         </Row>
-        <BottomNav></BottomNav>
+        {/* <BottomNav></BottomNav> */}
       </>
     );
   }

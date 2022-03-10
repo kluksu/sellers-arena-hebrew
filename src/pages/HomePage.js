@@ -358,7 +358,7 @@ class HomePage extends React.Component {
             </InfiniteScroll>
           </Col>
         </Row>
-        <BottomNav></BottomNav>
+        {/* <BottomNav></BottomNav> */}
       </>
     );
   }
