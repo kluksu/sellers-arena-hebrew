@@ -381,7 +381,7 @@ export default class PostComponent extends Component {
                     title={`${
                       this.state.selectedVariation
                         ? this.state.selectedVariation.id
-                        : "בחר וריאציה"
+                        : "בחר דגם"
                     }`}
                     id="basic-nav-dropdown"
                   >
@@ -401,12 +401,12 @@ export default class PostComponent extends Component {
                     // value={this.state.text}
                     // placeholder={"ספר לקונים מה שבא לך.."}
                   >
-                    <option>בחר וריאציה</option>
+                    <option>בחר דגם</option>
                     {variations}
                   </Form.Control> */}
                   {/* </Form.Group> */}
                   <Button onClick={() => this.addPictureToPost("variation")}>
-                    הוסף תמונת וריאציה לפוסט
+                    הוסף תמונת דגם לפוסט
                   </Button>
                 </div>
                 {/* <div

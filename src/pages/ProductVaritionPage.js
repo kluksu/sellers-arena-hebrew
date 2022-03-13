@@ -215,7 +215,7 @@ class ProductVaritionPage extends React.Component {
               {" "}
               <Button onClick={this.resetPage}>
                 {" "}
-                להעלות וריאציה נוספת של מוצר זה
+                להעלות דגם נוסף של מוצר זה
               </Button>
               <Button
                 onClick={() => {
@@ -244,7 +244,7 @@ class ProductVaritionPage extends React.Component {
         }
         if (this.state.cost_per_item) {
           this.setState({
-            variationError: "וריאציה זו כבר קיימת",
+            variationError: "דגם זה כבר קיים",
           });
         }
       }
@@ -377,7 +377,7 @@ class ProductVaritionPage extends React.Component {
           onKeyDown={(event) => handleKeyDown(event, this.uploadVar)}
           className="productUploadContainer"
         >
-          <h1>צור וריאציה</h1>
+          <h1>צור דגם</h1>
           <Form className="varUploadForm">
             <Row>
               <Col xl={6} sm={12}>
@@ -398,7 +398,7 @@ class ProductVaritionPage extends React.Component {
               </Col>
             </Row>
             <Form.Group controlId="exampleForm.ControlTextarea1">
-              <Form.Label>תיאור וריאציה (לא פעיל)</Form.Label>
+              <Form.Label>תיאור דגם</Form.Label>
               <Form.Control
                 onChange={this.handleChange}
                 as="textarea"
@@ -461,7 +461,7 @@ class ProductVaritionPage extends React.Component {
                 variant="success"
                 disabled={this.state.IsVarButtonDisabled}
               >
-                הוסף וריאציה
+                הוסף דגם
               </Button> */}
               <p className="FormRejects">{this.state.variationError}</p>
               <Row>

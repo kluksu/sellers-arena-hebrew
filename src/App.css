@@ -1008,6 +1008,15 @@ aside.emoji-picker-react:hover {
 .registerContainer > button {
   width: 100%;
 }
+@keyframes blink {
+  50% {
+    background-color: rgb(53, 177, 28);
+  }
+}
+.blink {
+  animation: blink 1s step-start 0s infinite;
+  transition: color 2s;
+}
 .registerPage {
   background-image: url("https://images.pexels.com/photos/2422286/pexels-photo-2422286.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
   padding-top: 150px;

@@ -88,6 +88,11 @@ export default class QuantityDiscount extends Component {
             </Col>
             <Col xl={2}>
               <Button
+                className={`${
+                  this.state.value && this.state.buttonText === "הוסף הנחה"
+                    ? "blink"
+                    : ""
+                }`}
                 onClick={
                   this.state.variant === "danger"
                     ? () => {
@@ -95,7 +100,7 @@ export default class QuantityDiscount extends Component {
                         this.setState({ variant: "primary" });
                         this.setState({ isDisabled: false });
                         this.setState({
-                          buttonText: "הוסף וריאציה",
+                          buttonText: "הוסף הנחה",
                           key: "",
                           value: "",
                         });

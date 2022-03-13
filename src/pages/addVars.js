@@ -10,7 +10,7 @@ export default class AddVars extends Component {
       isDisabled: false,
       variant: "primary",
       json: "",
-      buttonText: "הוסף וריאציה",
+      buttonText: "הוסף דגם",
       warning: "",
     };
   }
@@ -21,7 +21,7 @@ export default class AddVars extends Component {
       });
       if (this.props.varsInfo[this.state.key] === "") {
         this.setState({
-          buttonText: "הוסף וריאציה",
+          buttonText: "הוסף דגם",
           isDisabled: false,
           variant: "primary",
         });
@@ -79,6 +79,11 @@ export default class AddVars extends Component {
 
             <Col xl={2}>
               <Button
+                className={`${
+                  this.state.value && this.state.buttonText === "הוסף דגם"
+                    ? "blink"
+                    : ""
+                }`}
                 onClick={
                   this.state.variant === "danger"
                     ? () => {
@@ -86,7 +91,7 @@ export default class AddVars extends Component {
                         this.setState({ variant: "primary" });
                         this.setState({ isDisabled: false });
                         this.setState({
-                          buttonText: "הוסף וריאציה",
+                          buttonText: "הוסף דגם",
                           key: "",
                           value: "",
                         });

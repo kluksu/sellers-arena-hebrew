@@ -236,7 +236,7 @@ class EditVariationPage extends React.Component {
                     this.props.closeGenericModal();
                   }}
                 >
-                  ערוך וריאציה נוספת
+                  ערוך דגם נוסף
                 </Button>
               </>,
               "prevent"
@@ -333,7 +333,7 @@ class EditVariationPage extends React.Component {
               variant="danger"
               type="button"
             >
-              מחק וריאציה {`(${key} - ${value})`}
+              מחק דגם {`(${key} - ${value})`}
             </Button>
           </>
         );
@@ -389,7 +389,7 @@ class EditVariationPage extends React.Component {
             </Row>
 
             <Form.Group controlId="exampleForm.ControlTextarea1">
-              <Form.Label>תיאור וריאציה</Form.Label>
+              <Form.Label>תיאור דגם</Form.Label>
               <Form.Control
                 onChange={this.handleChange}
                 as="textarea"
@@ -461,7 +461,7 @@ class EditVariationPage extends React.Component {
                 variant="success"
                 disabled={this.state.isVarButtonActive}
               >
-                הוסף וריאציה
+                הוסף דגם
               </Button> */}
 
               <Row></Row>
@@ -515,7 +515,7 @@ class EditVariationPage extends React.Component {
                     );
                   }}
                 >
-                  מחק וריאציה
+                  מחק דגם
                 </Button>
               </Col>
 

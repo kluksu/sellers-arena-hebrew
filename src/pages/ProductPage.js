@@ -342,7 +342,7 @@ class ProductPage extends React.Component {
                 </Row>
               </div>
               <Form.Group>
-                <FormLabel>בחר וריאציה</FormLabel>
+                <FormLabel>בחר דגם</FormLabel>
                 <Form.Control
                   onChange={this.handleChange}
                   size="md"

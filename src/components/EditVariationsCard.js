@@ -31,7 +31,7 @@ class EditVariationsCard extends React.Component {
           <div>
             {" "}
             <img src={this.props.pictures} alt="variation picture"></img>{" "}
-            <div>קוד וריאציה:{this.props.id}</div>
+            <div>מספר דגם:{this.props.id}</div>
           </div>
 
           <div>

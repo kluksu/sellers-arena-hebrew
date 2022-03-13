@@ -232,7 +232,7 @@ export default class BulkItemsEdit extends Component {
         <div className="myItemsSearch">
           <Row>
             <Form.Group
-              className="m-auto"
+              // className="m-auto"
               className="mb-3"
               controlId="formBasicEmail"
             >
@@ -326,7 +326,7 @@ export default class BulkItemsEdit extends Component {
           <thead>
             <tr>
               <th></th>
-              <th>קוד וריאציה</th>
+              <th>קוד דגם</th>
 
               <th>גודל מנה</th>
               <th>מחיר יחידה</th>
@@ -340,7 +340,7 @@ export default class BulkItemsEdit extends Component {
               <tr>
                 <th>קוד מוצר</th>
 
-                {/* <th>קוד וריאציה</th> */}
+                {/* <th>קוד דגם</th> */}
 
                 <th>תמונה</th>
                 <th>שם</th>

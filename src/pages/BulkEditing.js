@@ -124,7 +124,7 @@ export default class BulkEditing extends Component {
               onChange={this.handleChange}
               type="text"
               name="serachText"
-              placeholder="חפש מספר מוצר,שם מוצר, מספר וריאציה, תיאור או ערך לדוגמא 'אדום'"
+              placeholder="חפש מספר מוצר,שם מוצר, מספר דגם, תיאור או ערך לדוגמא 'אדום'"
             />
             <Form.Text></Form.Text>
           </Form.Group> */}
@@ -144,7 +144,7 @@ export default class BulkEditing extends Component {
           <thead>
             <tr>
               <th></th>
-              <th>קוד וריאציה</th>
+              <th>קוד דגם</th>
 
               <th>גודל מנה</th>
               <th>מחיר יחידה</th>
@@ -158,7 +158,7 @@ export default class BulkEditing extends Component {
               <tr>
                 <th>קוד מוצר</th>
 
-                <th>קוד וריאציה</th>
+                <th>קוד דגם</th>
 
                 <th>תמונה</th>
                 <th>שם</th>
