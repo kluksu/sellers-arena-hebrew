@@ -221,7 +221,7 @@ export default class OpenAccount extends Component {
           >
             <option value={""}>-------</option>
             <option value={3}>ספק</option>
-            <option value={2}>קימונאי</option>
+            <option value={2}>קמעונאי</option>
           </Form.Control>
         </Form.Group>
         <p className="FormRejects">
