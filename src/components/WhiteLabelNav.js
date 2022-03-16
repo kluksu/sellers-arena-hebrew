@@ -298,8 +298,8 @@ export default class extends Component {
     }
     console.log(this.props.whiteLableStore);
     return (
-      <div className="whiteLableNav">
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <div className="myNavBar">
+        <Navbar collapseOnSelect expand="xl" bg="light">
           {/* <Container> */}
           <Navbar.Brand href="/#/">
             <img

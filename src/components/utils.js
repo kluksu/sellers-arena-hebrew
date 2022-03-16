@@ -317,6 +317,8 @@ export const categoriesAndSubCategories = [
   // },
 ];
 export const subcategoriesAndPics = {
+  pants:
+    "https://cdn.pixabay.com/photo/2015/02/09/14/07/funny-629675_960_720.jpg",
   "מתלים ומדפים":
     "https://images.pexels.com/photos/1090638/pexels-photo-1090638.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
   שונות:

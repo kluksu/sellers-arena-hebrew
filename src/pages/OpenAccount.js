@@ -115,7 +115,7 @@ export default class OpenAccount extends Component {
                 "החשבון נוצר",
                 "כעת יש לחכות לאישור מפעילי האתר על מנת להשתמש בחשבון, אם ישנה בעיה נא לפנות אלינו דרך עמוד צור קשר"
               );
-              window.location.assign("/#/");
+              window.location.replace("/#/");
             }
           })
           .catch((error) => {

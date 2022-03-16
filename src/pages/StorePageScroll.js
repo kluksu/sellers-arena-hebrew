@@ -1145,6 +1145,7 @@ class StorePageScroll extends React.Component {
                 let card =
                   variation.cost_per_item === null ? (
                     <ProductCard
+                      href={this.props.href}
                       key={variation.id}
                       cartItems={this.state.cartItems}
                       closeGenericModal={this.props.closeGenericModal}
@@ -1166,6 +1167,7 @@ class StorePageScroll extends React.Component {
                     </ProductCard>
                   ) : (
                     <ProductCard
+                      href={this.props.href}
                       key={variation.id}
                       cartItems={this.state.cartItems}
                       closeGenericModal={this.props.closeGenericModal}
@@ -1194,6 +1196,7 @@ class StorePageScroll extends React.Component {
               ) {
                 return (
                   <ProductCard
+                    href={this.props.href}
                     key={variation.id}
                     cartItems={this.state.cartItems}
                     closeGenericModal={this.props.closeGenericModal}
@@ -1223,6 +1226,7 @@ class StorePageScroll extends React.Component {
               )
                 return (
                   <ProductCard
+                    href={this.props.href}
                     key={variation.id}
                     cartItems={this.state.cartItems}
                     closeGenericModal={this.props.closeGenericModal}
@@ -1280,7 +1284,6 @@ class StorePageScroll extends React.Component {
               searchText={this.state.searchText}
               searchButton={false}
               searchItems={this.searchItems}
-              screenWidth={this.props.screenWidth}
               screenWidth={this.props.screenWidth}
               activeSubCategory={this.state.activeSubCategory}
               getStoreSubCategory={this.getStoreSubCategory}

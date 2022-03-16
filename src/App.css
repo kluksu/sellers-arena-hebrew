@@ -1673,6 +1673,13 @@ label.form-label {
   background-repeat: no-repeat;
   position: relative;
 }
+/* .whiteLableNav .navbar-dark .navbar-nav .nav-link .nav-link {
+  color: black;
+}
+.whiteLableNav .navbar-dark .navbar-nav .nav-link:hover {
+  color: #000000;
+  background-color: rgb(241, 237, 237);
+} */
 .siteBottom {
   position: relative;
   bottom: 0px;

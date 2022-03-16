@@ -63,7 +63,9 @@ class OrderSummery extends React.Component {
   checkOutAndGoHome = () => {
     this.props.checkOut(this.props.match.params.id).then((data) => {
       if (data.order_id && this.props.activeAccount.account_type == 2) {
-        this.props.getSpecificOrder(data.order_id).then((res) => {});
+        this.props.getSpecificOrder(data.order_id).then((res) => {
+          this.props.getOrders("submitted", "MySupplierOrders");
+        });
         //         buyer_account: {id: 122, name: 'מוצרים', tax_id: 'חגחגחקחגחקקי'}
         // buyer_comments: ""
         // buyer_unregistered_account: null

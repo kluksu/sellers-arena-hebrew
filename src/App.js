@@ -1337,6 +1337,7 @@ class App extends React.Component {
               openGenericModal={this.openGenericModal}
               openGenericModalOrderSummery={this.openGenericModalOrderSummery}
               getSpecificOrder={this.getSpecificOrder}
+              getOrders={this.getOrders}
               checkOut={this.checkOut}
               activeAccount={this.state.activeAccount}
               deleteCart={this.deleteCart}
@@ -1719,11 +1720,18 @@ class App extends React.Component {
               openGenericModalOrderSummery={this.openGenericModalOrderSummery}
               getSpecificOrder={this.getSpecificOrder}
               checkOut={this.checkOut}
+              getOrders={this.getOrders}
               activeAccount={this.state.activeAccount}
               deleteCart={this.deleteCart}
               accessToken={this.state.accessToken}
             ></OrderSummery>
           </Route>
+          {/* <Route exact path="/supplier-feed/:id">
+            <SupplierFeed
+              closeGenericModal={this.closeGenericModal}
+              openGenericModal={this.openGenericModal}
+            ></SupplierFeed>
+          </Route> */}
           <Route exact path="/my-order/:id">
             <MyOrder
               getSpecificOrder={this.getSpecificOrder}

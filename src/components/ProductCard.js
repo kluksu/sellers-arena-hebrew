@@ -31,7 +31,6 @@ class ProductCard extends React.Component {
         getCartProducts={this.props.getCartProducts}
         item={this.props.item}
         activeAccount={this.props.activeAccount}
-        accessToken={this.props.accessToken}
         buttons={buttons}
       ></ProductModal>,
       <>
@@ -372,7 +371,9 @@ class ProductCard extends React.Component {
                         onClick={(e) => {
                           e.stopPropagation(e);
                           window.location.assign(
-                            `/#/supplier-feed/${this.props.item.account}`
+                            `${
+                              this.props.href ? "/#/feed" : "/#/supplier-feed"
+                            }/${this.props.item.account}`
                           );
                         }}
                       ></ImFeed>
