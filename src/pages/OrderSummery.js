@@ -110,7 +110,7 @@ class OrderSummery extends React.Component {
     if (this.state.activeCart !== "") {
       return (
         <div className="OrderSummeryPage">
-          <Container className="orderSummeryContainer">
+          <div className="orderSummeryContainer">
             <OrderInfo
               isPriceFiledDisabled={"disabled"}
               createDelta={this.createDelta}
@@ -140,7 +140,7 @@ class OrderSummery extends React.Component {
             >
               שלח
             </Button>
-          </Container>
+          </div>
           <DiscountModal
             text={"changes were"}
             closeModal={this.closeModal}
