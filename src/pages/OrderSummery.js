@@ -142,7 +142,7 @@ class OrderSummery extends React.Component {
             </Button>
           </div>
           <DiscountModal
-            text={"changes were"}
+            text={"השינויים נשמרו בהצלחה"}
             closeModal={this.closeModal}
             isDiscountModalOpen={this.state.isDiscountModalOpen}
           ></DiscountModal>
