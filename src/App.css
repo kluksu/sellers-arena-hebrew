@@ -266,6 +266,7 @@ body {
 .HorizontalScrollBoxContainer .contactCard:hover {
   transform: scale(1.1);
 }
+
 .priceFrom {
   color: white;
   background-color: red;
@@ -2974,4 +2975,15 @@ span.navbar-toggler-icon {
   margin: auto;
   margin-bottom: 25px;
   font-weight: 900;
+}
+.tutorialsPage {
+  padding-top: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: black;
+}
+.tutorialsVideo {
+  margin: 30px;
+  color: white;
 }

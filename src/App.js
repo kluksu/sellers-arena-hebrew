@@ -66,6 +66,7 @@ import WhiteLabelNav from "./components/WhiteLabelNav";
 import LoginModal from "./components/LoginModal";
 import WhiteLableHome from "./pages/WhiteLableHome";
 import SiteBottom from "./components/SiteBottom";
+import TutorialsPage from "./pages/TutorialsPage";
 //${domain}/
 class App extends React.Component {
   constructor(props) {
@@ -1278,6 +1279,9 @@ class App extends React.Component {
               closeGenericModal={this.closeGenericModal}
             ></Features>
           </Route>
+          <Route exact path="/tutorials">
+            <TutorialsPage></TutorialsPage>
+          </Route>
           <Route exact path={"/StorePage/:id"}>
             <StorePageScroll
               createPermDiscount={this.createPermDiscount}
@@ -1742,6 +1746,9 @@ class App extends React.Component {
               accessToken={this.state.accessToken}
             ></MyOrder>
           </Route>{" "}
+          {/* <Route exact path="/tutorials">
+            <TutorialsPage></TutorialsPage>
+          </Route> */}
           <Route exact path="/privacy_policy">
             <PrivecyPolicy></PrivecyPolicy>
           </Route>
