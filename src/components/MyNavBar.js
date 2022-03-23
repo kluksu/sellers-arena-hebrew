@@ -336,6 +336,8 @@ class MyNavBar extends React.Component {
               <Nav.Link href="/#/suppliers">ספקים</Nav.Link>
             </Nav>
             <Nav>
+              <Nav.Link href="/#/tutorials">הדרכה</Nav.Link>
+
               {rootButton}
               {messageBoard}
               {shoppingCart}
