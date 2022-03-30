@@ -268,7 +268,10 @@ export default class Wall extends Component {
             {horizontalScrollBox}
           </>
         );
-      } else if (post.event_type === "variation_stock_increase") {
+      } else if (
+        post.event_type === "variation_stock_increase" ||
+        post.event_type === "variation_back_in_stock"
+      ) {
         return (
           <>
             <NewStockPost

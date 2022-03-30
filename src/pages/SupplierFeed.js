@@ -188,7 +188,7 @@ class SupplierFeed extends Component {
               //   handleClose={this.props.handleClose}
               //   addToContacts={this.props.addToContacts}
               //   activeAccount={this.props.activeAccount}
-              //   accessToken={this.props.accessToken}
+              accessToken={this.props.accessToken}
               post={post}
             ></Post>
             {/* {horizontalScrollBox} */}
@@ -210,7 +210,7 @@ class SupplierFeed extends Component {
               //   handleClose={this.props.handleClose}
               //   addToContacts={this.props.addToContacts}
               //   activeAccount={this.props.activeAccount}
-              //   accessToken={this.props.accessToken}
+              accessToken={this.props.accessToken}
               post={post}
             ></NewVariationPost>
             {/* {horizontalScrollBox} */}
@@ -232,7 +232,7 @@ class SupplierFeed extends Component {
               //   handleClose={this.props.handleClose}
               //   addToContacts={this.props.addToContacts}
               //   activeAccount={this.props.activeAccount}
-              //   accessToken={this.props.accessToken}
+              accessToken={this.props.accessToken}
               post={post}
             ></DiscountPost>
             {/* {horizontalScrollBox} */}
@@ -254,13 +254,16 @@ class SupplierFeed extends Component {
               //   handleClose={this.props.handleClose}
               //   addToContacts={this.props.addToContacts}
               //   activeAccount={this.props.activeAccount}
-              //   accessToken={this.props.accessToken}
+              accessToken={this.props.accessToken}
               post={post}
             ></PriceDropPost>
             {/* {horizontalScrollBox} */}
           </>
         );
-      } else if (post.event_type === "variation_stock_increase") {
+      } else if (
+        post.event_type === "variation_stock_increase" ||
+        post.event_type === "variation_back_in_stock"
+      ) {
         return (
           <>
             <NewStockPost
@@ -276,7 +279,7 @@ class SupplierFeed extends Component {
               //   handleClose={this.props.handleClose}
               //   addToContacts={this.props.addToContacts}
               //   activeAccount={this.props.activeAccount}
-              //   accessToken={this.props.accessToken}
+              accessToken={this.props.accessToken}
               post={post}
             ></NewStockPost>
             {/* {horizontalScrollBox} */}

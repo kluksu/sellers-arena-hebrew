@@ -211,7 +211,10 @@ export default class Feed extends Component {
             {horizontalScrollBox}
           </div>
         );
-      } else if (post.event_type === "variation_stock_increase") {
+      } else if (
+        post.event_type === "variation_stock_increase" ||
+        post.event_type === "variation_back_in_stock"
+      ) {
         return (
           <div key={post.id}>
             <NewStockPost

@@ -1470,6 +1470,7 @@ class App extends React.Component {
           </Route>
           <Route exact path="/supplier-feed/:id">
             <SupplierFeed
+              accessToken={this.state.accessToken}
               closeGenericModal={this.closeGenericModal}
               openGenericModal={this.openGenericModal}
             ></SupplierFeed>
