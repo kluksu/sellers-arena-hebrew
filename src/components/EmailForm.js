@@ -11,8 +11,9 @@ export default class EmailForm extends Component {
       name: "",
       phone: "",
       email: "",
-      subject: "",
-      message: "",
+      subject: this.props.selectedPlan,
+      message: this.props.selectedPlanMessage,
+
       errorMessage: "",
     };
   }

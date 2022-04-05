@@ -67,6 +67,8 @@ import LoginModal from "./components/LoginModal";
 import WhiteLableHome from "./pages/WhiteLableHome";
 import SiteBottom from "./components/SiteBottom";
 import TutorialsPage from "./pages/TutorialsPage";
+import ExecutiveSummary from "./pages/ExecutiveSummary";
+import RealPricing from "./pages/RealPricing";
 //${domain}/
 class App extends React.Component {
   constructor(props) {
@@ -652,6 +654,16 @@ class App extends React.Component {
       this.setState({ userDevice: "computer" });
     }
   };
+  getPlaneTypeAndGoToForm = (selectedPlan) => {
+    console.log("!!!!!!");
+    this.setState({
+      selectedPlan: `  הצטרפות לתכנית    ${selectedPlan}  `,
+      selectedPlanMessage: `היי, ברצוני להצטרף לתכנית ${selectedPlan}, אנא חיזרו אלי עם פרטים`,
+    });
+
+    window.location.assign("/#/contact-us");
+    window.scrollTo(0, 0);
+  };
   getMe = () => {
     const authorization = !this.state.accessToken
       ? null
@@ -1052,7 +1064,8 @@ class App extends React.Component {
     console.log(href);
     return window.location.href.includes("sapakos") ||
       (this.state.activeAccount &&
-        this.state.activeAccount.account_type == 3) ? (
+        this.state.activeAccount.account_type == 3) ||
+      window.location.href.includes("local") ? (
       <div className="App">
         {/* {this.state.activeAccount &&
         !window.location.href.includes("feed") &&
@@ -1135,6 +1148,9 @@ class App extends React.Component {
               accessToken={this.state.accessToken}
             ></HomePage>
           </Route>
+          <Route exact path="/Executive_summary">
+            <ExecutiveSummary></ExecutiveSummary>
+          </Route>
           <Route exact path="/category/:name">
             <FiltteredCategoryPage
               closeGenericModal={this.closeGenericModal}
@@ -1171,6 +1187,46 @@ class App extends React.Component {
               openGenericModal={this.openGenericModal}
               isGenericModalOpen={this.state.isGenericModalOpen}
             ></RegisterNew>
+          </Route>
+          <Route exact path="/pricing">
+            {/* pricePageHeadline: { fontSize: "", color: "" },
+      priceBoxHeadline: { fontSize: "", color: "", background: "" },
+      priceBox: { background: "" },
+      selectedElement: "priceBoxHeadline",
+      pricePageBackground: { background: "" },
+      pricePagePrice: { color: "", fontSize: "" },
+      priceBoxButtons: {
+        color: "",
+        fontSize: "",
+        background: "", */}
+            <RealPricing
+              priceBoxButtons={{
+                color: "white",
+                fontSize: "24px",
+                background: "blue",
+              }}
+              pricePagePrice={{ color: "black", fontSize: "24px" }}
+              pricePageBackground={{ background: "white" }}
+              priceBox={{ background: "white" }}
+              priceBoxHeadline={{
+                fontSize: "36px",
+                color: "black",
+                background: "white",
+              }}
+              pricePageHeadline={{ fontSize: "24px", color: "black" }}
+              shake={() => {
+                return;
+              }}
+              selectedElement={() => {
+                return;
+              }}
+              selectElement={() => {
+                return;
+              }}
+              getPlaneTypeAndGoToForm={this.getPlaneTypeAndGoToForm}
+              pageType={window.innerWidth > 1150 ? "table" : "boxes"}
+              windowWidth={this.state.windowWidth}
+            ></RealPricing>
           </Route>
           {/* <Route exact path="/login">
             <Login
@@ -1459,6 +1515,8 @@ class App extends React.Component {
           </Route>
           <Route exact path="/contact-us">
             <Pricing
+              selectedPlanMessage={this.state.selectedPlanMessage}
+              selectedPlan={this.state.selectedPlan}
               captchaResponse={this.state.captchaResponse}
               isRealUser={this.state.isRealUser}
               verifyCallback={this.verifyCallback}
@@ -1730,6 +1788,9 @@ class App extends React.Component {
               deleteCart={this.deleteCart}
               accessToken={this.state.accessToken}
             ></OrderSummery>
+          </Route>
+          <Route exact path="/Executive_summary">
+            <ExecutiveSummary></ExecutiveSummary>
           </Route>
           {/* <Route exact path="/supplier-feed/:id">
             <SupplierFeed

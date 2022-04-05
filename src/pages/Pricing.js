@@ -10,6 +10,8 @@ export default class Pricing extends Component {
           בחינם צרו קשר בטופס
         </h1>
         <EmailForm
+          selectedPlanMessage={this.props.selectedPlanMessage}
+          selectedPlan={this.props.selectedPlan}
           captchaResponse={this.props.captchaResponse}
           isRealUser={this.props.isRealUser}
           verifyCallback={this.props.verifyCallback}

@@ -176,6 +176,11 @@ class MyNavBar extends React.Component {
     //     </NavDropdown.Item>
     //   </NavDropdown>
     // ) : null;
+    const pricing = this.props.activeAccount ? (
+      ""
+    ) : (
+      <Nav.Link href="/#/pricing">מחירון </Nav.Link>
+    );
 
     const user_account =
       this.props.accessToken && this.props.userAccounts == 0 ? (
@@ -334,6 +339,7 @@ class MyNavBar extends React.Component {
               )}
               <Nav.Link href="/#/contact-us">צור קשר</Nav.Link>
               <Nav.Link href="/#/suppliers">ספקים</Nav.Link>
+              {pricing}
             </Nav>
             <Nav>
               <Nav.Link href="/#/tutorials">הדרכה</Nav.Link>
