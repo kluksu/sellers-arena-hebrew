@@ -1585,8 +1585,8 @@ class App extends React.Component {
               <div>הבנים 12 הוד השרון</div>,
               <div>0507780982</div>,
 
-              <a href="/#/terms_of_use"> תנאי שימוש</a>,
-              <a href="/#/privacy_policy"> מדיניות פרטיות</a>,
+              <a href="/#/terms_of_use_sapakos"> תנאי שימוש</a>,
+              <a href="/#/privacy_policy_sapakos"> מדיניות פרטיות</a>,
             ]}
           ></SiteBottom>
         </HashRouter>
@@ -1844,8 +1844,8 @@ class App extends React.Component {
               this.state.whiteLableStore.store_address,
 
               this.state.whiteLableStore.phone_number,
-              <a href="/#/terms_of_use"> תנאי שימוש</a>,
-              <a href="/#/privacy_policy"> מדיניות פרטיות</a>,
+              <a href="/#/terms_of_use_sapakos"> תנאי שימוש</a>,
+              <a href="/#/privacy_policy_sapakos"> מדיניות פרטיות</a>,
             ]}
           ></SiteBottom>
         </HashRouter>
