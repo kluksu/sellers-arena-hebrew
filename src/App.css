@@ -113,7 +113,7 @@ body {
   position: relative;
   overflow-x: scroll;
   overflow-y: hidden;
-  /* justify-content: center; */
+  justify-content: center;
 
   /* overflow-y: visible; */
   /* -ms-overflow-style: none; */
