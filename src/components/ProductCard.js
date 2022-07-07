@@ -52,7 +52,10 @@ class ProductCard extends React.Component {
   render() {
     //
     //not sure
-    let cardZoom = this.props.screenWidth > 1200 ? "" : "scale(1)";
+    let cardZoom =
+      this.props.screenWidth > 1200 && !window.location.href.includes("Store")
+        ? ""
+        : "scale(1)";
     //not sure
     // let discountsArr = [];
     // let prev = 0;
