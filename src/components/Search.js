@@ -83,22 +83,23 @@ export default class Search extends Component {
         //
         let funcCatogory = subCategory === "כל החנות" ? "" : subCategory;
 
-        carouselItems.push(
-          <Carousel.Item>
-            {" "}
-            <img
-              onClick={(e) => {
-                this.props.getStoreSubCategory(e, funcCatogory);
-              }} // className="d-block w-100"
-              src={subcategoriesAndPics[subCategory]}
-              alt={subCategory}
-            />{" "}
-            <Carousel.Caption>
-              {" "}
-              <h3>{subCategory}</h3>
-            </Carousel.Caption>{" "}
-          </Carousel.Item>
-        );
+        carouselItems
+          .push
+          // <Carousel.Item>
+          //   {" "}
+          //   <img
+          //     onClick={(e) => {
+          //       this.props.getStoreSubCategory(e, funcCatogory);
+          //     }} // className="d-block w-100"
+          //     src={subcategoriesAndPics[subCategory]}
+          //     alt={subCategory}
+          //   />{" "}
+          //   <Carousel.Caption>
+          //     {" "}
+          //     <h3>{subCategory}</h3>
+          //   </Carousel.Caption>{" "}
+          // </Carousel.Item>
+          ();
         categoriesArr.push(
           <div
             className="instoreCategoryNames"
@@ -120,13 +121,13 @@ export default class Search extends Component {
         );
         storeCategoriesButtons.push(
           <>
-            <InStoreCategoryButton
+            {/* <InStoreCategoryButton
               style={{ fontSize: fontSize }}
               funcCatogory={funcCatogory}
               getStoreSubCategory={this.props.getStoreSubCategory}
               // onClick={() => this.props.getStoreSubCategory(funcCatogory)}
               subCategory={subCategory}
-            ></InStoreCategoryButton>
+            ></InStoreCategoryButton> */}
           </>
         );
       });
